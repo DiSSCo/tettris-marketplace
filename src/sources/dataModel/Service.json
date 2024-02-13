@@ -1,0 +1,193 @@
+{
+    "title": "Service",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "description": "Generic concept of a Service or Tool",
+    "properties": {
+        "ods:id": {
+            "type": "string",
+            "description": "The unique digital identifier of the object",
+            "pattern": "https:\/\/doi.org\/10.22\/(.){3}-(.){3}-(.){3}",
+            "examples": [
+                "https://doi.org/10.22/XXX-XXX-XXX"
+            ]
+        },
+        "ods:version": {
+            "type": "integer",
+            "description": "The version of the object, each change generates a new version",
+            "minimum": 1,
+            "examples": [
+                1
+            ]
+        },
+        "ods:created": {
+            "type": "string",
+            "description": "The timestamp that the object version was created in DiSSCo",
+            "format": "date-time",
+            "examples": []
+        },
+        "dcterms:modified": {
+            "type": "string",
+            "description": "Modification date for specimen information"
+        },
+        "ods:type": {
+            "type": "string",
+            "description": "The FDO type of the object",
+            "$comment": "Unclear what value goes here"
+        },
+        "dcterms:license": {
+            "type": "string",
+            "description": "http://purl.org/dc/terms/license",
+            "$comment": "Determine available licenses"
+        },
+        "state": {
+            "type": "string",
+            "description": "The current state of the object",
+            "examples": [
+                "suggested",
+                "accepted",
+                "rejected"
+            ]
+        },
+        "language": {
+            "type": "string",
+            "description": "Indicator for the language the service is written in, using ISO alpha-3/ISO 639-2 ",
+            "examples": [
+                "en",
+                "nl"
+            ]
+
+        },
+        "description": {
+            "type": "string",
+            "description": "A fitting description about the service",
+            "examples": [
+                "A Bombus reference collection"
+            ]
+        },
+        "EOSC_serviceId": {
+            "type": "string",
+            "description": "A persistent identifier, a unique reference to the (Multi-Provider Regional or Thematic) Catalogue in the context of the EOSC Portal."
+        },
+        "taxonomicScope": {
+            "type": "string",
+            "description": "The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)"
+        },
+        "quality": {
+            "type": "string",
+            "description": "A quality indicator for the purpose of the service",
+            "examples": [
+                "Service resonates good with identifying Bombus individuals"
+            ]
+        },
+        "authors": {
+            "type": "array",
+            "items": {
+                "$ref": "agents.json"
+            }
+        },
+        "maintainers": {
+            "type": "array",
+            "items": {
+                "$ref": "agents.json"
+            }
+        },
+        "contactEmail": {
+            "type": "string",
+            "description": "Email of the primary contact"
+        },
+        "facilityLocation": {
+            "type": "string",
+            "description": "Location of the facility hosting the service"
+        },
+        "sourceUrl": {
+            "type": "string",
+            "description": "Link to the source DOI / PID of the virtual collection"
+        },
+        "websiteUrl": {
+            "type": "string",
+            "description": "Link to the website covering a description of the service"
+        },
+        "documentationUrl": {
+            "type": "string",
+            "description": "Link to the documentation of the service"
+        },
+        "paidService": {
+            "type": "boolean",
+            "description": "Boolean indicating if the service is paid for"
+        },
+        "usageConditions": {
+            "type": "string",
+            "description": "Full description of the usage conditions tied to the service"
+        },
+        "funders": {
+            "type": "array",
+            "description": "A recognition towards the funders of the service",
+            "items": {
+                "title": "funder",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the funder"
+                    },
+                    "referenceUrl": {
+                        "type": "string",
+                        "description": "Link to the funder's website"
+                    },
+                    "logo": {
+                        "type": "string",
+                        "description": "Link to the icon resource of the funder"
+                    }
+                }
+            }
+        },
+        "software": {
+            "type": "object",
+            "description": "Object representing the service's software",
+            "properties": {
+                "sourceUrl": {
+                    "type": "string",
+                    "description": "Link pointing to the source URL of the software, e.g. the GitHub repository"
+                },
+                "dependencies": {
+                    "type": "array",
+                    "description": "Array holding the names of the required dependencies to run the service's software",
+                    "items": {
+                        "dependencyName": "string"
+                    }
+                },
+                "deprecated": {
+                    "type": "boolean",
+                    "description": "Boolean indicating if the software has been deprecated"
+                },
+                "bugReports": {
+                    "type": "array",
+                    "description": "Array holding bug reports published by users of the service",
+                    "items": {
+                        "title": "Bug Report",
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "description": "Title of the bug report"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "Field holding the complete bug report's contents"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "associatedMedia": {
+            "type": "array",
+            "description": "Array of image Urls pointing to their respective sources",
+            "items": {
+                "url": {
+                    "type": "string",
+                    "description": "Image url pointing to its resource"
+                }
+            }
+        }
+    }
+}
