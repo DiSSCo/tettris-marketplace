@@ -1,0 +1,10 @@
+/* Primary variant */
+.primary {
+    background-color: var(--primary);
+    color: white;
+    transition: 0.4s;
+}
+
+.primary:hover {
+    filter: brightness(140%);
+}

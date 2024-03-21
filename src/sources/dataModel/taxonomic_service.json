@@ -1,5 +1,5 @@
 {
-    "title": "Service",
+    "title": "TaxonomicService",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "description": "Generic concept of a Service or Tool",
@@ -74,23 +74,28 @@
             "description": "The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)"
         },
         "quality": {
-            "type": "string",
+            "type": "number",
             "description": "A quality indicator for the purpose of the service",
             "examples": [
-                "Service resonates good with identifying Bombus individuals"
+                0,
+                50,
+                100
+            ]
+        },
+        "reviewArgumentation": {
+            "type": "string",
+            "description": "Argumentation that describes the given quality score",
+            "examples": [
+                "This service is appointed a score of 50, because..."
             ]
         },
         "authors": {
             "type": "array",
-            "items": {
-                "$ref": "agents.json"
-            }
+            "items": {}
         },
         "maintainers": {
             "type": "array",
-            "items": {
-                "$ref": "agents.json"
-            }
+            "items": {}
         },
         "contactEmail": {
             "type": "string",
