@@ -16,7 +16,7 @@ const initialState: TaxonomicServiceState = {
     taxonomicServices: []
 };
 
-export const ServiceSlice = createSlice({
+export const TaxonomicServiceSlice = createSlice({
     name: 'taxonomicService',
     initialState,
     reducers: {
@@ -31,11 +31,12 @@ export const ServiceSlice = createSlice({
 
 /* Action Creators */
 export const {
-
-} = ServiceSlice.actions;
+    setTaxonomicService,
+    setTaxonomicServices
+} = TaxonomicServiceSlice.actions;
 
 /* Connect with Root State */
 export const getTaxonomicService = (state: RootState) => state.taxonomicService.taxonomicService;
 export const getTaxonomicServices = (state: RootState) => state.taxonomicService.taxonomicServices;
 
-export default ServiceSlice.reducer;
+export default TaxonomicServiceSlice.reducer;

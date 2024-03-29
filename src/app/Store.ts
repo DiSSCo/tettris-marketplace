@@ -3,12 +3,10 @@ import { combineReducers, configureStore, ThunkAction, Action } from '@reduxjs/t
 import type { PreloadedStateShapeFromReducersMapObject } from '@reduxjs/toolkit';
 
 /* Import Redux Slices */
-import GeneralReducer from 'redux/GeneralSlice';
-import TaxonomicServiceReducer from 'redux/TaxonomicServiceSlice';
+import TaxonomicServiceReducer from '../redux/TaxonomicServiceSlice';
 
 
 const rootReducer = combineReducers({
-    general: GeneralReducer,
     taxonomicService: TaxonomicServiceReducer
 });
 
