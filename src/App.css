@@ -11,6 +11,12 @@
   --greyDark: #868696;
 }
 
+/* Import Montserrat Font */
+@font-face {
+  font-family: 'Montserrat';
+  src: url(webroot/font/Montserrat-VariableFont_wght.ttf);
+}
+
 /* Global styles */
 html {
   height: 100vh;
@@ -20,8 +26,7 @@ html {
 body {
   height: 100%;
   margin: 0;
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'sans-serif';
+  font-family: 'Montserrat';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #333333;
@@ -48,8 +53,9 @@ a {
   text-decoration: none !important;
 }
 
-p {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Font sizes, default is 16px */
@@ -88,6 +94,14 @@ p {
 
 .tc-accent {
   color: var(--accent);
+}
+
+.tc-white {
+  color: #ffffff;
+}
+
+.tc-grey {
+  color: var(--greyDark);
 }
 
 /* Font weight */
