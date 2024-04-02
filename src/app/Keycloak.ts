@@ -3,9 +3,7 @@ import Keycloak from 'keycloak-js';
 
 
 /* Callback type */
-interface Callback {
-    (): Function | void;
-};
+type Callback = () => Function | void;
 
 
 const keycloak = new Keycloak({
