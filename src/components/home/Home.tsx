@@ -6,6 +6,7 @@ import styles from './home.module.scss';
 
 /* Import Components */
 import Header from "components/general/header/Header";
+import SearchBar from './components/SearchBar';
 import HomeCategory from './components/HomeCategory';
 import Footer from 'components/general/footer/Footer';
 
@@ -27,11 +28,19 @@ const Home = () => {
                                 className="h-100 d-flex flex-column justify-content-center"
                             >
                                 {/* Title */}
-                                <h1 className="fs-title tc-white fw-bold">A hive for finding and supplying <br /> taxonomic expertise and services</h1>
-                                <div className="bgc-white w-25 pt-1 mt-3" />
+                                <Row>
+                                    <Col>
+                                        <h1 className="fs-title tc-white fw-bold">A hive for finding and supplying <br /> taxonomic expertise and services</h1>
+                                        <div className="bgc-white w-25 pt-1 mt-3" />
+                                    </Col>
+                                </Row>
 
                                 {/* Search Bar */}
-                                
+                                <Row className="mt-5">
+                                    <Col lg={{span: 5}}>
+                                        <SearchBar />
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
                         {/* Search Category representation */}
