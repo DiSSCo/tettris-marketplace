@@ -29,7 +29,7 @@ const Footer = () => {
                             </p>
                         </Col>
                         <Col className="col-lg-auto">
-                            <div className="h-100 d-flex align-items-center fs-4 tc-white fw-lightBold">
+                            <div className="h-100 d-flex align-items-center fs-5 tc-white fw-lightBold">
                                 <span>
                                     Privacy policy
                                 </span>

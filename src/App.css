@@ -59,6 +59,14 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 /* Font sizes, default is 16px */
+.fs-title {
+  font-size: 3rem !important;
+}
+
+.fs-subTitle {
+  font-size: 2rem !important;
+}
+
 .fs-1 {
   font-size: 2.5rem !important;
 }
@@ -143,4 +151,26 @@ h1, h2, h3, h4, h5, h6, p {
 
 .bgc-white {
   background-color: #ffffff;
+}
+
+.bgc-grey {
+  background-color: var(--grey);;
+}
+
+/* Z-index */
+.z-0 {
+  z-index: 0;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+.z-2 {
+  z-index: 2;
+}
+
+/* Transition */
+.tr-smooth {
+  transition: 0.3s;
 }
