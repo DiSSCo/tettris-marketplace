@@ -1,0 +1,132 @@
+/* Root variables */
+:root {
+  --primary: #FF8E3E;
+  --secondary: #21614A;
+  --tertiary: #7BC1DC;
+  --accent: #78D3AC;
+  --dark: #05041D;
+  --background: #f9fafc;
+  --grey: #D9D9DF;
+  --greyMedium: #B4B4BF;
+  --greyDark: #868696;
+}
+
+/* Global styles */
+html {
+  height: 100vh;
+  font-size: 0.85vw;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333333;
+  background-color: var(--background);
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+a {
+  margin: 0 !important;
+  padding: 0 !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+p {
+  margin: 0 !important;
+}
+
+/* Font sizes, default is 16px */
+.fs-1 {
+  font-size: 2.5rem !important;
+}
+
+.fs-2 {
+  font-size: 1.5rem !important;
+}
+
+.fs-3 {
+  font-size: 1.125rem !important;
+}
+
+.fs-4 {
+  font-size: 0.875rem !important;
+}
+
+.fs-5 {
+  font-size: 0.75rem !important;
+}
+
+/* Text color */
+.tc-primary {
+  color: var(--primary);
+}
+
+.tc-secondary {
+  color: var(--secondary);
+}
+
+.tc-tertiary {
+  color: var(--tertiary);
+}
+
+.tc-accent {
+  color: var(--accent);
+}
+
+/* Font weight */
+.fw-lightBold {
+  font-weight: 500;
+}
+
+/* Text overflow */
+.textOverflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Background color */
+.bgc-primary {
+  background-color: var(--primary);
+}
+
+.bgc-secondary {
+  background-color: var(--secondary);
+}
+
+.bgc-tertiary {
+  background-color: var(--tertiary);
+}
+
+.bgc-accent {
+  background-color: var(--accent);
+}
+
+.bgc-dark {
+  background-color: var(--dark);
+}
+
+.bgc-default {
+  background-color: var(--background);
+}
+
+.bgc-white {
+  background-color: #ffffff;
+}
