@@ -4,6 +4,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 /* Import Webroot */
 import CETAFLogo from 'webroot/img/cetafLogo.png';
 
+/* Import Styles */
+import styles from './header.module.scss';
+
 /* Import Icons */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -13,28 +16,31 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 const Header = () => {
     return (
         <Container fluid>
-            <Row>
+            <Row className="bgc-white py-2">
                 <Col lg={{ span: 10, offset: 1 }}>
                     <Row>
                         <Col className="col-lg-auto">
                             <img src={CETAFLogo}
                                 alt="CETAF Logo"
+                                className={styles.CETAFLogo}
                             />
                         </Col>
-                        <Col>
+                        <Col className="d-flex flex-column justify-content-center">
                             <p>
-                                <h2 className="fs-2 c-primary fw-lightBold">
+                                <h2 className="fs-2 tc-primary fw-bold">
                                     Marketplace
                                 </h2>
                             </p>
                             <p>
-                                <h3 className="fs-3 c-grey fw-lightBold">
+                                <h3 className="fs-3 tc-grey fw-lightBold">
                                     The Taxonomic Expertise and Services Marketplace
                                 </h3>
                             </p>
                         </Col>
-                        <Col>
-                            <FontAwesomeIcon icon={faBars} />
+                        <Col className="col-lg-auto d-flex flex-column justify-content-center">
+                            <FontAwesomeIcon icon={faBars}
+                                className="fs-2"
+                            />
                         </Col>
                     </Row>
                 </Col>
