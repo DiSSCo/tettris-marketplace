@@ -9,6 +9,7 @@ import { setupStore } from 'app/Store';
 
 /* Import Styles */
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 /* Import Components */
 import App from './App';

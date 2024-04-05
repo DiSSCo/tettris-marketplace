@@ -1,0 +1,62 @@
+{
+    "taxonomicServiceFilters": [
+        {
+            "name": "serviceType",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Taxonomic Service",
+                    "value": "taxonomicService"
+                },
+                {
+                    "label": "Reference Collection",
+                    "value": "referenceCollection"
+                }
+            ]
+        },
+        {
+            "name": "taxonomicScope",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Bombus",
+                    "value": "bombus"
+                },
+                {
+                    "label": "Spinosaurus",
+                    "value": "spinosaurus"
+                },
+                {
+                    "label": "Stegouros",
+                    "value": "stegouros"
+                }
+            ]
+        },
+        {
+            "name": "publishingDate",
+            "type": "date"
+        },
+        {
+            "name": "language",
+            "type": "select",
+            "options": [
+                {
+                    "label": "English",
+                    "value": "en"
+                },
+                {
+                    "label": "Spanish",
+                    "value": "es"
+                },
+                {
+                    "label": "French",
+                    "value": "fr"
+                },
+                {
+                    "label": "German",
+                    "value": "de"
+                }
+            ]
+        }
+    ]
+}
