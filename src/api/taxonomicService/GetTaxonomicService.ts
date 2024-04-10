@@ -1,6 +1,5 @@
 /* Import Types */
-import { TaxonomicService } from 'app/Types';
-import { JSONResult } from 'app/Types';
+import { TaxonomicService, JSONResult } from 'app/Types';
 
 /* Import Mock Data */
 import AcceptedTaxonomicService from 'sources/mock/TaxonomicServiceAccepted.json';

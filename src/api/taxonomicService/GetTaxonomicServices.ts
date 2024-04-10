@@ -1,6 +1,5 @@
 /* Import Types */
-import { TaxonomicService } from 'app/Types';
-import { JSONResultArray } from 'app/Types';
+import { TaxonomicService, JSONResultArray, Dict } from 'app/Types';
 
 /* Import Mock Data */
 import AcceptedTaxonomicService from 'sources/mock/TaxonomicServiceAccepted.json';
@@ -15,6 +14,7 @@ import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
 const GetTaxonomicServices = async (pageNumber: number) => {
     const pageSize: number = 12;
     let taxonomicServices: TaxonomicService[] = [];
+    let links: Dict = {};
 
     try {
         let result: { data: JSONResultArray } = {
@@ -47,11 +47,17 @@ const GetTaxonomicServices = async (pageNumber: number) => {
                 counter++;
             }
         });
+
+        /* Set Links */
+        links = result.data.links;
     } catch (error) {
         console.warn(error);
     }
 
-    return taxonomicServices;
+    return {
+        taxonomicServices,
+        links
+    };
 }
 
 export default GetTaxonomicServices;
