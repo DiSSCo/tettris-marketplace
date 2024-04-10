@@ -3,6 +3,7 @@
         {
             "name": "serviceType",
             "type": "select",
+            "default": "taxonomicService",
             "options": [
                 {
                     "label": "Taxonomic Service",

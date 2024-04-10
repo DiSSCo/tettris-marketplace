@@ -25,7 +25,9 @@ const SearchBar = () => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
 
                     /* Navigate to Search page and initate search with provided query */
-                    navigate(`/search?query=${values.query}`);
+                    if (values.query) {
+                        navigate(`/search?query=${values.query}`);
+                    }
                 }}
             >
                 <Form className="px-4 pt-2 pb-3">

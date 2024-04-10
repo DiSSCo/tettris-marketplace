@@ -42,9 +42,17 @@ export interface TaxonomicService {
    */
   language?: string;
   /**
+   * The title name of the service
+   */
+  title?: string;
+  /**
    * A fitting description about the service
    */
   description?: string;
+  /**
+   * A category that further defines the type of service
+   */
+  serviceCategory?: string;
   /**
    * A persistent identifier, a unique reference to the (Multi-Provider Regional or Thematic) Catalogue in the context of the EOSC Portal.
    */
@@ -52,7 +60,7 @@ export interface TaxonomicService {
   /**
    * The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)
    */
-  taxonomicScope?: string;
+  taxonomicScope?: string[];
   /**
    * A quality indicator for the purpose of the service
    */
@@ -61,8 +69,8 @@ export interface TaxonomicService {
    * Argumentation that describes the given quality score
    */
   reviewArgumentation?: string;
-  authors?: unknown[];
-  maintainers?: unknown[];
+  authors?: string[];
+  maintainers?: string[];
   /**
    * Email of the primary contact
    */
@@ -106,9 +114,7 @@ export interface TaxonomicService {
     /**
      * Array holding the names of the required dependencies to run the service's software
      */
-    dependencies?: {
-      [k: string]: unknown;
-    }[];
+    dependencies?: string[];
     /**
      * Boolean indicating if the software has been deprecated
      */
@@ -123,6 +129,10 @@ export interface TaxonomicService {
    * Array of image Urls pointing to their respective sources
    */
   associatedMedia?: {
+    /**
+     * Image url pointing to its resource
+     */
+    url?: string;
     [k: string]: unknown;
   }[];
   [k: string]: unknown;

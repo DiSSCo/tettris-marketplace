@@ -1,4 +1,5 @@
 /* Import Dependencies */
+import { useState } from "react";
 import Select from "react-select";
 
 /* Import Types */
@@ -35,10 +36,41 @@ interface Props {
 const Dropdown = (props: Props) => {
     const { selectedItem, items, placeholder, styles, OnChange } = props;
 
+    /* Base variables */
+    const [selectItems, setSelectItems] = useState<{ label: string, value: string, action?: Function }[]>(items);
+
+    /* If placeholder is given, add as default option */
+    if (placeholder && !selectedItem && !items.find((item) => [placeholder, 'Reset filter'].includes(item.label))) {
+        items.unshift({
+            label: placeholder,
+            value: ""
+        });
+    }
+
+    /**
+     * Function to check if the chosen option has a value and the default should change to 'Reset filter'
+     * @param option The selected option from the Select Component
+     */
+    const CheckItems = (option: SingleValue<DropdownItem>) => {
+        if (option?.value && !selectedItem && !selectItems.find((item) => item.label === 'Reset filter')) {
+            selectItems[0].label = 'Reset filter';
+
+            setSelectItems(selectItems);
+        } else if (!option?.value && selectItems.find((item) => item.label === 'Reset filter')) {
+            selectItems[0].label = placeholder ?? 'Select an option';
+
+            setSelectItems(selectItems);
+        }
+    }
+
     return (
         <Select
-            value={selectedItem ?? { value: '', label: placeholder ?? 'Select an item', action: () => {} }}
-            options={items}
+            value={selectedItem}
+            defaultValue={{
+                label: placeholder ?? 'Select an option',
+                value: ''
+            }}
+            options={selectItems}
             className="tc-white"
             isSearchable={false}
             styles={{
@@ -88,7 +120,7 @@ const Dropdown = (props: Props) => {
                     ...provided,
                     width: 'max-content',
                     padding: '0px',
-                    
+
                 }),
                 clearIndicator: provided => ({
                     ...provided,
@@ -115,9 +147,12 @@ const Dropdown = (props: Props) => {
                     },
                     fontWeight: state.isSelected ? 'bold' : ''
                 })
-                
+
             }}
-            onChange={(option: SingleValue<DropdownItem>) => OnChange ? OnChange(option) : option?.action ? option.action() : null}
+            onChange={(option: SingleValue<DropdownItem>) => {
+                OnChange ? OnChange(option) : option?.action && option.action();
+                CheckItems(option);
+            }}
         />
     );
 }

@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'app/Store';
 
 /* Import Types */
-import { TaxonomicService } from 'app/types/TaxonomicService';
+import { TaxonomicService } from 'app/Types';
 
 
 export interface TaxonomicServiceState {

@@ -1,0 +1,66 @@
+{
+    "data": {
+        "id": "https://handle.net/TEST/SEMKDJE98D7",
+        "type": "taxonomic_service",
+        "attributes": {
+            "taxonomicService": {
+                "ods:id": "https://handle.net/TEST/SEMKDJE98D7",
+                "ods:version": 1,
+                "ods:created": "2024-04-01T11:31:26.038070Z",
+                "dcterms:modified": "2024-05-01T11:31:26.038070Z",
+                "ods:type": "taxonomic_service",
+                "dcterms:license": "CC0",
+                "state": "accepted",
+                "language": "en",
+                "title": "Pollinator Academy",
+                "description": "Strengthening taxonomic capacity in Europe with tools and training.",
+                "EOSC_serviceId": "",
+                "taxonomicScope": [
+                    "Bombus",
+                    "Syrphidae",
+                    "lepidoptera"
+                ],
+                "quality": 80,
+                "reviewArgumentation": "This service passes the quality scores given for a taxonomic service, could use some minor improvements.",
+                "authors": [
+                    "John Doe",
+                    "Jane Doe"
+                ],
+                "maintainers": [
+                    "Pieter de Jong"
+                ],
+                "contactEmail": "pieterdejong@taxamail.com",
+                "facilityLocation": "Gasteren",
+                "sourceUrl": "",
+                "websiteUrl": "https://pollinatoracademy.eu/pollinators",
+                "documentationUrl": "",
+                "paidService": false,
+                "usageConditions": "None",
+                "funders": [
+                    {
+                        "name": "Funder",
+                        "referenceUrl": "",
+                        "logo": ""
+                    }
+                ],
+                "software": {
+                    "sourceUrl": "github.com",
+                    "dependencies": [
+                        "Pollinator library"
+                    ],
+                    "deprecated": false,
+                    "bugReports": [
+                        {
+                            "title": "Fixes",
+                            "description": "Fixed the bug"
+                        }
+                    ]
+                },
+                "associatedMedia": []
+            }
+        }
+    },
+    "links": {
+        "self": "https://marketplace.cetaf.org/api/v1/taxonomicServices/TEST/SEMKDJE98D7"
+    }
+}

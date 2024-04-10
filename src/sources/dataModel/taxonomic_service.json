@@ -56,7 +56,13 @@
                 "en",
                 "nl"
             ]
-
+        },
+        "title": {
+            "type": "string",
+            "description": "The title name of the service",
+            "examples": [
+                "Bombus reference collection"
+            ]
         },
         "description": {
             "type": "string",
@@ -65,13 +71,23 @@
                 "A Bombus reference collection"
             ]
         },
+        "serviceCategory": {
+            "type": "string",
+            "description": "A category that further defines the type of service",
+            "examples": [
+                "referenceCollection"
+            ]
+        },
         "EOSC_serviceId": {
             "type": "string",
             "description": "A persistent identifier, a unique reference to the (Multi-Provider Regional or Thematic) Catalogue in the context of the EOSC Portal."
         },
         "taxonomicScope": {
-            "type": "string",
-            "description": "The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)"
+            "type": "array",
+            "description": "The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)",
+            "items": {
+                "type": "string"
+            }
         },
         "quality": {
             "type": "number",
@@ -91,11 +107,15 @@
         },
         "authors": {
             "type": "array",
-            "items": {}
+            "items": {
+                "type": "string"
+            }
         },
         "maintainers": {
             "type": "array",
-            "items": {}
+            "items": {
+                "type": "string"
+            }
         },
         "contactEmail": {
             "type": "string",
@@ -129,6 +149,7 @@
             "type": "array",
             "description": "A recognition towards the funders of the service",
             "items": {
+                "type": "object",
                 "title": "funder",
                 "properties": {
                     "name": {
@@ -158,7 +179,7 @@
                     "type": "array",
                     "description": "Array holding the names of the required dependencies to run the service's software",
                     "items": {
-                        "dependencyName": "string"
+                        "type": "string"
                     }
                 },
                 "deprecated": {
@@ -169,6 +190,7 @@
                     "type": "array",
                     "description": "Array holding bug reports published by users of the service",
                     "items": {
+                        "type": "object",
                         "title": "Bug Report",
                         "properties": {
                             "title": {
@@ -188,9 +210,12 @@
             "type": "array",
             "description": "Array of image Urls pointing to their respective sources",
             "items": {
-                "url": {
-                    "type": "string",
-                    "description": "Image url pointing to its resource"
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "Image url pointing to its resource"
+                    }
                 }
             }
         }

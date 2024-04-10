@@ -34,7 +34,7 @@ const FiltersBar = () => {
 
     /* Set initial values */
     filters.forEach((filter) => {
-        initialValues[filter.name] = '';
+        initialValues[filter.name] = filter.default;
     });
 
     return (
@@ -71,7 +71,9 @@ const FiltersBar = () => {
                         <Col>
                             <Row>
                                 {filters.map((filter) => (
-                                    <Col lg={{ span: 3 }}>
+                                    <Col key={filter.name}
+                                        lg={{ span: 3 }}
+                                    >
                                         <Filter filter={filter}
                                             currentValue={values[filter.name as keyof typeof values]}
                                             SetFilterValue={(value: string | number | boolean) => setFieldValue(filter.name, value)}
