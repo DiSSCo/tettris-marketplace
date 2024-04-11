@@ -1,0 +1,64 @@
+{
+    "data": {
+        "id": "https://handle.net/TEST/POTKDJE98D7",
+        "type": "taxonomic_service",
+        "attributes": {
+            "taxonomicService": {
+                "ods:id": "https://handle.net/TEST/POTKDJE98D7",
+                "ods:version": 1,
+                "ods:created": "2024-04-01T11:31:26.038070Z",
+                "dcterms:modified": "2024-05-01T11:31:26.038070Z",
+                "ods:type": "taxonomic_service",
+                "dcterms:license": "CC0",
+                "state": "accepted",
+                "language": "en",
+                "title": "Bombus Reference Collection",
+                "description": "Compare Bombus specimens with the specimens in this collection to identify them.",
+                "serviceCategory": "referenceCollection",
+                "EOSC_serviceId": "",
+                "taxonomicScope": [
+                    "Bombus"
+                ],
+                "quality": 90,
+                "reviewArgumentation": "This service passes the quality scores given for a reference collection, could only use a couple more photos.",
+                "authors": [
+                    "Skipper", "Skeeto"
+                ],
+                "maintainers": [
+                    "Arthur Renzema"
+                ],
+                "contactEmail": "arthur.renzema@taxamail.com",
+                "facilityLocation": "Zuidlaren",
+                "sourceUrl": "",
+                "websiteUrl": "",
+                "documentationUrl": "",
+                "paidService": false,
+                "usageConditions": "None",
+                "funders": [
+                    {
+                        "name": "Funder",
+                        "referenceUrl": "",
+                        "logo": ""
+                    }
+                ],
+                "associatedMedia": [
+                    {
+                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/278859056/original.jpg"
+                    },
+                    {
+                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/278859082/original.jpg"
+                    },
+                    {
+                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/284025774/original.jpeg"
+                    },
+                    {
+                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/284025746/original.jpeg"
+                    }
+                ]
+            }
+        }
+    },
+    "links": {
+        "self": "https://marketplace.cetaf.org/api/v1/taxonomicServices/TEST/SEMKDJE98D7"
+    }
+}

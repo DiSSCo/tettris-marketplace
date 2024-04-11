@@ -1,0 +1,63 @@
+{
+    "data": {
+        "id": "https://handle.net/TEST/LOFKDJE98D7",
+        "type": "taxonomic_service",
+        "attributes": {
+            "taxonomicService": {
+                "ods:id": "https://handle.net/TEST/LOFKDJE98D7",
+                "ods:version": 1,
+                "ods:created": "2024-04-01T11:31:26.038070Z",
+                "dcterms:modified": "2024-05-01T11:31:26.038070Z",
+                "ods:type": "taxonomic_service",
+                "dcterms:license": "CC0",
+                "state": "accepted",
+                "language": "en",
+                "title": "Palaeontology Academy",
+                "description": "Learn about palaeontology and the taxonomy of extinct creatures.",
+                "EOSC_serviceId": "",
+                "taxonomicScope": [
+                    "Dromaeosauridae"
+                ],
+                "quality": 0,
+                "reviewArgumentation": "",
+                "authors": [
+                    "Tom Diekemoa"
+                ],
+                "maintainers": [
+                    "Tom Diekemoa"
+                ],
+                "contactEmail": "tom.diekemoa@gmail.com",
+                "facilityLocation": "Annen",
+                "sourceUrl": "",
+                "websiteUrl": "",
+                "documentationUrl": "",
+                "paidService": true,
+                "usageConditions": "None",
+                "funders": [
+                    {
+                        "name": "Funder",
+                        "referenceUrl": "",
+                        "logo": ""
+                    }
+                ],
+                "software": {
+                    "sourceUrl": "github.com",
+                    "dependencies": [
+                        "Pollinator library"
+                    ],
+                    "deprecated": false,
+                    "bugReports": [
+                        {
+                            "title": "Fixes",
+                            "description": "Fixed the bug"
+                        }
+                    ]
+                },
+                "associatedMedia": []
+            }
+        }
+    },
+    "links": {
+        "self": "https://marketplace.cetaf.org/api/v1/taxonomicServices/TEST/SEMKDJE98D7"
+    }
+}

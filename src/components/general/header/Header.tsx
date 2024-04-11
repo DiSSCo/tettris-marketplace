@@ -1,4 +1,5 @@
 /* Import Dependencies */
+import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Webroot */
@@ -20,22 +21,20 @@ const Header = () => {
                 <Col lg={{ span: 10, offset: 1 }}>
                     <Row>
                         <Col className="col-lg-auto">
-                            <img src={CETAFLogo}
-                                alt="CETAF Logo"
-                                className={styles.CETAFLogo}
-                            />
+                            <Link to="/">
+                                <img src={CETAFLogo}
+                                    alt="CETAF Logo"
+                                    className={styles.CETAFLogo}
+                                />
+                            </Link>
                         </Col>
                         <Col className="d-flex flex-column justify-content-center">
-                            <p>
-                                <h2 className="fs-2 tc-primary fw-bold">
-                                    Marketplace
-                                </h2>
-                            </p>
-                            <p>
-                                <h3 className="fs-3 tc-grey fw-lightBold">
-                                    The Taxonomic Expertise and Services Marketplace
-                                </h3>
-                            </p>
+                            <h2 className="fs-2 tc-primary fw-bold">
+                                Marketplace
+                            </h2>
+                            <h3 className="fs-3 tc-grey fw-lightBold">
+                                The Taxonomic Expertise and Services Marketplace
+                            </h3>
                         </Col>
                         <Col className="col-lg-auto d-flex flex-column justify-content-center">
                             <FontAwesomeIcon icon={faBars}

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2021",
     "lib": [
       "dom",
       "dom.iterable",
@@ -21,7 +21,5 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

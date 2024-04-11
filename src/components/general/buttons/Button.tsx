@@ -12,7 +12,7 @@ interface Props {
 
 
 /** Component that renders a custom button according to the appliation's style
-    * @param children Child components to be rendered in button
+    * @param children String to be placed in button
     * @param type The type of the button, e.g. 'button' or 'submit'
     * @param variant The variant of the button, impacts styling
     * @param OnClick The event to be fired when clicking on the button
@@ -22,7 +22,7 @@ const Button = (props: Props) => {
 
     return (
         <button type={type}
-            className={`${styles[variant]} px-2 py-1`}
+            className={`${styles[variant]} fs-4 fw-bold px-3 py-2 b-none`}
             onClick={() => OnClick()}
         >
             {children}

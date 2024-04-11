@@ -6,6 +6,7 @@
   --accent: #78D3AC;
   --dark: #05041D;
   --background: #f9fafc;
+  --greyLight: #f1f1f3;
   --grey: #D9D9DF;
   --greyMedium: #B4B4BF;
   --greyDark: #868696;
@@ -53,7 +54,13 @@ a {
   text-decoration: none !important;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -161,6 +168,12 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: transparent;
 }
 
+/* Gradient */
+.gradient-primary {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 11%, rgba(255,196,153,0.75) 100%);
+}
+
 /* Border */
 .b-none {
   border: none;
@@ -169,6 +182,15 @@ h1, h2, h3, h4, h5, h6, p {
 /* Border radius */
 .br-corner {
   border-radius: 8px;
+}
+
+/* Overflow */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
 }
 
 /* Z-index */
@@ -187,4 +209,27 @@ h1, h2, h3, h4, h5, h6, p {
 /* Transition */
 .tr-smooth {
   transition: 0.3s;
+}
+
+/* Scroll Bars */
+
+/* width */
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

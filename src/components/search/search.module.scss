@@ -1,0 +1,30 @@
+/* Custom styles for Components on the Search page */
+
+/* Search Result */
+.searchResult {
+    height: 10rem;
+    transition: 0.3s;
+    -webkit-box-shadow: 4px 4px 10px -8px rgba(51, 51, 51, 1);
+    -moz-box-shadow: 4px 4px 10px -8px rgba(51, 51, 51, 1);
+    box-shadow: 4px 4px 10px -8px rgba(51, 51, 51, 1);
+}
+
+.searchResult:hover {
+    -webkit-box-shadow: 4px 4px 10px -3px rgba(51, 51, 51, 1);
+    -moz-box-shadow: 4px 4px 10px -3px rgba(51, 51, 51, 1);
+    box-shadow: 4px 4px 10px -3px rgba(51, 51, 51, 1);
+    cursor: pointer;
+}
+
+.searchResultDescription {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    -moz-line-clamp: 5;
+    -ms-line-clamp: 5;
+    line-clamp: 5;
+    word-break: break-word;
+}
