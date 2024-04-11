@@ -1,4 +1,5 @@
 /* Import Dependencies */
+import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Webroot */
@@ -20,10 +21,12 @@ const Header = () => {
                 <Col lg={{ span: 10, offset: 1 }}>
                     <Row>
                         <Col className="col-lg-auto">
-                            <img src={CETAFLogo}
-                                alt="CETAF Logo"
-                                className={styles.CETAFLogo}
-                            />
+                            <Link to="/">
+                                <img src={CETAFLogo}
+                                    alt="CETAF Logo"
+                                    className={styles.CETAFLogo}
+                                />
+                            </Link>
                         </Col>
                         <Col className="d-flex flex-column justify-content-center">
                             <h2 className="fs-2 tc-primary fw-bold">
