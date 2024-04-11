@@ -22,7 +22,7 @@ const QueryBar = (props: Props) => {
     return (
         <div className="h-100 w-100 position-relative d-flex flex-column justify-content-center">
             <Field name={name}
-                placeholder={placeholder && placeholder}
+                placeholder={placeholder}
                 className="w-100 py-1 px-2"
             />
 

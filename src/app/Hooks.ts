@@ -75,7 +75,7 @@ const usePaginator = (Method: Function, Hanlder: Function, key?: string) => {
 
             return true;
         } else {
-            throw ('No next page');
+            throw (new Error('No next page'));
         }
     };
 
@@ -85,7 +85,7 @@ const usePaginator = (Method: Function, Hanlder: Function, key?: string) => {
 
             return true;
         } else {
-            throw ('No previous page');
+            throw (new Error('No previous page'));
         }
     };
 
@@ -107,7 +107,7 @@ const usePaginator = (Method: Function, Hanlder: Function, key?: string) => {
                     setRecords(records);
                     Hanlder(records);
                 } else {
-                    throw (`Fetch ended in undefined Result`);
+                    throw (new Error('Fetch ended in undefined Result'));
                 }
             }).catch(error => {
                 console.warn(error);

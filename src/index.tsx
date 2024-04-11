@@ -31,5 +31,4 @@ const RenderRoot = () => {
   );
 }
 
-// KeycloakService.InitKeyCloak(RenderRoot);
-RenderRoot();
+KeycloakService.InitKeyCloak(RenderRoot);

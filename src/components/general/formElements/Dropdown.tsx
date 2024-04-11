@@ -1,9 +1,8 @@
 /* Import Dependencies */
 import { useState } from "react";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 
 /* Import Types */
-import { SingleValue } from "react-select";
 import { DropdownItem } from "app/Types";
 
 
@@ -55,11 +54,11 @@ const Dropdown = (props: Props) => {
         if (option?.value && !selectedItem && !selectItems.find((item) => item.label === 'Reset filter')) {
             selectItems[0].label = 'Reset filter';
 
-            setSelectItems(selectItems);
+            setSelectItems([...selectItems]);
         } else if (!option?.value && selectItems.find((item) => item.label === 'Reset filter')) {
             selectItems[0].label = placeholder ?? 'Select an option';
 
-            setSelectItems(selectItems);
+            setSelectItems([...selectItems]);
         }
     }
 
@@ -150,7 +149,7 @@ const Dropdown = (props: Props) => {
 
             }}
             onChange={(option: SingleValue<DropdownItem>) => {
-                OnChange ? OnChange(option) : option?.action && option.action();
+                OnChange ? OnChange(option) : option?.action?.();
                 CheckItems(option);
             }}
         />

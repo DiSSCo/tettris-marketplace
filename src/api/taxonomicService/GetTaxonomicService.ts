@@ -36,7 +36,7 @@ const GetTaxonomicService = async (handle?: string, _version?: string) => {
 
                     break;
                 default:
-                    throw(false);
+                    throw (new Error('No mock data found'));
             }
 
             /* Get result data from JSON */

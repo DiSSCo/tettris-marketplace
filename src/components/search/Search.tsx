@@ -1,11 +1,10 @@
 /* Import Dependencies */
 import { Container, Row, Col } from 'react-bootstrap';
 
-/* Import Utilities */
-import { usePaginator } from 'app/Hooks';
+/* Import Hooks */
+import { usePaginator, useAppSelector, useAppDispatch } from 'app/Hooks';
 
 /* Import Store */
-import { useAppSelector, useAppDispatch } from 'app/Hooks';
 import { getTaxonomicServices, setTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
