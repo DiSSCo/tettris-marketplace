@@ -168,6 +168,12 @@ p {
   background-color: transparent;
 }
 
+/* Gradient */
+.gradient-primary {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 11%, rgba(255,196,153,0.75) 100%);
+}
+
 /* Border */
 .b-none {
   border: none;

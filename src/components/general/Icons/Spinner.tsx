@@ -9,7 +9,7 @@ import styles from './icons.module.scss';
 const Spinner = () => {
     return (
         <FontAwesomeIcon icon={faSpinner}
-            className={`${styles.spinner} fs-2`}
+            className={`${styles.spinner} fs-2 my-2`}
         />
     );
 }

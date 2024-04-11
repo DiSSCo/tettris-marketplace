@@ -45,10 +45,10 @@ const Search = () => {
             <Header />
 
             {/* Home page Body */}
-            <Container fluid className="flex-grow-1 overflow-hidden">
+            <Container fluid className="flex-grow-1 gradient-primary overflow-hidden">
                 <Row className="h-100">
                     <Col lg={{ span: 10, offset: 1 }}
-                        className="h-100 d-flex flex-column py-5"
+                        className="h-100 d-flex flex-column pt-5"
                     >
                         {/* Top Bar */}
                         <Row>
@@ -78,7 +78,7 @@ const Search = () => {
                                     </Col>
                                 </Row>
                                 {/* Load more button */}
-                                <Row>
+                                <Row className="mb-4">
                                     <Col className="d-flex justify-content-center">
                                         {!paginator.loading ?
                                             <Button type="button"
