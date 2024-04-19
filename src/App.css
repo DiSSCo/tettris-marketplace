@@ -170,8 +170,8 @@ p {
 
 /* Gradient */
 .gradient-primary {
-  background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 11%, rgba(255,196,153,0.75) 100%);
+  background: rgb(249, 250, 252);
+  background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(255, 238, 227, 1) 30%, rgba(255, 210, 178, 1) 60%, rgba(255, 238, 227, 1) 95%, rgba(249, 246, 244, 1) 100%);
 }
 
 /* Border */

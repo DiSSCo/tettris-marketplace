@@ -54,6 +54,7 @@ const Home = () => {
                                         <HomeCategory title="Taxonomic Services"
                                             subTitle="Go find"
                                             count={254}
+                                            link="/search"
                                             color="primary"
                                         />
                                     </Col>
@@ -61,6 +62,7 @@ const Home = () => {
                                         <HomeCategory title="Reference Collections"
                                             subTitle="Go explore"
                                             count={84}
+                                            link="/search"
                                             color="secondary"
                                         />
                                     </Col>
@@ -68,6 +70,7 @@ const Home = () => {
                                         <HomeCategory title="Expertise Taxonomists"
                                             subTitle="Go engage"
                                             count={113}
+                                            link="/"
                                             color="tertiary"
                                         />
                                     </Col>

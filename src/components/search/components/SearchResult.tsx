@@ -37,7 +37,7 @@ const SearchResult = (props: Props) => {
     });
 
     return (
-        <div className={`${styles.searchResult} w-100 bgc-white mt-1 py-2 px-3`}>
+        <div className={`${styles.searchResult} w-100 bgc-white mt-1 pt-3 pb-2 px-3`}>
             <Row className="h-100">
                 {/* Basic column with all the details */}
                 <Col className="h-100 d-flex flex-column">
@@ -54,7 +54,7 @@ const SearchResult = (props: Props) => {
                         }
                     </Row>
                     {/* Description */}
-                    <Row className='flex-grow-1 my-1'>
+                    <Row className='flex-grow-1 my-2'>
                         <Col>
                             <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicService.description}</p>
                         </Col>
