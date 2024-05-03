@@ -1,4 +1,5 @@
 /* Import Dependencies */
+import { isEmpty } from 'lodash';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Utilities */
@@ -54,7 +55,7 @@ const DetailsBlock = (props: Props) => {
                                             />
                                             : <>
                                                 <p className="fs-5 fw-bold">{MakeReadableString(key)}</p>
-                                                <p>{value || 'Not defined'}</p>
+                                                <p>{!isEmpty(value) ? value : 'Not defined'}</p>
                                             </>
                                     }
                                 </Col>
