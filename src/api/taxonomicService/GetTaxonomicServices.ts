@@ -11,8 +11,8 @@ import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
  * @param pageNumber The number of the current page of records
  * @returns An array of Taxonomic Service instances or an empty array
  */
-const GetTaxonomicServices = async ({ pageNumber }: { pageNumber: number }) => {
-    const pageSize: number = 12;
+const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { pageNumber: number, pageSize: number, searchFilters: { [searchFilter: string]: string } }) => {
+    /* Base variables */
     let taxonomicServices: TaxonomicService[] = [];
     let links: Dict = {};
 
@@ -20,7 +20,7 @@ const GetTaxonomicServices = async ({ pageNumber }: { pageNumber: number }) => {
         let result: { data: JSONResultArray } = {
             data: {
                 data: [
-                    { ...AcceptedTaxonomicService.data },
+                    ...searchFilters?.taxonomicServiceType !== 'referenceCollection' ? [{ ...AcceptedTaxonomicService.data }] : [],
                     { ...ReferenceCollection.data }
                 ],
                 links: {

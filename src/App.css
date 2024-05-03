@@ -50,7 +50,7 @@ code {
 a {
   margin: 0 !important;
   padding: 0 !important;
-  color: inherit !important;
+  color: inherit;
   text-decoration: none !important;
 }
 
@@ -176,6 +176,11 @@ p {
 .gradient-primary {
   background: rgb(249, 250, 252);
   background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(255, 238, 227, 1) 30%, rgba(255, 210, 178, 1) 60%, rgba(255, 238, 227, 1) 95%, rgba(249, 246, 244, 1) 100%);
+}
+
+.gradient-secondary {
+  background: rgb(249, 250, 252);
+  background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(236, 248, 244, 1) 30%, rgba(198, 235, 222, 1) 60%, rgba(236, 248, 244, 1) 95%, rgba(249, 246, 244, 1) 100%);
 }
 
 /* Border */

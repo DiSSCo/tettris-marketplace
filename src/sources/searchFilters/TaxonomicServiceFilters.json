@@ -1,7 +1,7 @@
 {
     "taxonomicServiceFilters": [
         {
-            "name": "serviceType",
+            "name": "taxonomicServiceType",
             "type": "select",
             "default": "taxonomicService",
             "options": [

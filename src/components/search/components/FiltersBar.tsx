@@ -34,7 +34,7 @@ const FiltersBar = () => {
 
     /* Set initial values */
     filters.forEach((filter) => {
-        initialValues[filter.name] = filter.default;
+        initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
     });
 
     return (
@@ -46,17 +46,21 @@ const FiltersBar = () => {
                 /* Filter handling is done in the individual components */
                 await new Promise((resolve) => setTimeout(resolve, 100));
 
-                /* Submit search query */
-                if (values.query) {
-                    searchParams.set('query', values.query);
-                } else {
-                    searchParams.delete('query');
-                }
+                /* For each form value, treat as search filter */
+                Object.entries(values).forEach(([key, value]) => {
+                    /* Remove filter from search params */
+                    searchParams.delete(key);
+
+                    /* Set filter to search params */
+                    if (value && value !== 'taxonomicService') {
+                        searchParams.set(key, value);
+                    }
+                });
 
                 setSearchParams(searchParams);
             }}
         >
-            {({ values, setFieldValue }) => (
+            {({ values, setFieldValue, submitForm }) => (
                 <Form>
                     <Row>
                         {/* Search Bar */}
@@ -77,6 +81,7 @@ const FiltersBar = () => {
                                         <Filter filter={filter}
                                             currentValue={values[filter.name as keyof typeof values]}
                                             SetFilterValue={(value: string | number | boolean) => setFieldValue(filter.name, value)}
+                                            SubmitForm={() => submitForm()}
                                         />
                                     </Col>
                                 ))}
