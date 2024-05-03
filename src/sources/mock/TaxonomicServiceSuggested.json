@@ -1,49 +1,50 @@
 {
     "data": {
-        "id": "https://handle.net/TEST/LOFKDJE98D7",
+        "id": "https://hdl.handle.net/TEST/LOFKDJE98D7",
         "type": "taxonomic_service",
         "attributes": {
             "taxonomicService": {
-                "ods:id": "https://handle.net/TEST/LOFKDJE98D7",
-                "ods:version": 1,
+                "erp:id": "https://hdl.handle.net/TEST/LOFKDJE98D7",
                 "ods:created": "2024-04-01T11:31:26.038070Z",
                 "dcterms:modified": "2024-05-01T11:31:26.038070Z",
                 "ods:type": "taxonomic_service",
                 "dcterms:license": "CC0",
-                "state": "accepted",
-                "language": "en",
-                "title": "Palaeontology Academy",
-                "description": "Learn about palaeontology and the taxonomy of extinct creatures.",
-                "EOSC_serviceId": "",
-                "taxonomicScope": [
+                "cetaf:state": "accepted",
+                "erp:languageAvailabilities": [
+                    "en"
+                ],
+                "erp:name": "Palaeontology Academy",
+                "erp:description": "Learn about palaeontology and the taxonomy of extinct creatures on this educational platform.",
+                "erp:tagLine": "Learn about palaeontology and the taxonomy of extinct creatures",
+                "erp:logo": "",
+                "cetaf:taxonomicServiceType": "taxonomicService",
+                "erp:category": "Platform",
+                "erp:EOSC_serviceId": "",
+                "erp:version": "1.5.4",
+                "erp:lastUpdate": "2024-04-25T11:31:26.038070Z",
+                "cetaf:taxonomicScope": [
                     "Dromaeosauridae"
                 ],
-                "quality": 0,
-                "reviewArgumentation": "",
-                "authors": [
-                    "Tom Diekemoa"
-                ],
-                "maintainers": [
-                    "Tom Diekemoa"
-                ],
-                "contactEmail": "tom.diekemoa@gmail.com",
-                "facilityLocation": "Annen",
-                "sourceUrl": "",
-                "websiteUrl": "",
-                "documentationUrl": "",
-                "paidService": true,
-                "usageConditions": "None",
-                "funders": [
+                "cetaf:qualityScore": 0,
+                "cetaf:reviewComments": "",
+                "erp:helpdeskEmail": "info@cetaf.org",
+                "erp:helpdeskPage": "cetaf.org",
+                "cetaf:agents": [
                     {
-                        "name": "Funder",
-                        "referenceUrl": "",
-                        "logo": ""
+                        "cetaf:agentId": "https://orcid.org/0000-0001-9790-9277",
+                        "cetaf:fullName": "Tom Dijkema",
+                        "cetaf:role": "Developer"
                     }
                 ],
+                "erp:webpage": "",
+                "cetaf:documentationUrl": "",
+                "erp:paymentModel": "Freemium",
+                "erp:termsOfUse": "",
+                "erp:fundingProgram": "",
                 "software": {
                     "sourceUrl": "github.com",
                     "dependencies": [
-                        "Pollinator library"
+                        "Palaeontological Academy"
                     ],
                     "deprecated": false,
                     "bugReports": [
@@ -52,8 +53,7 @@
                             "description": "Fixed the bug"
                         }
                     ]
-                },
-                "associatedMedia": []
+                }
             }
         }
     },

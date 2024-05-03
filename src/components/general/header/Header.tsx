@@ -8,10 +8,6 @@ import CETAFLogo from 'webroot/img/cetafLogo.png';
 /* Import Styles */
 import styles from './header.module.scss';
 
-/* Import Icons */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-
 
 /** Component that renders the application's Header */
 const Header = () => {
@@ -30,16 +26,11 @@ const Header = () => {
                         </Col>
                         <Col className="d-flex flex-column justify-content-center">
                             <h2 className="fs-2 tc-primary fw-bold">
-                                Marketplace
+                                Marketplace Prototype
                             </h2>
                             <h3 className="fs-3 tc-grey fw-lightBold">
                                 The Taxonomic Expertise and Services Marketplace
                             </h3>
-                        </Col>
-                        <Col className="col-lg-auto d-flex flex-column justify-content-center">
-                            <FontAwesomeIcon icon={faBars}
-                                className="fs-2"
-                            />
                         </Col>
                     </Row>
                 </Col>

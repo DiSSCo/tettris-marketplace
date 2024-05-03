@@ -1,62 +1,56 @@
 {
     "data": {
-        "id": "https://handle.net/TEST/SEMKDJE98D7",
+        "id": "https://hdl.handle.net/TEST/SEMKDJE98D7",
         "type": "taxonomic_service",
         "attributes": {
             "taxonomicService": {
-                "ods:id": "https://handle.net/TEST/SEMKDJE98D7",
-                "ods:version": 1,
+                "erp:id": "https://hdl.handle.net/TEST/SEMKDJE98D7",
                 "ods:created": "2024-04-01T11:31:26.038070Z",
                 "dcterms:modified": "2024-05-01T11:31:26.038070Z",
                 "ods:type": "taxonomic_service",
                 "dcterms:license": "CC0",
-                "state": "accepted",
-                "language": "en",
-                "title": "Pollinator Academy",
-                "description": "Strengthening taxonomic capacity in Europe with tools and training.",
-                "EOSC_serviceId": "",
-                "taxonomicScope": [
+                "cetaf:state": "accepted",
+                "erp:languageAvailabilities": [
+                    "en"
+                ],
+                "erp:name": "Pollinator Academy",
+                "erp:description": "Strengthening taxonomic capacity in Europe with tools and training using this online platform.",
+                "erp:tagLine": "Strengthening taxonomic capacity in Europe with tools and training",
+                "erp:logo": "",
+                "cetaf:taxonomicServiceType": "taxonomicService",
+                "erp:category": "Platform",
+                "erp:EOSC_serviceId": "",
+                "erp:version": "2.1.0",
+                "erp:lastUpdate": "2023-02-03T11:31:26.038070Z",
+                "cetaf:taxonomicScope": [
                     "Bombus",
                     "Syrphidae",
-                    "lepidoptera"
+                    "Lepidoptera"
                 ],
-                "quality": 80,
-                "reviewArgumentation": "This service passes the quality scores given for a taxonomic service, could use some minor improvements.",
-                "authors": [
-                    "John Doe",
-                    "Jane Doe"
-                ],
-                "maintainers": [
-                    "Pieter de Jong"
-                ],
-                "contactEmail": "pieterdejong@taxamail.com",
-                "facilityLocation": "Gasteren",
-                "sourceUrl": "",
-                "websiteUrl": "https://pollinatoracademy.eu/pollinators",
-                "documentationUrl": "",
-                "paidService": false,
-                "usageConditions": "None",
-                "funders": [
+                "cetaf:qualityScore": 80,
+                "cetaf:reviewComments": "This service passes the quality scores given for a taxonomic service, could use some minor improvements.",
+                "erp:helpdeskEmail": "info@cetaf.org",
+                "erp:helpdeskPage": "cetaf.org",
+                "cetaf:agents": [
                     {
-                        "name": "Funder",
-                        "referenceUrl": "",
-                        "logo": ""
+                        "cetaf:agentId": "https://orcid.org/0000-0001-9790-9277",
+                        "cetaf:fullName": "Tom Dijkema",
+                        "cetaf:role": "Developer"
                     }
                 ],
-                "software": {
-                    "sourceUrl": "github.com",
-                    "dependencies": [
+                "erp:webpage": "https://pollinatoracademy.eu/pollinators",
+                "cetaf:documentationUrl": "https://pollinatoracademy.eu",
+                "erp:paymentModel": "Freemium",
+                "erp:termsOfUse": "https://pollinatoracademy.eu/terms-and-conditions/",
+                "erp:fundingProgram": "",
+                "cetaf:software": {
+                    "cetaf:sourceUrl": "github.com",
+                    "erp:requiredResources": [
                         "Pollinator library"
                     ],
-                    "deprecated": false,
-                    "bugReports": [
-                        {
-                            "title": "Fixes",
-                            "description": "Fixed the bug"
-                        }
-                    ]
-                },
-                "associatedMedia": []
+                    "cetaf:deprecated": false,
+                    "erp:changeLog": "Fixed a bug"
+                }
             }
         }
     },

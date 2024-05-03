@@ -4,7 +4,7 @@ import styles from './buttons.module.scss';
 
 /* Props Type */
 interface Props {
-    children: string,
+    children?: string,
     type: 'button' | 'submit',
     variant: 'primary' | 'secondary',
     OnClick: Function

@@ -2,7 +2,6 @@
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import { Provider } from 'react-redux';
-import KeycloakService from 'app/Keycloak';
 
 /* Import Store */
 import { setupStore } from 'app/Store';
@@ -31,4 +30,4 @@ const RenderRoot = () => {
   );
 }
 
-KeycloakService.InitKeyCloak(RenderRoot);
+RenderRoot();

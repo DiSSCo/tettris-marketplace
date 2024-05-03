@@ -60,7 +60,7 @@ const FiltersBar = () => {
                 <Form>
                     <Row>
                         {/* Search Bar */}
-                        <Col lg={{ span: 3 }}>
+                        <Col lg={{ span: 4 }}>
                             <QueryBar name="query"
                                 placeholder="Enter a search query"
                             >
@@ -72,7 +72,7 @@ const FiltersBar = () => {
                             <Row>
                                 {filters.map((filter) => (
                                     <Col key={filter.name}
-                                        lg={{ span: 3 }}
+                                        lg={{ span: 4 }}
                                     >
                                         <Filter filter={filter}
                                             currentValue={values[filter.name as keyof typeof values]}

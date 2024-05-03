@@ -1,0 +1,19 @@
+/* Custom styling for components on the taxonomic service page */
+.imageBackground {
+    background: repeating-linear-gradient(45deg,
+            var(--greyLight),
+            var(--greyLight) 10px,
+            var(--grey) 10px,
+            var(--grey) 20px);
+}
+
+/* Description block */
+.descriptionBlock {
+    height: 13rem;
+}
+
+/* Multimedia block */
+.multimediaItem {
+    height: 10rem;
+    max-width: 100%;
+}

@@ -1,58 +1,63 @@
 {
     "data": {
-        "id": "https://handle.net/TEST/POTKDJE98D7",
+        "id": "https://hdl.handle.net/TEST/POTKDJE98D7",
         "type": "taxonomic_service",
         "attributes": {
             "taxonomicService": {
-                "ods:id": "https://handle.net/TEST/POTKDJE98D7",
-                "ods:version": 1,
+                "erp:id": "https://hdl.handle.net/TEST/POTKDJE98D7",
                 "ods:created": "2024-04-01T11:31:26.038070Z",
                 "dcterms:modified": "2024-05-01T11:31:26.038070Z",
                 "ods:type": "taxonomic_service",
                 "dcterms:license": "CC0",
-                "state": "accepted",
-                "language": "en",
-                "title": "Bombus Reference Collection",
-                "description": "Compare Bombus specimens with the specimens in this collection to identify them.",
-                "serviceCategory": "referenceCollection",
-                "EOSC_serviceId": "",
-                "taxonomicScope": [
+                "cetaf:state": "accepted",
+                "erp:languageAvailabilities": [
+                    "en"
+                ],
+                "erp:name": "Bombus Reference Collection",
+                "erp:description": "Compare Bombus specimens with the specimens in this collection to identify them.",
+                "erp:tagLine": "Compare Bombus specimens with the specimens",
+                "erp:logo": "",
+                "cetaf:taxonomicServiceType": "referenceCollection",
+                "erp:category": "Platform",
+                "erp:EOSC_serviceId": "",
+                "erp:version": "1.0.0",
+                "erp:lastUpdate": "2023-02-03T11:31:26.038070Z",
+                "cetaf:taxonomicScope": [
                     "Bombus"
                 ],
-                "quality": 90,
-                "reviewArgumentation": "This service passes the quality scores given for a reference collection, could only use a couple more photos.",
-                "authors": [
-                    "Skipper", "Skeeto"
-                ],
-                "maintainers": [
-                    "Arthur Renzema"
-                ],
-                "contactEmail": "arthur.renzema@taxamail.com",
-                "facilityLocation": "Zuidlaren",
-                "sourceUrl": "",
-                "websiteUrl": "",
-                "documentationUrl": "",
-                "paidService": false,
-                "usageConditions": "None",
-                "funders": [
+                "cetaf:qualityScore": 90,
+                "cetaf:reviewComments": "This service passes the quality scores given for a reference collection, could only use a couple more photos.",
+                "erp:helpdeskEmail": "info@cetaf.org",
+                "erp:helpdeskPage": "cetaf.org",
+                "cetaf:agents": [
                     {
-                        "name": "Funder",
-                        "referenceUrl": "",
-                        "logo": ""
+                        "cetaf:agentId": "https://orcid.org/0000-0001-9790-9277",
+                        "cetaf:fullName": "Tom Dijkema",
+                        "cetaf:role": "Developer"
+                    },
+                    {
+                        "cetaf:agentId": "https://orcid.org/0000-0001-9790-9277",
+                        "cetaf:fullName": "Tom Dijkema",
+                        "cetaf:role": "Developer"
                     }
                 ],
-                "associatedMedia": [
+                "erp:webpage": "cetaf.org",
+                "cetaf:documentationUrl": "cetaf.org",
+                "erp:paymentModel": "Freemium",
+                "erp:termsOfUse": "",
+                "erp:fundingProgram": "Horizon 2020",
+                "erp:multimedia": [
                     {
-                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/278859056/original.jpg"
+                        "erp:multimediaUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/278859056/original.jpg"
                     },
                     {
-                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/278859082/original.jpg"
+                        "erp:multimediaUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/278859082/original.jpg"
                     },
                     {
-                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/284025774/original.jpeg"
+                        "erp:multimediaUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/284025774/original.jpeg"
                     },
                     {
-                        "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/284025746/original.jpeg"
+                        "erp:multimediaUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/284025746/original.jpeg"
                     }
                 ]
             }

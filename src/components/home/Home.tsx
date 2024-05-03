@@ -11,7 +11,10 @@ import HomeCategory from './components/HomeCategory';
 import Footer from 'components/general/footer/Footer';
 
 
-/** Base component that renders the Home page */
+/**
+ * Base component that renders the Home page
+ * @returns JSX Component
+ */
 const Home = () => {
     return (
         <div className="h-100 d-flex flex-column">

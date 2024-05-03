@@ -8,18 +8,10 @@ const Capitalize = (string: string) => {
 }
 
 /** Function to replace capitals in a string with spaces to make a readable string */
-const MakeReadableString = (string: string) => {
-    let readableString: string = string;
+const MakeReadableString = (string: string) => {  
+    const splitArray: string[] = string.split(/(?=[A-Z])/);
 
-    for (const character of string) {
-        if (character === character.toUpperCase()) {
-            let splittedArray = string.split(character, 2);
-
-            readableString = `${splittedArray[0]} ${character}${splittedArray[1]}`;
-        }
-    }
-
-    return Capitalize(readableString);
+    return Capitalize(splitArray.join(' '));
 }
 
 

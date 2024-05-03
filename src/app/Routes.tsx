@@ -15,7 +15,7 @@ const routes = [
     /* Search */
     <Route key="search" path="/search" element={<Search />} />,
     /* Taxonomic Service */
-    <Route key="taxonomicService" path="/ts" element={<TaxonomicService />} />,
+    <Route key="taxonomicService" path="/ts/:prefix/:suffix/:version?" element={<TaxonomicService />} />,
     <Route key="taxonomicService/add" path="/ts/add" element={<TaxonomicServiceForm />} />
 ];
 

@@ -10,156 +10,159 @@
  */
 export interface TaxonomicService {
   /**
-   * The unique digital identifier of the object
+   * A persistent identifier, a unique reference to the Resource.
    */
-  "ods:id"?: string;
-  /**
-   * The version of the object, each change generates a new version
-   */
-  "ods:version"?: number;
+  "erp:id": string;
   /**
    * The timestamp that the object version was created in DiSSCo
    */
-  "ods:created"?: string;
+  "ods:created": string;
   /**
    * Modification date for specimen information
    */
-  "dcterms:modified"?: string;
+  "dcterms:modified": string;
   /**
    * The FDO type of the object
    */
-  "ods:type"?: string;
+  "ods:type": string;
   /**
    * http://purl.org/dc/terms/license
    */
-  "dcterms:license"?: string;
+  "dcterms:license": string;
   /**
    * The current state of the object
    */
-  state?: string;
+  "cetaf:state": string;
   /**
-   * Indicator for the language the service is written in, using ISO alpha-3/ISO 639-2
+   * Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2
    */
-  language?: string;
+  "erp:languageAvailabilities": string[];
   /**
-   * The title name of the service
+   * Brief and descriptive name of the Resource as assigned by the Provider
    */
-  title?: string;
+  "erp:name": string;
   /**
-   * A fitting description about the service
+   * A high-level description in fairly non-technical terms of a) what the Resource does, functionality it provides and Resources it enables to access, b) the benefit to a user/customer delivered by a Resource; benefits are usually related to alleviating pains (e.g., eliminate undesired outcomes, obstacles or risks) or producing gains (e.g. increased performance, social gains, positive emotions or cost saving), c) list of customers, communities, users, etc. using the Resource.
    */
-  description?: string;
+  "erp:description": string;
   /**
-   * A category that further defines the type of service
+   * Short catchphrase for marketing and advertising purposes. It will be usually displayed close to the Resource name and should refer to the main value or purpose of the Resource.
    */
-  serviceCategory?: string;
+  "erp:tagLine"?: string;
+  /**
+   * Link to the logo/visual identity of the Resource. The logo will be visible at the Portal. If there is no specific logo for the Resource the logo of the Provider may be used.
+   */
+  "erp:logo"?: string;
+  /**
+   * A type that further defines the type of taxonomic service
+   */
+  "cetaf:taxonomicServiceType": string;
+  /**
+   * A named group of Resources that offer access to the same type of Resources.
+   */
+  "erp:category": string;
   /**
    * A persistent identifier, a unique reference to the (Multi-Provider Regional or Thematic) Catalogue in the context of the EOSC Portal.
    */
-  EOSC_serviceId?: string;
+  "erp:EOSC_serviceId"?: string;
+  /**
+   * Version of the Resource that is in force.
+   */
+  "erp:version"?: string;
+  /**
+   * Date of the latest update of the Resource.
+   */
+  "erp:lastUpdate"?: string;
   /**
    * The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)
    */
-  taxonomicScope?: string[];
+  "cetaf:taxonomicScope"?: string[];
   /**
    * A quality indicator for the purpose of the service
    */
-  quality?: number;
+  "cetaf:qualityScore": number;
   /**
-   * Argumentation that describes the given quality score
+   * Comments that describes the admin review and why a certain state is given
    */
-  reviewArgumentation?: string;
-  authors?: string[];
-  maintainers?: string[];
+  "cetaf:reviewComments"?: string;
   /**
-   * Email of the primary contact
+   * Email to contact your helpdesk, where users with incidents and requests will be directed.
    */
-  contactEmail?: string;
+  "erp:helpdeskEmail"?: string;
   /**
-   * Location of the facility hosting the service
+   * Link to the helpdesk where users with incidents and requests will be directed. It should allow private communication with providers (not a public forum). Create a dedicated URL for your Resources and provide the shortest possible alias.
    */
-  facilityLocation?: string;
+  "erp:helpdeskPage"?: string;
   /**
-   * Link to the source DOI / PID of the virtual collection
+   * An array holding the agents connected to the taxonomic service
    */
-  sourceUrl?: string;
+  "cetaf:agents": Agent[];
   /**
-   * Link to the website covering a description of the service
+   * Webpage with information about the Resource usually hosted and maintained by the Provider.
    */
-  websiteUrl?: string;
+  "erp:webpage"?: string;
   /**
    * Link to the documentation of the service
    */
-  documentationUrl?: string;
+  "cetaf:documentationUrl"?: string;
   /**
-   * Boolean indicating if the service is paid for
+   * Webpage with the supported payment models and restrictions that apply to the Resource.
    */
-  paidService?: boolean;
+  "erp:paymentModel": string;
   /**
-   * Full description of the usage conditions tied to the service
+   * Link describing the rules, resource conditions and usage policy which one must agree to abide by in order to use the Resource. Create a dedicated URL for your Resources and provide the shortest possible alias.
    */
-  usageConditions?: string;
+  "erp:termsOfUse"?: string;
   /**
-   * A recognition towards the funders of the service
+   * Name of the funding program that supported the development and/or operation of the Resource.
    */
-  funders?: Funder[];
+  "erp:fundingProgram"?: string;
   /**
    * Object representing the service's software
    */
-  software?: {
+  "cetaf:software"?: {
     /**
      * Link pointing to the source URL of the software, e.g. the GitHub repository
      */
-    sourceUrl?: string;
+    "cetaf:sourceUrl": string;
     /**
-     * Array holding the names of the required dependencies to run the service's software
+     * List any other EOSC Resources that your Resource requires in order to operate.
      */
-    dependencies?: string[];
+    "erp:requiredResources"?: string[];
     /**
      * Boolean indicating if the software has been deprecated
      */
-    deprecated?: boolean;
+    "cetaf:deprecated"?: boolean;
     /**
-     * Array holding bug reports published by users of the service
+     * Summary of the Resource features updated from the previous version.
      */
-    bugReports?: BugReport[];
+    "erp:changeLog"?: string;
     [k: string]: unknown;
   };
   /**
-   * Array of image Urls pointing to their respective sources
+   * Array of multimedia objects, pointing to their respective sources
    */
-  associatedMedia?: {
+  "erp:multimedia"?: {
     /**
-     * Image url pointing to its resource
+     * Link to video, screenshots or slides showing details of the Resource.
      */
-    url?: string;
+    "erp:multimediaUrl": string;
     [k: string]: unknown;
   }[];
   [k: string]: unknown;
 }
-export interface Funder {
+export interface Agent {
   /**
-   * Name of the funder
+   * A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid
    */
-  name?: string;
+  "cetaf:agentId": string;
   /**
-   * Link to the funder's website
+   * Full name of the agent
    */
-  referenceUrl?: string;
+  "cetaf:fullName"?: string;
   /**
-   * Link to the icon resource of the funder
+   * The role assigned to the agent
    */
-  logo?: string;
-  [k: string]: unknown;
-}
-export interface BugReport {
-  /**
-   * Title of the bug report
-   */
-  title?: string;
-  /**
-   * Field holding the complete bug report's contents
-   */
-  description?: string;
+  "cetaf:role"?: string;
   [k: string]: unknown;
 }
