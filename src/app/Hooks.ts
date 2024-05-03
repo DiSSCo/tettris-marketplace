@@ -41,7 +41,7 @@ const useFetch = () => {
      */
     const FetchMultiple = async (...methods: Function[]) => {
         const promises: Promise<Dict>[] = [];
-        let fetchResults: any | undefined;
+        let fetchResults: Dict[] | undefined;
 
         methods.forEach((Method) => {
             promises.push(Method());

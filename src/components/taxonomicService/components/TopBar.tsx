@@ -1,9 +1,6 @@
 /* Import Dependencies */
 import { Row, Col } from 'react-bootstrap';
 
-/* Import Utitlities */
-import { MakeReadableString } from 'app/Utilities';
-
 /* Import Types */
 import { TaxonomicService } from 'app/Types';
 

@@ -32,7 +32,8 @@ const MultimediaBlock = (props: Props) => {
                     <div className="h-100 b-primary px-4 py-3">
                         <Row className="justify-content-between">
                             {multimediaItems.map(multimediaItem => (
-                                <Col lg={{ span: 4 }}
+                                <Col key={multimediaItem['erp:multimediaUrl']}
+                                    lg={{ span: 4 }}
                                     className="mb-3"
                                 >
                                     <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center`}>
