@@ -4,31 +4,28 @@
     "type": "object",
     "description": "Generic concept of a Service or Tool",
     "properties": {
-        "ods:id": {
+        "erp:id": {
             "type": "string",
-            "description": "The unique digital identifier of the object",
+            "description": "A persistent identifier, a unique reference to the Resource.",
             "pattern": "https:\/\/doi.org\/10.22\/(.){3}-(.){3}-(.){3}",
             "examples": [
                 "https://doi.org/10.22/XXX-XXX-XXX"
             ]
         },
-        "ods:version": {
-            "type": "integer",
-            "description": "The version of the object, each change generates a new version",
-            "minimum": 1,
-            "examples": [
-                1
-            ]
-        },
         "ods:created": {
             "type": "string",
-            "description": "The timestamp that the object version was created in DiSSCo",
+            "description": "The timestamp that the object version was created",
             "format": "date-time",
-            "examples": []
+            "examples": [
+                "2023-07-10T12:02:00.000Z"
+            ]
         },
         "dcterms:modified": {
             "type": "string",
-            "description": "Modification date for specimen information"
+            "description": "Modification date for specimen information",
+            "examples": [
+                "2023-07-10T12:02:00.000Z"
+            ]
         },
         "ods:type": {
             "type": "string",
@@ -40,7 +37,7 @@
             "description": "http://purl.org/dc/terms/license",
             "$comment": "Determine available licenses"
         },
-        "state": {
+        "cetaf:state": {
             "type": "string",
             "description": "The current state of the object",
             "examples": [
@@ -49,47 +46,85 @@
                 "rejected"
             ]
         },
-        "language": {
-            "type": "string",
-            "description": "Indicator for the language the service is written in, using ISO alpha-3/ISO 639-2 ",
-            "examples": [
-                "en",
-                "nl"
-            ]
+        "erp:languageAvailabilities": {
+            "type": "array",
+            "description": "Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2 ",
+            "items": {
+                "type": "string"
+            }
         },
-        "title": {
+        "erp:name": {
             "type": "string",
-            "description": "The title name of the service",
+            "description": "Brief and descriptive name of the Resource as assigned by the Provider",
             "examples": [
                 "Bombus reference collection"
             ]
         },
-        "description": {
+        "erp:description": {
             "type": "string",
-            "description": "A fitting description about the service",
+            "description": "A high-level description in fairly non-technical terms of a) what the Resource does, functionality it provides and Resources it enables to access, b) the benefit to a user/customer delivered by a Resource; benefits are usually related to alleviating pains (e.g., eliminate undesired outcomes, obstacles or risks) or producing gains (e.g. increased performance, social gains, positive emotions or cost saving), c) list of customers, communities, users, etc. using the Resource.",
+            "examples": [
+                "A Bombus reference collection that contains a bunch of different specimen related to the Bombus species"
+            ]
+        },
+        "erp:tagLine": {
+            "type": "string",
+            "description": "Short catchphrase for marketing and advertising purposes. It will be usually displayed close to the Resource name and should refer to the main value or purpose of the Resource.",
             "examples": [
                 "A Bombus reference collection"
             ]
         },
-        "serviceCategory": {
+        "erp:logo": {
             "type": "string",
-            "description": "A category that further defines the type of service",
+            "description": "Link to the logo/visual identity of the Resource. The logo will be visible at the Portal. If there is no specific logo for the Resource the logo of the Provider may be used.",
+            "examples": [
+                "https://eosc.eu/wp-content/uploads/2022/09/New-guidelines-for-EOSC-family-branding.jpg"
+            ]
+        },
+        "cetaf:taxonomicServiceType": {
+            "type": "string",
+            "description": "A type that further defines the type of taxonomic service",
             "examples": [
                 "referenceCollection"
             ]
         },
-        "EOSC_serviceId": {
+        "erp:category": {
+            "type": "string",
+            "description": "A named group of Resources that offer access to the same type of Resources.",
+            "examples": [
+                "Software Repository",
+                "Software Package",
+                "Platform"
+            ]
+        },
+        "erp:EOSC_serviceId": {
             "type": "string",
             "description": "A persistent identifier, a unique reference to the (Multi-Provider Regional or Thematic) Catalogue in the context of the EOSC Portal."
         },
-        "taxonomicScope": {
+        "erp:version": {
+            "type": "string",
+            "description": "Version of the Resource that is in force.",
+            "examples": [
+                "1",
+                "1.1",
+                "2.0.1"
+            ]
+        },
+        "erp:lastUpdate": {
+            "type": "string",
+            "description": "Date of the latest update of the Resource.",
+            "examples": [
+                "2023-07-10T12:02:00.000Z"
+            ]
+        },
+        "cetaf:taxonomicScope": {
             "type": "array",
             "description": "The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)",
             "items": {
                 "type": "string"
             }
         },
-        "quality": {
+        "cetaf:qualityScore": {
             "type": "number",
             "description": "A quality indicator for the purpose of the service",
             "examples": [
@@ -98,126 +133,164 @@
                 100
             ]
         },
-        "reviewArgumentation": {
+        "cetaf:reviewComments": {
             "type": "string",
-            "description": "Argumentation that describes the given quality score",
+            "description": "Comments that describes the admin review and why a certain state is given",
             "examples": [
-                "This service is appointed a score of 50, because..."
+                "This service is accepted, because...",
+                "This service is rejected, because..."
             ]
         },
-        "authors": {
+        "erp:helpdeskEmail": {
+            "type": "string",
+            "description": "Email to contact your helpdesk, where users with incidents and requests will be directed.",
+            "examples": [
+                "info@cetaf.org"
+            ]
+        },
+        "erp:helpdeskPage": {
+            "type": "string",
+            "description": "Link to the helpdesk where users with incidents and requests will be directed. It should allow private communication with providers (not a public forum). Create a dedicated URL for your Resources and provide the shortest possible alias.",
+            "examples": [
+                "cetaf.org"
+            ]
+        },
+        "cetaf:agents": {
             "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
-        "maintainers": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
-        "contactEmail": {
-            "type": "string",
-            "description": "Email of the primary contact"
-        },
-        "facilityLocation": {
-            "type": "string",
-            "description": "Location of the facility hosting the service"
-        },
-        "sourceUrl": {
-            "type": "string",
-            "description": "Link to the source DOI / PID of the virtual collection"
-        },
-        "websiteUrl": {
-            "type": "string",
-            "description": "Link to the website covering a description of the service"
-        },
-        "documentationUrl": {
-            "type": "string",
-            "description": "Link to the documentation of the service"
-        },
-        "paidService": {
-            "type": "boolean",
-            "description": "Boolean indicating if the service is paid for"
-        },
-        "usageConditions": {
-            "type": "string",
-            "description": "Full description of the usage conditions tied to the service"
-        },
-        "funders": {
-            "type": "array",
-            "description": "A recognition towards the funders of the service",
+            "description": "An array holding the agents connected to the taxonomic service",
             "items": {
                 "type": "object",
-                "title": "funder",
+                "title": "agent",
                 "properties": {
-                    "name": {
+                    "cetaf:agentId": {
                         "type": "string",
-                        "description": "Name of the funder"
+                        "description": "A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid",
+                        "examples": [
+                            "https://orcid.org/0000-0000-0000-0000"
+                        ]
                     },
-                    "referenceUrl": {
+                    "cetaf:fullName": {
                         "type": "string",
-                        "description": "Link to the funder's website"
+                        "description": "Full name of the agent",
+                        "examples": [
+                            "John Doe"
+                        ]
                     },
-                    "logo": {
+                    "cetaf:role": {
                         "type": "string",
-                        "description": "Link to the icon resource of the funder"
+                        "description": "The role assigned to the agent",
+                        "examples": [
+                            "Publisher",
+                            "Maintainer"
+                        ]
                     }
-                }
+                },
+                "required": [
+                    "cetaf:agentId"
+                ]
             }
         },
-        "software": {
+        "erp:webpage": {
+            "type": "string",
+            "description": "Webpage with information about the Resource usually hosted and maintained by the Provider.",
+            "examples": [
+                "cetaf.org"
+            ]
+        },
+        "cetaf:documentationUrl": {
+            "type": "string",
+            "description": "Link to the documentation of the service",
+            "examples": [
+                "cetaf.org"
+            ]
+        },
+        "erp:paymentModel": {
+            "type": "string",
+            "description": "Webpage with the supported payment models and restrictions that apply to the Resource.",
+            "examples": [
+                "http://service-name.service-provider.eu/Maintenance"
+            ]
+        },
+        "erp:termsOfUse": {
+            "type": "string",
+            "description": "Link describing the rules, resource conditions and usage policy which one must agree to abide by in order to use the Resource. Create a dedicated URL for your Resources and provide the shortest possible alias.",
+            "examples": [
+                "http://service-name.service-provid-er.eu/TermsOfUse"
+            ]
+        },
+        "erp:fundingProgram": {
+            "type": "string",
+            "description": "Name of the funding program that supported the development and/or operation of the Resource.",
+            "examples": [
+                "Horizon 2020"
+            ]
+        },
+        "cetaf:software": {
             "type": "object",
             "description": "Object representing the service's software",
             "properties": {
-                "sourceUrl": {
+                "cetaf:sourceUrl": {
                     "type": "string",
-                    "description": "Link pointing to the source URL of the software, e.g. the GitHub repository"
+                    "description": "Link pointing to the source URL of the software, e.g. the GitHub repository",
+                    "examples": [
+                        "https://github.com/DiSSCo/tettris-marketplace"
+                    ]
                 },
-                "dependencies": {
+                "erp:requiredResources": {
                     "type": "array",
-                    "description": "Array holding the names of the required dependencies to run the service's software",
+                    "description": "List any other EOSC Resources that your Resource requires in order to operate.",
                     "items": {
                         "type": "string"
                     }
                 },
-                "deprecated": {
+                "cetaf:deprecated": {
                     "type": "boolean",
                     "description": "Boolean indicating if the software has been deprecated"
                 },
-                "bugReports": {
-                    "type": "array",
-                    "description": "Array holding bug reports published by users of the service",
-                    "items": {
-                        "type": "object",
-                        "title": "Bug Report",
-                        "properties": {
-                            "title": {
-                                "type": "string",
-                                "description": "Title of the bug report"
-                            },
-                            "description": {
-                                "type": "string",
-                                "description": "Field holding the complete bug report's contents"
-                            }
-                        }
-                    }
+                "erp:changeLog": {
+                    "type": "string",
+                    "description": "Summary of the Resource features updated from the previous version.",
+                    "examples": [
+                        "Upgrade of user interface. Correction of minor bugs."
+                    ]
                 }
-            }
+            },
+            "required": [
+                "cetaf:sourceUrl"
+            ]
         },
-        "associatedMedia": {
+        "erp:multimedia": {
             "type": "array",
-            "description": "Array of image Urls pointing to their respective sources",
+            "description": "Array of multimedia objects, pointing to their respective sources",
             "items": {
                 "type": "object",
                 "properties": {
-                    "url": {
+                    "erp:multimediaUrl": {
                         "type": "string",
-                        "description": "Image url pointing to its resource"
+                        "description": "Link to video, screenshots or slides showing details of the Resource."
                     }
-                }
+                },
+                "required": [
+                    "erp:multimediaUrl"
+                ]
             }
         }
-    }
+    },
+    "required": [
+        "erp:id",
+        "ods:created",
+        "dcterms:modified",
+        "ods:type",
+        "dcterms:license",
+        "cetaf:state",
+        "erp:languageAvailabilities",
+        "erp:name",
+        "erp:description",
+        "cetaf:taxonomicServiceType",
+        "erp:category",
+        "cetaf:qualityScore",
+        "cetaf:agents",
+        "erp:paymentModel",
+        "erp:usageConditions"
+    ]
 }

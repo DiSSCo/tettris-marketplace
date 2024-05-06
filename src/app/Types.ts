@@ -7,7 +7,7 @@ export type Dict = {
     [name: string]: any;
 };
 
-/* Type for a JSON Result Interface */
+/* Types for JSON Result Interfaces */
 type DataFragment = {
     id: string,
     type: string,
@@ -43,6 +43,13 @@ export type JSONResultArray = {
 /* Type for a Taxonomic Service */
 export type TaxonomicService = {
     taxonomicService: TaxonomicServiceType
+}
+
+/* Type for an Agent */
+export type Agent = {
+    "cetaf:agentId": string,
+    "cetaf:fullName"?: string,
+    "cetaf:role"?: string
 }
 
 /* Type for a Filter */

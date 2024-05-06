@@ -33,10 +33,15 @@ const Search = () => {
     /* Base variables */
     const taxonomicServices = useAppSelector(getTaxonomicServices);
 
-    const paginator = usePaginator(GetTaxonomicServices, (newTaxonomicServices: TaxonomicService[]) => {
-        /* On receivel of a new page with records, add them to the total */
-        dispatch(setTaxonomicServices([...taxonomicServices, ...newTaxonomicServices]));
-    }, 'taxonomicServices');
+    const paginator = usePaginator({
+        Method: GetTaxonomicServices,
+        Handler: (newTaxonomicServices: TaxonomicService[]) => {
+            /* On receivel of a new page with records, add them to the total */
+            dispatch(setTaxonomicServices([...taxonomicServices, ...newTaxonomicServices]));
+        },
+        key: 'taxonomicServices',
+        currentRecords: taxonomicServices
+    });
 
     return (
         <div className="h-100 d-flex flex-column">

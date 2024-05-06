@@ -9,11 +9,10 @@ import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
 
 /**
  * Function that fetches a taxonomic service from the API by providing a taxonomic service identifier
- * @param taxonomicServiceID The identifier of the requested taxonomic service
- * @param version The specific version of the requested taxonomic service
+ * @param handle The handle identifier of the requested taxonomic service
  * @returns An instance of Taxonomic Service or undefined
  */
-const GetTaxonomicService = async (handle?: string, _version?: string) => {
+const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
     let taxonomicService: TaxonomicService | undefined;
 
     if (handle) {
@@ -21,10 +20,13 @@ const GetTaxonomicService = async (handle?: string, _version?: string) => {
 
         try {
             let result: { data: JSONResult };
+            let mockData;
 
             switch (taxonomicServiceID) {
                 case 'TEST/SEMKDJE98D7':
-                    result = { data: { ...AcceptedTaxonomicService } };
+                    mockData = AcceptedTaxonomicService;
+
+                    result = { data: { ...mockData } };
 
                     break;
                 case 'TEST/LOFKDJE98D7':
@@ -32,7 +34,9 @@ const GetTaxonomicService = async (handle?: string, _version?: string) => {
 
                     break;
                 case 'TEST/POTKDJE98D7':
-                    result = { data: { ...ReferenceCollection } };
+                    mockData = ReferenceCollection;
+
+                    result = { data: { ...mockData } };
 
                     break;
                 default:
@@ -49,7 +53,7 @@ const GetTaxonomicService = async (handle?: string, _version?: string) => {
         }
     }
 
-    return taxonomicService;
+    return taxonomicService
 }
 
 export default GetTaxonomicService;

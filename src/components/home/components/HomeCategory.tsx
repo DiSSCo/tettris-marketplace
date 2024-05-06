@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import { useState } from "react"
+import { Link } from "react-router-dom";
 import CountUp from 'react-countup';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
@@ -13,18 +14,22 @@ interface Props {
     title: string,
     subTitle: string,
     count: number,
+    link: string,
     color: 'primary' | 'secondary' | 'tertiary'
 };
 
 
-/** Component that renders a template for the category selection on the Home page
-    * @param title The title of the category that should be displayed in large font
-    * @param subTitle The text that will appear in smaller font below the title
-    * @param count The total count of records the category holds
-    * @param color The color code of the category indicated by the CSS order of: primary, secondary and tertiary
-*/
+/**
+ * Component that renders a template for the category selection on the Home page
+ * @param title The title of the category that should be displayed in large font
+ * @param subTitle The text that will appear in smaller font below the title
+ * @param count The total count of records the category holds
+ * @param link The link the category should go to when clicked on
+ * @param color The color code of the category indicated by the CSS order of: primary, secondary and tertiary
+ * @returns JSX Component
+ */
 const HomeCategory = (props: Props) => {
-    const { title, subTitle, count, color } = props;
+    const { title, subTitle, count, link, color } = props;
 
     /* Base variables */
     const [active, setActive] = useState<boolean>(false);
@@ -47,17 +52,19 @@ const HomeCategory = (props: Props) => {
             {/* Colored Bar, will extend to the bottom when hovered on this component */}
             <div className={hoverDivClass} />
 
-            <Col className="flex-grow-1 mt-1 z-2">
+            <Col className="flex-grow-1 z-2 mt-1 p-0">
                 {/* Content of the category */}
-                <Row className="pt-5 pb-5">
-                    <Col className="text-center">
-                        <p className={`${textClass} fs-1 tc-${color} fw-bold tr-smooth`}>
-                            <CountUp end={count} />
-                        </p>
-                        <p className={`${textClass} fs-subTitle fw-lightBold tr-smooth`}>{title}</p>
-                        <p className={`${textClass} fs-2 fw-lightBold tr-smooth`}>{subTitle}</p>
-                    </Col>
-                </Row>
+                <Link to={link}>
+                    <Row className="pt-5 pb-5">
+                        <Col className="text-center">
+                            <p className={`${textClass} fs-1 tc-${color} fw-bold tr-smooth`}>
+                                <CountUp end={count} />
+                            </p>
+                            <p className={`${textClass} fs-subTitle fw-lightBold tr-smooth`}>{title}</p>
+                            <p className={`${textClass} fs-2 fw-lightBold tr-smooth`}>{subTitle}</p>
+                        </Col>
+                    </Row>
+                </Link>
             </Col>
         </Row>
     );

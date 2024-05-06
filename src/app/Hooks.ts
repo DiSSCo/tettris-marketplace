@@ -13,19 +13,25 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 /**
  * Fetch hook for handling fetch requests
- * @returns 
+ * @returns Instance of hook
  */
 const useFetch = () => {
-    const Fetch = async (Method: Function) => {
-        let fetchResult: Dict | undefined;
+    const [loading, setLoading] = useState<boolean>(true);
 
-        await Method().then((result: Dict) => {
-            fetchResult = result;
-        }).catch((error: string) => {
-            console.warn(error);
-        });
+    const Fetch = ({ Method, Handler, params }: { Method: Function, Handler?: Function, params?: Dict }) => {
+        const [fetchResult, setFetchResult] = useState<any>();
 
-        return fetchResult;
+        useEffect(() => {
+            Method(params).then((result: Dict) => {
+                setFetchResult(result);
+
+                Handler?.(result);
+            }).finally(() => {
+                setLoading(false);
+            });
+        }, []);
+
+        return fetchResult
     };
 
     /**
@@ -35,7 +41,7 @@ const useFetch = () => {
      */
     const FetchMultiple = async (...methods: Function[]) => {
         const promises: Promise<Dict>[] = [];
-        let fetchResults: Dict | undefined;
+        let fetchResults: Dict[] | undefined;
 
         methods.forEach((Method) => {
             promises.push(Method());
@@ -49,6 +55,7 @@ const useFetch = () => {
     };
 
     return {
+        loading,
         Fetch,
         FetchMultiple
     };
@@ -59,14 +66,12 @@ const useFetch = () => {
  * Paginator Hook for handling pagination with fetch requests and page numbers
  * @returns Instance of hook
  */
-const usePaginator = (Method: Function, Hanlder: Function, key?: string) => {
-    /* Hooks */
-    const fetch = useFetch();
-
+const usePaginator = ({ Method, Handler, key, currentRecords }: { Method: Function, Handler: Function, key?: string, currentRecords?: Dict[] }) => {
     /* Base variables */
-    const [records, setRecords] = useState<Dict[]>([]);
+    const [records, setRecords] = useState<Dict[]>(currentRecords ?? []);
     const [links, setLinks] = useState<Dict>({});
     const [pageNumber, setPageNumber] = useState<number>(1);
+    const pageSize: number = 12;
     const [loading, setLoading] = useState<boolean>(false);
 
     const Next = () => {
@@ -95,7 +100,9 @@ const usePaginator = (Method: Function, Hanlder: Function, key?: string) => {
 
         setTimeout(() => {
             /* Fetch data */
-            fetch.Fetch(Method).then((result) => {
+            (async () => {
+                const result = await Method({ pageNumber, pageSize });
+
                 if (result) {
                     if (result?.links) {
                         setLinks(result.links);
@@ -105,18 +112,14 @@ const usePaginator = (Method: Function, Hanlder: Function, key?: string) => {
                     const records = key ? result[key] : result[Object.keys(result)[0]];
 
                     setRecords(records);
-                    Hanlder(records);
+                    Handler(records);
                 } else {
                     throw (new Error('Fetch ended in undefined Result'));
                 }
-            }).catch(error => {
-                console.warn(error);
-            }).finally(() => {
+
                 setLoading(false);
-            });
+            })();
         }, 3000);
-
-
     }, [pageNumber]);
 
     return {

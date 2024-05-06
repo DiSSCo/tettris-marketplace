@@ -11,7 +11,7 @@ import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
  * @param pageNumber The number of the current page of records
  * @returns An array of Taxonomic Service instances or an empty array
  */
-const GetTaxonomicServices = async (pageNumber: number) => {
+const GetTaxonomicServices = async ({ pageNumber }: { pageNumber: number }) => {
     const pageSize: number = 12;
     let taxonomicServices: TaxonomicService[] = [];
     let links: Dict = {};

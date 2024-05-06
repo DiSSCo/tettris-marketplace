@@ -34,10 +34,6 @@
             ]
         },
         {
-            "name": "publishingDate",
-            "type": "date"
-        },
-        {
             "name": "language",
             "type": "select",
             "options": [
