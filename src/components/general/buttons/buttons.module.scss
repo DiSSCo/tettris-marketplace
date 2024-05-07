@@ -1,10 +1,22 @@
+/* Custom styling for a custom button component */
+.button {
+    background-color: transparent;
+    transition: 0.3s;
+    color: inherit;
+}
+
+.button:hover {
+    filter: brightness(130%);
+}
+
+
 /* Primary variant */
 .primary {
     background-color: var(--primary);
-    color: white;
-    transition: 0.4s;
+    color: white;   
 }
 
-.primary:hover {
-    filter: brightness(130%);
+.secondary {
+    background-color: var(--secondary);
+    color: white;
 }

@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 /* Import Types */
@@ -66,13 +67,25 @@ const useFetch = () => {
  * Paginator Hook for handling pagination with fetch requests and page numbers
  * @returns Instance of hook
  */
-const usePaginator = ({ Method, Handler, key, currentRecords }: { Method: Function, Handler: Function, key?: string, currentRecords?: Dict[] }) => {
+const usePaginator = ({ Method, Handler, pageSize, key, allowSearchParams = false, currentRecords }:
+    { Method: Function, Handler: Function, pageSize: number, key?: string, allowSearchParams: boolean, currentRecords?: Dict[] }
+) => {
+    /* Hooks */
+    const [searchParams] = useSearchParams();
+
     /* Base variables */
     const [records, setRecords] = useState<Dict[]>(currentRecords ?? []);
     const [links, setLinks] = useState<Dict>({});
     const [pageNumber, setPageNumber] = useState<number>(1);
-    const pageSize: number = 12;
     const [loading, setLoading] = useState<boolean>(false);
+
+    /* Get search filters from search params */
+    const searchFilters = [...searchParams.entries()].reduce((filtersObject, [key, value]) => {
+        return {
+            ...filtersObject,
+            [key]: value
+        }
+    }, {});
 
     const Next = () => {
         if ('next' in links) {
@@ -101,7 +114,7 @@ const usePaginator = ({ Method, Handler, key, currentRecords }: { Method: Functi
         setTimeout(() => {
             /* Fetch data */
             (async () => {
-                const result = await Method({ pageNumber, pageSize });
+                const result = await Method({ pageNumber, pageSize, ...(allowSearchParams && { searchFilters }) });
 
                 if (result) {
                     if (result?.links) {

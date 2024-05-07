@@ -65,7 +65,7 @@ const Home = () => {
                                         <HomeCategory title="Reference Collections"
                                             subTitle="Go explore"
                                             count={84}
-                                            link="/search"
+                                            link="/search?taxonomicServiceType=referenceCollection"
                                             color="secondary"
                                         />
                                     </Col>
@@ -73,7 +73,7 @@ const Home = () => {
                                         <HomeCategory title="Expertise Taxonomists"
                                             subTitle="Go engage"
                                             count={113}
-                                            link="/"
+                                            link="/expertise"
                                             color="tertiary"
                                         />
                                     </Col>

@@ -1,5 +1,7 @@
 /* Import Dependencies */
+import classNames from 'classnames';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useSearchParams } from 'react-router-dom';
 
 /* Import Hooks */
 import { usePaginator, useAppSelector, useAppDispatch } from 'app/Hooks';
@@ -29,6 +31,7 @@ import { Button, Spinner } from 'components/general/CustomComponents';
 const Search = () => {
     /* Hooks */
     const dispatch = useAppDispatch();
+    const [searchParams] = useSearchParams();
 
     /* Base variables */
     const taxonomicServices = useAppSelector(getTaxonomicServices);
@@ -39,8 +42,16 @@ const Search = () => {
             /* On receivel of a new page with records, add them to the total */
             dispatch(setTaxonomicServices([...taxonomicServices, ...newTaxonomicServices]));
         },
+        pageSize: 12,
         key: 'taxonomicServices',
+        allowSearchParams: true,
         currentRecords: taxonomicServices
+    });
+
+    /* ClassNames */
+    const mainBodyClass = classNames({
+        'gradient-primary': true,
+        'gradient-secondary': searchParams.get('taxonomicServiceType') === 'referenceCollection'
     });
 
     return (
@@ -49,7 +60,7 @@ const Search = () => {
             <Header />
 
             {/* Home page Body */}
-            <Container fluid className="flex-grow-1 gradient-primary overflow-hidden">
+            <Container fluid className={`${mainBodyClass} flex-grow-1 overflow-hidden tr-smooth`}>
                 <Row className="h-100">
                     <Col lg={{ span: 10, offset: 1 }}
                         className="h-100 d-flex flex-column pt-5"
@@ -86,7 +97,7 @@ const Search = () => {
                                     <Col className="d-flex justify-content-center">
                                         {!paginator.loading ?
                                             <Button type="button"
-                                                variant="primary"
+                                                variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                                                 OnClick={() => paginator.Next()}
                                             >
                                                 Load more

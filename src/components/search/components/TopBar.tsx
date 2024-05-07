@@ -1,5 +1,5 @@
 /* Import Dependencies */
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Components */
@@ -12,6 +12,7 @@ import { Button } from 'components/general/CustomComponents';
 const TopBar = () => {
     /* Hooks */
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
     return (
         <Row>
@@ -22,7 +23,7 @@ const TopBar = () => {
             </Col>
             <Col className="col-lg-auto">
                 <Button type="button"
-                    variant="primary"
+                    variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary': 'primary'}
                     OnClick={() => navigate('/ts/add')}
                 >
                     Suggest a new service
