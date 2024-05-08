@@ -7,6 +7,9 @@ import { Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
+/* Import Styles */
+import styles from 'components/home/home.module.scss';
+
 /* Import Components */
 import { QueryBar } from 'components/general/FormComponents';
 
@@ -17,7 +20,7 @@ const SearchBar = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="bgc-white br-corner">
+        <div className={`${styles.searchBar} position-absolute position-lg-static top-0 start-0 w-100 bgc-white br-corner`}>
             <Formik initialValues={{
                 query: ''
             }}
@@ -43,15 +46,6 @@ const SearchBar = () => {
                             >
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                             </QueryBar>
-                            {/* <Field name="query"
-                                className="w-100 py-1 px-2"
-                                placeholder="Enter search query"
-                            />
-                            <button type="submit"
-                                className="bgc-none b-none fs-4 position-absolute end-0 me-4"
-                            >
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </button> */}
                         </Col>
                     </Row>
                 </Form>

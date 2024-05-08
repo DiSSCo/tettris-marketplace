@@ -8,6 +8,9 @@ import { Row, Col } from 'react-bootstrap';
 /* Import Styles */
 import styles from '../home.module.scss';
 
+/* Import Components */
+import { Button } from "components/general/CustomComponents";
+
 
 /* Props Type */
 interface Props {
@@ -36,7 +39,7 @@ const HomeCategory = (props: Props) => {
 
     /* ClassNames */
     const hoverDivClass = classNames({
-        [`${styles.homeCategoryBar} bgc-${color} py-3 tr-smooth z-1 position-absolute`]: true,
+        [`${styles.homeCategoryBar} bgc-${color} py-3 tr-smooth z-1 position-absolute d-none d-lg-block`]: true,
         'h-100': active
     });
 
@@ -55,13 +58,21 @@ const HomeCategory = (props: Props) => {
             <Col className="flex-grow-1 z-2 mt-1 p-0">
                 {/* Content of the category */}
                 <Link to={link}>
-                    <Row className="pt-5 pb-5">
-                        <Col className="text-center">
+                    <Row className="py-lg-5">
+                        <Col className="d-flex flex-column justify-content-center text-center">
                             <p className={`${textClass} fs-1 tc-${color} fw-bold tr-smooth`}>
                                 <CountUp end={count} />
                             </p>
                             <p className={`${textClass} fs-subTitle fw-lightBold tr-smooth`}>{title}</p>
-                            <p className={`${textClass} fs-2 fw-lightBold tr-smooth`}>{subTitle}</p>
+
+                            {/* Button on mobile, title on desktop */}
+                            <Button type="button"
+                                variant="blank"
+                                className={`tc-${color} d-block d-lg-none mt-2`}
+                            >
+                                {subTitle}
+                            </Button>
+                            <p className={`${textClass} fs-2 fw-lightBold tr-smooth d-none d-lg-block`}>{subTitle}</p>
                         </Col>
                     </Row>
                 </Link>

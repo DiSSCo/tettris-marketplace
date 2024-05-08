@@ -12,11 +12,13 @@ import styles from './header.module.scss';
 /** Component that renders the application's Header */
 const Header = () => {
     return (
-        <Container fluid>
-            <Row className="bgc-white py-2">
+        <Container fluid
+            className={styles.header}
+        >
+            <Row className="bgc-white py-2 px-2">
                 <Col lg={{ span: 10, offset: 1 }}>
                     <Row>
-                        <Col className="col-lg-auto">
+                        <Col className="col-auto">
                             <Link to="/">
                                 <img src={CETAFLogo}
                                     alt="CETAF Logo"
@@ -25,10 +27,10 @@ const Header = () => {
                             </Link>
                         </Col>
                         <Col className="d-flex flex-column justify-content-center">
-                            <h2 className="fs-2 tc-primary fw-bold">
+                            <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
                                 Marketplace Prototype
                             </h2>
-                            <h3 className="fs-3 tc-grey fw-lightBold">
+                            <h3 className="fs-4 tc-grey fw-lightBold">
                                 The Taxonomic Expertise and Services Marketplace
                             </h3>
                         </Col>

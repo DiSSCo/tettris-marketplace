@@ -9,7 +9,7 @@ import styles from './buttons.module.scss';
 interface Props {
     children?: string | JSX.Element,
     type: 'button' | 'submit',
-    variant: 'primary' | 'secondary' | 'blank',
+    variant: 'primary' | 'secondary' | 'tertiary' | 'blank',
     className?: string,
     OnClick?: Function
 };
@@ -36,7 +36,7 @@ const Button = (props: Props) => {
             className={`${styles.button} ${styles[variant]} ${buttonClass} fs-4 fw-bold b-none br-round`}
             onClick={() => OnClick?.()}
         >
-            {children}
+            {children ?? ''}
         </button>
     );
 };
