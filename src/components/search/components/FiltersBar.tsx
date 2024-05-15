@@ -18,13 +18,21 @@ import { QueryBar } from 'components/general/FormComponents';
 import Filter from './Filter';
 
 
+/* Props Type */
+type Props = {
+    ToggleFilters?: Function
+};
+
+
 /** Component that renders the Filters Bar on the Search page, it contains:
  * search bar (input)
  * taxonomic scope filter (select)
  * publishing date filter (select)
  * language filter (select)
 */
-const FiltersBar = () => {
+const FiltersBar = (props: Props) => {
+    const { ToggleFilters } = props;
+
     /* Hooks */
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -58,13 +66,19 @@ const FiltersBar = () => {
                 });
 
                 setSearchParams(searchParams);
+
+                /* On mobile, close filters */
+                ToggleFilters?.();
             }}
         >
             {({ values, setFieldValue, submitForm }) => (
                 <Form>
                     <Row>
                         {/* Search Bar */}
-                        <Col lg={{ span: 4 }}>
+                        <Col xs={{ span: 12 }} 
+                            lg={{ span: 4 }}
+                            className="mb-4 mb-lg-0"
+                        >
                             <QueryBar name="query"
                                 placeholder="Enter a search query"
                             >
@@ -76,7 +90,9 @@ const FiltersBar = () => {
                             <Row>
                                 {filters.map((filter) => (
                                     <Col key={filter.name}
+                                        xs={{ span: 12 }}
                                         lg={{ span: 4 }}
+                                        className="mb-2"
                                     >
                                         <Filter filter={filter}
                                             currentValue={values[filter.name as keyof typeof values]}

@@ -25,6 +25,9 @@ export const TaxonomicServiceSlice = createSlice({
         },
         setTaxonomicServices: (state, action: PayloadAction<TaxonomicService[]>) => {
             state.taxonomicServices = action.payload;
+        },
+        concatToTaxonomicServices: (state, action: PayloadAction<TaxonomicService[]>) => {
+            state.taxonomicServices = state.taxonomicServices.concat(action.payload);
         }
     }
 })
@@ -32,7 +35,8 @@ export const TaxonomicServiceSlice = createSlice({
 /* Action Creators */
 export const {
     setTaxonomicService,
-    setTaxonomicServices
+    setTaxonomicServices,
+    concatToTaxonomicServices
 } = TaxonomicServiceSlice.actions;
 
 /* Connect with Root State */

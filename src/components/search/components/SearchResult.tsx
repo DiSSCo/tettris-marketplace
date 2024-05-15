@@ -55,12 +55,12 @@ const SearchResult = (props: Props) => {
 
     /* ClassNames */
     const imageColClass = classNames({
-        'd-none': !previewImage,
-        'd-block': previewImage
+        'd-none d-lg-none': !previewImage,
+        'd-none d-lg-flex': previewImage
     });
 
     return (
-        <div className={`${styles.searchResult} w-100 bgc-white mt-1 pt-3 pb-2 px-3`}>
+        <div className={`${styles.searchResult} w-100 bgc-white mt-lg-1 pt-3 pb-2 px-3`}>
             <button type="button"
                 className="button-no-style"
                 onClick={() => SelectTaxonomicService(taxonomicService)}
@@ -71,12 +71,12 @@ const SearchResult = (props: Props) => {
                         {/* Title and language if image is not present */}
                         <Row>
                             <Col>
-                                <p className="fw-bold">{taxonomicService.taxonomicService['erp:name']}</p>
-                                <p className="fs-4 fst-italic">{taxonomicService.taxonomicService['cetaf:taxonomicScope']?.toString()}</p>
+                                <p className="fs-4 fs-lg-3 fs-lg-default fw-bold">{taxonomicService.taxonomicService['erp:name']}</p>
+                                <p className="fs-5 fs-lg-4 fst-italic">{taxonomicService.taxonomicService['cetaf:taxonomicScope']?.toString()}</p>
                             </Col>
-                            {!previewImage &&
-                                <Col className="col-lg-auto">
-                                    <p className="fw-bold fs-4">{taxonomicService.taxonomicService['erp:languageAvailabilities']?.join(' / ').toUpperCase()}</p>
+                            {(!previewImage || window.innerWidth < 768) &&
+                                <Col xs="auto" lg="auto">
+                                    <p className="fw-bold fs-5 fs-lg-4">{taxonomicService.taxonomicService['erp:languageAvailabilities']?.join(' / ').toUpperCase()}</p>
                                 </Col>
                             }
                         </Row>
@@ -89,18 +89,18 @@ const SearchResult = (props: Props) => {
                         {/* Service Type and Publishing Date if preview image is not present */}
                         <Row>
                             <Col>
-                                <p className="fs-4">{MakeReadableString(taxonomicService.taxonomicService['cetaf:taxonomicServiceType'] ?? 'Taxonomic Service')}</p>
+                                <p className="fs-5 fs-lg-4">{MakeReadableString(taxonomicService.taxonomicService['cetaf:taxonomicServiceType'] ?? 'Taxonomic Service')}</p>
                             </Col>
-                            {!previewImage &&
-                                <Col className="col-lg-auto">
-                                    <p className="fs-4 fw-bold">{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
+                            {(!previewImage || window.innerWidth < 768) &&
+                                <Col xs="auto" lg="auto">
+                                    <p className="fs-5 fs-lg-4 fw-bold">{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
                                 </Col>
                             }
                         </Row>
                     </Col>
                     {/* If preview image is present, render this additional column which takes over some details from the original one */}
                     <Col lg={{ span: 4 }}
-                        className={`${imageColClass} h-100 d-flex flex-column`}
+                        className={`${imageColClass} h-100 flex-column`}
                         style={{
                             backgroundImage: `Url(${previewImage})`,
                             backgroundColor: '#333333',

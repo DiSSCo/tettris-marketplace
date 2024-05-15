@@ -1,5 +1,5 @@
 /* Import Dependencies */
-import { useEffect, useState } from 'react';
+import { Ref, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
@@ -64,17 +64,57 @@ const useFetch = () => {
 
 
 /**
+ * Focus hook for handling the focus of a specific HTML element
+ * @param ref A React reference to the focussed element
+ * @returns Instance of hook
+ */
+const useFocus = ({ ref, OnFocusLose }: { ref: React.RefObject<HTMLElement>, OnFocusLose?: Function }) => {
+    /* Base variables */
+    const [focusToggle, setFocusToggle] = useState<boolean>(false);
+
+    useEffect(() => {
+        const focusElement = ref.current as HTMLDivElement;
+
+        /**
+         * Function to handle a click outside of the element
+         * @param event The click event initiated by the user
+         */
+        const HandleClickOutside = (event: Dict) => {
+            if (!focusElement.contains(event.target)) {
+                setFocusToggle(false);
+
+                /* Call OnFocusLose function if defined */
+                OnFocusLose?.();
+            }
+        };
+
+        /* Set listener for mouse down (click) events */
+        document.addEventListener("mousedown", HandleClickOutside);
+
+        /* Clean up function */
+        return () => {
+            document.removeEventListener("mousedown", HandleClickOutside);
+        };
+    }, [ref]);
+
+    return {
+        focusToggle
+    };
+}
+
+
+/**
  * Paginator Hook for handling pagination with fetch requests and page numbers
  * @returns Instance of hook
  */
-const usePaginator = ({ Method, Handler, pageSize, key, allowSearchParams = false, currentRecords }:
-    { Method: Function, Handler: Function, pageSize: number, key?: string, allowSearchParams: boolean, currentRecords?: Dict[] }
+const usePaginator = ({ Initiate, Method, Handler, pageSize, key, allowSearchParams = false }:
+    { Initiate: Function, Method: Function, Handler: Function, pageSize: number, key?: string, allowSearchParams: boolean }
 ) => {
     /* Hooks */
     const [searchParams] = useSearchParams();
 
     /* Base variables */
-    const [records, setRecords] = useState<Dict[]>(currentRecords ?? []);
+    const [records, setRecords] = useState<Dict[]>([]);
     const [links, setLinks] = useState<Dict>({});
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
@@ -106,6 +146,11 @@ const usePaginator = ({ Method, Handler, pageSize, key, allowSearchParams = fals
             throw (new Error('No previous page'));
         }
     };
+
+    /* Initial setup */
+    useEffect(() => {
+        Initiate();
+    }, []);
 
     useEffect(() => {
         /* Set Loading to true */
@@ -144,8 +189,8 @@ const usePaginator = ({ Method, Handler, pageSize, key, allowSearchParams = fals
     };
 };
 
-
 export {
     useFetch,
+    useFocus,
     usePaginator
 }

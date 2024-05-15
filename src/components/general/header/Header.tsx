@@ -30,7 +30,7 @@ const Header = () => {
                             <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
                                 Marketplace Prototype
                             </h2>
-                            <h3 className="fs-4 tc-grey fw-lightBold">
+                            <h3 className="fs-4 fs-lg-3 tc-grey fw-lightBold">
                                 The Taxonomic Expertise and Services Marketplace
                             </h3>
                         </Col>
