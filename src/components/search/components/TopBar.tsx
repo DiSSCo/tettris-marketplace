@@ -76,7 +76,7 @@ const TopBar = () => {
                     <Button type="button"
                         variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                         className="fs-5 fs-lg-4"
-                        OnClick={() => window.open('https://dissco.jitbit.com/helpdesk/User/Login', '_blank')}
+                        OnClick={() => window.open('https://dissco.jitbit.com/helpdesk/User/Login', '_blank', 'noopener')}
                     >
                         Suggest a new service
                     </Button>

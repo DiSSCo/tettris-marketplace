@@ -44,7 +44,7 @@ const TopBar = (props: Props) => {
                 <Button type="button"
                     variant="primary"
                     className="fs-5 fs-lg-4"
-                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['erp:helpdeskPage']?.replace('http://', '').replace('https://', '')}`, '_blank')}
+                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['erp:helpdeskPage']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
                 >
                     Apply for usage
                 </Button>
