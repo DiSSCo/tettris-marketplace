@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState, useRef } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -24,7 +24,6 @@ import { Button } from 'components/general/CustomComponents';
 */
 const TopBar = () => {
     /* Hooks */
-    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
     /* Base variables */
@@ -32,7 +31,7 @@ const TopBar = () => {
 
     /* Create ref and focus for mobile filters */
     const filtersRef = useRef<HTMLDivElement>(null);
-    const filtersFocus = useFocus({ ref: filtersRef, OnFocusLose: () => setFiltersToggle(false) });
+    useFocus({ ref: filtersRef, OnFocusLose: () => setFiltersToggle(false) });
 
     /* Class Names */
     const filtersClass = classNames({

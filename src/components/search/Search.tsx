@@ -4,10 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
 /* Import Hooks */
-import { usePaginator, useAppSelector, useAppDispatch } from 'app/Hooks';
+import { usePaginator, useAppDispatch } from 'app/Hooks';
 
 /* Import Store */
-import { getTaxonomicServices, setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
+import { setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
 import { TaxonomicService } from 'app/Types';
@@ -34,8 +34,6 @@ const Search = () => {
     const [searchParams] = useSearchParams();
 
     /* Base variables */
-    const taxonomicServices = useAppSelector(getTaxonomicServices);
-
     const paginator = usePaginator({
         Initiate: () => dispatch(setTaxonomicServices([])),
         Method: GetTaxonomicServices,

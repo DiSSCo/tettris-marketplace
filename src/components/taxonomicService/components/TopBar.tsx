@@ -24,21 +24,16 @@ const TopBar = (props: Props) => {
     let stateTagLine: string;
 
     /* Define the state tag line */
-    switch(taxonomicService.taxonomicService['cetaf:state']) {
-        case 'published':
-            stateTagLine = 'Published and visible';
-
-            break;
-        default:
-            stateTagLine = 'Draft and hidden';
-
-            break;
-    }
+    if (taxonomicService.taxonomicService['cetaf:state'] === 'published') {
+        stateTagLine = 'Published and visible';
+    } else {
+        stateTagLine = 'Draft and hidden';
+    };
 
     return (
         <Row>
             {/* State and Title */}
-            <Col xs={{span: 12}} lg>
+            <Col xs={{ span: 12 }} lg>
                 <p className="fs-4 fs-lg-3">{stateTagLine}</p>
                 <h1 className="fs-3 fs-lg-2">{taxonomicService.taxonomicService['erp:name']}</h1>
             </Col>

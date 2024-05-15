@@ -13,7 +13,7 @@ const Capitalize = (string: string) => {
 
 /** Function to replace capitals in a string with spaces to make a readable string */
 const MakeReadableString = (string: string) => {
-    const splitArray: RegExpMatchArray | null = string.match(/[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?![a-z])/g);
+    const splitArray: RegExpMatchArray | null = string.match(/[A-Z]?[a-z]+|[/d]+|[A-Z]+(?![a-z])/g);
 
     return startCase(splitArray?.join(' ')) ?? startCase(string.split(/(?=[A-Z])/).join(' '));
 };
