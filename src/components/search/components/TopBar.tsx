@@ -45,7 +45,7 @@ const TopBar = () => {
         <div className="position-relative">
             <Row>
                 <Col xs={{ span: 12 }} lg>
-                    <h1 className="fs-2 fs-lg-2 fw-lightBold">
+                    <h1 className="fs-3 fs-lg-2 fw-lightBold">
                         Browse the catalog
                     </h1>
                 </Col>
@@ -77,7 +77,7 @@ const TopBar = () => {
                     <Button type="button"
                         variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                         className="fs-5 fs-lg-4"
-                        OnClick={() => navigate('/ts/add')}
+                        OnClick={() => window.open('https://dissco.jitbit.com/helpdesk/User/Login', '_blank')}
                     >
                         Suggest a new service
                     </Button>

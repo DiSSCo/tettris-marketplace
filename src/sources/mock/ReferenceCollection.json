@@ -9,7 +9,7 @@
                 "dcterms:modified": "2024-05-01T11:31:26.038070Z",
                 "ods:type": "taxonomic_service",
                 "dcterms:license": "CC0",
-                "cetaf:state": "accepted",
+                "cetaf:state": "published",
                 "erp:languageAvailabilities": [
                     "en"
                 ],

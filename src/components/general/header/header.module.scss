@@ -1,13 +1,4 @@
 /* Custom styling for the Header component */
-@media only screen and (max-width: 768px) {
-    .header {
-        position: sticky;
-        -webkit-box-shadow: 1px 3px 25px -8px rgba(51, 51, 51, 1);
-        -moz-box-shadow: 1px 3px 25px -8px rgba(51, 51, 51, 1);
-        box-shadow: 1px 3px 25px -8px rgba(51, 51, 51, 1);
-    }
-}
-
 .CETAFLogo {
     height: 4rem;
 }

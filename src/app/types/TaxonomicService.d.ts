@@ -14,7 +14,7 @@ export interface TaxonomicService {
    */
   "erp:id": string;
   /**
-   * The timestamp that the object version was created in DiSSCo
+   * The timestamp that the object version was created
    */
   "ods:created": string;
   /**
@@ -137,6 +137,10 @@ export interface TaxonomicService {
      * Summary of the Resource features updated from the previous version.
      */
     "erp:changeLog"?: string;
+    /**
+     * List of programming lanugages used in the software
+     */
+    "cetaf:programmingLanguages"?: string[];
     [k: string]: unknown;
   };
   /**
@@ -147,6 +151,10 @@ export interface TaxonomicService {
      * Link to video, screenshots or slides showing details of the Resource.
      */
     "erp:multimediaUrl": string;
+    /**
+     * http://purl.org/dc/terms/license
+     */
+    "dcterms:license"?: string;
     [k: string]: unknown;
   }[];
   [k: string]: unknown;
