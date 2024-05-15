@@ -7,9 +7,17 @@
             var(--grey) 20px);
 }
 
+@media only screen and (max-width: 768px) {
+    .imageBackground {
+        height: 10rem !important;
+    }
+}
+
 /* Description block */
-.descriptionBlock {
-    height: 13rem;
+@media only screen and (min-width: 768px) {
+    .descriptionBlock {
+        height: 13rem;
+    }
 }
 
 /* Multimedia block */

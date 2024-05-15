@@ -71,7 +71,7 @@ const SearchResult = (props: Props) => {
                         {/* Title and language if image is not present */}
                         <Row>
                             <Col>
-                                <p className="fs-4 fs-lg-3 fs-lg-default fw-bold">{taxonomicService.taxonomicService['erp:name']}</p>
+                                <p className="fs-4 fs-lg-default fw-bold">{taxonomicService.taxonomicService['erp:name']}</p>
                                 <p className="fs-5 fs-lg-4 fst-italic">{taxonomicService.taxonomicService['cetaf:taxonomicScope']?.toString()}</p>
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
