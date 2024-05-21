@@ -41,9 +41,8 @@
             "type": "string",
             "description": "The current state of the object",
             "examples": [
-                "suggested",
-                "accepted",
-                "rejected"
+                "draft",
+                "published"
             ]
         },
         "erp:languageAvailabilities": {
@@ -253,6 +252,16 @@
                     "examples": [
                         "Upgrade of user interface. Correction of minor bugs."
                     ]
+                },
+                "cetaf:programmingLanguages": {
+                    "type": "array",
+                    "description": "List of programming lanugages used in the software",
+                    "items": {
+                        "type": "string"
+                    },
+                    "examples": [
+                        ["Java", "Python", "R"]
+                    ]
                 }
             },
             "required": [
@@ -268,6 +277,11 @@
                     "erp:multimediaUrl": {
                         "type": "string",
                         "description": "Link to video, screenshots or slides showing details of the Resource."
+                    },
+                    "dcterms:license": {
+                        "type": "string",
+                        "description": "http://purl.org/dc/terms/license",
+                        "$comment": "Determine available licenses"
                     }
                 },
                 "required": [

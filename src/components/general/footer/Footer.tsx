@@ -14,9 +14,47 @@ const Footer = () => {
 
     return (
         <Container fluid>
-            <Row className="bgc-dark py-2">
+            <Row className="bgc-dark py-2 px-2 px-lg-0">
                 <Col lg={{ span: 10, offset: 1 }}>
-                    <Row>
+                    {/* Mobile */}
+                    <Row className="d-flex d-lg-none">
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <p className="fs-5 tc-white fw-lightBold">
+                                        TETTRIs Grant Agreement 101081903
+                                    </p>
+                                </Col>
+                                <Col className="col-auto">
+                                    <p className="fs-5 tc-white">{`CETAF ${currentYear}`}</p>
+                                </Col>
+                            </Row>
+                            <Row className="mt-3">
+                                <Col>
+                                    <Row className="mt-2 align-items-end">
+                                        <Col>
+                                            <img src={EUFundedLogo}
+                                                alt="Funded by EU logo"
+                                                className={styles.EUFundedLogo}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Row>
+                                                <Col>
+                                                    <div className="h-100 fs-5 tc-white fw-lightBold text-end">
+                                                        <p>Privacy policy</p>
+                                                        <p className="mt-1">Terms and Conditions</p>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    {/* Desktop */}
+                    <Row className="d-none d-lg-flex">
                         <Col className="col-lg-auto">
                             <img src={EUFundedLogo}
                                 alt="Funded by EU logo"

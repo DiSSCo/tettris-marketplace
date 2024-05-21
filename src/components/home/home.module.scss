@@ -1,5 +1,4 @@
 /* Custom styling for the Home page */
-
 .background {
     background:
         url('/webroot/img/homeBackground.jpg');
@@ -10,7 +9,22 @@
     background-position: 0%;
 }
 
+/* Search bar */
+@media only screen and (max-width: 768px) {
+    .searchBar {
+        -webkit-box-shadow: 1px 7px 15px -7px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 1px 7px 15px -7px rgba(0, 0, 0, 0.75);
+        box-shadow: 1px 7px 15px -7px rgba(0, 0, 0, 0.75);
+    }
+}
+
 /* Home Category */
 .homeCategoryBar {
     height: 10%;
+}
+
+@media only screen and (min-width: 768px) {
+    .homeCategoryBar {
+        height: 10%;
+    }
 }

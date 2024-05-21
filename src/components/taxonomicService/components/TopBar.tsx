@@ -24,33 +24,27 @@ const TopBar = (props: Props) => {
     let stateTagLine: string;
 
     /* Define the state tag line */
-    switch(taxonomicService.taxonomicService['cetaf:state']) {
-        case 'accepted':
-            stateTagLine = 'Published and visible';
-
-            break;
-        case 'rejected':
-            stateTagLine = 'Rejected and hidden'
-
-            break;
-        default:
-            stateTagLine = 'Proposed and hidden';
-
-            break;
-    }
+    if (taxonomicService.taxonomicService['cetaf:state'] === 'published') {
+        stateTagLine = 'Published and visible';
+    } else {
+        stateTagLine = 'Draft and hidden';
+    };
 
     return (
         <Row>
             {/* State and Title */}
-            <Col>
-                <p className="fs-3">{stateTagLine}</p>
-                <h1 className="fs-2">{taxonomicService.taxonomicService['erp:name']}</h1>
+            <Col xs={{ span: 12 }} lg>
+                <p className="fs-4 fs-lg-3">{stateTagLine}</p>
+                <h1 className="fs-3 fs-lg-2">{taxonomicService.taxonomicService['erp:name']}</h1>
             </Col>
             {/* Apply for usage button */}
-            <Col className="col-lg-auto">
+            <Col xs lg="auto"
+                className="mt-3 mt-lg-0"
+            >
                 <Button type="button"
                     variant="primary"
-                    OnClick={() => {}}
+                    className="fs-5 fs-lg-4"
+                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['erp:helpdeskPage']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
                 >
                     Apply for usage
                 </Button>

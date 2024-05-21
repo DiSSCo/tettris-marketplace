@@ -41,8 +41,8 @@ const DescriptionBlock = (props: Props) => {
             <Row className="h-100">
                 {/* Preview image, if available */}
                 {taxonomicService.taxonomicService['erp:multimedia']?.length &&
-                    <Col lg={{ span: 3 }}
-                        className="h-100 bgc-white me-3"
+                    <Col xs={{ span: 12 }} lg={{ span: 3 }}
+                        className="h-100 bgc-white me-3 mb-3 mb-lg-0"
                     >
                         <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center `}>
                             <img src={taxonomicService.taxonomicService['erp:multimedia'][0]['erp:multimediaUrl']}
@@ -57,28 +57,34 @@ const DescriptionBlock = (props: Props) => {
                     {/* Tyoe, taxonomic scope, language, publishing date and quality score */}
                     <Row className="justify-content-between">
                         {/* Type */}
-                        <Col className="col-lg-auto">
+                        <Col xs={{ span: 12 }} lg="auto">
                             <p className="fs-5 fw-bold">Taxonomic service type</p>
                             <p className="tc-primary fw-bold">{MakeReadableString(taxonomicService.taxonomicService['cetaf:taxonomicServiceType'])}</p>
                         </Col>
                         {/* Taxonomic scope */}
-                        <Col className="col-lg-auto">
+                        <Col xs={{ span: 12 }} lg="auto"
+                            className="mt-2 mt-lg-0"
+                        >
                             <p className="fs-5 fw-bold">Taxonomic scope</p>
                             <p>{taxonomicService.taxonomicService['cetaf:taxonomicScope']?.join(' / ')}</p>
                         </Col>
                         {/* Languages */}
-                        <Col className="col-lg-auto">
+                        <Col xs={{ span: 12 }} lg="auto"
+                            className="mt-2 mt-lg-0"
+                        >
                             <p className="fs-5 fw-bold">Supporting languages</p>
                             <p>{taxonomicService.taxonomicService['erp:languageAvailabilities'].join(' / ')}</p>
                         </Col>
                         {/* Publishing date */}
-                        <Col className="col-lg-auto">
+                        <Col xs={{ span: 12 }} lg="auto"
+                            className="mt-2 mt-lg-0"
+                        >
                             <p className="fs-5 fw-bold">Publishing date</p>
                             <p>{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
                         </Col>
                         {/* Quality score */}
-                        <Col lg={{ span: 3 }}
-                            className="py-1"
+                        <Col xs={{ span: 12 }} lg={{ span: 3 }}
+                            className="mt-3 mt-lg-0 py-1"
                         >
                             <div className="position-relative h-100 d-flex align-items-center bgc-grey-light">
                                 <p className="position-relative w-100 text-center fs-4 fw-lightBold z-2">Quality score</p>
@@ -90,9 +96,9 @@ const DescriptionBlock = (props: Props) => {
                         </Col>
                     </Row>
                     {/* Description */}
-                    <Row className="flex-grow-1 mt-4">
+                    <Row className="flex-grow-1 mt-3 mt-lg-4">
                         <Col className="h-100 d-flex flex-column">
-                            <p className="fw-bold">Description</p>
+                            <p className="fs-4 fs-lg-default fw-bold">Description</p>
 
                             <div className="flex-grow-1 mt-1 overflow-scroll">
                                 <p className="fs-4">{taxonomicService.taxonomicService['erp:description']}</p>

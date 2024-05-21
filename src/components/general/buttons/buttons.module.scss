@@ -2,7 +2,6 @@
 .button {
     background-color: transparent;
     transition: 0.3s;
-    color: inherit;
 }
 
 .button:hover {
@@ -18,5 +17,10 @@
 
 .secondary {
     background-color: var(--secondary);
+    color: white;
+}
+
+.tertiary {
+    background-color: var(--tertiary);
     color: white;
 }

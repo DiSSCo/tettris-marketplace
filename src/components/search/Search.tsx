@@ -4,10 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
 /* Import Hooks */
-import { usePaginator, useAppSelector, useAppDispatch } from 'app/Hooks';
+import { usePaginator, useAppDispatch } from 'app/Hooks';
 
 /* Import Store */
-import { getTaxonomicServices, setTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
+import { setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
 import { TaxonomicService } from 'app/Types';
@@ -34,18 +34,16 @@ const Search = () => {
     const [searchParams] = useSearchParams();
 
     /* Base variables */
-    const taxonomicServices = useAppSelector(getTaxonomicServices);
-
     const paginator = usePaginator({
+        Initiate: () => dispatch(setTaxonomicServices([])),
         Method: GetTaxonomicServices,
-        Handler: (newTaxonomicServices: TaxonomicService[]) => {
-            /* On receivel of a new page with records, add them to the total */
-            dispatch(setTaxonomicServices([...taxonomicServices, ...newTaxonomicServices]));
+        Handler: (taxonomicServices: TaxonomicService[]) => {
+            /* On receival of a new page with records, add them to the total */
+            dispatch(concatToTaxonomicServices(taxonomicServices));
         },
         pageSize: 12,
         key: 'taxonomicServices',
-        allowSearchParams: true,
-        currentRecords: taxonomicServices
+        allowSearchParams: true
     });
 
     /* ClassNames */
@@ -63,7 +61,7 @@ const Search = () => {
             <Container fluid className={`${mainBodyClass} flex-grow-1 overflow-hidden tr-smooth`}>
                 <Row className="h-100">
                     <Col lg={{ span: 10, offset: 1 }}
-                        className="h-100 d-flex flex-column pt-5"
+                        className="h-100 d-flex flex-column pt-5 px-4 px-lg-3"
                     >
                         {/* Top Bar */}
                         <Row>
@@ -72,7 +70,7 @@ const Search = () => {
                             </Col>
                         </Row>
                         {/* Filters Bar */}
-                        <Row className="mt-3">
+                        <Row className="mt-3 d-none d-lg-flex">
                             <Col>
                                 <FiltersBar />
                             </Col>

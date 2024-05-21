@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import classNames from 'classnames';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -20,7 +20,7 @@ import DescriptionBlock from './components/DescriptionBlock';
 import DetailsBlock from './components/DetailsBlock';
 import MultimediaBlock from './components/MultimediaBlock';
 import Footer from 'components/general/footer/Footer';
-import { Spinner } from 'components/general/CustomComponents';
+import { Button, Spinner } from 'components/general/CustomComponents';
 
 /* Import API */
 import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
@@ -29,6 +29,7 @@ import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
 const TaxonomicService = () => {
     /* Hooks */
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const params = useParams();
     const fetch = useFetch();
 
@@ -58,7 +59,7 @@ const TaxonomicService = () => {
             <Container fluid className="flex-grow-1 overflow-hidden">
                 <Row className="h-100">
                     <Col lg={{ span: 10, offset: 1 }}
-                        className="h-100 d-flex flex-column pt-5"
+                        className="h-100 d-flex flex-column pt-3 pt-lg-5 px-4 px-lg-3"
                     >
                         {/* If data is still being loaded after 1.5 seconds, display spinner */}
                         {fetch.loading &&
@@ -80,8 +81,20 @@ const TaxonomicService = () => {
                         {/* If taxonomic service is present */}
                         {taxonomicService &&
                             <>
+                                {/* MOBILE: Back to search button */}
+                                <Row className="d-lg-none">
+                                    <Col>
+                                        <Button type="button"
+                                            variant="blank"
+                                            className="px-0"
+                                            OnClick={() => navigate(-1)}
+                                        >
+                                            {`< Back to search`}
+                                        </Button>
+                                    </Col>
+                                </Row>
                                 {/* Top bar */}
-                                <Row>
+                                <Row className="mt-3 pt-lg-0">
                                     <Col>
                                         <TopBar taxonomicService={taxonomicService} />
                                     </Col>
@@ -97,7 +110,9 @@ const TaxonomicService = () => {
                                         </Row>
                                         {/* Detail blocks */}
                                         <Row className={`${detailBlocksClass} mt-4`}>
-                                            <Col lg={{ span: 3 }}>
+                                            <Col xs={{ span: 12 }}
+                                                lg={{ span: 3 }}
+                                            >
                                                 <DetailsBlock name="Service Details"
                                                     properties={{
                                                         category: taxonomicService.taxonomicService['erp:category'],
@@ -109,7 +124,10 @@ const TaxonomicService = () => {
                                                     }}
                                                 />
                                             </Col>
-                                            <Col lg={{ span: 3 }}>
+                                            <Col xs={{ span: 12 }}
+                                                lg={{ span: 3 }}
+                                                className="mt-4 mt-lg-0"
+                                            >
                                                 <DetailsBlock name="Contact Information"
                                                     properties={{
                                                         helpdeskEmail: taxonomicService.taxonomicService['erp:helpdeskEmail'],
@@ -122,20 +140,26 @@ const TaxonomicService = () => {
                                             </Col>
                                             {/* Show software details if software object is present in taxonomic service */}
                                             {taxonomicService.taxonomicService['cetaf:software'] &&
-                                                <Col lg={{ span: 3 }}>
+                                                <Col xs={{ span: 12 }}
+                                                    lg={{ span: 3 }}
+                                                    className="mt-4 mt-lg-0"
+                                                >
                                                     <DetailsBlock name="Software"
                                                         properties={{
                                                             sourceUrl: taxonomicService.taxonomicService['cetaf:software']['cetaf:sourceUrl'],
                                                             requiredResources: taxonomicService.taxonomicService['cetaf:software']['erp:requiredResources'],
                                                             status: taxonomicService.taxonomicService['cetaf:software']['cetaf:deprecated'] ? 'Deprecated' : 'Maintained',
-                                                            changeLog: taxonomicService.taxonomicService['cetaf:software']['erp:changeLog']
+                                                            changeLog: taxonomicService.taxonomicService['cetaf:software']['erp:changeLog'],
+                                                            programmingLanguages: taxonomicService.taxonomicService['cetaf:software']['cetaf:programmingLanguages']
                                                         }}
                                                     />
                                                 </Col>
                                             }
                                             {/* Show multimedia block, if multimedia is present */}
                                             {taxonomicService.taxonomicService['erp:multimedia'] &&
-                                                <Col>
+                                                <Col xs={{ span: 12 }} lg
+                                                    className="mt-4 mt-lg-0"
+                                                >
                                                     <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['erp:multimedia']} />
                                                 </Col>
                                             }

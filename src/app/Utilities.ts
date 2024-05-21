@@ -1,3 +1,7 @@
+/* Import Dependencies */
+import { startCase } from "lodash";
+
+
 /** Function to capitalize the first character of a string */
 const Capitalize = (string: string) => {
     if (string) {
@@ -8,11 +12,11 @@ const Capitalize = (string: string) => {
 }
 
 /** Function to replace capitals in a string with spaces to make a readable string */
-const MakeReadableString = (string: string) => {  
-    const splitArray: string[] = string.split(/(?=[A-Z])/);
+const MakeReadableString = (string: string) => {
+    const splitArray: RegExpMatchArray | null = string.match(/[A-Z]?[a-z]+|[/d]+|[A-Z]+(?![a-z])/g);
 
-    return Capitalize(splitArray.join(' '));
-}
+    return startCase(splitArray?.join(' ')) ?? startCase(string.split(/(?=[A-Z])/).join(' '));
+};
 
 
 export {

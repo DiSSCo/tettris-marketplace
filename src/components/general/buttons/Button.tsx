@@ -9,7 +9,7 @@ import styles from './buttons.module.scss';
 interface Props {
     children?: string | JSX.Element,
     type: 'button' | 'submit',
-    variant: 'primary' | 'secondary' | 'blank',
+    variant: 'primary' | 'secondary' | 'tertiary' | 'blank',
     className?: string,
     OnClick?: Function
 };
@@ -28,15 +28,16 @@ const Button = (props: Props) => {
     /* ClassNames */
     const buttonClass = classNames({
         'px-4 py-2': variant !== 'blank',
-        [`${className}`]: className
+        [`${className}`]: className,
+        'fs-4': !className?.includes('fs')
     });
 
     return (
         <button type={type}
-            className={`${styles.button} ${styles[variant]} ${buttonClass} fs-4 fw-bold b-none br-round`}
+            className={`${styles.button} ${styles[variant]} ${buttonClass} fw-bold b-none br-round`}
             onClick={() => OnClick?.()}
         >
-            {children}
+            {children ?? ''}
         </button>
     );
 };
