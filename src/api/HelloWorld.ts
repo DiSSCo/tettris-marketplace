@@ -11,7 +11,7 @@ const HelloWorld = async () => {
     let validResponse: boolean = false;
 
     try {
-        const result = await axios({
+        await axios({
             method: 'get',
             url: `/Op.Hello`,
             params: {

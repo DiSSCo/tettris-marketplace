@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useFetch } from 'app/Hooks';
 
 /* Import Types */
-import { Dict, TaxonomicService } from 'app/Types';
+import { Dict } from 'app/Types';
 
 /* Import Styles */
 import styles from './home.module.scss';

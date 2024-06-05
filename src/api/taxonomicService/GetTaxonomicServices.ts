@@ -40,7 +40,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
             url: `/Op.Search`,
             params: {
                 pageSize,
-                pageNum: (pageNumber - 1) ?? 0,
+                pageNum: (pageNumber - 1 >= 0) ? pageNumber - 1 : 0,
                 targetId: 'service',
                 query: filters
             },

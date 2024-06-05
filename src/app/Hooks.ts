@@ -50,17 +50,21 @@ const useFetch = () => {
             });
 
             Promise.all(promises).then((results) => {
-                const aliasedResults: { [alias: string]: Dict } = {};
-
-                results.forEach((result, index) => {
-                    aliasedResults[callMethods[index].alias] = result;
-                });
-
-                Handler?.(aliasedResults);
+                ProcessResults(results);
             }).catch(error => {
                 ErrorHandler?.(error);
             });
         }, []);
+
+        const ProcessResults = (results: Dict[]) => {
+            const aliasedResults: { [alias: string]: Dict } = {};
+
+            results.forEach((result, index) => {
+                aliasedResults[callMethods[index].alias] = result;
+            });
+
+            Handler?.(aliasedResults);
+        };
     };
 
     return {
@@ -181,13 +185,13 @@ const usePaginator = ({ Initiate, Method, Handler, ErrorHandler, pageSize, resul
                         throw (new Error('Fetch ended in undefined Result'));
                     };
                 } catch (error) {
+                    ErrorHandler?.();
+
                     if (pageNumber > 1) {
                         setErrorMessage('No more records to be found');
                     } else if (isEmpty(returnData.records)) {
                         setErrorMessage('Not a single record found, the API servive might be down');
                     };
-
-                    ErrorHandler?.();
                 };
 
                 setLoading(false);
