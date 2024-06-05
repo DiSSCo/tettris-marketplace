@@ -12,8 +12,16 @@ type DataFragment = {
     id: string,
     type: string,
     attributes: {
-        taxonomicService?: TaxonomicServiceType,
-        [property: string]: any
+        content: {
+            taxonomicService?: TaxonomicServiceType,
+            [property: string]: any
+        },
+        metadata: {
+            createdOn: number,
+            createdBy: string,
+            modifiedOn: number,
+            modifiedBy: string
+        }
     }
 }
 
@@ -39,6 +47,13 @@ export type JSONResultArray = {
         totalRecords: number
     }
 }
+
+export type CordraResult = DataFragment;
+
+export type CordraResultArray = {
+    size: number,
+    results: DataFragment[]
+};
 
 /* Type for a Taxonomic Service */
 export type TaxonomicService = {

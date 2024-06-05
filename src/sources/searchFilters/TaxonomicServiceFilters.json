@@ -2,6 +2,7 @@
     "taxonomicServiceFilters": [
         {
             "name": "taxonomicServiceType",
+            "alias": "cetaf:taxonomicServiceType",
             "type": "select",
             "default": "taxonomicService",
             "options": [
@@ -17,24 +18,13 @@
         },
         {
             "name": "taxonomicScope",
+            "alias": "cetaf:taxonomicScope",
             "type": "select",
-            "options": [
-                {
-                    "label": "Bombus",
-                    "value": "bombus"
-                },
-                {
-                    "label": "Spinosaurus",
-                    "value": "spinosaurus"
-                },
-                {
-                    "label": "Stegouros",
-                    "value": "stegouros"
-                }
-            ]
+            "options": []
         },
         {
             "name": "language",
+            "alias": "erp:languageAvailabilities",
             "type": "select",
             "options": [
                 {

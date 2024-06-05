@@ -1,8 +1,18 @@
 /* Import Dependencies */
+import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+
+/* Import Hooks */
+import { useFetch } from 'app/Hooks';
+
+/* Import Types */
+import { Dict, TaxonomicService } from 'app/Types';
 
 /* Import Styles */
 import styles from './home.module.scss';
+
+/* Import API */
+import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
 
 /* Import Components */
 import Header from "components/general/header/Header";
@@ -16,6 +26,48 @@ import Footer from 'components/general/footer/Footer';
  * @returns JSX Component
  */
 const Home = () => {
+    /* Hooks */
+    const fetch = useFetch();
+
+    /* Base variables */
+    const [counts, setCounts] = useState<Dict>({
+        taxonomicServices: 0,
+        referenceCollections: 0,
+        taxonomicExpertise: 0
+    });
+
+    /* Fetch count for taxonomic services, reference collecitons and taxonomic expertise */
+    fetch.FetchMultiple({
+        callMethods: [
+            {
+                alias: 'taxonomicServices',
+                Method: GetTaxonomicServices,
+                params: {
+                    pageSize: 1,
+                    pageNumber: 0
+                }
+            },
+            {
+                alias: 'referenceCollections',
+                Method: GetTaxonomicServices,
+                params: {
+                    pageSize: 1,
+                    pageNumber: 0,
+                    searchFilters: {
+                        "cetaf:taxonomicServiceType": 'referenceCollection'
+                    }
+                }
+            }
+        ],
+        Handler: (results: { [alias: string]: { metadata: Dict } }) => {
+            setCounts({
+                taxonomicServices: results.taxonomicServices.metadata.totalRecords,
+                referenceCollections: results.referenceCollections.metadata.totalRecords,
+                taxonomicExpertise: 0
+            });
+        }
+    });
+
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -81,7 +133,7 @@ const Home = () => {
                                         >
                                             <HomeCategory title="Taxonomic Services"
                                                 subTitle="Go find"
-                                                count={254}
+                                                count={counts.taxonomicServices}
                                                 link="/search"
                                                 color="primary"
                                             />
@@ -91,7 +143,7 @@ const Home = () => {
                                         >
                                             <HomeCategory title="Reference Collections"
                                                 subTitle="Go explore"
-                                                count={84}
+                                                count={counts.referenceCollections}
                                                 link="/search?taxonomicServiceType=referenceCollection"
                                                 color="secondary"
                                             />
@@ -101,7 +153,7 @@ const Home = () => {
                                         >
                                             <HomeCategory title="Expertise Taxonomists"
                                                 subTitle="Go engage"
-                                                count={113}
+                                                count={counts.taxonomicExpertise}
                                                 link="/expertise"
                                                 color="tertiary"
                                             />

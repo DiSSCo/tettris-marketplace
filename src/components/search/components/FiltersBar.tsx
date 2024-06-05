@@ -92,7 +92,7 @@ const FiltersBar = (props: Props) => {
                                     <Col key={filter.name}
                                         xs={{ span: 12 }}
                                         lg={{ span: 4 }}
-                                        className="mb-2"
+                                        className="mb-2 mb-lg-0"
                                     >
                                         <Filter filter={filter}
                                             currentValue={values[filter.name as keyof typeof values]}

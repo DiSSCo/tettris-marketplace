@@ -1,9 +1,13 @@
-/* Import Types */
-import { TaxonomicService, JSONResultArray, Dict } from 'app/Types';
+/* Import Dependencies */
+import axios from 'axios';
+import moment from 'moment';
+import { isEmpty } from 'lodash';
 
-/* Import Mock Data */
-import AcceptedTaxonomicService from 'sources/mock/TaxonomicServiceAccepted.json';
-import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
+/* Import Types */
+import { TaxonomicService, CordraResultArray, Dict } from 'app/Types';
+
+/* Import Sources */
+import TaxonomicServiceFilters from 'sources/searchFilters/TaxonomicServiceFilters.json';
 
 
 /**
@@ -14,49 +18,63 @@ import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
 const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { pageNumber: number, pageSize: number, searchFilters: { [searchFilter: string]: string } }) => {
     /* Base variables */
     let taxonomicServices: TaxonomicService[] = [];
-    let links: Dict = {};
+    let metadata: Dict = {};
+
+    /* Destructure search filters into string */
+    let filters: string = '';
+
+    filters = filters.concat('/taxonomicService/ods\\:type:taxonomicService');
+
+    if (!isEmpty(searchFilters)) {
+        Object.entries(searchFilters).map(([key, value]) => {
+            /* Get field alias from taxonomic service filters source */
+            const alias: string | undefined = TaxonomicServiceFilters.taxonomicServiceFilters.find(taxonomicSearchFilter => taxonomicSearchFilter.name === key)?.alias;
+
+            filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}:` + `${value}`);
+        });
+    };
 
     try {
-        let result: { data: JSONResultArray } = {
-            data: {
-                data: [
-                    ...searchFilters?.taxonomicServiceType !== 'referenceCollection' ? [{ ...AcceptedTaxonomicService.data }] : [],
-                    { ...ReferenceCollection.data }
-                ],
-                links: {
-                    self: `https://marketplace.cetaf.org/api/v1/taxonomicServices?pageSize=${pageSize}&pageNumber=${pageNumber}`,
-                    first: `https://marketplace.cetaf.org/api/v1/taxonomicServices?pageSize=${pageSize}&pageNumber=1`,
-                    next: `https://marketplace.cetaf.org/api/v1/taxonomicServices?pageSize=${pageSize}&pageNumber=${pageNumber + 1}`,
-                    ...(pageNumber > 1 && { previous: `https://marketplace.cetaf.org/api/v1/taxonomicServices?pageSize=${pageSize}&pageNumber=${pageNumber - 1}` })
-                }
-            }
-        };
-
-        /* Get result data from JSON */
-        const data: JSONResultArray = result.data;
-
-        /* Set Taxonomic Services */
-        data.data.forEach((dataFragment) => {
-            const taxonomicService = dataFragment.attributes as TaxonomicService;
-
-            let counter = 0;
-
-            while (counter < 6) {
-                taxonomicServices.push(taxonomicService);
-
-                counter++;
-            }
+        const result = await axios({
+            method: 'get',
+            url: `/Op.Search`,
+            params: {
+                pageSize,
+                pageNum: (pageNumber - 1) ?? 0,
+                targetId: 'service',
+                query: filters
+            },
+            responseType: 'json'
         });
 
-        /* Set Links */
-        links = result.data.links;
+        /* Get result data from JSON */
+        const data: CordraResultArray = result.data;
+
+        /* Set Taxonomic Services */
+        data.results.forEach((dataFragment) => {
+            const taxonomicService = dataFragment.attributes.content as TaxonomicService;
+
+            /* Set created and modified */
+            taxonomicService.taxonomicService['ods:created'] = moment(new Date(dataFragment.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+            taxonomicService.taxonomicService['dcterms:modified'] = moment(new Date(dataFragment.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+
+            /* Push to taxonomic services array */
+            taxonomicServices.push(taxonomicService);
+        });
+
+        /* Set metadata */
+        metadata = {
+            totalRecords: data.size
+        };
     } catch (error) {
         console.warn(error);
-    }
+
+        throw(error);
+    };
 
     return {
         taxonomicServices,
-        links
+        metadata
     };
 }
 

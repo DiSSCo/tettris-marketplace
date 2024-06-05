@@ -1,10 +1,9 @@
-/* Import Types */
-import { TaxonomicService, JSONResult } from 'app/Types';
+/* Import Dependencies */
+import axios from 'axios';
+import moment from 'moment';
 
-/* Import Mock Data */
-import AcceptedTaxonomicService from 'sources/mock/TaxonomicServiceAccepted.json';
-import SuggestedTaxonomicService from 'sources/mock/TaxonomicServiceSuggested.json';
-import ReferenceCollection from 'sources/mock/ReferenceCollection.json';
+/* Import Types */
+import { TaxonomicService, CordraResult } from 'app/Types';
 
 
 /**
@@ -19,41 +18,30 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
         const taxonomicServiceID: string = handle.replace(process.env.REACT_APP_HANDLE_URL as string, '');
 
         try {
-            let result: { data: JSONResult };
-            let mockData;
-
-            switch (taxonomicServiceID) {
-                case 'TEST/SEMKDJE98D7':
-                    mockData = AcceptedTaxonomicService;
-
-                    result = { data: { ...mockData } };
-
-                    break;
-                case 'TEST/LOFKDJE98D7':
-                    result = { data: { ...SuggestedTaxonomicService } };
-
-                    break;
-                case 'TEST/POTKDJE98D7':
-                    mockData = ReferenceCollection;
-
-                    result = { data: { ...mockData } };
-
-                    break;
-                default:
-                    throw (new Error('No mock data found'));
-            }
+            const result = await axios({
+                method: 'get',
+                url: '/Op.Retrieve',
+                params: {
+                    targetId: taxonomicServiceID
+                },
+                responseType: 'json'
+            });
 
             /* Get result data from JSON */
-            const data: JSONResult = result.data;
+            const data: CordraResult = result.data;
 
             /* Set Taxonomic Service */
-            taxonomicService = data.data.attributes as TaxonomicService;
+            taxonomicService = data.attributes.content as TaxonomicService;
+
+            /* Set created and modified */
+            taxonomicService.taxonomicService['ods:created'] = moment(new Date(data.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+            taxonomicService.taxonomicService['dcterms:modified'] = moment(new Date(data.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
         } catch (error) {
             console.warn(error);
         }
-    }
+    };
 
-    return taxonomicService
+    return taxonomicService;
 }
 
 export default GetTaxonomicService;

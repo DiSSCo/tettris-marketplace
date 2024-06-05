@@ -37,13 +37,12 @@ const TaxonomicService = () => {
     const taxonomicService: TaxonomicServiceType | undefined = useAppSelector(getTaxonomicService);
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
-    if (!taxonomicService || taxonomicService.taxonomicService['erp:id'] !== taxonomicServiceID.replace(process.env.REACT_APP_HANDLE_URL as string, '')) {
-        fetch.Fetch({
-            Method: GetTaxonomicService,
-            Handler: (taxonomicService: TaxonomicServiceType) => dispatch(setTaxonomicService(taxonomicService)),
-            params: { handle: taxonomicServiceID }
-        });
-    }
+    /* Fetch taxonomic service */
+    fetch.Fetch({
+        Method: GetTaxonomicService,
+        Handler: (taxonomicService: TaxonomicServiceType) => dispatch(setTaxonomicService(taxonomicService)),
+        params: { handle: taxonomicServiceID }
+    });
 
     /* ClassNames */
     const detailBlocksClass = classNames({
@@ -63,20 +62,14 @@ const TaxonomicService = () => {
                     >
                         {/* If data is still being loaded after 1.5 seconds, display spinner */}
                         {fetch.loading &&
-                            <>
-                                {setTimeout(() => {
-                                    return (
-                                        <Row className="flex-grow-1">
-                                            <Col className="d-flex justify-content-center align-items-center">
-                                                <div className="text-center">
-                                                    <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
-                                                    <Spinner />
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                    );
-                                }, 1500)}
-                            </>
+                            <Row className="flex-grow-1">
+                                <Col className="d-flex justify-content-center align-items-center">
+                                    <div className="text-center">
+                                        <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
+                                        <Spinner />
+                                    </div>
+                                </Col>
+                            </Row>
                         }
                         {/* If taxonomic service is present */}
                         {taxonomicService &&

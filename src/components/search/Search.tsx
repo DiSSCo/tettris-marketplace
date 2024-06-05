@@ -42,7 +42,7 @@ const Search = () => {
             dispatch(concatToTaxonomicServices(taxonomicServices));
         },
         pageSize: 12,
-        key: 'taxonomicServices',
+        resultKey: 'taxonomicServices',
         allowSearchParams: true
     });
 
@@ -50,6 +50,20 @@ const Search = () => {
     const mainBodyClass = classNames({
         'gradient-primary': true,
         'gradient-secondary': searchParams.get('taxonomicServiceType') === 'referenceCollection'
+    });
+
+    const searchResultsClassScrollBlock = classNames({
+        'overflow-x-hidden': paginator.totalRecords,
+        'overflow-hidden': !paginator.totalRecords
+    });
+
+    const searchResultsClass = classNames({
+        'h-100': !paginator.totalRecords && !paginator.errorMessage
+    });
+
+    const loadMoreBlockClass = classNames({
+        'h-100': !paginator.loading && paginator.errorMessage,
+        'mb-4': !paginator.errorMessage
     });
 
     return (
@@ -78,29 +92,45 @@ const Search = () => {
                         {/* Results Count */}
                         <Row className="mt-4">
                             <Col>
-                                <p className="fs-4 fw-lightBold">224 results</p>
+                                <p className="fs-4 fw-lightBold">{`${paginator.totalRecords ?? 0} results`}</p>
                             </Col>
                         </Row>
                         {/* Search Results body */}
-                        <Row className="flex-grow-1 mt-4 overflow-x-hidden">
+                        <Row className={`${searchResultsClassScrollBlock} flex-grow-1 mt-4`}>
                             <Col>
                                 {/* Search Result blocks */}
-                                <Row>
+                                <Row className={searchResultsClass}>
                                     <Col>
-                                        <SearchResults />
+                                        {paginator.totalRecords === 0 ?
+                                            <Row className="h-100 align-items-center">
+                                                <Col>
+                                                    <p className="text-center">No records found</p>
+                                                </Col>
+                                            </Row>
+                                            : <SearchResults />
+                                        }
                                     </Col>
                                 </Row>
                                 {/* Load more button */}
-                                <Row className="mb-4">
+                                <Row className={loadMoreBlockClass}>
                                     <Col className="d-flex justify-content-center">
-                                        {!paginator.loading ?
+                                        {(!paginator.loading && !paginator.errorMessage && paginator.totalRecords > 0) ?
                                             <Button type="button"
                                                 variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
-                                                OnClick={() => paginator.Next()}
+                                                OnClick={() => paginator.Next?.()}
                                             >
                                                 Load more
                                             </Button>
-                                            : <Spinner />
+                                            : <>
+                                                {(!paginator.errorMessage && paginator.totalRecords > 0) ?
+                                                    <Spinner />
+                                                    : <Row className="h-100 align-items-center">
+                                                        <Col>
+                                                            <p>{paginator.errorMessage}</p>
+                                                        </Col>
+                                                    </Row>
+                                                }
+                                            </>
                                         }
                                     </Col>
                                 </Row>
