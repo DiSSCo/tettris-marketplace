@@ -185,13 +185,13 @@ const usePaginator = ({ Initiate, Method, Handler, ErrorHandler, pageSize, resul
                         throw (new Error('Fetch ended in undefined Result'));
                     };
                 } catch (error) {
-                    ErrorHandler?.();
-
                     if (pageNumber > 1) {
                         setErrorMessage('No more records to be found');
-                    } else if (isEmpty(returnData.records)) {
+                    } else {
                         setErrorMessage('Not a single record found, the API servive might be down');
                     };
+
+                    ErrorHandler?.();
                 };
 
                 setLoading(false);
