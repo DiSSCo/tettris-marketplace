@@ -1,5 +1,4 @@
 /* Import Dependencies */
-import { isEmpty } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
