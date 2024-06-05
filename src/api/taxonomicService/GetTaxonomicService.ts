@@ -38,6 +38,8 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
             taxonomicService.taxonomicService['dcterms:modified'] = moment(new Date(data.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
         } catch (error) {
             console.warn(error);
+
+            throw(error);
         }
     };
 

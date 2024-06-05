@@ -37,8 +37,6 @@ const Header = () => {
         }
     });
 
-    console.log(apiOnline);
-
     return (
         <Container fluid
             className={styles.header}

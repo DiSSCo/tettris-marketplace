@@ -1,7 +1,8 @@
 /* Import Dependencies */
 import classNames from 'classnames';
 import moment from 'moment';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -35,12 +36,16 @@ const TaxonomicService = () => {
 
     /* Base variables */
     const taxonomicService: TaxonomicServiceType | undefined = useAppSelector(getTaxonomicService);
+    const [error, setError] = useState<boolean>(false);
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
     /* Fetch taxonomic service */
     fetch.Fetch({
         Method: GetTaxonomicService,
         Handler: (taxonomicService: TaxonomicServiceType) => dispatch(setTaxonomicService(taxonomicService)),
+        ErrorHandler: () => {
+            setError(true);
+        },
         params: { handle: taxonomicServiceID }
     });
 
@@ -160,6 +165,28 @@ const TaxonomicService = () => {
                                     </Col>
                                 </Row>
                             </>
+                        }
+                        {/* If an error occurred */}
+                        {error &&
+                            <Row className="h-100">
+                                <Col className="d-flex flex-column justify-content-center align-items-center">
+                                    <Row>
+                                        <Col>
+                                            <p>{`An error occurred whilst searching for Taxonomic Service with ID: ${taxonomicServiceID}`}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>
+                                                Retry or go back to <Link to="/"
+                                                    className="tc-primary"
+                                                >
+                                                    home
+                                                </Link></p>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
                         }
                     </Col>
                 </Row>
