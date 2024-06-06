@@ -20,7 +20,10 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import HelloWorld from 'api/HelloWorld';
 
 
-/** Component that renders the application's Header */
+/**
+ * Component that renders the application's Header
+ * @returns JSX Component
+ */
 const Header = () => {
     /* Base variables */
     const [apiOnline, setApiOnline] = useState<boolean | undefined>();
@@ -52,19 +55,27 @@ const Header = () => {
                                 />
                             </Link>
                         </Col>
-                        <Col className="d-flex flex-column justify-content-center">
-                            <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
-                                Marketplace Prototype
-                            </h2>
-                            <h3 className="fs-4 fs-lg-3 tc-grey fw-lightBold">
-                                The Taxonomic Expertise and Services Marketplace
-                            </h3>
+                        <Col>
+                            <Row>
+                                <Col xs={{ span: 12 }} lg="auto"
+                                    className="d-flex flex-column justify-content-center"
+                                >
+                                    <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
+                                        Marketplace Prototype
+                                    </h2>
+                                    <h3 className="fs-4 fs-lg-3 tc-grey fw-lightBold">
+                                        The Taxonomic Expertise and Services Marketplace
+                                    </h3>
+                                </Col>
+                                {apiOnline === false &&
+                                    <Col xs={{ span: 12 }} lg
+                                        className="d-flex justify-content-end align-items-center mt-2 mt-lg-0"
+                                    >
+                                        <p className="tc-error fw-lightBold"><FontAwesomeIcon icon={faInfoCircle} /> API service is offline</p>
+                                    </Col>
+                                }
+                            </Row>
                         </Col>
-                        {apiOnline === false &&
-                            <Col className="d-flex justify-content-end align-items-center">
-                                <p className="tc-error fw-lightBold"><FontAwesomeIcon icon={faInfoCircle} /> API service is offline</p>
-                            </Col>
-                        }
                     </Row>
                 </Col>
             </Row>
