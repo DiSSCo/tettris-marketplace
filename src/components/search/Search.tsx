@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import { usePaginator, useAppDispatch } from 'app/Hooks';
 
 /* Import Store */
+import { setIsApiOnline } from 'redux-store/AppStore';
 import { setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
@@ -40,7 +41,9 @@ const Search = () => {
         Handler: (taxonomicServices: TaxonomicService[]) => {
             /* On receival of a new page with records, add them to the total */
             dispatch(concatToTaxonomicServices(taxonomicServices));
+            dispatch(setIsApiOnline(true))
         },
+        ErrorHandler: (pageNumber: number) => pageNumber <= 1 && dispatch(setIsApiOnline(false)),
         pageSize: 12,
         resultKey: 'taxonomicServices',
         allowSearchParams: true

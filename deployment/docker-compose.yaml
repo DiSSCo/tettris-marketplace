@@ -2,11 +2,13 @@ version: '3.8'
 
 services:
   cordra:
-    build:
-      context: cordra
-      dockerfile: docker/Dockerfile
+    container_name: cordra
+    restart: always
+    image: public.ecr.aws/dissco/cordra:latest
     env_file:
-      - variables.env
+      - ./cordra/variables.env
+    volumes:
+      - ./data:/opt/cordra/data
   tettris_marketplace:
     container_name: tettris_marketplace
     restart: always
@@ -14,7 +16,7 @@ services:
   nginx:
     container_name: nginx
     restart: unless-stopped
-    image: nginx:1.25
+    image: nginx:1.26
     ports:
       - "80:80"
       - "443:443"

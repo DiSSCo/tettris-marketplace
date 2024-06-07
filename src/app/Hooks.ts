@@ -190,7 +190,7 @@ const usePaginator = ({ Initiate, Method, Handler, ErrorHandler, pageSize, resul
                         setErrorMessage('Not a single record found, the API servive might be down');
                     };
 
-                    ErrorHandler?.();
+                    ErrorHandler?.(pageNumber);
                 };
 
                 setLoading(false);

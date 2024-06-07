@@ -9,6 +9,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch, useFetch } from 'app/Hooks';
 
 /* Import Store */
+import { setIsApiOnline } from 'redux-store/AppStore';
 import { getTaxonomicService, setTaxonomicService } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
@@ -42,9 +43,14 @@ const TaxonomicService = () => {
     /* Fetch taxonomic service */
     fetch.Fetch({
         Method: GetTaxonomicService,
-        Handler: (taxonomicService: TaxonomicServiceType) => dispatch(setTaxonomicService(taxonomicService)),
+        Handler: (taxonomicService: TaxonomicServiceType) => {
+            dispatch(setTaxonomicService(taxonomicService));
+            dispatch(setIsApiOnline(true));
+        },
         ErrorHandler: () => {
             setError(true);
+            dispatch(setIsApiOnline(false));
+
         },
         params: { handle: taxonomicServiceID }
     });

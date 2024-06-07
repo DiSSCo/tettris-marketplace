@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
-import { useFetch } from 'app/Hooks';
+import { useAppDispatch, useFetch } from 'app/Hooks';
+
+/* Import Store */
+import { setIsApiOnline } from 'redux-store/AppStore';
 
 /* Import Types */
 import { Dict } from 'app/Types';
@@ -27,6 +30,7 @@ import Footer from 'components/general/footer/Footer';
  */
 const Home = () => {
     /* Hooks */
+    const dispatch = useAppDispatch();
     const fetch = useFetch();
 
     /* Base variables */
@@ -65,7 +69,9 @@ const Home = () => {
                 referenceCollections: results.referenceCollections.metadata.totalRecords,
                 taxonomicExpertise: 0
             });
-        }
+            dispatch(setIsApiOnline(true))
+        },
+        ErrorHandler: () => dispatch(setIsApiOnline(false))
     });
 
     return (
