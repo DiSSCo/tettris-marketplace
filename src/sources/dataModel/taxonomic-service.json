@@ -35,7 +35,10 @@
         "dcterms:license": {
             "type": "string",
             "description": "http://purl.org/dc/terms/license",
-            "$comment": "Determine available licenses"
+            "$comment": "Determine available licenses",
+            "examples": [
+                "CC0"
+            ]
         },
         "cetaf:state": {
             "type": "string",
@@ -281,7 +284,10 @@
                     "dcterms:license": {
                         "type": "string",
                         "description": "http://purl.org/dc/terms/license",
-                        "$comment": "Determine available licenses"
+                        "$comment": "Determine available licenses",
+                        "examples": [
+                            "CC0"
+                        ]
                     }
                 },
                 "required": [
@@ -304,7 +310,6 @@
         "erp:category",
         "cetaf:qualityScore",
         "cetaf:agents",
-        "erp:paymentModel",
-        "erp:usageConditions"
+        "erp:paymentModel"
     ]
 }

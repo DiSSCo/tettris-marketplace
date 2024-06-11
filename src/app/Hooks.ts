@@ -17,22 +17,22 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
  * @returns Instance of hook
  */
 const useFetch = () => {
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const Fetch = ({ Method, Handler, params }: { Method: Function, Handler?: Function, params?: Dict }) => {
-        const [fetchResult, setFetchResult] = useState<any>();
-
+    const Fetch = ({ params, Method, Handler, ErrorHandler }: { params?: Dict, Method: Function, Handler?: Function, ErrorHandler?: Function }) => {
         useEffect(() => {
-            Method(params).then((result: Dict) => {
-                setFetchResult(result);
+            setLoading(true);
 
+            Method(params).then((result: Dict) => {
                 Handler?.(result);
+            }).catch((error: Error) => {
+                console.error(error);
+
+                ErrorHandler?.(error);
             }).finally(() => {
                 setLoading(false);
             });
         }, []);
-
-        return fetchResult
     };
 
     /**
@@ -40,19 +40,30 @@ const useFetch = () => {
      * @param methods Fetch methods to query
      * @returns Results
      */
-    const FetchMultiple = async (...methods: Function[]) => {
-        const promises: Promise<Dict>[] = [];
-        let fetchResults: Dict[] | undefined;
+    const FetchMultiple = ({ callMethods, Handler, ErrorHandler }: { callMethods: { alias: string, params?: Dict, Method: Function }[], Handler?: Function, ErrorHandler?: Function }) => {
+        useEffect(() => {
+            const promises: Promise<Dict>[] = [];
 
-        methods.forEach((Method) => {
-            promises.push(Method());
-        });
+            callMethods.forEach(callMethod => {
+                promises.push(callMethod.Method(callMethod.params));
+            });
 
-        await Promise.allSettled(promises).then((results) => {
-            fetchResults = results;
-        });
+            Promise.all(promises).then((results) => {
+                ProcessResults(results);
+            }).catch(error => {
+                ErrorHandler?.(error);
+            });
+        }, []);
 
-        return fetchResults;
+        const ProcessResults = (results: Dict[]) => {
+            const aliasedResults: { [alias: string]: Dict } = {};
+
+            results.forEach((result, index) => {
+                aliasedResults[callMethods[index].alias] = result;
+            });
+
+            Handler?.(aliasedResults);
+        };
     };
 
     return {
@@ -107,17 +118,23 @@ const useFocus = ({ ref, OnFocusLose }: { ref: React.RefObject<HTMLElement>, OnF
  * Paginator Hook for handling pagination with fetch requests and page numbers
  * @returns Instance of hook
  */
-const usePaginator = ({ Initiate, Method, Handler, pageSize, key, allowSearchParams = false }:
-    { Initiate: Function, Method: Function, Handler: Function, pageSize: number, key?: string, allowSearchParams: boolean }
+const usePaginator = ({ Initiate, Method, Handler, ErrorHandler, pageSize, resultKey, allowSearchParams = false }:
+    { Initiate: Function, Method: Function, Handler: Function, ErrorHandler?: Function, pageSize: number, resultKey?: string, allowSearchParams: boolean }
 ) => {
     /* Hooks */
     const [searchParams] = useSearchParams();
 
     /* Base variables */
-    const [records, setRecords] = useState<Dict[]>([]);
-    const [links, setLinks] = useState<Dict>({});
+    const [returnData, setReturnData] = useState<{
+        records: Dict[],
+        metadata: Dict
+    }>({
+        records: [],
+        metadata: {}
+    });
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
     /* Get search filters from search params */
     const searchFilters = [...searchParams.entries()].reduce((filtersObject, [key, value]) => {
@@ -126,66 +143,84 @@ const usePaginator = ({ Initiate, Method, Handler, pageSize, key, allowSearchPar
             [key]: value
         }
     }, {});
+    const [searchFiltersSave, setSearchFiltersSave] = useState<Dict>(
+        searchFilters
+    );
 
+    /**
+     * Function to check for a next page and if so initate a fetch for those records
+     * @returns True, if there is a next page or not
+     */
     const Next = () => {
-        if ('next' in links) {
-            setPageNumber(pageNumber + 1);
-
-            return true;
-        } else {
-            throw (new Error('No next page'));
-        }
+        setPageNumber(pageNumber + 1);
     };
 
-    const Previous = () => {
-        if ('prev' in links) {
-            setPageNumber(pageNumber - 1);
-
-            return true;
-        } else {
-            throw (new Error('No previous page'));
-        }
-    };
-
-    /* Initial setup */
+    /* UseEffect to watch the page number, if changed, trigger the given method */
     useEffect(() => {
-        Initiate();
-    }, []);
+        if (pageNumber) {
+            /* Set Loading to true */
+            setLoading(true);
 
-    useEffect(() => {
-        /* Set Loading to true */
-        setLoading(true);
-
-        setTimeout(() => {
             /* Fetch data */
             (async () => {
-                const result = await Method({ pageNumber, pageSize, ...(allowSearchParams && { searchFilters }) });
+                try {
+                    const result = await Method({ pageNumber: pageNumber, pageSize, ...(allowSearchParams && { searchFilters }) });
 
-                if (result) {
-                    if (result?.links) {
-                        setLinks(result.links);
-                        delete (result.links);
-                    }
+                    if (result) {
+                        /* Set return data */
+                        const records = resultKey ? result[resultKey] : result[Object.keys(result)[0]];
 
-                    const records = key ? result[key] : result[Object.keys(result)[0]];
+                        setReturnData({
+                            records,
+                            metadata: result.metadata
+                        });
 
-                    setRecords(records);
-                    Handler(records);
-                } else {
-                    throw (new Error('Fetch ended in undefined Result'));
-                }
+                        /* Undo error message */
+                        setErrorMessage(undefined);
+
+                        /* Return records to handler */
+                        Handler?.(records);
+                    } else {
+                        throw (new Error('Fetch ended in undefined Result'));
+                    };
+                } catch (error) {
+                    if (pageNumber > 1) {
+                        setErrorMessage('No more records to be found');
+                    } else {
+                        setErrorMessage('Not a single record found, the API servive might be down');
+                    };
+
+                    ErrorHandler?.(pageNumber);
+                };
 
                 setLoading(false);
             })();
-        }, 3000);
+        } else {
+            setPageNumber(1);
+        };
     }, [pageNumber]);
 
+    /* UseEffect to watch the search parameters if allowed, if so and on change, reset the page number to 1 */
+    useEffect(() => {
+        if (JSON.stringify(searchFilters) !== JSON.stringify(searchFiltersSave)) {
+            setSearchFiltersSave(searchFilters);
+
+            setPageNumber(0);
+        }
+    }, [(allowSearchParams ? searchParams : false)]);
+
+    /* Initate Function */
+    useEffect(() => {
+        Initiate?.();
+    }, []);
+
     return {
-        records,
+        records: returnData.records ?? [],
+        totalRecords: returnData.metadata?.totalRecords ?? undefined,
+        currentPage: pageNumber,
         loading,
-        SetLinks: (links: Dict) => setLinks(links),
-        Next,
-        Previous
+        errorMessage,
+        Next
     };
 };
 

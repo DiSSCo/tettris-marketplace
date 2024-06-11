@@ -8,37 +8,27 @@ export type Dict = {
 };
 
 /* Types for JSON Result Interfaces */
-type DataFragment = {
+export type CordraResult = {
     id: string,
     type: string,
     attributes: {
-        taxonomicService?: TaxonomicServiceType,
-        [property: string]: any
-    }
-}
-
-export type JSONResult = {
-    data: DataFragment,
-    links: {
-        self: string
-    },
-    meta?: {
-        totalRecords: number
+        content: {
+            taxonomicService?: TaxonomicServiceType,
+            [property: string]: any
+        },
+        metadata: {
+            createdOn: number,
+            createdBy: string,
+            modifiedOn: number,
+            modifiedBy: string
+        }
     }
 };
 
-export type JSONResultArray = {
-    data: DataFragment[],
-    links: {
-        self: string,
-        first?: string,
-        next?: string,
-        previous?: string
-    },
-    meta?: {
-        totalRecords: number
-    }
-}
+export type CordraResultArray = {
+    size: number,
+    results: CordraResult[]
+};
 
 /* Type for a Taxonomic Service */
 export type TaxonomicService = {

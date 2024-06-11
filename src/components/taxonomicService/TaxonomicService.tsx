@@ -1,13 +1,15 @@
 /* Import Dependencies */
 import classNames from 'classnames';
 import moment from 'moment';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
 import { useAppSelector, useAppDispatch, useFetch } from 'app/Hooks';
 
 /* Import Store */
+import { setIsApiOnline } from 'redux-store/AppStore';
 import { getTaxonomicService, setTaxonomicService } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
@@ -35,15 +37,23 @@ const TaxonomicService = () => {
 
     /* Base variables */
     const taxonomicService: TaxonomicServiceType | undefined = useAppSelector(getTaxonomicService);
+    const [error, setError] = useState<boolean>(false);
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
-    if (!taxonomicService || taxonomicService.taxonomicService['erp:id'] !== taxonomicServiceID.replace(process.env.REACT_APP_HANDLE_URL as string, '')) {
-        fetch.Fetch({
-            Method: GetTaxonomicService,
-            Handler: (taxonomicService: TaxonomicServiceType) => dispatch(setTaxonomicService(taxonomicService)),
-            params: { handle: taxonomicServiceID }
-        });
-    }
+    /* Fetch taxonomic service */
+    fetch.Fetch({
+        Method: GetTaxonomicService,
+        Handler: (taxonomicService: TaxonomicServiceType) => {
+            dispatch(setTaxonomicService(taxonomicService));
+            dispatch(setIsApiOnline(true));
+        },
+        ErrorHandler: () => {
+            setError(true);
+            dispatch(setIsApiOnline(false));
+
+        },
+        params: { handle: taxonomicServiceID }
+    });
 
     /* ClassNames */
     const detailBlocksClass = classNames({
@@ -63,20 +73,14 @@ const TaxonomicService = () => {
                     >
                         {/* If data is still being loaded after 1.5 seconds, display spinner */}
                         {fetch.loading &&
-                            <>
-                                {setTimeout(() => {
-                                    return (
-                                        <Row className="flex-grow-1">
-                                            <Col className="d-flex justify-content-center align-items-center">
-                                                <div className="text-center">
-                                                    <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
-                                                    <Spinner />
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                    );
-                                }, 1500)}
-                            </>
+                            <Row className="flex-grow-1">
+                                <Col className="d-flex justify-content-center align-items-center">
+                                    <div className="text-center">
+                                        <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
+                                        <Spinner />
+                                    </div>
+                                </Col>
+                            </Row>
                         }
                         {/* If taxonomic service is present */}
                         {taxonomicService &&
@@ -167,6 +171,28 @@ const TaxonomicService = () => {
                                     </Col>
                                 </Row>
                             </>
+                        }
+                        {/* If an error occurred */}
+                        {error &&
+                            <Row className="h-100">
+                                <Col className="d-flex flex-column justify-content-center align-items-center">
+                                    <Row>
+                                        <Col>
+                                            <p>{`An error occurred whilst searching for Taxonomic Service with ID: ${taxonomicServiceID}`}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>
+                                                Retry or go back to <Link to="/"
+                                                    className="tc-primary"
+                                                >
+                                                    home
+                                                </Link></p>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
                         }
                     </Col>
                 </Row>

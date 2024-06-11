@@ -3,10 +3,12 @@ import { combineReducers, configureStore, ThunkAction, Action } from '@reduxjs/t
 import type { PreloadedStateShapeFromReducersMapObject } from '@reduxjs/toolkit';
 
 /* Import Redux Slices */
+import AppServiceReducer from '../redux-store/AppStore';
 import TaxonomicServiceReducer from '../redux-store/TaxonomicServiceSlice';
 
 
 const rootReducer = combineReducers({
+    app: AppServiceReducer,
     taxonomicService: TaxonomicServiceReducer
 });
 

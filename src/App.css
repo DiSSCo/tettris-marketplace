@@ -10,6 +10,7 @@
   --grey: #D9D9DF;
   --greyMedium: #B4B4BF;
   --greyDark: #868696;
+  --error: #E74C3C;
 }
 
 /* Import Montserrat Font */
@@ -149,6 +150,10 @@ p {
 
 .tc-grey {
   color: var(--greyDark);
+}
+
+.tc-error {
+  color: var(--error);
 }
 
 /* Font weight */
