@@ -1,5 +1,5 @@
 /* Import Dependencies */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select, { SingleValue } from "react-select";
 
 /* Import Types */
@@ -18,6 +18,7 @@ interface Props {
         value: string,
     },
     placeholder?: string,
+    hasDefault?: boolean,
     styles?: {
         color?: string
     },
@@ -33,7 +34,7 @@ interface Props {
     * @param OnChange A global function that triggers when an option is selected, has priority over an action of an option
 */
 const Dropdown = (props: Props) => {
-    const { selectedItem, items, placeholder, styles, OnChange } = props;
+    const { selectedItem, items, placeholder, hasDefault, styles, OnChange } = props;
 
     /* Base variables */
     const [selectItems, setSelectItems] = useState<{ label: string, value: string, action?: Function }[]>(items);
@@ -44,15 +45,22 @@ const Dropdown = (props: Props) => {
             label: placeholder,
             value: ""
         });
-    }
+    };
 
     /**
      * Function to check if the chosen option has a value and the default should change to 'Reset filter'
      * @param option The selected option from the Select Component
      */
-    const CheckItems = (option: SingleValue<DropdownItem>) => {
-        if (option?.value && !selectedItem && !selectItems.find((item) => item.label === 'Reset filter')) {
-            selectItems[0].label = 'Reset filter';
+    const CheckItems = (option: SingleValue<DropdownItem> | undefined) => {
+        if ((option?.value || selectedItem) && !selectItems.find((item) => item.label === 'Reset filter')) {
+            if (!hasDefault && selectItems[0].label !== placeholder) {
+                selectItems.unshift({
+                    label: 'Reset filter',
+                    value: ""
+                });
+            } else if (!hasDefault) {
+                selectItems[0].label = 'Reset filter';
+            };
 
             setSelectItems([...selectItems]);
         } else if (!option?.value && selectItems.find((item) => item.label === 'Reset filter')) {
@@ -62,9 +70,15 @@ const Dropdown = (props: Props) => {
         }
     }
 
+    useEffect(() => {
+        CheckItems(selectedItem);
+    }, [selectedItem]);
+
     return (
-        <Select
-            value={selectedItem}
+        <Select value={selectedItem ?? {
+            label: placeholder ?? 'Select an option',
+            value: ''
+        }}
             defaultValue={{
                 label: placeholder ?? 'Select an option',
                 value: ''

@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
+import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
@@ -33,6 +34,7 @@ const Search = () => {
     /* Hooks */
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
+    const [noMoreResults, setNoMoreResults] = useState<boolean>(false);
 
     /* Base variables */
     const paginator = usePaginator({
@@ -43,7 +45,13 @@ const Search = () => {
             dispatch(concatToTaxonomicServices(taxonomicServices));
             dispatch(setIsApiOnline(true))
         },
-        ErrorHandler: (pageNumber: number) => pageNumber <= 1 && dispatch(setIsApiOnline(false)),
+        ErrorHandler: (error: Error) => {
+            if (error.cause === 200) {
+                setNoMoreResults(true);
+            } else {
+                dispatch(setIsApiOnline(false));
+            };
+        },
         pageSize: 12,
         resultKey: 'taxonomicServices',
         allowSearchParams: true
@@ -65,7 +73,7 @@ const Search = () => {
     });
 
     const loadMoreBlockClass = classNames({
-        'h-100': !paginator.loading && paginator.errorMessage,
+        'flex-grow-1': !paginator.loading && paginator.errorMessage,
         'mb-4': !paginator.errorMessage
     });
 
@@ -100,7 +108,7 @@ const Search = () => {
                         </Row>
                         {/* Search Results body */}
                         <Row className={`${searchResultsClassScrollBlock} flex-grow-1 mt-4`}>
-                            <Col>
+                            <Col className="h-100 d-flex flex-column">
                                 {/* Search Result blocks */}
                                 <Row className={searchResultsClass}>
                                     <Col>
@@ -125,7 +133,7 @@ const Search = () => {
                                                 Load more
                                             </Button>
                                             : <>
-                                                {(!paginator.errorMessage && paginator.totalRecords > 0) ?
+                                                {(!noMoreResults && paginator.totalRecords > 0) ?
                                                     <Spinner />
                                                     : <Row className="h-100 align-items-center">
                                                         <Col>

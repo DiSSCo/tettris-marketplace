@@ -27,6 +27,15 @@ export const TaxonomicServiceSlice = createSlice({
             state.taxonomicServices = action.payload;
         },
         concatToTaxonomicServices: (state, action: PayloadAction<TaxonomicService[]>) => {
+            // const newTaxonomicServices: TaxonomicService[] = [];
+
+            // if ()
+            // action.payload.forEach(taxonomicService => {
+            //     if (!(state.taxonomicServices.find(stateTaxonomicService => stateTaxonomicService.taxonomicService['erp:id'] === taxonomicService.taxonomicService['erp:id']))) {
+            //         newTaxonomicServices.push(taxonomicService);
+            //     };
+            // });
+
             state.taxonomicServices = state.taxonomicServices.concat(action.payload);
         }
     }

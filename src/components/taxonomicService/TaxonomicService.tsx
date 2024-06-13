@@ -37,7 +37,7 @@ const TaxonomicService = () => {
 
     /* Base variables */
     const taxonomicService: TaxonomicServiceType | undefined = useAppSelector(getTaxonomicService);
-    const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>();
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
     /* Fetch taxonomic service */
@@ -47,10 +47,12 @@ const TaxonomicService = () => {
             dispatch(setTaxonomicService(taxonomicService));
             dispatch(setIsApiOnline(true));
         },
-        ErrorHandler: () => {
-            setError(true);
-            dispatch(setIsApiOnline(false));
+        ErrorHandler: (error: Error) => {
+            setErrorMessage(error.message);
 
+            if (error?.cause !== 200) {
+                dispatch(setIsApiOnline(false));
+            }
         },
         params: { handle: taxonomicServiceID }
     });
@@ -173,7 +175,7 @@ const TaxonomicService = () => {
                             </>
                         }
                         {/* If an error occurred */}
-                        {error &&
+                        {errorMessage &&
                             <Row className="h-100">
                                 <Col className="d-flex flex-column justify-content-center align-items-center">
                                     <Row>
@@ -181,7 +183,12 @@ const TaxonomicService = () => {
                                             <p>{`An error occurred whilst searching for Taxonomic Service with ID: ${taxonomicServiceID}`}</p>
                                         </Col>
                                     </Row>
-                                    <Row>
+                                    <Row className="mt-2">
+                                        <Col>
+                                            <p>{errorMessage}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row className="mt-2">
                                         <Col>
                                             <p>
                                                 Retry or go back to <Link to="/"
