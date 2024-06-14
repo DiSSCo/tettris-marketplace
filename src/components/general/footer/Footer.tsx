@@ -69,11 +69,21 @@ const Footer = () => {
                         <Col className="col-lg-auto">
                             <div className="h-100 d-flex align-items-center fs-5 tc-white fw-lightBold">
                                 <span>
-                                    Privacy policy
+                                    <a href="https://cetaf.org/privacy/"
+                                        target="_blank"
+                                        rel="noreferer"
+                                    >
+                                        Privacy policy
+                                    </a>
                                 </span>
                                 <span className="px-2">|</span>
                                 <span>
-                                    Terms and Conditions
+                                    <a href="https://cetaf.org/privacy/"
+                                        target="_blank"
+                                        rel="noreferer"
+                                    >
+                                        Terms and Conditions
+                                    </a>
                                 </span>
                                 <span className="px-2">|</span>
                                 <span>

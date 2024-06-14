@@ -311,5 +311,6 @@
         "cetaf:qualityScore",
         "cetaf:agents",
         "erp:paymentModel"
-    ]
+    ],
+    "additionalProperties": false
 }

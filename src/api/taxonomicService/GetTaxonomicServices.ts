@@ -27,15 +27,18 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
     filters = filters.concat('/taxonomicService/ods\\:type:taxonomicService');
 
     /* Filter for state to be published */
-    filters = filters.concat('AND /taxonomicService/cetaf\\:state:published');
+    filters = filters.concat(' AND /taxonomicService/cetaf\\:state:published');
 
     if (!isEmpty(searchFilters)) {
         Object.entries(searchFilters).map(([key, value]) => {
             const alias: string | undefined = TaxonomicServiceFilters.taxonomicServiceFilters.find(taxonomicSearchFilter => taxonomicSearchFilter.name === key)?.alias;
 
             if (key === 'language') {
-                /* Get field alias from taxonomic service filters source */
+                /* Set array search for language */
                 filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
+            } else if (key === 'query') {
+                /* Set query to name search */
+                filters = filters.concat(` AND ` + `/taxonomicService/erp\\:name:` + `${value}*`);
             } else {
                 /* Get field alias from taxonomic service filters source */
                 filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}:` + `${value}`);
