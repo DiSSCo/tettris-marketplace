@@ -83,16 +83,14 @@ const TaxonomicService = () => {
                     >
                         {/* If data is still being loaded after 1.5 seconds, display spinner */}
                         {(fetch.loading && displaySpinner) &&
-                            <>
-                                <Row className="flex-grow-1">
-                                    <Col className="d-flex justify-content-center align-items-center">
-                                        <div className="text-center">
-                                            <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
-                                            <Spinner />
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </>
+                            <Row className="flex-grow-1">
+                                <Col className="d-flex justify-content-center align-items-center">
+                                    <div className="text-center">
+                                        <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
+                                        <Spinner />
+                                    </div>
+                                </Col>
+                            </Row>
                         }
                         {/* If taxonomic service is present */}
                         {taxonomicService &&

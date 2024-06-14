@@ -61,13 +61,11 @@ const Dropdown = (props: Props) => {
             } else if (!hasDefault) {
                 selectItems[0].label = 'Reset filter';
             };
-
-            setSelectItems([...selectItems]);
         } else if (!option?.value && selectItems.find((item) => item.label === 'Reset filter')) {
             selectItems[0].label = placeholder ?? 'Select an option';
+        };
 
-            setSelectItems([...selectItems]);
-        }
+        setSelectItems([...selectItems]);
     }
 
     useEffect(() => {

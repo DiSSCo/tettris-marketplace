@@ -78,12 +78,7 @@ const Footer = () => {
                                 </span>
                                 <span className="px-2">|</span>
                                 <span>
-                                    <a href="https://cetaf.org/privacy/"
-                                        target="_blank"
-                                        rel="noreferer"
-                                    >
-                                        Terms and Conditions
-                                    </a>
+                                    Terms and Conditions
                                 </span>
                                 <span className="px-2">|</span>
                                 <span>
