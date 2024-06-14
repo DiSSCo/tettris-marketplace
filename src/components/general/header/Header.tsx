@@ -33,7 +33,7 @@ const Header = () => {
         >
             <Row className="bgc-white py-2 px-2">
                 <Col lg={{ span: 10, offset: 1 }}>
-                    <Row>
+                    <Row className="align-items-center">
                         <Col className="col-auto">
                             <Link to="/">
                                 <img src={CETAFLogo}
@@ -48,7 +48,7 @@ const Header = () => {
                                     className="d-flex flex-column justify-content-center"
                                 >
                                     <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
-                                        Marketplace Prototype
+                                        Marketplace
                                     </h2>
                                     <h3 className="fs-4 fs-lg-3 tc-grey fw-lightBold">
                                         The Taxonomic Expertise and Services Marketplace

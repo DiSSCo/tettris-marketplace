@@ -37,7 +37,8 @@ const TaxonomicService = () => {
 
     /* Base variables */
     const taxonomicService: TaxonomicServiceType | undefined = useAppSelector(getTaxonomicService);
-    const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>();
+    const [displaySpinner, setDisplaySpinner] = useState<boolean>(false);
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
     /* Fetch taxonomic service */
@@ -47,13 +48,22 @@ const TaxonomicService = () => {
             dispatch(setTaxonomicService(taxonomicService));
             dispatch(setIsApiOnline(true));
         },
-        ErrorHandler: () => {
-            setError(true);
-            dispatch(setIsApiOnline(false));
+        ErrorHandler: (error: Error) => {
+            setErrorMessage(error.message);
 
+            if (error?.cause !== 200) {
+                dispatch(setIsApiOnline(false));
+            }
         },
         params: { handle: taxonomicServiceID }
     });
+
+    /* Time out to check if the taxonomic service is still being loaded after 1.5 seconds */
+    setTimeout(() => {
+        if (fetch.loading) {
+            setDisplaySpinner(true);
+        };
+    }, 1500);
 
     /* ClassNames */
     const detailBlocksClass = classNames({
@@ -72,7 +82,7 @@ const TaxonomicService = () => {
                         className="h-100 d-flex flex-column pt-3 pt-lg-5 px-4 px-lg-3"
                     >
                         {/* If data is still being loaded after 1.5 seconds, display spinner */}
-                        {fetch.loading &&
+                        {(fetch.loading && displaySpinner) &&
                             <Row className="flex-grow-1">
                                 <Col className="d-flex justify-content-center align-items-center">
                                     <div className="text-center">
@@ -173,7 +183,7 @@ const TaxonomicService = () => {
                             </>
                         }
                         {/* If an error occurred */}
-                        {error &&
+                        {errorMessage &&
                             <Row className="h-100">
                                 <Col className="d-flex flex-column justify-content-center align-items-center">
                                     <Row>
@@ -181,7 +191,12 @@ const TaxonomicService = () => {
                                             <p>{`An error occurred whilst searching for Taxonomic Service with ID: ${taxonomicServiceID}`}</p>
                                         </Col>
                                     </Row>
-                                    <Row>
+                                    <Row className="mt-2">
+                                        <Col>
+                                            <p>{errorMessage}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row className="mt-2">
                                         <Col>
                                             <p>
                                                 Retry or go back to <Link to="/"

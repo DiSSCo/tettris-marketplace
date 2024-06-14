@@ -187,10 +187,17 @@ const usePaginator = ({ Initiate, Method, Handler, ErrorHandler, pageSize, resul
                     if (pageNumber > 1) {
                         setErrorMessage('No more records to be found');
                     } else {
-                        setErrorMessage('Not a single record found, the API servive might be down');
+                        setReturnData({
+                            records: [],
+                            metadata: {
+                                totalRecords: 0
+                            }
+                        });
+
+                        setErrorMessage('Not a single record found with these criteria');
                     };
 
-                    ErrorHandler?.(pageNumber);
+                    ErrorHandler?.(error);
                 };
 
                 setLoading(false);
@@ -212,7 +219,7 @@ const usePaginator = ({ Initiate, Method, Handler, ErrorHandler, pageSize, resul
     /* Initate Function */
     useEffect(() => {
         Initiate?.();
-    }, []);
+    }, [searchParams]);
 
     return {
         records: returnData.records ?? [],

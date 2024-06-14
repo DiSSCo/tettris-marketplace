@@ -23,14 +23,26 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
     /* Destructure search filters into string */
     let filters: string = '';
 
+    /* Filter for the object type to be a taxonomic service */
     filters = filters.concat('/taxonomicService/ods\\:type:taxonomicService');
+
+    /* Filter for state to be published */
+    filters = filters.concat(' AND /taxonomicService/cetaf\\:state:published');
 
     if (!isEmpty(searchFilters)) {
         Object.entries(searchFilters).map(([key, value]) => {
-            /* Get field alias from taxonomic service filters source */
             const alias: string | undefined = TaxonomicServiceFilters.taxonomicServiceFilters.find(taxonomicSearchFilter => taxonomicSearchFilter.name === key)?.alias;
 
-            filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}:` + `${value}`);
+            if (key === 'language') {
+                /* Set array search for language */
+                filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
+            } else if (key === 'query') {
+                /* Set query to name search */
+                filters = filters.concat(` AND ` + `/taxonomicService/erp\\:name:` + `${value}*`);
+            } else {
+                /* Get field alias from taxonomic service filters source */
+                filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}:` + `${value}`);
+            }
         });
     };
 
@@ -50,6 +62,11 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
         /* Get result data from JSON */
         const data: CordraResultArray = result.data;
 
+        /* Check if there are any results */
+        if (!data.results.length) {
+            throw (new Error('No results found', { cause: 200 }));
+        };
+
         /* Set Taxonomic Services */
         data.results.forEach((dataFragment) => {
             const taxonomicService = dataFragment.attributes.content as TaxonomicService;
@@ -67,9 +84,9 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
             totalRecords: data.size
         };
     } catch (error) {
-        console.warn(error);
+        console.error(error);
 
-        throw(error);
+        throw (error);
     };
 
     return {

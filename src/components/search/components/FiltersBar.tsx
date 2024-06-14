@@ -50,6 +50,7 @@ const FiltersBar = (props: Props) => {
             query: searchParams.get('query') ?? '',
             ...initialValues
         }}
+            enableReinitialize={true}
             onSubmit={async (values) => {
                 /* Filter handling is done in the individual components */
                 await new Promise((resolve) => setTimeout(resolve, 100));
@@ -71,7 +72,8 @@ const FiltersBar = (props: Props) => {
                 ToggleFilters?.();
             }}
         >
-            {({ values, setFieldValue, submitForm }) => (
+            {({ values, setFieldValue, submitForm }) => {
+                return (
                 <Form>
                     <Row>
                         {/* Search Bar */}
@@ -96,6 +98,7 @@ const FiltersBar = (props: Props) => {
                                     >
                                         <Filter filter={filter}
                                             currentValue={values[filter.name as keyof typeof values]}
+                                            hasDefault={!!filters.find(originalFilter => originalFilter.name === filter.name)?.default}
                                             SetFilterValue={(value: string | number | boolean) => setFieldValue(filter.name, value)}
                                             SubmitForm={() => submitForm()}
                                         />
@@ -105,7 +108,8 @@ const FiltersBar = (props: Props) => {
                         </Col>
                     </Row>
                 </Form>
-            )}
+                )
+            }}
         </Formik>
     );
 }

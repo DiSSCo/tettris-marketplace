@@ -33,13 +33,18 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
             /* Set Taxonomic Service */
             taxonomicService = data.attributes.content as TaxonomicService;
 
+            /* Check if Taxonomic Service is published, otherwise throw error */
+            if (taxonomicService.taxonomicService['cetaf:state'] !== 'published') {
+                throw (new Error('This Taxonomic Service has not been published yet', { cause: 200 }));
+            };
+
             /* Set created and modified */
             taxonomicService.taxonomicService['ods:created'] = moment(new Date(data.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
             taxonomicService.taxonomicService['dcterms:modified'] = moment(new Date(data.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
         } catch (error) {
-            console.warn(error);
+            console.error(error);
 
-            throw(error);
+            throw (error);
         }
     };
 

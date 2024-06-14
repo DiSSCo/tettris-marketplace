@@ -12,6 +12,7 @@ import { Dropdown, DatePicker } from 'components/general/FormComponents';
 type Props = {
     filter: FilterType,
     currentValue?: string | number | boolean | Date,
+    hasDefault?: boolean,
     SetFilterValue: Function,
     SubmitForm: Function
 };
@@ -24,7 +25,7 @@ type Props = {
     * @param SubmitForm Function to submit the form
 */
 const Filter = (props: Props) => {
-    const { filter, currentValue, SetFilterValue, SubmitForm } = props;
+    const { filter, currentValue, hasDefault, SetFilterValue, SubmitForm } = props;
 
     switch (filter.type) {
         case 'select':
@@ -37,6 +38,7 @@ const Filter = (props: Props) => {
                         value: `${currentValue}`
                     } : undefined}
                     placeholder={MakeReadableString(filter.name)}
+                    hasDefault={hasDefault}
                     styles={{
                         color: '#FF8E3E'
                     }}
@@ -44,7 +46,7 @@ const Filter = (props: Props) => {
                         SetFilterValue(item.value);
                         SubmitForm();
                     }}
-                />
+                />;
             }
             return <> </>;
         case 'date':
