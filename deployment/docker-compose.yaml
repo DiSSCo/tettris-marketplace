@@ -12,7 +12,7 @@ services:
   tettris_marketplace:
     container_name: tettris_marketplace
     restart: always
-    image: public.ecr.aws/dissco/tettris-marketplace:latest
+    image: public.ecr.aws/dissco/tettris-marketplace:sha-ca57584
   nginx:
     container_name: nginx
     restart: unless-stopped
