@@ -38,6 +38,7 @@ const TaxonomicService = () => {
     /* Base variables */
     const taxonomicService: TaxonomicServiceType | undefined = useAppSelector(getTaxonomicService);
     const [errorMessage, setErrorMessage] = useState<string | undefined>();
+    const [displaySpinner, setDisplaySpinner] = useState<boolean>(false);
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
     /* Fetch taxonomic service */
@@ -57,6 +58,13 @@ const TaxonomicService = () => {
         params: { handle: taxonomicServiceID }
     });
 
+    /* Time out to check if the taxonomic service is still being loaded after 1.5 seconds */
+    setTimeout(() => {
+        if (fetch.loading) {
+            setDisplaySpinner(true);
+        };
+    }, 1500);
+
     /* ClassNames */
     const detailBlocksClass = classNames({
         'pt-4': !taxonomicService?.taxonomicService['erp:multimedia']
@@ -74,15 +82,17 @@ const TaxonomicService = () => {
                         className="h-100 d-flex flex-column pt-3 pt-lg-5 px-4 px-lg-3"
                     >
                         {/* If data is still being loaded after 1.5 seconds, display spinner */}
-                        {fetch.loading &&
-                            <Row className="flex-grow-1">
-                                <Col className="d-flex justify-content-center align-items-center">
-                                    <div className="text-center">
-                                        <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
-                                        <Spinner />
-                                    </div>
-                                </Col>
-                            </Row>
+                        {(fetch.loading && displaySpinner) &&
+                            <>
+                                <Row className="flex-grow-1">
+                                    <Col className="d-flex justify-content-center align-items-center">
+                                        <div className="text-center">
+                                            <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
+                                            <Spinner />
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </>
                         }
                         {/* If taxonomic service is present */}
                         {taxonomicService &&
