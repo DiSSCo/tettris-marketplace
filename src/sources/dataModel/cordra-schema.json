@@ -10,7 +10,7 @@
       "required": [
         "erp:id",
         "ods:type",
-        "dcterms:license",
+        "dcterms:licence",
         "cetaf:state",
         "erp:languageAvailabilities",
         "erp:name",
@@ -38,9 +38,9 @@
             "taxonomicService"
           ]
         },
-        "dcterms:license": {
+        "dcterms:licence": {
           "type": "string",
-          "title": "License"
+          "title": "Licence"
         },
         "cetaf:state": {
           "type": "string",
@@ -230,9 +230,9 @@
                 "type": "string",
                 "title": "Multimedia URL"
               },
-              "dcterms:license": {
+              "dcterms:licence": {
                 "type": "string",
-                "title": "Multimedia License"
+                "title": "Multimedia Licence"
               }
             }
           }
