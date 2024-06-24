@@ -130,7 +130,7 @@ const TaxonomicService = () => {
                                                 <DetailsBlock name="Service Details"
                                                     properties={{
                                                         category: taxonomicService.taxonomicService['erp:category'],
-                                                        license: taxonomicService.taxonomicService['dcterms:license'],
+                                                        licence: taxonomicService.taxonomicService['dcterms:licence'],
                                                         version: taxonomicService.taxonomicService['erp:version'],
                                                         lastUpdated: moment(taxonomicService.taxonomicService['erp:lastUpdate']).format('MMM DD - YYYY'),
                                                         paymentModel: taxonomicService.taxonomicService['erp:paymentModel'],

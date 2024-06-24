@@ -38,19 +38,22 @@ const Search = () => {
 
     /* Base variables */
     const paginator = usePaginator({
-        Initiate: () => dispatch(setTaxonomicServices([])),
+        Initiate: () => {
+            dispatch(setTaxonomicServices([]));
+            setNoMoreResults(false);
+        },
         Method: GetTaxonomicServices,
         Handler: (taxonomicServices: TaxonomicService[]) => {
             /* On receival of a new page with records, add them to the total */
             dispatch(concatToTaxonomicServices(taxonomicServices));
             dispatch(setIsApiOnline(true))
+
+            if (!taxonomicServices.length) {
+                setNoMoreResults(true);
+            }
         },
         ErrorHandler: (error: Error) => {
-            if (error.cause === 200) {
-                setNoMoreResults(true);
-            } else {
-                dispatch(setIsApiOnline(false));
-            };
+            dispatch(setIsApiOnline(false));
         },
         pageSize: 12,
         resultKey: 'taxonomicServices',
@@ -125,23 +128,23 @@ const Search = () => {
                                 {/* Load more button */}
                                 <Row className={loadMoreBlockClass}>
                                     <Col className="d-flex justify-content-center">
-                                        {(!paginator.loading && !paginator.errorMessage && paginator.totalRecords > 0) ?
+                                        {(!paginator.loading && !noMoreResults && paginator.totalRecords > 0) &&
                                             <Button type="button"
                                                 variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                                                 OnClick={() => paginator.Next?.()}
                                             >
                                                 Load more
                                             </Button>
-                                            : <>
-                                                {(!noMoreResults && paginator.totalRecords > 0) ?
-                                                    <Spinner />
-                                                    : <Row className="h-100 align-items-center">
-                                                        <Col>
-                                                            <p>{paginator.errorMessage}</p>
-                                                        </Col>
-                                                    </Row>
-                                                }
-                                            </>
+                                        }
+                                        {(!paginator.loading && noMoreResults && paginator.totalRecords > 0) &&
+                                            <Row className="h-100 align-items-center">
+                                                <Col>
+                                                    <p>{`No ${paginator.totalRecords > 0 ? 'more ' : ''}results found`}</p>
+                                                </Col>
+                                            </Row>
+                                        }
+                                        {paginator.loading &&
+                                            <Spinner />
                                         }
                                     </Col>
                                 </Row>

@@ -62,11 +62,6 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
         /* Get result data from JSON */
         const data: CordraResultArray = result.data;
 
-        /* Check if there are any results */
-        if (!data.results.length) {
-            throw (new Error('No results found', { cause: 200 }));
-        };
-
         /* Set Taxonomic Services */
         data.results.forEach((dataFragment) => {
             const taxonomicService = dataFragment.attributes.content as TaxonomicService;

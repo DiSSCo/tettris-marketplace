@@ -26,9 +26,9 @@ export interface TaxonomicService {
    */
   "ods:type": string;
   /**
-   * http://purl.org/dc/terms/license
+   * http://purl.org/dc/terms/licence
    */
-  "dcterms:license": string;
+  "dcterms:licence": string;
   /**
    * The current state of the object
    */
@@ -152,9 +152,9 @@ export interface TaxonomicService {
      */
     "erp:multimediaUrl": string;
     /**
-     * http://purl.org/dc/terms/license
+     * http://purl.org/dc/terms/licence
      */
-    "dcterms:license"?: string;
+    "dcterms:licence"?: string;
     [k: string]: unknown;
   }[];
   [k: string]: unknown;

@@ -32,10 +32,10 @@
             "description": "The FDO type of the object",
             "$comment": "Unclear what value goes here"
         },
-        "dcterms:license": {
+        "dcterms:licence": {
             "type": "string",
-            "description": "http://purl.org/dc/terms/license",
-            "$comment": "Determine available licenses",
+            "description": "http://purl.org/dc/terms/licence",
+            "$comment": "Determine available licences",
             "examples": [
                 "CC0"
             ]
@@ -281,10 +281,10 @@
                         "type": "string",
                         "description": "Link to video, screenshots or slides showing details of the Resource."
                     },
-                    "dcterms:license": {
+                    "dcterms:licence": {
                         "type": "string",
-                        "description": "http://purl.org/dc/terms/license",
-                        "$comment": "Determine available licenses",
+                        "description": "http://purl.org/dc/terms/licence",
+                        "$comment": "Determine available licences",
                         "examples": [
                             "CC0"
                         ]
@@ -301,7 +301,7 @@
         "ods:created",
         "dcterms:modified",
         "ods:type",
-        "dcterms:license",
+        "dcterms:licence",
         "cetaf:state",
         "erp:languageAvailabilities",
         "erp:name",
