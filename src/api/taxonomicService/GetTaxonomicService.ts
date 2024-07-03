@@ -39,7 +39,7 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
             };
 
             /* Set created and modified */
-            taxonomicService.taxonomicService['ods:created'] = moment(new Date(data.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+            taxonomicService.taxonomicService['cetaf:created'] = moment(new Date(data.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
             taxonomicService.taxonomicService['dcterms:modified'] = moment(new Date(data.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
         } catch (error) {
             console.error(error);

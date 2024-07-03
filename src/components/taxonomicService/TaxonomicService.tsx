@@ -67,7 +67,7 @@ const TaxonomicService = () => {
 
     /* ClassNames */
     const detailBlocksClass = classNames({
-        'pt-4': !taxonomicService?.taxonomicService['erp:multimedia']
+        'pt-4': !taxonomicService?.taxonomicService['cetaf:hasMultimedia']
     });
 
     return (
@@ -148,33 +148,33 @@ const TaxonomicService = () => {
                                                         helpdeskWebPage: taxonomicService.taxonomicService['erp:helpdeskPage'],
                                                         webpage: taxonomicService.taxonomicService['erp:webpage'],
                                                         documentationWebPage: taxonomicService.taxonomicService['cetaf:documentationUrl'],
-                                                        agents: taxonomicService.taxonomicService['cetaf:agents']
+                                                        agents: taxonomicService.taxonomicService['cetaf:hasAgent']
                                                     }}
                                                 />
                                             </Col>
                                             {/* Show software details if software object is present in taxonomic service */}
-                                            {taxonomicService.taxonomicService['cetaf:software'] &&
+                                            {taxonomicService.taxonomicService['cetaf:Software'] &&
                                                 <Col xs={{ span: 12 }}
                                                     lg={{ span: 3 }}
                                                     className="mt-4 mt-lg-0"
                                                 >
                                                     <DetailsBlock name="Software"
                                                         properties={{
-                                                            sourceUrl: taxonomicService.taxonomicService['cetaf:software']['cetaf:sourceUrl'],
-                                                            requiredResources: taxonomicService.taxonomicService['cetaf:software']['erp:requiredResources'],
-                                                            status: taxonomicService.taxonomicService['cetaf:software']['cetaf:deprecated'] ? 'Deprecated' : 'Maintained',
-                                                            changeLog: taxonomicService.taxonomicService['cetaf:software']['erp:changeLog'],
-                                                            programmingLanguages: taxonomicService.taxonomicService['cetaf:software']['cetaf:programmingLanguages']
+                                                            sourceUrl: taxonomicService.taxonomicService['cetaf:Software']['cetaf:sourceUrl'],
+                                                            requiredResources: taxonomicService.taxonomicService['cetaf:Software']['erp:requiredResources'],
+                                                            status: taxonomicService.taxonomicService['cetaf:Software']['cetaf:deprecated'] ? 'Deprecated' : 'Maintained',
+                                                            changeLog: taxonomicService.taxonomicService['cetaf:Software']['erp:changeLog'],
+                                                            programmingLanguages: taxonomicService.taxonomicService['cetaf:Software']['cetaf:programmingLanguages']
                                                         }}
                                                     />
                                                 </Col>
                                             }
                                             {/* Show multimedia block, if multimedia is present */}
-                                            {taxonomicService.taxonomicService['erp:multimedia'] &&
+                                            {taxonomicService.taxonomicService['cetaf:hasMultimedia'] &&
                                                 <Col xs={{ span: 12 }} lg
                                                     className="mt-4 mt-lg-0"
                                                 >
-                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['erp:multimedia']} />
+                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['cetaf:hasMultimedia']} />
                                                 </Col>
                                             }
                                         </Row>

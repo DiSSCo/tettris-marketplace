@@ -6,7 +6,7 @@ import { resolve } from 'path';
 
 /* Taxonomic Service */
 const TaxonomicService = async () => {
-    writeFileSync('src/app/types/TaxonomicService.d.ts', await compileFromFile(resolve(__dirname, '../sources/dataModel', 'taxonomic-service.json'), {}));
+    writeFileSync(resolve(__dirname, './types', 'TaxonomicService.d.ts'), await compileFromFile(resolve(__dirname, '../sources/dataModel', 'taxonomic-service.json'), {}));
 }
 
 

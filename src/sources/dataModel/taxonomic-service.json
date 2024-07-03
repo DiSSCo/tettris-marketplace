@@ -19,7 +19,7 @@
             "description": "The type of the object, in this case taxonomicService",
             "const": "taxonomicService"
         },
-        "erp:created": {
+        "cetaf:created": {
             "type": "string",
             "description": "The timestamp that the object version was created",
             "format": "date-time",

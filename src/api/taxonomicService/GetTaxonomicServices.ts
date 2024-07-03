@@ -67,7 +67,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
             const taxonomicService = dataFragment.attributes.content as TaxonomicService;
 
             /* Set created and modified */
-            taxonomicService.taxonomicService['ods:created'] = moment(new Date(dataFragment.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+            taxonomicService.taxonomicService['cetaf:created'] = moment(new Date(dataFragment.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
             taxonomicService.taxonomicService['dcterms:modified'] = moment(new Date(dataFragment.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
 
             /* Push to taxonomic services array */

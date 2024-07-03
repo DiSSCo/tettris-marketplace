@@ -10,33 +10,44 @@
  */
 export interface TaxonomicService {
   /**
-   * A persistent identifier, a unique reference to the Resource.
+   * The unique identifier of the Taxonomic Service object
    */
-  "erp:id": string;
+  "@id": string;
+  /**
+   * The type of the object, in this case taxonomicService
+   */
+  "@type": "taxonomicService";
   /**
    * The timestamp that the object version was created
    */
-  "ods:created": string;
+  "cetaf:created"?: string;
   /**
-   * Modification date for specimen information
+   * Modification date for Taxonomic Service information
    */
   "dcterms:modified": string;
-  /**
-   * The FDO type of the object
-   */
-  "ods:type": string;
-  /**
-   * http://purl.org/dc/terms/licence
-   */
-  "dcterms:licence": string;
   /**
    * The current state of the object
    */
   "cetaf:state": string;
   /**
-   * Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2
+   * A type that defines the kind of taxonomic service
    */
-  "erp:languageAvailabilities": string[];
+  "cetaf:taxonomicServiceType":
+    | "AITrainingDataset"
+    | "communityGroup"
+    | "crowdSourcing"
+    | "dataTool"
+    | "e-LearningService"
+    | "factsheet"
+    | "identification"
+    | "inventory"
+    | "referenceCollection"
+    | "specimenDatasetNotInGBIF"
+    | "website";
+  /**
+   * http://purl.org/dc/terms/licence
+   */
+  "dcterms:licence": string;
   /**
    * Brief and descriptive name of the Resource as assigned by the Provider
    */
@@ -50,13 +61,13 @@ export interface TaxonomicService {
    */
   "erp:tagLine"?: string;
   /**
+   * Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2
+   */
+  "erp:languageAvailabilities": string[];
+  /**
    * Link to the logo/visual identity of the Resource. The logo will be visible at the Portal. If there is no specific logo for the Resource the logo of the Provider may be used.
    */
   "erp:logo"?: string;
-  /**
-   * A type that further defines the type of taxonomic service
-   */
-  "cetaf:taxonomicServiceType": string;
   /**
    * A named group of Resources that offer access to the same type of Resources.
    */
@@ -66,11 +77,11 @@ export interface TaxonomicService {
    */
   "erp:EOSC_serviceId"?: string;
   /**
-   * Version of the Resource that is in force.
+   * Version of the Resource that is in force in EOSC.
    */
   "erp:version"?: string;
   /**
-   * Date of the latest update of the Resource.
+   * Date of the latest update of the Resource in EOSC.
    */
   "erp:lastUpdate"?: string;
   /**
@@ -84,7 +95,7 @@ export interface TaxonomicService {
   /**
    * Comments that describes the admin review and why a certain state is given
    */
-  "cetaf:reviewComments"?: string;
+  "cetaf:reviewComment"?: string;
   /**
    * Email to contact your helpdesk, where users with incidents and requests will be directed.
    */
@@ -94,9 +105,9 @@ export interface TaxonomicService {
    */
   "erp:helpdeskPage"?: string;
   /**
-   * An array holding the agents connected to the taxonomic service
+   * Contains zero or more cetaf:Agent objects
    */
-  "cetaf:agents": Agent[];
+  "cetaf:hasAgent": Agent[];
   /**
    * Webpage with information about the Resource usually hosted and maintained by the Provider.
    */
@@ -120,7 +131,7 @@ export interface TaxonomicService {
   /**
    * Object representing the service's software
    */
-  "cetaf:software"?: {
+  "cetaf:Software"?: {
     /**
      * Link pointing to the source URL of the software, e.g. the GitHub repository
      */
@@ -146,7 +157,7 @@ export interface TaxonomicService {
   /**
    * Array of multimedia objects, pointing to their respective sources
    */
-  "erp:multimedia"?: {
+  "cetaf:hasMultimedia"?: {
     /**
      * Link to video, screenshots or slides showing details of the Resource.
      */
@@ -157,7 +168,6 @@ export interface TaxonomicService {
     "dcterms:licence"?: string;
     [k: string]: unknown;
   }[];
-  [k: string]: unknown;
 }
 export interface Agent {
   /**

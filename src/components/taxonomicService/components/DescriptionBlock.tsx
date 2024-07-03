@@ -29,7 +29,7 @@ const DescriptionBlock = (props: Props) => {
 
     /* ClassNames */
     const descriptionBlockClass = classNames({
-        [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['erp:multimedia']
+        [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['cetaf:hasMultimedia']
     });
 
     const qualityScoreBarClass = classNames({
@@ -40,13 +40,13 @@ const DescriptionBlock = (props: Props) => {
         <div className={descriptionBlockClass}>
             <Row className="h-100">
                 {/* Preview image, if available */}
-                {taxonomicService.taxonomicService['erp:multimedia']?.length &&
+                {taxonomicService.taxonomicService['cetaf:hasMultimedia']?.length &&
                     <Col xs={{ span: 12 }} lg={{ span: 3 }}
                         className="h-100 bgc-white me-3 mb-3 mb-lg-0"
                     >
                         <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center `}>
-                            <img src={taxonomicService.taxonomicService['erp:multimedia'][0]['erp:multimediaUrl']}
-                                alt={taxonomicService.taxonomicService['erp:multimedia'][0]['erp:multimediaUrl']}
+                            <img src={taxonomicService.taxonomicService['cetaf:hasMultimedia'][0]['erp:multimediaUrl']}
+                                alt={taxonomicService.taxonomicService['cetaf:hasMultimedia'][0]['erp:multimediaUrl']}
                                 className="h-100"
                             />
                         </div>
@@ -80,7 +80,7 @@ const DescriptionBlock = (props: Props) => {
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Publishing date</p>
-                            <p>{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
+                            <p>{moment(taxonomicService.taxonomicService['cetaf:created']).format('MMM DD - YYYY')}</p>
                         </Col>
                         {/* Quality score */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}

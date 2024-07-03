@@ -52,7 +52,7 @@ const Search = () => {
                 setNoMoreResults(true);
             }
         },
-        ErrorHandler: (error: Error) => {
+        ErrorHandler: () => {
             dispatch(setIsApiOnline(false));
         },
         pageSize: 12,
