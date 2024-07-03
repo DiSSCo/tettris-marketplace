@@ -1,18 +1,25 @@
 {
+    "$id": "https://schemas.dissco.tech/schemas/fdo-type/tettris-service/0.1.0/tettris-service.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$comment": "Taxonomic Service Version 0.1.0",
     "title": "TaxonomicService",
-    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "description": "Generic concept of a Service or Tool",
     "properties": {
-        "erp:id": {
+        "@id": {
             "type": "string",
-            "description": "A persistent identifier, a unique reference to the Resource.",
+            "description": "The unique identifier of the Taxonomic Service object",
             "pattern": "https:\/\/doi.org\/10.22\/(.){3}-(.){3}-(.){3}",
             "examples": [
                 "https://doi.org/10.22/XXX-XXX-XXX"
             ]
         },
-        "ods:created": {
+        "@type": {
+            "type": "string",
+            "description": "The type of the object, in this case taxonomicService",
+            "const": "taxonomicService"
+        },
+        "erp:created": {
             "type": "string",
             "description": "The timestamp that the object version was created",
             "format": "date-time",
@@ -22,22 +29,9 @@
         },
         "dcterms:modified": {
             "type": "string",
-            "description": "Modification date for specimen information",
+            "description": "Modification date for Taxonomic Service information",
             "examples": [
                 "2023-07-10T12:02:00.000Z"
-            ]
-        },
-        "ods:type": {
-            "type": "string",
-            "description": "The FDO type of the object",
-            "$comment": "Unclear what value goes here"
-        },
-        "dcterms:licence": {
-            "type": "string",
-            "description": "http://purl.org/dc/terms/licence",
-            "$comment": "Determine available licences",
-            "examples": [
-                "CC0"
             ]
         },
         "cetaf:state": {
@@ -48,12 +42,30 @@
                 "published"
             ]
         },
-        "erp:languageAvailabilities": {
-            "type": "array",
-            "description": "Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2 ",
-            "items": {
-                "type": "string"
-            }
+        "cetaf:taxonomicServiceType": {
+            "type": "string",
+            "description": "A type that defines the kind of taxonomic service",
+            "enum": [
+                "AITrainingDataset",
+                "communityGroup",
+                "crowdSourcing",
+                "dataTool",
+                "e-LearningService",
+                "factsheet",
+                "identification",
+                "inventory",
+                "referenceCollection",
+                "specimenDatasetNotInGBIF",
+                "website"
+            ]
+        },
+        "dcterms:licence": {
+            "type": "string",
+            "description": "http://purl.org/dc/terms/licence",
+            "$comment": "Determine available licences",
+            "examples": [
+                "CC0"
+            ]
         },
         "erp:name": {
             "type": "string",
@@ -76,18 +88,18 @@
                 "A Bombus reference collection"
             ]
         },
+        "erp:languageAvailabilities": {
+            "type": "array",
+            "description": "Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2 ",
+            "items": {
+                "type": "string"
+            }
+        },
         "erp:logo": {
             "type": "string",
             "description": "Link to the logo/visual identity of the Resource. The logo will be visible at the Portal. If there is no specific logo for the Resource the logo of the Provider may be used.",
             "examples": [
                 "https://eosc.eu/wp-content/uploads/2022/09/New-guidelines-for-EOSC-family-branding.jpg"
-            ]
-        },
-        "cetaf:taxonomicServiceType": {
-            "type": "string",
-            "description": "A type that further defines the type of taxonomic service",
-            "examples": [
-                "referenceCollection"
             ]
         },
         "erp:category": {
@@ -105,7 +117,7 @@
         },
         "erp:version": {
             "type": "string",
-            "description": "Version of the Resource that is in force.",
+            "description": "Version of the Resource that is in force in EOSC.",
             "examples": [
                 "1",
                 "1.1",
@@ -114,7 +126,7 @@
         },
         "erp:lastUpdate": {
             "type": "string",
-            "description": "Date of the latest update of the Resource.",
+            "description": "Date of the latest update of the Resource in EOSC.",
             "examples": [
                 "2023-07-10T12:02:00.000Z"
             ]
@@ -135,7 +147,7 @@
                 100
             ]
         },
-        "cetaf:reviewComments": {
+        "cetaf:reviewComment": {
             "type": "string",
             "description": "Comments that describes the admin review and why a certain state is given",
             "examples": [
@@ -157,12 +169,12 @@
                 "cetaf.org"
             ]
         },
-        "cetaf:agents": {
+        "cetaf:hasAgent": {
             "type": "array",
-            "description": "An array holding the agents connected to the taxonomic service",
+            "description": "Contains zero or more cetaf:Agent objects",
             "items": {
                 "type": "object",
-                "title": "agent",
+                "title": "Agent",
                 "properties": {
                     "cetaf:agentId": {
                         "type": "string",
@@ -227,7 +239,7 @@
                 "Horizon 2020"
             ]
         },
-        "cetaf:software": {
+        "cetaf:Software": {
             "type": "object",
             "description": "Object representing the service's software",
             "properties": {
@@ -263,7 +275,11 @@
                         "type": "string"
                     },
                     "examples": [
-                        ["Java", "Python", "R"]
+                        [
+                            "Java",
+                            "Python",
+                            "R"
+                        ]
                     ]
                 }
             },
@@ -271,7 +287,7 @@
                 "cetaf:sourceUrl"
             ]
         },
-        "erp:multimedia": {
+        "cetaf:hasMultimedia": {
             "type": "array",
             "description": "Array of multimedia objects, pointing to their respective sources",
             "items": {
@@ -297,19 +313,19 @@
         }
     },
     "required": [
-        "erp:id",
-        "ods:created",
+        "@id",
+        "@type",
+        "erp:created",
         "dcterms:modified",
-        "ods:type",
-        "dcterms:licence",
         "cetaf:state",
-        "erp:languageAvailabilities",
+        "cetaf:taxonomicServiceType",
+        "dcterms:licence",
         "erp:name",
         "erp:description",
-        "cetaf:taxonomicServiceType",
+        "erp:languageAvailabilities",
         "erp:category",
         "cetaf:qualityScore",
-        "cetaf:agents",
+        "cetaf:hasAgent",
         "erp:paymentModel"
     ],
     "additionalProperties": false
