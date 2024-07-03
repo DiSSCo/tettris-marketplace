@@ -9,9 +9,9 @@
         "@id": {
             "type": "string",
             "description": "The unique identifier of the Taxonomic Service object",
-            "pattern": "https:\/\/doi.org\/10.22\/(.){3}-(.){3}-(.){3}",
+            "pattern": "20.500.14547\/(.){20}",
             "examples": [
-                "https://doi.org/10.22/XXX-XXX-XXX"
+                "20.500.14547/47bcc386b52ecbae623a"
             ]
         },
         "@type": {
