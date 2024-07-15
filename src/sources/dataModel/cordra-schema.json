@@ -10,7 +10,7 @@
       "required": [
         "@id",
         "@type",
-        "erp:created",
+        "cetaf:created",
         "dcterms:modified",
         "cetaf:state",
         "cetaf:taxonomicServiceType",

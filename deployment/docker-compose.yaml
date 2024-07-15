@@ -9,6 +9,8 @@ services:
       - ./cordra/variables.env
     volumes:
       - ./data:/opt/cordra/data
+    ports:
+      - "2641:2641"
   tettris_marketplace:
     container_name: tettris_marketplace
     restart: always

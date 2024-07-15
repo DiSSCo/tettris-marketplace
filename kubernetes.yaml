@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tettris-marketplace
+  labels:
+    app: tettris-marketplace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tettris-marketplace
+  template:
+    metadata:
+      labels:
+        app: tettris-marketplace
+    spec:
+      containers:
+        - name: tettris-marketplace
+          image: public.ecr.aws/dissco/tettris-marketplace:sha-affacca
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
