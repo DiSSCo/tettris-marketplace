@@ -30,6 +30,7 @@
         "dcterms:modified": {
             "type": "string",
             "description": "Modification date for Taxonomic Service information",
+            "format": "date-time",
             "examples": [
                 "2023-07-10T12:02:00.000Z"
             ]
