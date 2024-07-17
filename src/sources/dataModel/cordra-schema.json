@@ -199,7 +199,7 @@
             "type": "object",
             "title": "Agent",
             "properties": {
-              "cetaf:agentId": {
+              "cetaf:agentID": {
                 "type": "string",
                 "title": "Agent ID",
                 "description": "A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid"
@@ -216,7 +216,7 @@
               }
             },
             "required": [
-              "cetaf:agentId"
+              "cetaf:agentID"
             ]
           }
         },
