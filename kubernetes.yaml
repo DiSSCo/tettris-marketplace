@@ -17,14 +17,16 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: tettris-marketplace
-          image: public.ecr.aws/dissco/tettris-marketplace:sha-affacca
-          ports:
-            - containerPort: 3000
           resources:
             requests:
+              ephemeral-storage: "100Mi"
               memory: "100Mi"
               cpu: "100m"
             limits:
+              ephemeral-storage: "100Mi"
               memory: "100Mi"
               cpu: "200m"
+          image: public.ecr.aws/dissco/tettris-marketplace:sha-affacca
+          ports:
+            - containerPort: 3000
       restartPolicy: Always
