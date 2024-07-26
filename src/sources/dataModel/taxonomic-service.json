@@ -25,7 +25,7 @@
         },
         "schema:dateCreated": {
             "type": "string",
-            "description": "The date on which the CreativeWork was created or the item was added to a DataFeed.",
+            "description": "The date on which the Taxonomic Service was created or the item was added to a DataFeed.",
             "format": "date-time",
             "examples": [
                 "2023-07-10T12:02:00.000Z"
@@ -33,7 +33,7 @@
         },
         "schema:dateModified": {
             "type": "string",
-            "description": "The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.",
+            "description": "The date on which the Taxonomic Service was most recently modified or when the item's entry was modified within a DataFeed.",
             "format": "date-time",
             "examples": [
                 "2023-07-10T12:02:00.000Z"
@@ -50,7 +50,6 @@
         "schema:license": {
             "type": "string",
             "description": "A license document that applies to this content, typically indicated by URL",
-            "$comment": "Determine available licenses",
             "examples": [
                 "https://creativecommons.org/public-domain/cc0/"
             ]
@@ -64,7 +63,7 @@
         },
         "schema:version": {
             "type": "string",
-            "description": "The version of the CreativeWork embodied by a specified resource.",
+            "description": "The version of the Service embodied by a specified resource.",
             "examples": [
                 "1",
                 "1.1",
@@ -72,7 +71,7 @@
             ]
         },
         "ods:topicDiscipline": {
-            "description": "The topic discipline of the specimen",
+            "description": "The topic discipline relevant to the taxonomic range of the service",
             "enum": [
                 "Anthropology",
                 "Botany",
@@ -99,7 +98,7 @@
         },
         "schema:documentation": {
             "type": "string",
-            "description": "Further documentation describing the service in more detail.",
+            "description": "URL to further documentation describing the service in more detail.",
             "examples": [
                 "cetaf.org"
             ]
@@ -144,21 +143,21 @@
                 },
                 "schema:name": {
                     "type": "string",
-                    "description": "The name of the item",
+                    "description": "The name of the Servie",
                     "examples": [
                         "Bombus reference collection"
                     ]
                 },
                 "schema:description": {
                     "type": "string",
-                    "description": "A description of the item",
+                    "description": "A description of the Service",
                     "examples": [
                         "A Bombus reference collection that contains a bunch of different specimen related to the Bombus species"
                     ]
                 },
                 "schema:slogan": {
                     "type": "string",
-                    "description": "A slogan or motto associated with the item.",
+                    "description": "A slogan or motto associated with the Service.",
                     "examples": [
                         "A Bombus reference collection"
                     ]
@@ -172,7 +171,7 @@
                 },
                 "schema:dateModified": {
                     "type": "string",
-                    "description": "The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.",
+                    "description": "The date on which the Service was most recently modified or when the item's entry was modified within a DataFeed.",
                     "format": "date-time",
                     "examples": [
                         "2023-07-10T12:02:00.000Z"
@@ -199,7 +198,7 @@
             "properties": {
                 "schema:email": {
                     "type": "string",
-                    "description": "Email address of the contact point",
+                    "description": "Email address of the contact point.",
                     "examples": [
                         "info@cetaf.org"
                     ]
@@ -229,7 +228,7 @@
                 "properties": {
                     "schema:identifier": {
                         "type": "string",
-                        "description": "A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid",
+                        "description": "A unique identifier to identify the maintainer; ORCID or Wikidata identifiers are valid",
                         "examples": [
                             "https://orcid.org/0000-0000-0000-0000"
                         ]
@@ -331,7 +330,6 @@
                 "schema:license": {
                     "type": "string",
                     "description": "A license document that applies to this content, typically indicated by URL",
-                    "$comment": "Determine available licenses",
                     "examples": [
                         "https://creativecommons.org/public-domain/cc0/"
                     ]
@@ -344,7 +342,7 @@
         },
         "schema:AssociatedMedia": {
             "type": "array",
-            "description": "Array of media objects that encodes this CreativeWork. This property is a synonym for encoding.",
+            "description": "Array of media objects that encodes this Service. This property is a synonym for encoding.",
             "items": {
                 "type": "object",
                 "properties": {
@@ -355,7 +353,6 @@
                     "schema:license": {
                         "type": "string",
                         "description": "A license document that applies to this content, typically indicated by URL",
-                        "$comment": "Determine available licenses",
                         "examples": [
                             "https://creativecommons.org/public-domain/cc0/"
                         ]
