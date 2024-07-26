@@ -36,10 +36,13 @@ export type TaxonomicService = {
 }
 
 /* Type for an Agent */
-export type Agent = {
-    "cetaf:agentId": string,
-    "cetaf:fullName"?: string,
-    "cetaf:role"?: string
+export type Maintainer = {
+    "schema:identifier"?: string;
+    "schema:name"?: string;
+    "schema:Organization"?: {
+        "schema:identifier"?: string;
+        "schema:legalName"?: string;
+    };
 }
 
 /* Type for a Filter */

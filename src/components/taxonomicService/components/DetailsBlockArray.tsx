@@ -5,13 +5,13 @@ import { Row, Col } from 'react-bootstrap';
 import { MakeReadableString } from 'app/Utilities';
 
 /* Import Types */
-import { Agent, Dict } from 'app/Types';
+import { Maintainer, Dict } from 'app/Types';
 
 
 /* Props Type */
 type Props = {
     name: string,
-    propertiesArray: string[] | Dict[] | Agent[]
+    propertiesArray: string[] | Dict[] | Maintainer[]
 };
 
 

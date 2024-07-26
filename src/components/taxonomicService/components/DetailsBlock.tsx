@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import { MakeReadableString } from 'app/Utilities';
 
 /* Import Types */
-import { Agent } from 'app/Types';
+import { Maintainer } from 'app/Types';
 
 /* Import Components */
 import DetailsBlockArray from './DetailsBlockArray';
@@ -16,7 +16,7 @@ import DetailsBlockArray from './DetailsBlockArray';
 type Props = {
     name: string,
     properties: {
-        [property: string]: string | number | string[] | Agent[] | undefined
+        [property: string]: string | number | string[] | Maintainer[] | undefined
     }
 };
 

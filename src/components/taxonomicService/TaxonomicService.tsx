@@ -67,7 +67,7 @@ const TaxonomicService = () => {
 
     /* ClassNames */
     const detailBlocksClass = classNames({
-        'pt-4': !taxonomicService?.taxonomicService['erp:multimedia']
+        'pt-4': !taxonomicService?.taxonomicService['schema:AssociatedMedia']
     });
 
     return (
@@ -129,12 +129,11 @@ const TaxonomicService = () => {
                                             >
                                                 <DetailsBlock name="Service Details"
                                                     properties={{
-                                                        category: taxonomicService.taxonomicService['erp:category'],
-                                                        licence: taxonomicService.taxonomicService['dcterms:licence'],
-                                                        version: taxonomicService.taxonomicService['erp:version'],
-                                                        lastUpdated: moment(taxonomicService.taxonomicService['erp:lastUpdate']).format('MMM DD - YYYY'),
-                                                        paymentModel: taxonomicService.taxonomicService['erp:paymentModel'],
-                                                        fundingProgram: taxonomicService.taxonomicService['erp:fundingProgram']
+                                                        licence: taxonomicService.taxonomicService['schema:license'],
+                                                        version: taxonomicService.taxonomicService['schema:version'],
+                                                        lastUpdated: moment(taxonomicService.taxonomicService['schema:Service']['schema:dateModified']).format('MMM DD - YYYY'),
+                                                        paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:url'],
+                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funder']?.['schema:name']
                                                     }}
                                                 />
                                             </Col>
@@ -144,37 +143,37 @@ const TaxonomicService = () => {
                                             >
                                                 <DetailsBlock name="Contact Information"
                                                     properties={{
-                                                        helpdeskEmail: taxonomicService.taxonomicService['erp:helpdeskEmail'],
-                                                        helpdeskWebPage: taxonomicService.taxonomicService['erp:helpdeskPage'],
-                                                        webpage: taxonomicService.taxonomicService['erp:webpage'],
-                                                        documentationWebPage: taxonomicService.taxonomicService['cetaf:documentationUrl'],
-                                                        agents: taxonomicService.taxonomicService['cetaf:agents']
+                                                        contactEmail: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:email'],
+                                                        contactWebpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
+                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:sameAs'],
+                                                        documentationWebpage: taxonomicService.taxonomicService['schema:documentation'],
+                                                        maintainers: taxonomicService.taxonomicService['schema:Maintainer']
                                                     }}
                                                 />
                                             </Col>
                                             {/* Show software details if software object is present in taxonomic service */}
-                                            {taxonomicService.taxonomicService['cetaf:software'] &&
+                                            {taxonomicService.taxonomicService['schema:SoftwareSourceCode'] &&
                                                 <Col xs={{ span: 12 }}
                                                     lg={{ span: 3 }}
                                                     className="mt-4 mt-lg-0"
                                                 >
                                                     <DetailsBlock name="Software"
                                                         properties={{
-                                                            sourceUrl: taxonomicService.taxonomicService['cetaf:software']['cetaf:sourceUrl'],
-                                                            requiredResources: taxonomicService.taxonomicService['cetaf:software']['erp:requiredResources'],
-                                                            status: taxonomicService.taxonomicService['cetaf:software']['cetaf:deprecated'] ? 'Deprecated' : 'Maintained',
-                                                            changeLog: taxonomicService.taxonomicService['cetaf:software']['erp:changeLog'],
-                                                            programmingLanguages: taxonomicService.taxonomicService['cetaf:software']['cetaf:programmingLanguages']
+                                                            codeRepository: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:codeRepository'],
+                                                            runtimePlatform: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:runtimePlatform'],
+                                                            status: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:creativeWorkStatus'],
+                                                            changeLog: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:about'],
+                                                            programmingLanguages: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:programmingLanguage']
                                                         }}
                                                     />
                                                 </Col>
                                             }
                                             {/* Show multimedia block, if multimedia is present */}
-                                            {taxonomicService.taxonomicService['erp:multimedia'] &&
+                                            {taxonomicService.taxonomicService['schema:AssociatedMedia'] &&
                                                 <Col xs={{ span: 12 }} lg
                                                     className="mt-4 mt-lg-0"
                                                 >
-                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['erp:multimedia']} />
+                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['schema:AssociatedMedia']} />
                                                 </Col>
                                             }
                                         </Row>

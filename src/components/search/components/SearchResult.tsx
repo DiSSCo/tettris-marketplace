@@ -39,7 +39,7 @@ const SearchResult = (props: Props) => {
     const navigate = useNavigate();
 
     /* Base variables */
-    const previewImage: string | undefined = taxonomicService.taxonomicService['erp:multimedia']?.[0]?.['erp:multimediaUrl'];
+    const previewImage: string | undefined = taxonomicService.taxonomicService['schema:AssociatedMedia']?.[0]?.['schema:contentUrl'];
 
     /**
      * Function for selecting a taxonomic service
@@ -50,7 +50,7 @@ const SearchResult = (props: Props) => {
         dispatch(setTaxonomicService(taxonomicService));
 
         /* Navigate to the taxonomic service page */
-        navigate(`/ts/${taxonomicService.taxonomicService['erp:id'].replace(process.env.REACT_APP_HANDLE_URL as string, '')}`);
+        navigate(`/ts/${taxonomicService.taxonomicService['@id'].replace(process.env.REACT_APP_HANDLE_URL as string, '')}`);
     }
 
     /* ClassNames */
@@ -71,29 +71,29 @@ const SearchResult = (props: Props) => {
                         {/* Title and language if image is not present */}
                         <Row>
                             <Col>
-                                <p className="fs-4 fs-lg-default fw-bold">{taxonomicService.taxonomicService['erp:name']}</p>
-                                <p className="fs-5 fs-lg-4 fst-italic">{taxonomicService.taxonomicService['cetaf:taxonomicScope']?.toString()}</p>
+                                <p className="fs-4 fs-lg-default fw-bold">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</p>
+                                <p className="fs-5 fs-lg-4 fst-italic">{taxonomicService.taxonomicService['schema:taxonomicRange']?.toString()}</p>
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
                                 <Col xs="auto" lg="auto">
-                                    <p className="fw-bold fs-5 fs-lg-4">{taxonomicService.taxonomicService['erp:languageAvailabilities']?.join(' / ').toUpperCase()}</p>
+                                    <p className="fw-bold fs-5 fs-lg-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                                 </Col>
                             }
                         </Row>
                         {/* Description */}
                         <Row className='flex-grow-1 my-2'>
                             <Col>
-                                <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicService.taxonomicService['erp:description']}</p>
+                                <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicService.taxonomicService['schema:Service']['schema:description']}</p>
                             </Col>
                         </Row>
                         {/* Service Type and Publishing Date if preview image is not present */}
                         <Row>
                             <Col>
-                                <p className="fs-5 fs-lg-4">{MakeReadableString(taxonomicService.taxonomicService['cetaf:taxonomicServiceType'] ?? 'Taxonomic Service')}</p>
+                                <p className="fs-5 fs-lg-4">{MakeReadableString(taxonomicService.taxonomicService['schema:Service']['schema:serviceType'] ?? 'Taxonomic Service')}</p>
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
                                 <Col xs="auto" lg="auto">
-                                    <p className="fs-5 fs-lg-4 fw-bold">{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
+                                    <p className="fs-5 fs-lg-4 fw-bold">{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
                                 </Col>
                             }
                         </Row>
@@ -113,13 +113,13 @@ const SearchResult = (props: Props) => {
                         {/* Language */}
                         <Row className="flex-grow-1">
                             <Col className="d-flex justify-content-end">
-                                <p className="tc-white fw-bold fs-4">{taxonomicService.taxonomicService['erp:languageAvailabilities']?.join(' / ').toUpperCase()}</p>
+                                <p className="tc-white fw-bold fs-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                             </Col>
                         </Row>
                         {/* Publishing Date */}
                         <Row>
                             <Col className="d-flex justify-content-end">
-                                <p className="tc-white fw-bold fs-4">{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
+                                <p className="tc-white fw-bold fs-4">{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
                             </Col>
                         </Row>
                     </Col>

@@ -20,7 +20,7 @@ const SearchResults = () => {
     return (
         <Row>
             {taxonomicServices.map((taxonomicService) => (
-                <Col key={taxonomicService.taxonomicService['erp:id']}
+                <Col key={taxonomicService.taxonomicService['@id']}
                     lg={{ span: 4 }}
                     className="mb-4"
                 >

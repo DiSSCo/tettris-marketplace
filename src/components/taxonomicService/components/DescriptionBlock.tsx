@@ -29,7 +29,7 @@ const DescriptionBlock = (props: Props) => {
 
     /* ClassNames */
     const descriptionBlockClass = classNames({
-        [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['erp:multimedia']
+        [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['schema:AssociatedMedia']
     });
 
     const qualityScoreBarClass = classNames({
@@ -40,13 +40,13 @@ const DescriptionBlock = (props: Props) => {
         <div className={descriptionBlockClass}>
             <Row className="h-100">
                 {/* Preview image, if available */}
-                {taxonomicService.taxonomicService['erp:multimedia']?.length &&
+                {taxonomicService.taxonomicService['schema:AssociatedMedia']?.length &&
                     <Col xs={{ span: 12 }} lg={{ span: 3 }}
                         className="h-100 bgc-white me-3 mb-3 mb-lg-0"
                     >
                         <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center `}>
-                            <img src={taxonomicService.taxonomicService['erp:multimedia'][0]['erp:multimediaUrl']}
-                                alt={taxonomicService.taxonomicService['erp:multimedia'][0]['erp:multimediaUrl']}
+                            <img src={taxonomicService.taxonomicService['schema:AssociatedMedia'][0]['schema:contentUrl']}
+                                alt={taxonomicService.taxonomicService['schema:AssociatedMedia'][0]['schema:contentUrl']}
                                 className="h-100"
                             />
                         </div>
@@ -59,28 +59,28 @@ const DescriptionBlock = (props: Props) => {
                         {/* Type */}
                         <Col xs={{ span: 12 }} lg="auto">
                             <p className="fs-5 fw-bold">Taxonomic service type</p>
-                            <p className="tc-primary fw-bold">{MakeReadableString(taxonomicService.taxonomicService['cetaf:taxonomicServiceType'])}</p>
+                            <p className="tc-primary fw-bold">{MakeReadableString(taxonomicService.taxonomicService['schema:Service']['schema:serviceType'])}</p>
                         </Col>
                         {/* Taxonomic scope */}
                         <Col xs={{ span: 12 }} lg="auto"
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Taxonomic scope</p>
-                            <p>{taxonomicService.taxonomicService['cetaf:taxonomicScope']?.join(' / ')}</p>
+                            <p>{taxonomicService.taxonomicService['schema:taxonomicRange']?.join(' / ')}</p>
                         </Col>
                         {/* Languages */}
                         <Col xs={{ span: 12 }} lg="auto"
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Supporting languages</p>
-                            <p>{taxonomicService.taxonomicService['erp:languageAvailabilities'].join(' / ')}</p>
+                            <p>{taxonomicService.taxonomicService['schema:availableLanguage'].join(' / ')}</p>
                         </Col>
                         {/* Publishing date */}
                         <Col xs={{ span: 12 }} lg="auto"
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Publishing date</p>
-                            <p>{moment(taxonomicService.taxonomicService['ods:created']).format('MMM DD - YYYY')}</p>
+                            <p>{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
                         </Col>
                         {/* Quality score */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}
@@ -90,7 +90,7 @@ const DescriptionBlock = (props: Props) => {
                                 <p className="position-relative w-100 text-center fs-4 fw-lightBold z-2">Quality score</p>
 
                                 <div className={`${qualityScoreBarClass} position-absolute h-100 top-0 z-1`}
-                                    style={{ width: `${taxonomicService.taxonomicService['cetaf:qualityScore']}%` }}
+                                    style={{ width: `${taxonomicService.taxonomicService['schema:ratingValue']}%` }}
                                 />
                             </div>
                         </Col>
@@ -101,7 +101,7 @@ const DescriptionBlock = (props: Props) => {
                             <p className="fs-4 fs-lg-default fw-bold">Description</p>
 
                             <div className="flex-grow-1 mt-1 overflow-scroll">
-                                <p className="fs-4">{taxonomicService.taxonomicService['erp:description']}</p>
+                                <p className="fs-4">{taxonomicService.taxonomicService['schema:Service']['schema:description']}</p>
                             </div>
                         </Col>
                     </Row>
