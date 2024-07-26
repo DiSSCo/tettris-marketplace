@@ -6,7 +6,7 @@
   "properties": {
     "taxonomicService": {
       "type": "object",
-      "title": "TaxonomicService",
+      "title": "Taxonomic Service",
       "required": [
         "@id",
         "@type",
