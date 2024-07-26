@@ -39,9 +39,9 @@
                 "2023-07-10T12:02:00.000Z"
             ]
         },
-        "schema:creativeWorkStatus": {
+        "schema:status": {
             "type": "string",
-            "description": "The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.",
+            "description": "The status of the record",
             "enum": [
                 "draft",
                 "published"
@@ -50,7 +50,7 @@
         "schema:license": {
             "type": "string",
             "description": "A license document that applies to this content, typically indicated by URL",
-            "$comment": "Determine available licences",
+            "$comment": "Determine available licenses",
             "examples": [
                 "https://creativecommons.org/public-domain/cc0/"
             ]
@@ -92,7 +92,7 @@
         },
         "schema:taxonomicRange": {
             "type": "array",
-            "description": "The taxonomic grouping of the organism that expresses, encodes, or in some way related to the BioChemEntity.",
+            "description": "The taxonomic grouping of the organism.",
             "items": {
                 "type": "string"
             }
@@ -170,15 +170,6 @@
                         "https://eosc.eu/wp-content/uploads/2022/09/New-guidelines-for-EOSC-family-branding.jpg"
                     ]
                 },
-                "schema:category": {
-                    "type": "string",
-                    "description": "A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.",
-                    "examples": [
-                        "Software Repository",
-                        "Software Package",
-                        "Platform"
-                    ]
-                },
                 "schema:dateModified": {
                     "type": "string",
                     "description": "The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.",
@@ -198,8 +189,7 @@
             "required": [
                 "schema:serviceType",
                 "schema:name",
-                "schema:description",
-                "schema:category"
+                "schema:description"
             ],
             "additionalProperties": false
         },
@@ -251,18 +241,22 @@
                             "John Doe"
                         ]
                     },
-                    "schema:jobTitle": {
-                        "type": "string",
-                        "description": "The job title/role of the maintainer.",
-                        "examples": [
-                            "Publisher",
-                            "Taxonomist"
-                        ]
+                    "schema:Organization": {
+                        "type": "object",
+                        "description": "The organisation the maintainer is affiliated with",
+                        "properties": {
+                            "schema:identifier": {
+                                "type": "string",
+                                "description": "The ROR identifier of the organisation"
+                            },
+                            "schema:legalName": {
+                                "type": "string",
+                                "description": "The official name of the organization, e.g. the registered company name."
+                            }
+                        },
+                        "additionalProperties": false
                     }
                 },
-                "required": [
-                    "schema:identifier"
-                ],
                 "additionalProperties": false
             }
         },
@@ -270,22 +264,11 @@
             "type": "object",
             "description": "A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.",
             "properties": {
-                "schema:acceptedPaymentMethod": {
+                "schema:url": {
                     "type": "string",
-                    "description": "",
-                    "enum": [
-                        "http://purl.org/goodrelations/v1#ByBankTransferInAdvance",
-                        "http://purl.org/goodrelations/v1#ByInvoice",
-                        "http://purl.org/goodrelations/v1#Cash",
-                        "http://purl.org/goodrelations/v1#CheckInAdvance",
-                        "http://purl.org/goodrelations/v1#COD",
-                        "http://purl.org/goodrelations/v1#DirectDebit",
-                        "http://purl.org/goodrelations/v1#GoogleCheckout",
-                        "http://purl.org/goodrelations/v1#PayPal",
-                        "http://purl.org/goodrelations/v1#PaySwarm"
-                    ]
+                    "description": "Webpage with the supported payment models and restrictions that apply to the Resource."
                 },
-                "schema:funder": {
+                "schema:Funder": {
                     "type": "object",
                     "description": "A person or organization that supports (sponsors) something through some kind of financial contribution.",
                     "properties": {
@@ -296,12 +279,10 @@
                                 "Horizon 2020"
                             ]
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 }
             },
-            "required": [
-                "schema:acceptedPaymentMethod"
-            ],
             "additionalProperties": false
         },
         "schema:SoftwareSourceCode": {
@@ -346,6 +327,14 @@
                         "Python",
                         "R"
                     ]
+                },
+                "schema:license": {
+                    "type": "string",
+                    "description": "A license document that applies to this content, typically indicated by URL",
+                    "$comment": "Determine available licenses",
+                    "examples": [
+                        "https://creativecommons.org/public-domain/cc0/"
+                    ]
                 }
             },
             "required": [
@@ -363,10 +352,10 @@
                         "type": "string",
                         "description": "Actual bytes of the media object, for example the image file or video file."
                     },
-                    "schema:licence": {
+                    "schema:license": {
                         "type": "string",
                         "description": "A license document that applies to this content, typically indicated by URL",
-                        "$comment": "Determine available licences",
+                        "$comment": "Determine available licenses",
                         "examples": [
                             "https://creativecommons.org/public-domain/cc0/"
                         ]
@@ -382,15 +371,13 @@
     "required": [
         "@id",
         "@type",
-        "schema:created",
-        "schema:modified",
-        "schema:creativeWorkStatus",
-        "schema:licence",
+        "schema:dateCreated",
+        "schema:dateModified",
+        "schema:status",
+        "schema:license",
         "schema:availableLanguage",
-        "schema:rating",
-        "schema:Service",
-        "schema:Maintainer",
-        "schema:FundingScheme"
+        "schema:ratingValue",
+        "schema:Service"
     ],
     "additionalProperties": false
 }
