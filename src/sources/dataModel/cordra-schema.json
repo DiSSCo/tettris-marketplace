@@ -232,7 +232,7 @@
         },
         "erp:paymentModel": {
           "type": "string",
-          "title": "Paymeny Model",
+          "title": "Payment Model",
           "description": "Webpage with the supported payment models and restrictions that apply to the Resource."
         },
         "erp:termsOfUse": {
