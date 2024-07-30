@@ -14,173 +14,209 @@ export interface TaxonomicService {
    */
   "@id": string;
   /**
-   * The type of the object, in this case taxonomicService
+   * The type of the object, in this case TaxonomicService
    */
-  "@type": "taxonomicService";
+  "@type": "TaxonomicService";
   /**
-   * The timestamp that the object version was created
+   * The date on which the CreativeWork was created or the item was added to a DataFeed.
    */
-  "cetaf:created"?: string;
+  "schema:dateCreated": string;
   /**
-   * Modification date for Taxonomic Service information
+   * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
    */
-  "dcterms:modified": string;
+  "schema:dateModified": string;
   /**
-   * The current state of the object
+   * The status of the record
    */
-  "cetaf:state": string;
+  "schema:status": "draft" | "published";
   /**
-   * A type that defines the kind of taxonomic service
+   * A license document that applies to this content, typically indicated by URL
    */
-  "cetaf:taxonomicServiceType":
-    | "AITrainingDataset"
-    | "communityGroup"
-    | "crowdSourcing"
-    | "dataTool"
-    | "e-LearningService"
-    | "factsheet"
-    | "identification"
-    | "inventory"
-    | "referenceCollection"
-    | "specimenDatasetNotInGBIF"
-    | "website";
+  "schema:license": string;
   /**
-   * http://purl.org/dc/terms/licence
+   * A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard.
    */
-  "dcterms:licence": string;
+  "schema:availableLanguage": string[];
   /**
-   * Brief and descriptive name of the Resource as assigned by the Provider
+   * The version of the CreativeWork embodied by a specified resource.
    */
-  "erp:name": string;
+  "schema:version"?: string;
   /**
-   * A high-level description in fairly non-technical terms of a) what the Resource does, functionality it provides and Resources it enables to access, b) the benefit to a user/customer delivered by a Resource; benefits are usually related to alleviating pains (e.g., eliminate undesired outcomes, obstacles or risks) or producing gains (e.g. increased performance, social gains, positive emotions or cost saving), c) list of customers, communities, users, etc. using the Resource.
+   * The topic discipline of the specimen
    */
-  "erp:description": string;
+  "ods:topicDiscipline"?:
+    | "Anthropology"
+    | "Botany"
+    | "Astrogeology"
+    | "Geology"
+    | "Microbiology"
+    | "Palaeontology"
+    | "Zoology"
+    | "Ecology"
+    | "Other Biodiversity"
+    | "Other Geodiversity"
+    | "Unclassified";
   /**
-   * Short catchphrase for marketing and advertising purposes. It will be usually displayed close to the Resource name and should refer to the main value or purpose of the Resource.
+   * The taxonomic grouping of the organism.
    */
-  "erp:tagLine"?: string;
+  "schema:taxonomicRange"?: string[];
   /**
-   * Indicators for the language the service is written in, using ISO alpha-3/ISO 639-2
+   * Further documentation describing the service in more detail.
    */
-  "erp:languageAvailabilities": string[];
+  "schema:documentation"?: string;
   /**
-   * Link to the logo/visual identity of the Resource. The logo will be visible at the Portal. If there is no specific logo for the Resource the logo of the Provider may be used.
+   * The rating for the content
    */
-  "erp:logo"?: string;
+  "schema:ratingValue": number;
   /**
-   * A named group of Resources that offer access to the same type of Resources.
+   * A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating.
    */
-  "erp:category": string;
+  "schema:ratingExplanation"?: string;
   /**
-   * A persistent identifier, a unique reference to the (Multi-Provider Regional or Thematic) Catalogue in the context of the EOSC Portal.
+   * A service provided by an organization, e.g. delivery service, print services, etc.
    */
-  "erp:EOSC_serviceId"?: string;
-  /**
-   * Version of the Resource that is in force in EOSC.
-   */
-  "erp:version"?: string;
-  /**
-   * Date of the latest update of the Resource in EOSC.
-   */
-  "erp:lastUpdate"?: string;
-  /**
-   * The taxonomic scope on which the service acts upon, e.g. the taxonomic level (genus, species, etc.)
-   */
-  "cetaf:taxonomicScope"?: string[];
-  /**
-   * A quality indicator for the purpose of the service
-   */
-  "cetaf:qualityScore": number;
-  /**
-   * Comments that describes the admin review and why a certain state is given
-   */
-  "cetaf:reviewComment"?: string;
-  /**
-   * Email to contact your helpdesk, where users with incidents and requests will be directed.
-   */
-  "erp:helpdeskEmail"?: string;
-  /**
-   * Link to the helpdesk where users with incidents and requests will be directed. It should allow private communication with providers (not a public forum). Create a dedicated URL for your Resources and provide the shortest possible alias.
-   */
-  "erp:helpdeskPage"?: string;
-  /**
-   * Contains zero or more cetaf:Agent objects
-   */
-  "cetaf:hasAgent": Agent[];
-  /**
-   * Webpage with information about the Resource usually hosted and maintained by the Provider.
-   */
-  "erp:webpage"?: string;
-  /**
-   * Link to the documentation of the service
-   */
-  "cetaf:documentationUrl"?: string;
-  /**
-   * Webpage with the supported payment models and restrictions that apply to the Resource.
-   */
-  "erp:paymentModel": string;
-  /**
-   * Link describing the rules, resource conditions and usage policy which one must agree to abide by in order to use the Resource. Create a dedicated URL for your Resources and provide the shortest possible alias.
-   */
-  "erp:termsOfUse"?: string;
-  /**
-   * Name of the funding program that supported the development and/or operation of the Resource.
-   */
-  "erp:fundingProgram"?: string;
-  /**
-   * Object representing the service's software
-   */
-  "cetaf:Software"?: {
+  "schema:Service": {
     /**
-     * Link pointing to the source URL of the software, e.g. the GitHub repository
+     * A type that defines the kind of taxonomic service
      */
-    "cetaf:sourceUrl": string;
+    "schema:serviceType":
+      | "AITrainingDataset"
+      | "communityGroup"
+      | "crowdSourcing"
+      | "dataTool"
+      | "e-LearningService"
+      | "factsheet"
+      | "identification"
+      | "inventory"
+      | "referenceCollection"
+      | "specimenDatasetNotInGBIF"
+      | "website";
     /**
-     * List any other EOSC Resources that your Resource requires in order to operate.
+     * The name of the item
      */
-    "erp:requiredResources"?: string[];
+    "schema:name": string;
     /**
-     * Boolean indicating if the software has been deprecated
+     * A description of the item
      */
-    "cetaf:deprecated"?: boolean;
+    "schema:description": string;
     /**
-     * Summary of the Resource features updated from the previous version.
+     * A slogan or motto associated with the item.
      */
-    "erp:changeLog"?: string;
+    "schema:slogan"?: string;
     /**
-     * List of programming lanugages used in the software
+     * An associated logo URL.
      */
-    "cetaf:programmingLanguages"?: string[];
-    [k: string]: unknown;
+    "schema:logo"?: string;
+    /**
+     * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+     */
+    "schema:dateModified"?: string;
+    /**
+     * Human-readable terms of service documentation.
+     */
+    "schema:termsOfService"?: string;
   };
   /**
-   * Array of multimedia objects, pointing to their respective sources
+   * A contact point—for example, a Customer Complaints department.
    */
-  "cetaf:hasMultimedia"?: {
+  "schema:ContactPoint"?: {
     /**
-     * Link to video, screenshots or slides showing details of the Resource.
+     * Email address of the contact point
      */
-    "erp:multimediaUrl": string;
+    "schema:email"?: string;
     /**
-     * http://purl.org/dc/terms/licence
+     * URL of the item that leads to the point of contact
      */
-    "dcterms:licence"?: string;
-    [k: string]: unknown;
+    "schema:url"?: string;
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     */
+    "schema:sameAs"?: string;
+  };
+  /**
+   * A maintainer of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artifact.
+   */
+  "schema:Maintainer"?: {
+    /**
+     * A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid
+     */
+    "schema:identifier"?: string;
+    /**
+     * Full name of the maintainer
+     */
+    "schema:name"?: string;
+    /**
+     * The organisation the maintainer is affiliated with
+     */
+    "schema:Organization"?: {
+      /**
+       * The ROR identifier of the organisation
+       */
+      "schema:identifier"?: string;
+      /**
+       * The official name of the organization, e.g. the registered company name.
+       */
+      "schema:legalName"?: string;
+    };
   }[];
-}
-export interface Agent {
   /**
-   * A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid
+   * A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.
    */
-  "cetaf:agentId": string;
+  "schema:FundingScheme"?: {
+    /**
+     * Webpage with the supported payment models and restrictions that apply to the Resource.
+     */
+    "schema:url"?: string;
+    /**
+     * A person or organization that supports (sponsors) something through some kind of financial contribution.
+     */
+    "schema:Funder"?: {
+      /**
+       * The name of the funder (funding program)
+       */
+      "schema:name"?: string;
+    };
+  };
   /**
-   * Full name of the agent
+   * Object representing the service's software source code
    */
-  "cetaf:fullName"?: string;
+  "schema:SoftwareSourceCode"?: {
+    /**
+     * Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex).
+     */
+    "schema:codeRepository": string;
+    /**
+     * The subject matter of the content including a summary of the Resource features updated from the previous version.
+     */
+    "schema:about"?: string;
+    /**
+     * Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).
+     */
+    "schema:runtimePlatform"?: string;
+    /**
+     * The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.
+     */
+    "schema:creativeWorkStatus"?: string;
+    /**
+     * The computer programming language.
+     */
+    "schema:programmingLanguage"?: string;
+    /**
+     * A license document that applies to this content, typically indicated by URL
+     */
+    "schema:license"?: string;
+  };
   /**
-   * The role assigned to the agent
+   * Array of media objects that encodes this CreativeWork. This property is a synonym for encoding.
    */
-  "cetaf:role"?: string;
-  [k: string]: unknown;
+  "schema:AssociatedMedia"?: {
+    /**
+     * Actual bytes of the media object, for example the image file or video file.
+     */
+    "schema:contentUrl": string;
+    /**
+     * A license document that applies to this content, typically indicated by URL
+     */
+    "schema:license"?: string;
+  }[];
 }

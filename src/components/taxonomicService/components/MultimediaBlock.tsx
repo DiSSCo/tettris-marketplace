@@ -8,7 +8,7 @@ import styles from 'components/taxonomicService/taxonomicService.module.scss';
 /* Props Type */
 type Props = {
     multimediaItems: {
-        "erp:multimediaUrl": string
+        "schema:contentUrl": string
     }[]
 };
 
@@ -32,13 +32,13 @@ const MultimediaBlock = (props: Props) => {
                     <div className="h-100 b-primary px-4 py-3">
                         <Row className="justify-content-between">
                             {multimediaItems.map(multimediaItem => (
-                                <Col key={multimediaItem['erp:multimediaUrl']}
+                                <Col key={multimediaItem['schema:contentUrl']}
                                     lg={{ span: 4 }}
                                     className="mb-3"
                                 >
                                     <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center`}>
-                                        <img src={multimediaItem['erp:multimediaUrl']}
-                                            alt={multimediaItem['erp:multimediaUrl']}
+                                        <img src={multimediaItem['schema:contentUrl']}
+                                            alt={multimediaItem['schema:contentUrl']}
                                             className={styles.multimediaItem}
                                         />
                                     </div>
