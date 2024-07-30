@@ -14,7 +14,7 @@ const CreateForm = () => {
   /* Create Form Fields */
   (() => {
     /* License (Required) */
-    CreateLicenseField(form, 'Service License', true);
+    CreateLicenseField(form, 'Service License');
 
     /* Available Languages (Required) */
     CreateAvailableLanguagesField(form);
