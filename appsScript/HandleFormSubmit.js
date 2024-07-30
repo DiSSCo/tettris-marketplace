@@ -47,119 +47,115 @@ const ReferenceField = (fieldName) => {
  * Function to add a value to the taxonomic service object
  */
 const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
-  if (itemResponse) {
-    switch (itemTitle) {
-      case 'Available Languages':
-      case 'Taxonomic Range':
-        /* For each item separated by comma in string, push to array */
-        taxonomicService[ReferenceField(itemTitle)] = itemResponse.split(',').map(item => item.replace(' ', ''));
+  switch (itemTitle) {
+    case 'Available Languages':
+    case 'Taxonomic Range':
+      /* For each item separated by comma in string, push to array */
+      taxonomicService[ReferenceField(itemTitle)] = itemResponse.split(',').map(item => item.replace(' ', ''));
 
-        break;
-      case 'Service Type':
-      case 'Name':
-      case 'Description':
-      case 'Slogan':
-      case 'Logo':
-      case 'Date Modified':
-      case 'Terms of Service':
-        taxonomicService['schema:Service'][ReferenceField(itemTitle)] = itemResponse;
+      break;
+    case 'Service Type':
+    case 'Name':
+    case 'Description':
+    case 'Slogan':
+    case 'Logo':
+    case 'Date Modified':
+    case 'Terms of Service':
+      taxonomicService['schema:Service'][ReferenceField(itemTitle)] = itemResponse;
 
-        break;
-      case 'Contact Email':
-      case 'Contact Webpage':
-      case 'Webpage':
-        /* Check if contact point disctionary exists, else add */
-        if (!('schema:ContactPoin' in taxonomicService)) {
-          taxonomicService['schema:ContactPoint'] = {};
-        }
+      break;
+    case 'Contact Email':
+    case 'Contact Webpage':
+    case 'Webpage':
+      /* Check if contact point disctionary exists, else add */
+      if (!('schema:ContactPoin' in taxonomicService)) {
+        taxonomicService['schema:ContactPoint'] = {};
+      }
 
-        taxonomicService['schema:ContactPoint'][ReferenceField(itemTitle)] = itemResponse;
+      taxonomicService['schema:ContactPoint'][ReferenceField(itemTitle)] = itemResponse;
 
-        break;
-      case 'Identifier of Maintainer':
-        /* Check if index is not zero, otherwise create it first */
-        if (!maintainerIndex) {
-          taxonomicService['schema:Maintainer'] = [];
-        }
+      break;
+    case 'Identifier of Maintainer':
+      /* Check if index is not zero, otherwise create it first */
+      if (!maintainerIndex) {
+        taxonomicService['schema:Maintainer'] = [];
+      }
 
-        /* Increment index by one */
-        maintainerIndex++;
+      /* Increment index by one */
+      maintainerIndex++;
 
-        taxonomicService['schema:Maintainer'][maintainerIndex - 1] = {
-          [`${ReferenceField(itemTitle)}`]: itemResponse
+      taxonomicService['schema:Maintainer'][maintainerIndex - 1] = {
+        [`${ReferenceField(itemTitle)}`]: itemResponse
+      };
+
+      break;
+    case 'Full Name':
+    case 'Organisation Identifier':
+    case 'Organisation Legal Name':
+      taxonomicService['schema:Maintainer'][maintainerIndex - 1][`${ReferenceField(itemTitle)}`] = itemResponse;
+
+      break;
+    case 'Payment Model':
+    case 'Funder Name':
+      /* Check if funder dictionary is present */
+      if (!('schema:FundingScheme' in taxonomicService)) {
+        taxonomicService['schema:FundingScheme'] = {};
+      }
+
+      if (itemTitle === 'Funder Name') {
+        taxonomicService['schema:FundingScheme']['schema:Funder'] = {
+          [ReferenceField(itemTitle)]: itemResponse
         };
+      } else {
+        taxonomicService['schema:FundingScheme'][ReferenceField(itemTitle)] = itemResponse;
+      };
 
-        break;
-      case 'Full Name':
-      case 'Organisation Identifier':
-      case 'Organisation Legal Name':
-        taxonomicService['schema:Maintainer'][maintainerIndex - 1][`${ReferenceField(itemTitle)}`] = itemResponse;
+      break;
+    case 'Code Repository':
+      taxonomicService['schema:SoftwareSourceCode'] = {
+        [`${ReferenceField(itemTitle)}`]: itemResponse
+      };
 
-        break;
-      case 'Payment Model':
-      case 'Funder Name':
-        /* Check if funder dictionary is present */
-        if (!('schema:FundingScheme' in taxonomicService)) {
-          taxonomicService['schema:FundingScheme'] = {};
-        }
+      break;
+    case 'Programming Languages':
+    case 'Change Log':
+    case 'Runtime Platform':
+    case 'Status':
+      if ('schema:SoftwareSourceCode' in taxonomicService) {
+        taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = itemResponse;
+      };
 
-        if (itemTitle === 'Funder Name') {
-          taxonomicService['schema:FundingScheme']['schema:Funder'] = {
-            [ReferenceField(itemTitle)]: itemResponse
-          };
-        } else {
-          taxonomicService['schema:FundingScheme'][ReferenceField(itemTitle)] = itemResponse;
-        };
+      break;
+    case 'Software License':
+      taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
 
-        break;
-      case 'Code Repository':
-        if (itemResponse) {
-          taxonomicService['schema:SoftwareSourceCode'] = {
-            [`${ReferenceField(itemTitle)}`]: itemResponse
-          };
-        };
+      break;
+    case 'Content URL':
+      /* Check if index is not zero, otherwise create it first */
+      if (!associatedMediaIndex) {
+        taxonomicService['schema:AssociatedMedia'] = [];
+      }
 
-        break;
-      case 'Programming Languages':
-      case 'Change Log':
-      case 'Runtime Platform':
-      case 'Status':
-        if ('schema:SoftwareSourceCode' in taxonomicService) {
-          taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = itemResponse;
-        };
+      /* Increment index by one */
+      associatedMediaIndex++;
 
-        break;
-      case 'Software License':
-        taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
+      taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1] = {
+        [`${ReferenceField(itemTitle)}`]: itemResponse
+      };
 
-        break;
-      case 'Content URL':
-        /* Check if index is not zero, otherwise create it first */
-        if (!associatedMediaIndex) {
-          taxonomicService['schema:AssociatedMedia'] = [];
-        }
+      break;
+    case 'Media License 1':
+    case 'Media License 2':
+    case 'Media License 3':
+      taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1][`${ReferenceField(itemTitle)}`] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
 
-        /* Increment index by one */
-        associatedMediaIndex++;
+      break;
+    case 'Service License':
+      taxonomicService[ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
 
-        taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1] = {
-          [`${ReferenceField(itemTitle)}`]: itemResponse
-        };
-
-        break;
-      case 'Media License 1':
-      case 'Media License 2':
-      case 'Media License 3':
-        taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1][`${ReferenceField(itemTitle)}`] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
-
-        break;
-      case 'Service License':
-        taxonomicService[ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
-
-        break;
-      default:
-        taxonomicService[ReferenceField(itemTitle)] = itemResponse;
-    };
+      break;
+    default:
+      taxonomicService[ReferenceField(itemTitle)] = itemResponse;
   };
 };
 
@@ -184,16 +180,18 @@ const HandleFormSubmit = (e) => {
   const itemResponses = e.response.getItemResponses();
   let message = 'A new application has been submitted, the data:\n \n';
 
-  for (var i = 0; i < itemResponses.length; i++) {
-    const itemTitle = itemResponses[i].getItem().getTitle();
-    const itemResponse = itemResponses[i].getResponse();
+  itemResponses.forEach((itemResponsesRecord, i) => {
+    const itemTitle = itemResponsesRecord.getItem().getTitle();
+    const itemResponse = itemResponsesRecord.getResponse();
 
     /* Add response item to taxonomic service */
-    AddToTaxonomicService(taxonomicService.attributes.content.taxonomicService, itemTitle, itemResponse);
+    if (itemResponse) {
+      AddToTaxonomicService(taxonomicService.attributes.content.taxonomicService, itemTitle, itemResponse);
+    }
 
     /* Add response item to message */
     message += itemTitle + ': ' + itemResponse + '\n';
-  };
+  });
 
   /* POST submission as a draft record to Cordra */
   const url = "https://cetaf-marketplace.dissco.tech/cordra/doip/0.DOIP/Op.Create?targetId=service";
