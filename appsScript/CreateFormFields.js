@@ -189,7 +189,7 @@ const CreateMaintainerSection = (form, index) => {
   (() => {
     const textItem = form.addTextItem();
 
-    textItem.setTitle('Identifier');
+    textItem.setTitle('Identifier of Maintainer');
   })();
 
   /* Full Name */
@@ -216,7 +216,7 @@ const CreateMaintainerSection = (form, index) => {
 };
 
 /* Funding Schema */
-const CreateFundingSchemaSection = (form, index) => {
+const CreateFundingSchemaSection = (form) => {
   const sectionHeader = form.addSectionHeaderItem();
 
   sectionHeader.setTitle('Funding');
@@ -276,7 +276,6 @@ const CreateSoftwareSourceCodeSection = (form) => {
     const textItem = form.addParagraphTextItem();
 
     textItem.setTitle('Programming Languages');
-    textItem.setHelpText('Separate by comma to define multiple');
   })();
 
   /* Software License */

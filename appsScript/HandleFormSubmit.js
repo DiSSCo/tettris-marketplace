@@ -1,5 +1,5 @@
 const fieldNameResolutionDict = {
-  "Service Licence": 'schema:license',
+  "Service License": 'schema:license',
   "Available Languages": 'schema:availableLanguage',
   Version: 'schema:version',
   "Topic Discipline": "ods:topicDiscipline",
@@ -15,7 +15,7 @@ const fieldNameResolutionDict = {
   "Contact Email": 'schema:email',
   "Contact Webpage": 'schema:url',
   "Webpage": 'schema:sameAs',
-  "Identifier": "schema:identifier",
+  "Identifier of Maintainer": "schema:identifier",
   "Full Name": "schema:name",
   "Organisation Identifier": "schema:identifier",
   "Organisation Legal Name": "schema:legalName",
@@ -28,9 +28,13 @@ const fieldNameResolutionDict = {
   "Programming Languages": 'schema:programmingLanguage',
   "Software License": "schema:license",
   "Content URL": "schema:contentUrl",
-  "Media License": "schema:license"
+  "Media License 1": "schema:license",
+  "Media License 2": "schema:license",
+  "Media License 3": "schema:license",
 };
 const licences = Licenses();
+let maintainerIndex = 0;
+let associatedMediaIndex = 0;
 
 /**
  * Function to return the schema name for a field, when provided with the name of the field in the form
@@ -45,35 +49,111 @@ const ReferenceField = (fieldName) => {
 const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
   if (itemResponse) {
     switch (itemTitle) {
-      case 'Languages':
-      case 'Taxonomic Scope':
+      case 'Available Languages':
+      case 'Taxonomic Range':
         /* For each item separated by comma in string, push to array */
         taxonomicService[ReferenceField(itemTitle)] = itemResponse.split(',').map(item => item.replace(' ', ''));
 
         break;
-      case 'Source URL':
+      case 'Service Type':
+      case 'Name':
+      case 'Description':
+      case 'Slogan':
+      case 'Logo':
+      case 'Date Modified':
+      case 'Terms of Service':
+        taxonomicService['schema:Service'][ReferenceField(itemTitle)] = itemResponse;
+
+        break;
+      case 'Contact Email':
+      case 'Contact Webpage':
+      case 'Webpage':
+        /* Check if contact point disctionary exists, else add */
+        if (!('schema:ContactPoin' in taxonomicService)) {
+          taxonomicService['schema:ContactPoint'] = {};
+        }
+
+        taxonomicService['schema:ContactPoint'][ReferenceField(itemTitle)] = itemResponse;
+
+        break;
+      case 'Identifier of Maintainer':
+        /* Check if index is not zero, otherwise create it first */
+        if (!maintainerIndex) {
+          taxonomicService['schema:Maintainer'] = [];
+        }
+
+        /* Increment index by one */
+        maintainerIndex++;
+
+        taxonomicService['schema:Maintainer'][maintainerIndex - 1] = {
+          [`${ReferenceField(itemTitle)}`]: itemResponse
+        };
+
+        break;
+      case 'Full Name':
+      case 'Organisation Identifier':
+      case 'Organisation Legal Name':
+        taxonomicService['schema:Maintainer'][maintainerIndex - 1][`${ReferenceField(itemTitle)}`] = itemResponse;
+
+        break;
+      case 'Payment Model':
+      case 'Funder Name':
+        /* Check if funder dictionary is present */
+        if (!('schema:FundingScheme' in taxonomicService)) {
+          taxonomicService['schema:FundingScheme'] = {};
+        }
+
+        if (itemTitle === 'Funder Name') {
+          taxonomicService['schema:FundingScheme']['schema:Funder'] = {
+            [ReferenceField(itemTitle)]: itemResponse
+          };
+        } else {
+          taxonomicService['schema:FundingScheme'][ReferenceField(itemTitle)] = itemResponse;
+        };
+
+        break;
+      case 'Code Repository':
         if (itemResponse) {
-          taxonomicService['cetaf:Software'] = {
+          taxonomicService['schema:SoftwareSourceCode'] = {
             [`${ReferenceField(itemTitle)}`]: itemResponse
           };
         };
 
         break;
-      case 'Required Resources':
       case 'Programming Languages':
-        if ('cetaf:Software' in taxonomicService) {
-          taxonomicService['cetaf:Software'][ReferenceField(itemTitle)] = itemResponse.split(',').map(item => item.replace(' ', ''));
-        };
-
-        break;
-      case 'Deprecated':
       case 'Change Log':
-        if ('cetaf:Software' in taxonomicService) {
-          taxonomicService['cetaf:Software'][ReferenceField(itemTitle)] = itemResponse;
+      case 'Runtime Platform':
+      case 'Status':
+        if ('schema:SoftwareSourceCode' in taxonomicService) {
+          taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = itemResponse;
         };
 
         break;
-      case 'Licence':
+      case 'Software License':
+        taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
+
+        break;
+      case 'Content URL':
+        /* Check if index is not zero, otherwise create it first */
+        if (!associatedMediaIndex) {
+          taxonomicService['schema:AssociatedMedia'] = [];
+        }
+
+        /* Increment index by one */
+        associatedMediaIndex++;
+
+        taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1] = {
+          [`${ReferenceField(itemTitle)}`]: itemResponse
+        };
+
+        break;
+      case 'Media License 1':
+      case 'Media License 2':
+      case 'Media License 3':
+        taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1][`${ReferenceField(itemTitle)}`] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
+
+        break;
+      case 'Service License':
         taxonomicService[ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
 
         break;
@@ -94,13 +174,9 @@ const HandleFormSubmit = (e) => {
       content: {
         taxonomicService: {
           '@type': 'taxonomicService',
-          'cetaf:state': 'draft',
-          'cetaf:qualityScore': 0,
-          'cetaf:hasAgent': [
-            {
-              'cetaf:agentID': 'https://orcid.org/0000-0000-0000-0000'
-            }
-          ]
+          'schema:status': 'draft',
+          'schema:ratingValue': 0,
+          'schema:Service': {}
         }
       }
     }
