@@ -26,8 +26,8 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
     /* Filter for the object type to be a taxonomic service */
     filters = filters.concat('/taxonomicService/@type:TaxonomicService');
 
-    /* Filter for state to be published */
-    filters = filters.concat(' AND /taxonomicService/schema\\:status:published');
+    /* Filter for state to be accepted */
+    filters = filters.concat(' AND /taxonomicService/schema\\:status:accepted');
 
     if (!isEmpty(searchFilters)) {
         Object.entries(searchFilters).map(([key, value]) => {

@@ -4,6 +4,7 @@ const fieldNameResolutionDict = {
   Version: 'schema:version',
   "Topic Discipline": "ods:topicDiscipline",
   "Taxonomic Range": 'schema:taxonomicRange',
+  "Geographic Area": "schema:geographicArea",
   "Documentation URL": "schema:documentation",
   "Service Type": 'schema:serviceType',
   Name: 'schema:name',
@@ -170,7 +171,7 @@ const HandleFormSubmit = (e) => {
       content: {
         taxonomicService: {
           '@type': 'TaxonomicService',
-          'schema:status': 'draft',
+          'schema:status': 'proposed',
           'schema:ratingValue': 0,
           'schema:Service': {}
         }

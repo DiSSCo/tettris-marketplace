@@ -34,7 +34,7 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
             taxonomicService = data.attributes.content as TaxonomicService;
 
             /* Check if Taxonomic Service is published, otherwise throw error */
-            if (taxonomicService.taxonomicService['schema:status'] !== 'published') {
+            if (taxonomicService.taxonomicService['schema:status'] !== 'accepted') {
                 throw (new Error('This Taxonomic Service has not been published yet', { cause: 200 }));
             };
 

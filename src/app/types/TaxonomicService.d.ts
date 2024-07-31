@@ -28,7 +28,7 @@ export interface TaxonomicService {
   /**
    * The status of the record
    */
-  "schema:status": "draft" | "published";
+  "schema:status": "proposed" | "accepted" | "rejected";
   /**
    * A license document that applies to this content, typically indicated by URL
    */

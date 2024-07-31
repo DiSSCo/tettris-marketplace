@@ -1,7 +1,7 @@
 /**
  * Function to create the licenses dropdown in the form, based upon the SPDX license list (Required)
  */
-const CreateLicenseField = (form, name, required = false) => {
+const CreateLicenseField = (form, name, helpText, section) => {
   const licenses = Licenses();
 
   /* Add list item to form */
@@ -13,13 +13,27 @@ const CreateLicenseField = (form, name, required = false) => {
   licenses.licenses.forEach(license => {
     /* Check if license is not deprecated */
     if (!license.isDeprecatedLicenseId) {
-      listItemChoices.push(listItem.createChoice(license.name.replace(/(\r\n|\n|\r)/gm, "")));
+      if (section === 'service') {
+        if (license.name.includes('Creative')) {
+          listItemChoices.unshift(listItem.createChoice(license.name.replace(/(\r\n|\n|\r)/gm, "")));
+        } else {
+          listItemChoices.push(listItem.createChoice(license.name.replace(/(\r\n|\n|\r)/gm, "")));
+        }
+      } else if (section === 'software') {
+        if (license.name.includes('Apache') || license.name.includes('MIT') || license.name.includes('GPL')) {
+          listItemChoices.unshift(listItem.createChoice(license.name.replace(/(\r\n|\n|\r)/gm, "")));
+        } else {
+          listItemChoices.push(listItem.createChoice(license.name.replace(/(\r\n|\n|\r)/gm, "")));
+        }
+      } else {
+        listItemChoices.push(listItem.createChoice(license.name.replace(/(\r\n|\n|\r)/gm, "")));
+      }
     }
   });
 
   listItem.setChoices(listItemChoices);
   listItem.setTitle(name);
-  listItem.setRequired(required);
+  listItem.setHelpText(helpText);
 };
 
 /* Available Languages (Requires at least one) */
@@ -27,7 +41,7 @@ const CreateAvailableLanguagesField = (form) => {
   const textItem = form.addParagraphTextItem();
 
   textItem.setTitle('Available Languages');
-  textItem.setHelpText('Use ISO alpha-3/ISO 639-2, separate by comma to define multiple');
+  textItem.setHelpText('Use ISO alpha-3/ISO 639-2, separate by comma to define multiple.');
   textItem.setRequired(true);
 };
 
@@ -36,6 +50,7 @@ const CreateVersionField = (form) => {
   const textItem = form.addTextItem();
 
   textItem.setTitle('Version');
+  textItem.setHelpText('Current version of the resource, for example V1.0.0.');
 };
 
 /* Topic Discipline */
@@ -59,6 +74,7 @@ const CreateTopicDisciplineField = (form) => {
   multipleChoiceItem.setChoices(choices.map(choice => multipleChoiceItem.createChoice(choice)));
 
   multipleChoiceItem.setTitle('Topic Discipline');
+  multipleChoiceItem.setHelpText('For resources that are not discipline specific use "Unclassified"');
 };
 
 /* Taxonomic Range */
@@ -66,7 +82,15 @@ const CreateTaxonomicRangeField = (form) => {
   const textItem = form.addParagraphTextItem();
 
   textItem.setTitle('Taxonomic Range');
-  textItem.setHelpText('Separate by comma to define multiple');
+  textItem.setHelpText('e.g. Bees,  Agromyzidae, Braconidae subfamilies. Separate by comma to define multiple.');
+};
+
+/* Geographic Area */
+const CreateGeographicAreaField = (form) => {
+  const textItem = form.addTextItem();
+
+  textItem.setTitle('Geographic Area');
+  textItem.setHelpText('e.g. Palearctic, South-East Europe, Mediterranean.  Separate by comma to define multiple.');
 };
 
 /* Documentation URL */
@@ -103,6 +127,7 @@ const CreateServiceSection = (form) => {
     multipleChoiceItem.setChoices(choices.map(choice => multipleChoiceItem.createChoice(choice)));
 
     multipleChoiceItem.setTitle('Service Type');
+    multipleChoiceItem.setHelpText('The type of service. Use "inventory" for a catalog or inventory of resources such as a web page listing a number of identification keys made with a certain software package.');
     multipleChoiceItem.setRequired(true);
   })();
 
@@ -112,6 +137,7 @@ const CreateServiceSection = (form) => {
 
     textItem.setTitle('Name');
     textItem.setRequired(true);
+    textItem.setHelpText('Name of the e-service or tool (max 50 chars)');
   })();
 
   /* Description (Required) */
@@ -120,6 +146,7 @@ const CreateServiceSection = (form) => {
 
     textItem.setTitle('Description');
     textItem.setRequired(true);
+    textItem.setHelpText('A one or two paragraph description of the service in English.');
   })();
 
   /* Slogan */
@@ -127,6 +154,7 @@ const CreateServiceSection = (form) => {
     const textItem = form.addParagraphTextItem();
 
     textItem.setTitle('Slogan');
+    textItem.setHelpText('Short catchphrase for marketing and advertising purposes. It should refer to the main value or purpose of the resource.');
   })();
 
   /* Logo */
@@ -134,6 +162,7 @@ const CreateServiceSection = (form) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Logo');
+    textItem.setHelpText('URL to a logo of the resource in JPG or PNG format.');
   })();
 
   /* Date Modified */
@@ -141,6 +170,7 @@ const CreateServiceSection = (form) => {
     const textItem = form.addDateItem();
 
     textItem.setTitle('Date Modified');
+    textItem.setHelpText('Date when the resource was last updated.');
   })();
 
   /* Terms of Service */
@@ -148,6 +178,7 @@ const CreateServiceSection = (form) => {
     const textItem = form.addParagraphTextItem();
 
     textItem.setTitle('Terms of Service');
+    textItem.setHelpText('URL to terms of service documentation');
   })();
 };
 
@@ -169,6 +200,7 @@ const CreateContactPointSection = (form) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Contact Webpage');
+    textItem.setHelpText('URL to a webpage for the resource.');
   })();
 
   /* Webpage */
@@ -190,6 +222,7 @@ const CreateMaintainerSection = (form, index) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Identifier of Maintainer');
+    textItem.setHelpText('An identifier such as GitHub ID or ORCID.');
   })();
 
   /* Full Name */
@@ -226,6 +259,7 @@ const CreateFundingSchemaSection = (form) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Payment Model');
+    textItem.setHelpText('One of:  License-Based payment, Usage-Based payment,, Freemium, Open Source, Ad-Based,  Value-Based or Voluntary payment, Hybrid model');
   })();
 
   /* Funder Name */
@@ -247,7 +281,7 @@ const CreateSoftwareSourceCodeSection = (form) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Code Repository');
-    textItem.setHelpText('Required when using the Software Source Code object');
+    textItem.setHelpText('Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex).');
   })();
 
   /* Change Log */
@@ -255,6 +289,7 @@ const CreateSoftwareSourceCodeSection = (form) => {
     const textItem = form.addParagraphTextItem();
 
     textItem.setTitle('Change Log');
+    textItem.setHelpText('The subject matter of the content including a summary of the Resource features updated from the previous version.');
   })();
 
   /* Runtime Platform */
@@ -262,6 +297,7 @@ const CreateSoftwareSourceCodeSection = (form) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Runtime Platform');
+    textItem.setHelpText('Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0).');
   })();
 
   /* Status */
@@ -269,6 +305,7 @@ const CreateSoftwareSourceCodeSection = (form) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Status');
+    textItem.setHelpText('Status in terms of its stage in a lifecycle. For example: Beta, Production, Unmaintained, Discontinued.');
   })();
 
   /* Programming Languages */
@@ -280,7 +317,7 @@ const CreateSoftwareSourceCodeSection = (form) => {
 
   /* Software License */
   (() => {
-    CreateLicenseField(form, 'Software License');
+    CreateLicenseField(form, 'Software License', 'Depending on the resource type a licence for resource software.', 'software');
   })();
 };
 
@@ -295,6 +332,7 @@ const CreateAssociatedMediaSection = (form, index) => {
     const textItem = form.addTextItem();
 
     textItem.setTitle('Content URL');
+    textItem.setHelpText('URL to a JPG or PNG file showing a screenshot or other relevant illustration of the resource.');
   })();
 
   /* Media License */

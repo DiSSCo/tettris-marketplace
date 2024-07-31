@@ -13,8 +13,11 @@ const CreateForm = () => {
 
   /* Create Form Fields */
   (() => {
+     /* Service Section (Required) */
+    CreateServiceSection(form);
+
     /* License (Required) */
-    CreateLicenseField(form, 'Service License');
+    CreateLicenseField(form, 'Service License', 'Depending on the resource type a licence for the knowledge product contents.', 'service');
 
     /* Available Languages (Required) */
     CreateAvailableLanguagesField(form);
@@ -28,11 +31,11 @@ const CreateForm = () => {
     /* Taxonomic Range */
     CreateTaxonomicRangeField(form);
 
+    /* Geographic Area */
+    CreateGeographicAreaField(form);
+
     /* Documentation URL */
     CreateDocumentationURLField(form);
-
-    /* Service Section */
-    CreateServiceSection(form);
 
     /* Contact Point Section */
     CreateContactPointSection(form);
