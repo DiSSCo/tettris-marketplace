@@ -44,7 +44,7 @@ const DetailsBlockArray = (props: Props) => {
                                         <div key={`${index}_${key}`}
                                             className="my-1"
                                         >
-                                            <p className="fs-5 fw-bold">{MakeReadableString(key.replace('cetaf:', ''))}</p>
+                                            <p className="fs-5 fw-bold">{MakeReadableString(key.replace('schema:', ''))}</p>
                                             <p className="fs-4">{value}</p>
                                         </div>
                                     ))

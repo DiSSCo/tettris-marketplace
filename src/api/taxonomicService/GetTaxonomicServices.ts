@@ -55,7 +55,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
                     break;
                 case 'serviceType':
                     /* Set service type search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:Service/schema\\:serviceType/_\\:` + `${value}`);
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:Service/schema\\:serviceType\:` + `${value}`);
 
                     break;
                 default:
