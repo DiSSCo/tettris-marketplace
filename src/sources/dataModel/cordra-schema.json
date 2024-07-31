@@ -115,7 +115,7 @@
         "schema:ratingValue": {
           "type": "number",
           "title": "Rating Value",
-          "description": "The rating for the content"
+          "description": "The rating for the content on a scale from 0 to 100"
         },
         "schema:ratingExplanation": {
           "type": "string",
@@ -154,7 +154,7 @@
             "schema:name": {
               "type": "string",
               "title": "Name",
-              "description": "The name of the Service",
+              "description": "The preferred name of the service (can be in any language)",
               "cordra": {
                 "preview": {
                   "showInPreview": true,
@@ -166,7 +166,7 @@
             "schema:description": {
               "type": "string",
               "title": "Description",
-              "description": "A description of the Service",
+              "description": "A description of the service (english)",
               "cordra": {
                 "preview": {
                   "showInPreview": true,
@@ -221,7 +221,7 @@
         },
         "schema:Maintainer": {
           "type": "array",
-          "description": "A maintainer of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artifact.",
+          "description": "An array of maintainers of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artefact.",
           "items": {
             "type": "object",
             "properties": {
@@ -242,7 +242,7 @@
                   "schema:identifier": {
                     "type": "string",
                     "title": "Organisation ROR",
-                    "description": "The ROR identifier of the organisation"
+                    "description": "The ROR identifier of the organisation."
                   },
                   "schema:legalName": {
                     "type": "string",
@@ -262,7 +262,7 @@
             "schema:url": {
               "type": "string",
               "title": "Payment model URL",
-              "description": "Webpage with the supported payment models and restrictions that apply to the Resource."
+              "description": "URL to webpage with the supported payment models and restrictions that apply to the Resource."
             },
             "schema:Funder": {
               "type": "object",
@@ -314,7 +314,7 @@
             "schema:license": {
               "type": "string",
               "title": "License",
-              "description": "A license document that applies to this content, typically indicated by URL"
+              "description": "A license document that applies to this content, typically indicated by URL."
             }
           }
         },
