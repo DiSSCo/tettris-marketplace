@@ -129,6 +129,8 @@ const TaxonomicService = () => {
                                             >
                                                 <DetailsBlock name="Service Details"
                                                     properties={{
+                                                        topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
+                                                        geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
                                                         version: taxonomicService.taxonomicService['schema:version'],
                                                         lastUpdated: moment(taxonomicService.taxonomicService['schema:Service']['schema:dateModified']).format('MMM DD - YYYY'),

@@ -44,7 +44,7 @@ const DetailsBlock = (props: Props) => {
                 <Col>
                     <div className="h-100 b-primary px-4 py-3">
                         {Object.entries(properties).map(([key, value]) => (
-                            <Row key={key}
+                            <Row key={`${name}_${key}`}
                                 className="mb-2"
                             >
                                 <Col>

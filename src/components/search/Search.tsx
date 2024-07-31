@@ -63,7 +63,7 @@ const Search = () => {
     /* ClassNames */
     const mainBodyClass = classNames({
         'gradient-primary': true,
-        'gradient-secondary': searchParams.get('taxonomicServiceType') === 'referenceCollection'
+        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection'
     });
 
     const searchResultsClassScrollBlock = classNames({
@@ -130,7 +130,7 @@ const Search = () => {
                                     <Col className="d-flex justify-content-center">
                                         {(!paginator.loading && !noMoreResults && paginator.totalRecords > 0) &&
                                             <Button type="button"
-                                                variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                                variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                                                 OnClick={() => paginator.Next?.()}
                                             >
                                                 Load more

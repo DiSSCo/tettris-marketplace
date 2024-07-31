@@ -34,17 +34,17 @@ const DetailsBlockArray = (props: Props) => {
                 </Row>
                 <Row className="w-100 overflow-x-scroll flex-nowrap">
                     {/* For each property in properties array, render an inline block */}
-                    {propertiesArray.map((property) => (
-                        <Col key={typeof(property) === 'object' ? Object.keys(property)[0] : property}
+                    {propertiesArray.map((property, index) => (
+                        <Col key={`${index}_${typeof(property) === 'object' ? Object.keys(property)[0] : property}`}
                             className="col-lg-auto pe-0"
                         >
                             <div className="bgc-grey-light mt-1 px-2 py-1 textOverflow">
                                 {typeof (property) === 'object' ?
                                     Object.entries(property).map(([key, value]) => (
-                                        <div key={key}
+                                        <div key={`${index}_${key}`}
                                             className="my-1"
                                         >
-                                            <p className="fs-5 fw-bold">{MakeReadableString(key.replace('cetaf:', ''))}</p>
+                                            <p className="fs-5 fw-bold">{MakeReadableString(key.replace('schema:', ''))}</p>
                                             <p className="fs-4">{value}</p>
                                         </div>
                                     ))

@@ -43,7 +43,6 @@ const Footer = () => {
                                                 <Col>
                                                     <div className="h-100 fs-5 tc-white fw-lightBold text-end">
                                                         <p>Privacy policy</p>
-                                                        <p className="mt-1">Terms and Conditions</p>
                                                     </div>
                                                 </Col>
                                             </Row>
@@ -75,10 +74,6 @@ const Footer = () => {
                                     >
                                         Privacy policy
                                     </a>
-                                </span>
-                                <span className="px-2">|</span>
-                                <span>
-                                    Terms and Conditions
                                 </span>
                                 <span className="px-2">|</span>
                                 <span>

@@ -5,7 +5,7 @@ import { Filter as FilterType, DropdownItem } from "app/Types";
 import { MakeReadableString } from 'app/Utilities';
 
 /* Import Components */
-import { Dropdown, DatePicker } from 'components/general/FormComponents';
+import { Dropdown, DatePicker, QueryBar } from 'components/general/FormComponents';
 
 
 /* Props Type */
@@ -55,7 +55,9 @@ const Filter = (props: Props) => {
                 OnChange={(date: Date) => SetFilterValue(date)}
             />
         default:
-            return <> </>
+            return <QueryBar name={filter.name}
+                placeholder={MakeReadableString(filter.name)}
+            />
     }
 }
 

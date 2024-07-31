@@ -24,25 +24,44 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
     let filters: string = '';
 
     /* Filter for the object type to be a taxonomic service */
-    filters = filters.concat('/taxonomicService/ods\\:type:taxonomicService');
+    filters = filters.concat('/taxonomicService/@type:TaxonomicService');
 
     /* Filter for state to be published */
-    filters = filters.concat(' AND /taxonomicService/cetaf\\:state:published');
+    filters = filters.concat(' AND /taxonomicService/schema\\:status:published');
 
     if (!isEmpty(searchFilters)) {
         Object.entries(searchFilters).map(([key, value]) => {
             const alias: string | undefined = TaxonomicServiceFilters.taxonomicServiceFilters.find(taxonomicSearchFilter => taxonomicSearchFilter.name === key)?.alias;
 
-            if (key === 'language') {
-                /* Set array search for language */
-                filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
-            } else if (key === 'query') {
-                /* Set query to name search */
-                filters = filters.concat(` AND ` + `/taxonomicService/erp\\:name:` + `${value}*`);
-            } else {
-                /* Get field alias from taxonomic service filters source */
-                filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}:` + `${value}`);
-            }
+            switch (key) {
+                case 'language':
+                    /* Set array search for language */
+                    filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
+
+                    break;
+                case 'query':
+                    /* Set query to name search */
+                    filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:Service/schema\\:name:` + `${value}*`
+                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`
+                        + ` OR ` + `/taxonomicService/ods\\:topicDiscipline:` + `${value}*`
+                        + `)`
+                    );
+
+                    break;
+                case 'taxonomicRange':
+                    /* Set taxonomic range search */
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`);
+
+                    break;
+                case 'serviceType':
+                    /* Set service type search */
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:Service/schema\\:serviceType:` + `${value}`);
+
+                    break;
+                default:
+                    /* Get field alias from taxonomic service filters source */
+                    filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replaceAll(':', '\\:')}:` + `${value}`);
+            };
         });
     };
 

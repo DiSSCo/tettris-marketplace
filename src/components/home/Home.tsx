@@ -58,7 +58,7 @@ const Home = () => {
                     pageSize: 1,
                     pageNumber: 0,
                     searchFilters: {
-                        "cetaf:taxonomicServiceType": 'referenceCollection'
+                        "schema:Service/schema:serviceType": 'referenceCollection'
                     }
                 }
             }
@@ -150,7 +150,7 @@ const Home = () => {
                                             <HomeCategory title="Reference Collections"
                                                 subTitle="Go explore"
                                                 count={counts.referenceCollections}
-                                                link="/search?taxonomicServiceType=referenceCollection"
+                                                link="/search?serviceType=referenceCollection"
                                                 color="secondary"
                                             />
                                         </Col>

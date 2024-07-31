@@ -93,7 +93,7 @@ const FiltersBar = (props: Props) => {
                                 {filters.map((filter) => (
                                     <Col key={filter.name}
                                         xs={{ span: 12 }}
-                                        lg={{ span: 4 }}
+                                        lg={{ span: 3 }}
                                         className="mb-2 mb-lg-0"
                                     >
                                         <Filter filter={filter}

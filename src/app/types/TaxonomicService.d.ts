@@ -18,11 +18,11 @@ export interface TaxonomicService {
    */
   "@type": "TaxonomicService";
   /**
-   * The date on which the CreativeWork was created or the item was added to a DataFeed.
+   * The date on which the Taxonomic Service was created or the item was added to a DataFeed.
    */
   "schema:dateCreated": string;
   /**
-   * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+   * The date on which the Taxonomic Service was most recently modified or when the item's entry was modified within a DataFeed.
    */
   "schema:dateModified": string;
   /**
@@ -32,17 +32,17 @@ export interface TaxonomicService {
   /**
    * A license document that applies to this content, typically indicated by URL
    */
-  "schema:license": string;
+  "schema:license"?: string;
   /**
    * A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard.
    */
   "schema:availableLanguage": string[];
   /**
-   * The version of the CreativeWork embodied by a specified resource.
+   * The version of the Service embodied by a specified resource.
    */
   "schema:version"?: string;
   /**
-   * The topic discipline of the specimen
+   * The topic discipline relevant to the taxonomic range of the service
    */
   "ods:topicDiscipline"?:
     | "Anthropology"
@@ -61,11 +61,15 @@ export interface TaxonomicService {
    */
   "schema:taxonomicRange"?: string[];
   /**
-   * Further documentation describing the service in more detail.
+   * The geographic area associated with the service.
+   */
+  "schema:geographicArea"?: string;
+  /**
+   * URL to further documentation describing the service in more detail.
    */
   "schema:documentation"?: string;
   /**
-   * The rating for the content
+   * The rating for the content on a scale from 0 to 100
    */
   "schema:ratingValue": number;
   /**
@@ -92,15 +96,15 @@ export interface TaxonomicService {
       | "specimenDatasetNotInGBIF"
       | "website";
     /**
-     * The name of the item
+     * The preferred name of the service (can be in any language)
      */
     "schema:name": string;
     /**
-     * A description of the item
+     * A description of the service (english)
      */
     "schema:description": string;
     /**
-     * A slogan or motto associated with the item.
+     * A slogan or motto associated with the Service (english).
      */
     "schema:slogan"?: string;
     /**
@@ -108,7 +112,7 @@ export interface TaxonomicService {
      */
     "schema:logo"?: string;
     /**
-     * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+     * The date on which the Service was most recently modified or when the item's entry was modified within a DataFeed.
      */
     "schema:dateModified"?: string;
     /**
@@ -121,7 +125,7 @@ export interface TaxonomicService {
    */
   "schema:ContactPoint"?: {
     /**
-     * Email address of the contact point
+     * Email address of the contact point.
      */
     "schema:email"?: string;
     /**
@@ -134,11 +138,11 @@ export interface TaxonomicService {
     "schema:sameAs"?: string;
   };
   /**
-   * A maintainer of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artifact.
+   * An array of maintainers of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artefact.
    */
   "schema:Maintainer"?: {
     /**
-     * A unique identifier to identify the agent; ORCID or Wikidata identifiers are valid
+     * A unique identifier to identify the maintainer; ORCID or Wikidata identifiers are valid
      */
     "schema:identifier"?: string;
     /**
@@ -150,7 +154,7 @@ export interface TaxonomicService {
      */
     "schema:Organization"?: {
       /**
-       * The ROR identifier of the organisation
+       * The ROR identifier of the organisation.
        */
       "schema:identifier"?: string;
       /**
@@ -164,7 +168,7 @@ export interface TaxonomicService {
    */
   "schema:FundingScheme"?: {
     /**
-     * Webpage with the supported payment models and restrictions that apply to the Resource.
+     * URL to webpage with the supported payment models and restrictions that apply to the Resource.
      */
     "schema:url"?: string;
     /**
@@ -202,12 +206,12 @@ export interface TaxonomicService {
      */
     "schema:programmingLanguage"?: string;
     /**
-     * A license document that applies to this content, typically indicated by URL
+     * A license document that applies to this content, typically indicated by URL.
      */
     "schema:license"?: string;
   };
   /**
-   * Array of media objects that encodes this CreativeWork. This property is a synonym for encoding.
+   * Array of media objects that encodes this Service. This property is a synonym for encoding.
    */
   "schema:AssociatedMedia"?: {
     /**
