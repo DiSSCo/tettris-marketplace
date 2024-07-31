@@ -170,7 +170,7 @@ const HandleFormSubmit = (e) => {
       content: {
         taxonomicService: {
           '@type': 'TaxonomicService',
-          'schema:status': 'draft',
+          'schema:status': 'proposed',
           'schema:ratingValue': 0,
           'schema:Service': {}
         }
@@ -193,7 +193,7 @@ const HandleFormSubmit = (e) => {
     message += itemTitle + ': ' + itemResponse + '\n';
   });
 
-  /* POST submission as a draft record to Cordra */
+  /* POST submission as a proposed record to Cordra */
   const url = "https://cetaf-marketplace.dissco.tech/cordra/doip/0.DOIP/Op.Create?targetId=service";
   const options = {
     method: "POST",

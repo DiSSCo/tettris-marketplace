@@ -59,8 +59,9 @@
           "title": "Status",
           "description": "he status of the record",
           "enum": [
-            "draft",
-            "published"
+            "proposed",
+            "accepted",
+            "rejected"
           ]
         },
         "schema:license": {

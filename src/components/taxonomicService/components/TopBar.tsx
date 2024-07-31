@@ -24,7 +24,7 @@ const TopBar = (props: Props) => {
     let stateTagLine: string;
 
     /* Define the state tag line */
-    if (taxonomicService.taxonomicService['schema:status'] === 'published') {
+    if (taxonomicService.taxonomicService['schema:status'] === 'accepted') {
         stateTagLine = 'Published and visible';
     } else {
         stateTagLine = 'Draft and hidden';
