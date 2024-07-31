@@ -42,7 +42,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
                 case 'query':
                     /* Set query to name search */
                     filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:Service/schema\\:name:` + `${value}*`
-                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_\:` + `${value}`
+                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`
                         + ` OR ` + `/taxonomicService/ods\\:topicDiscipline:` + `${value}*`
                         + `)`
                     );
@@ -50,12 +50,12 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
                     break;
                 case 'taxonomicRange':
                     /* Set taxonomic range search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_\:` + `${value}`);
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`);
 
                     break;
                 case 'serviceType':
                     /* Set service type search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:Service/schema\\:serviceType\:` + `${value}`);
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:Service/schema\\:serviceType:` + `${value}`);
 
                     break;
                 default:
