@@ -169,7 +169,7 @@ const HandleFormSubmit = (e) => {
     attributes: {
       content: {
         taxonomicService: {
-          '@type': 'taxonomicService',
+          '@type': 'TaxonomicService',
           'schema:status': 'draft',
           'schema:ratingValue': 0,
           'schema:Service': {}

@@ -1,8 +1,8 @@
 {
     "taxonomicServiceFilters": [
         {
-            "name": "taxonomicServiceType",
-            "alias": "cetaf:taxonomicServiceType",
+            "name": "serviceType",
+            "alias": "schema:Service/schema:serviceType",
             "type": "select",
             "default": "taxonomicService",
             "options": [
@@ -17,33 +17,68 @@
             ]
         },
         {
-            "name": "taxonomicScope",
-            "alias": "cetaf:taxonomicScope",
+            "name": "taxonomicRange",
+            "alias": "schema:taxonomicRange",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "topicDiscipline",
+            "alias": "ods:topicDiscipline",
             "type": "select",
-            "options": []
+            "default": "",
+            "options": [
+                {
+                    "label": "Anthropoloy",
+                    "value": "Anthropoloy"
+                },
+                {
+                    "label": "Botany",
+                    "value": "Botany"
+                },
+                {
+                    "label": "Astrogeology",
+                    "value": "Astrogeology"
+                },
+                {
+                    "label": "Geology",
+                    "value": "Geology"
+                },
+                {
+                    "label": "Microbiology",
+                    "value": "Microbiology"
+                },
+                {
+                    "label": "Palaeontology",
+                    "value": "Palaeontology"
+                },
+                {
+                    "label": "Zoology",
+                    "value": "Zoology"
+                },
+                {
+                    "label": "Ecology",
+                    "value": "Ecology"
+                },
+                {
+                    "label": "Other Biodiversity",
+                    "value": "Other Biodiversity"
+                },
+                {
+                    "label": "Other Geodiversity",
+                    "value": "Other Geodiversity"
+                },
+                {
+                    "label": "Unclassified",
+                    "value": "Unclassified"
+                }
+            ]
         },
         {
             "name": "language",
-            "alias": "erp:languageAvailabilities",
-            "type": "select",
-            "options": [
-                {
-                    "label": "English",
-                    "value": "en"
-                },
-                {
-                    "label": "Spanish",
-                    "value": "es"
-                },
-                {
-                    "label": "French",
-                    "value": "fr"
-                },
-                {
-                    "label": "German",
-                    "value": "de"
-                }
-            ]
+            "alias": "schema:availableLanguage",
+            "type": "string",
+            "default": ""
         }
     ]
 }

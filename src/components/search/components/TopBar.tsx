@@ -53,7 +53,7 @@ const TopBar = () => {
                     className="d-block d-lg-none mt-3"
                 >
                     <Button type="button"
-                        variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                         className="fs-5"
                         OnClick={() => setFiltersToggle(!filtersToggle)}
                     >
@@ -74,9 +74,12 @@ const TopBar = () => {
                     className="mt-3 mt-lg-0"
                 >
                     <Button type="button"
-                        variant={searchParams.get('taxonomicServiceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                         className="fs-5 fs-lg-4"
-                        OnClick={() => window.open('https://dissco.jitbit.com/helpdesk/User/Login', '_blank', 'noopener')}
+                        OnClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf6ug3jMZnZaZrP0WYv7GgFvnn06QIdi2GFekEqynwsoTCfUQ/viewform?usp=sf_link',
+                            '_blank',
+                            'noopener'
+                        )}
                     >
                         Suggest a new service
                     </Button>
