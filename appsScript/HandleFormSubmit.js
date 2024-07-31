@@ -4,6 +4,7 @@ const fieldNameResolutionDict = {
   Version: 'schema:version',
   "Topic Discipline": "ods:topicDiscipline",
   "Taxonomic Range": 'schema:taxonomicRange',
+  "Geographic Area": "schema:geographicArea",
   "Documentation URL": "schema:documentation",
   "Service Type": 'schema:serviceType',
   Name: 'schema:name',
@@ -193,7 +194,7 @@ const HandleFormSubmit = (e) => {
     message += itemTitle + ': ' + itemResponse + '\n';
   });
 
-  /* POST submission as a proposed record to Cordra */
+  /* POST submission as a draft record to Cordra */
   const url = "https://cetaf-marketplace.dissco.tech/cordra/doip/0.DOIP/Op.Create?targetId=service";
   const options = {
     method: "POST",
