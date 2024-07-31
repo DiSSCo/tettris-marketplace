@@ -107,6 +107,11 @@
             "type": "string"
           }
         },
+        "schema:geographicArea": {
+          "type": "string",
+          "title": "Geographic Area",
+          "description": "The geographic area associated with the service."
+        },
         "schema:documentation": {
           "type": "string",
           "title": "Documentation URL",
