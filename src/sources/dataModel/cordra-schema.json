@@ -164,7 +164,7 @@
                   "isPrimary": true
                 }
               },
-              "maxLength": 50
+              "maxLength": 75
             },
             "schema:description": {
               "type": "string",
