@@ -221,7 +221,7 @@ const CreateMaintainerSection = (form, index) => {
   (() => {
     const textItem = form.addTextItem();
 
-    textItem.setTitle('Identifier of Maintainer');
+    textItem.setTitle(`Identifier of Maintainer ${index}`);
     textItem.setHelpText('An identifier such as GitHub ID or ORCID.');
   })();
 
@@ -229,14 +229,14 @@ const CreateMaintainerSection = (form, index) => {
   (() => {
     const textItem = form.addTextItem();
 
-    textItem.setTitle('Full Name');
+    textItem.setTitle(`Full Name ${index}`);
   })();
 
   /* Organisation identifier (ROR) */
   (() => {
     const textItem = form.addTextItem();
 
-    textItem.setTitle('Organisation Identifier');
+    textItem.setTitle(`Organisation Identifier ${index}`);
     textItem.setHelpText('Use a ROR identifier');
   })();
 
@@ -244,7 +244,7 @@ const CreateMaintainerSection = (form, index) => {
   (() => {
     const textItem = form.addTextItem();
 
-    textItem.setTitle('Organisation Legal Name');
+    textItem.setTitle(`Organisation Legal Name ${index}`);
   })();
 };
 
@@ -331,7 +331,7 @@ const CreateAssociatedMediaSection = (form, index) => {
   (() => {
     const textItem = form.addTextItem();
 
-    textItem.setTitle('Content URL');
+    textItem.setTitle(`Content URL ${index}`);
     textItem.setHelpText('URL to a JPG or PNG file showing a screenshot or other relevant illustration of the resource.');
   })();
 
