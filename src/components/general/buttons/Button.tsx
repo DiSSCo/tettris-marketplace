@@ -10,6 +10,7 @@ interface Props {
     children?: string | JSX.Element,
     type: 'button' | 'submit',
     variant: 'primary' | 'secondary' | 'tertiary' | 'blank',
+    disabled?: boolean,
     className?: string,
     OnClick?: Function
 };
@@ -19,11 +20,12 @@ interface Props {
     * @param children String to be placed in button
     * @param type The type of the button, e.g. 'button' or 'submit'
     * @param variant The variant of the button, impacts styling
+    * @param disabled Boolean indicating if the button is disabled
     * @param className Additional class names to be added to the button
     * @param OnClick The event to be fired when clicking on the button
 */
 const Button = (props: Props) => {
-    const { children, type, variant, className, OnClick } = props;
+    const { children, type, variant, disabled, className, OnClick } = props;
 
     /* ClassNames */
     const buttonClass = classNames({
@@ -34,6 +36,7 @@ const Button = (props: Props) => {
 
     return (
         <button type={type}
+            disabled={disabled}
             className={`${styles.button} ${styles[variant]} ${buttonClass} fw-bold b-none br-round`}
             onClick={() => OnClick?.()}
         >

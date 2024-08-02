@@ -70,15 +70,22 @@ const SearchResult = (props: Props) => {
                     <Col className="h-100 d-flex flex-column">
                         {/* Title and language if image is not present */}
                         <Row>
-                            <Col>
-                                <p className="fs-4 fs-lg-default fw-bold">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</p>
-                                <p className="fs-5 fs-lg-4 fst-italic">{taxonomicService.taxonomicService['schema:taxonomicRange']?.toString()}</p>
+                            <Col lg={{ span: (!previewImage || window.innerWidth < 768) ? 9 : 12 }}>
+                                <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</p>
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
-                                <Col xs="auto" lg="auto">
-                                    <p className="fw-bold fs-5 fs-lg-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
+                                <Col xs="auto" lg={{ span: 3 }}
+                                 
+                                >
+                                    <p className="fw-bold fs-5 fs-lg-4 text-end textOverflow">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                                 </Col>
                             }
+                        </Row>
+                        {/* Taxomomic range */}
+                        <Row>
+                            <Col>
+                                <p className="fs-5 fs-lg-4 fst-italic textOverflow">{taxonomicService.taxonomicService['schema:taxonomicRange']?.toString()}</p>
+                            </Col>
                         </Row>
                         {/* Description */}
                         <Row className='flex-grow-1 my-2'>

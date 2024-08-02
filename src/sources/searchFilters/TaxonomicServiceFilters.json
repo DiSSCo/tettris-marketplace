@@ -37,14 +37,6 @@
                     "value": "Botany"
                 },
                 {
-                    "label": "Astrogeology",
-                    "value": "Astrogeology"
-                },
-                {
-                    "label": "Geology",
-                    "value": "Geology"
-                },
-                {
                     "label": "Microbiology",
                     "value": "Microbiology"
                 },
@@ -63,10 +55,6 @@
                 {
                     "label": "Other Biodiversity",
                     "value": "Other Biodiversity"
-                },
-                {
-                    "label": "Other Geodiversity",
-                    "value": "Other Geodiversity"
                 },
                 {
                     "label": "Unclassified",

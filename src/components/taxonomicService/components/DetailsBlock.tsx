@@ -55,7 +55,7 @@ const DetailsBlock = (props: Props) => {
                                             />
                                             : <>
                                                 <p className="fs-5 fw-bold">{MakeReadableString(key)}</p>
-                                                <p>{!isEmpty(value) ? value : 'Not defined'}</p>
+                                                <p>{!isEmpty(value) ? value : '-'}</p>
                                             </>
                                     }
                                 </Col>

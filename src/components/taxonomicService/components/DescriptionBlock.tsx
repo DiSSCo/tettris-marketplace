@@ -62,14 +62,14 @@ const DescriptionBlock = (props: Props) => {
                             <p className="tc-primary fw-bold">{MakeReadableString(taxonomicService.taxonomicService['schema:Service']['schema:serviceType'])}</p>
                         </Col>
                         {/* Taxonomic scope */}
-                        <Col xs={{ span: 12 }} lg="auto"
+                        <Col xs={{ span: 12 }} lg={{ span: 3 }}
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Taxonomic scope</p>
                             <p>{taxonomicService.taxonomicService['schema:taxonomicRange']?.join(' / ')}</p>
                         </Col>
                         {/* Languages */}
-                        <Col xs={{ span: 12 }} lg="auto"
+                        <Col xs={{ span: 12 }} lg={{ span: 3 }}
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Supporting languages</p>
@@ -86,7 +86,7 @@ const DescriptionBlock = (props: Props) => {
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}
                             className="mt-3 mt-lg-0 py-1"
                         >
-                            <div className="position-relative h-100 d-flex align-items-center bgc-grey-light">
+                            <div className="position-relative py-2 d-flex align-items-center bgc-grey-light">
                                 <p className="position-relative w-100 text-center fs-4 fw-lightBold z-2">Quality score</p>
 
                                 <div className={`${qualityScoreBarClass} position-absolute h-100 top-0 z-1`}
