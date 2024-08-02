@@ -108,7 +108,17 @@ const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
         };
       }
 
-      taxonomicService['schema:Maintainer'][index][`${ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))}`] = itemResponse;
+      if (itemTitle.includes('Organisation')) {
+        if (!taxonomicService['schema:Maintainer'][index]['schema:Organization']) {
+          taxonomicService['schema:Maintainer'][index]['schema:Organization'] = {
+            [ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))]: itemResponse
+          };
+        } else {
+          taxonomicService['schema:Maintainer'][index]['schema:Organization'][ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))] = itemResponse;
+        }
+      } else {
+        taxonomicService['schema:Maintainer'][index][ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))] = itemResponse;
+      }
 
       break;
     case 'Payment Model':
