@@ -4,6 +4,10 @@
     transition: 0.3s;
 }
 
+.button:disabled {
+    filter: brightness(80%) !important;
+}
+
 .button:hover {
     filter: brightness(130%);
 }
@@ -12,7 +16,7 @@
 /* Primary variant */
 .primary {
     background-color: var(--primary);
-    color: white;   
+    color: white;
 }
 
 .secondary {

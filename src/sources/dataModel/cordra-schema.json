@@ -89,14 +89,11 @@
           "enum": [
             "Anthropology",
             "Botany",
-            "Astrogeology",
-            "Geology",
             "Microbiology",
             "Palaeontology",
             "Zoology",
             "Ecology",
             "Other Biodiversity",
-            "Other Geodiversity",
             "Unclassified"
           ]
         },
@@ -167,7 +164,7 @@
                   "isPrimary": true
                 }
               },
-              "maxLength": 50
+              "maxLength": 75
             },
             "schema:description": {
               "type": "string",
@@ -179,11 +176,12 @@
                   "excludeTitle": true
                 }
               },
-              "format": "textarea"
+              "format": "textarea",
+              "maxLength": 2000
             },
             "schema:slogan": {
               "type": "string",
-              "maxLength": 100,
+              "maxLength": 200,
               "title": "Slogan",
               "description": "Short catchphrase for marketing and advertising purposes. It will be usually displayed close to the Resource name and should refer to the main value or purpose of the Resource."
             },

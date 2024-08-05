@@ -69,7 +69,7 @@ const TaxonomicService = () => {
     const detailBlocksClass = classNames({
         'pt-4': !taxonomicService?.taxonomicService['schema:AssociatedMedia']
     });
-
+    
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -114,7 +114,7 @@ const TaxonomicService = () => {
                                     </Col>
                                 </Row>
                                 {/* Scrollable content */}
-                                <Row className="flex-grow-1 overflow-scroll mt-4 mb-3">
+                                <Row className="flex-grow-1 overflow-scroll mt-3 mb-3">
                                     <Col>
                                         {/* Description block */}
                                         <Row>

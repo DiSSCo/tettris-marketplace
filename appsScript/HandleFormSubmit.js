@@ -48,6 +48,9 @@ const ReferenceField = (fieldName) => {
  * Function to add a value to the taxonomic service object
  */
 const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
+  let index = 0;
+  let visibleIndex = 0;
+
   switch (itemTitle) {
     case 'Available Languages':
     case 'Taxonomic Range':
@@ -76,24 +79,46 @@ const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
       taxonomicService['schema:ContactPoint'][ReferenceField(itemTitle)] = itemResponse;
 
       break;
-    case 'Identifier of Maintainer':
-      /* Check if index is not zero, otherwise create it first */
-      if (!maintainerIndex) {
-        taxonomicService['schema:Maintainer'] = [];
+    case 'Identifier of Maintainer 1':
+    case 'Identifier of Maintainer 2':
+    case 'Identifier of Maintainer 3':
+    case 'Full Name 1':
+    case 'Full Name 2':
+    case 'Full Name 3':
+    case 'Organisation Identifier 1':
+    case 'Organisation Identifier 2':
+    case 'Organisation Identifier 3':
+    case 'Organisation Legal Name 1':
+    case 'Organisation Legal Name 2':
+    case 'Organisation Legal Name 3':
+      /* Get index from item title */
+      index = Number(itemTitle.slice(-1)) - 1;
+      visibleIndex = index + 1;
+
+      /* Check if maintainer object exists, otherwise create it first */
+      if (!taxonomicService['schema:Maintainer']) {
+        taxonomicService['schema:Maintainer'] = [
+          {
+            'schema:identifier': ''
+          }
+        ];
+      } else if (!taxonomicService['schema:Maintainer'][index]) {
+        taxonomicService['schema:Maintainer'][index] = {
+          'schema:identifier': ''
+        };
       }
 
-      /* Increment index by one */
-      maintainerIndex++;
-
-      taxonomicService['schema:Maintainer'][maintainerIndex - 1] = {
-        [`${ReferenceField(itemTitle)}`]: itemResponse
-      };
-
-      break;
-    case 'Full Name':
-    case 'Organisation Identifier':
-    case 'Organisation Legal Name':
-      taxonomicService['schema:Maintainer'][maintainerIndex - 1][`${ReferenceField(itemTitle)}`] = itemResponse;
+      if (itemTitle.includes('Organisation')) {
+        if (!taxonomicService['schema:Maintainer'][index]['schema:Organization']) {
+          taxonomicService['schema:Maintainer'][index]['schema:Organization'] = {
+            [ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))]: itemResponse
+          };
+        } else {
+          taxonomicService['schema:Maintainer'][index]['schema:Organization'][ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))] = itemResponse;
+        }
+      } else {
+        taxonomicService['schema:Maintainer'][index][ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))] = itemResponse;
+      }
 
       break;
     case 'Payment Model':
@@ -131,24 +156,34 @@ const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
       taxonomicService['schema:SoftwareSourceCode'][ReferenceField(itemTitle)] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
 
       break;
-    case 'Content URL':
-      /* Check if index is not zero, otherwise create it first */
-      if (!associatedMediaIndex) {
-        taxonomicService['schema:AssociatedMedia'] = [];
-      }
-
-      /* Increment index by one */
-      associatedMediaIndex++;
-
-      taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1] = {
-        [`${ReferenceField(itemTitle)}`]: itemResponse
-      };
-
-      break;
+    case 'Content URL 1':
+    case 'Content URL 2':
+    case 'Content URL 3':
     case 'Media License 1':
     case 'Media License 2':
     case 'Media License 3':
-      taxonomicService['schema:AssociatedMedia'][associatedMediaIndex - 1][`${ReferenceField(itemTitle)}`] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
+      /* Get index from item title */
+      index = Number(itemTitle.slice(-1)) - 1;
+      visibleIndex = index + 1;
+
+      /* Check if associated media object exists, otherwise create it first */
+      if (!taxonomicService['schema:AssociatedMedia']) {
+        taxonomicService['schema:AssociatedMedia'] = [
+          {
+            'schema:contentUrl': ''
+          }
+        ];
+      } else if (!taxonomicService['schema:AssociatedMedia'][index]) {
+        taxonomicService['schema:AssociatedMedia'][index] = {
+          'schema:contentUrl': ''
+        };
+      }
+
+      if (itemTitle.includes('Media License')) {
+        taxonomicService['schema:AssociatedMedia'][index][`${ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))}`] = licences.licenses.find(licence => licence.name === itemResponse).licenseId;
+      } else {
+        taxonomicService['schema:AssociatedMedia'][index][`${ReferenceField(itemTitle.replace(` ${visibleIndex}`, ''))}`] = itemResponse;
+      }
 
       break;
     case 'Service License':
@@ -186,12 +221,12 @@ const HandleFormSubmit = (e) => {
     const itemResponse = itemResponsesRecord.getResponse();
 
     /* Add response item to taxonomic service */
-    if (itemResponse) {
+    if (itemResponse && itemTitle) {
       AddToTaxonomicService(taxonomicService.attributes.content.taxonomicService, itemTitle, itemResponse);
-    }
 
-    /* Add response item to message */
-    message += itemTitle + ': ' + itemResponse + '\n';
+      /* Add response item to message */
+      message += itemTitle + ': ' + itemResponse + '\n';
+    }
   });
 
   /* POST submission as a draft record to Cordra */

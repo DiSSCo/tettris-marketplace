@@ -76,14 +76,11 @@
             "enum": [
                 "Anthropology",
                 "Botany",
-                "Astrogeology",
-                "Geology",
                 "Microbiology",
                 "Palaeontology",
                 "Zoology",
                 "Ecology",
                 "Other Biodiversity",
-                "Other Geodiversity",
                 "Unclassified"
             ],
             "examples": [
