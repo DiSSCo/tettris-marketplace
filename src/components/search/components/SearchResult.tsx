@@ -50,7 +50,7 @@ const SearchResult = (props: Props) => {
         dispatch(setTaxonomicService(taxonomicService));
 
         /* Navigate to the taxonomic service page */
-        navigate(`/ts/${taxonomicService.taxonomicService['@id'].replace(process.env.REACT_APP_HANDLE_URL as string, '')}`);
+        navigate(`/ts/${taxonomicService.taxonomicService['@id'].replace(import.meta.env.VITE_HANDLE_URL as string, '')}`);
     }
 
     /* ClassNames */

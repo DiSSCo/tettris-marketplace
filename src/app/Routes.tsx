@@ -1,27 +1,21 @@
 /* Import Dependencies */
-import { Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
 
-/* Import Components */
-import Home from "components/home/Home";
-import Search from "components/search/Search";
-import TaxonomicService from "components/taxonomicService/TaxonomicService";
-import Expertise from "components/expertise/Expertise";
-import NotFound404 from "components/general/NotFound404/NotFound404";
+/* Import Routes */
+import ExpertiseRoutes from 'components/expertise/Routes';
+import HomeRoutes from 'components/home/Routes';
+import NotFound404 from 'components/general/NotFound404/NotFound404';
+import SearchRoutes from 'components/search/Routes';
+import TaxonomicServiceRoutes from 'components/taxonomicService/Routes';
 
 
 /* Routes for application */
-const routes = [
-    /* Home */
-    <Route key="home" path="/" element={<Home />} />,
-    /* Search */
-    <Route key="search" path="/search" element={<Search />} />,
-    /* Taxonomic Service */
-    <Route key="taxonomicService" path="/ts/:prefix/:suffix/:version?" element={<TaxonomicService />} />,
-    /* Expertise */
-    <Route key="expertise" path="/expertise" element={<Expertise />} />,
-    /* 404 */
+const AppRoutes: JSX.Element[] = [
+    ...ExpertiseRoutes,
+    ...HomeRoutes,
+    ...SearchRoutes,
+    ...TaxonomicServiceRoutes,
     <Route key="404" path="*" element={<NotFound404 />} />
 ];
 
-
-export default routes;
+export default AppRoutes;

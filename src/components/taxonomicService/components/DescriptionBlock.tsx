@@ -1,7 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
 import MarkdownIt from 'markdown-it';
-
 import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
 
@@ -29,6 +28,10 @@ type Props = {
 const DescriptionBlock = (props: Props) => {
     const { taxonomicService } = props;
 
+    /* Transform description's markdown */
+    const md = new MarkdownIt();
+    const description = md.render(taxonomicService.taxonomicService['schema:Service']['schema:description']);
+
     /* ClassNames */
     const descriptionBlockClass = classNames({
         [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['schema:AssociatedMedia']
@@ -37,9 +40,6 @@ const DescriptionBlock = (props: Props) => {
     const qualityScoreBarClass = classNames({
         'bgc-primary': true
     });
-
-    const md = new MarkdownIt().use(require('markdown-it-sub')).use(require('markdown-it-sup'));
-    const description = md.render(taxonomicService.taxonomicService['schema:Service']['schema:description']);
 
     return (
         <div className={descriptionBlockClass}>
@@ -107,14 +107,7 @@ const DescriptionBlock = (props: Props) => {
 
                             <div className="flex-grow-1 mt-1 overflow-scroll"
                                 dangerouslySetInnerHTML={{ __html: description }}
-                            >
-                                {/* <p className="fs-4"> */}
-                                {/* <Markdown remarkPlugins={[remarkGemoji, remarkGfm]}>
-                                        {taxonomicService.taxonomicService['schema:Service']['schema:description']}
-                                    </Markdown> */}
-
-                                {/* </p> */}
-                            </div>
+                            />
                         </Col>
                     </Row>
                 </Col>

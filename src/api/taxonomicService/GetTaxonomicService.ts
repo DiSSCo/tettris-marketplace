@@ -15,7 +15,7 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
     let taxonomicService: TaxonomicService | undefined;
 
     if (handle) {
-        const taxonomicServiceID: string = handle.replace(process.env.REACT_APP_HANDLE_URL as string, '');
+        const taxonomicServiceID: string = handle.replace(import.meta.env.VITE_HANDLE_URL as string, '');
 
         try {
             const result = await axios({
