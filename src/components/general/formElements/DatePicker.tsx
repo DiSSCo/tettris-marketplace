@@ -26,7 +26,7 @@ const DatePicker = (props: Props) => {
             <ReactDatePicker selected={selected}
                 className="h-100 w-100 fs-4 py-1 px-2"
                 placeholderText={placeholder ?? 'Select a date'}
-                onChange={(date: Date) => OnChange(date)}
+                onChange={(date) => OnChange(date)}
             />
 
             <div className="bgc-none b-none fs-4 position-absolute end-0 me-3 z--1">
