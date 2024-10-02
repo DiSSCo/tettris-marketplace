@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
+import MarkdownIt from 'markdown-it';
 import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
 
@@ -26,6 +27,10 @@ type Props = {
  */
 const DescriptionBlock = (props: Props) => {
     const { taxonomicService } = props;
+
+    /* Transform description's markdown */
+    const md = new MarkdownIt();
+    const description = md.render(taxonomicService.taxonomicService['schema:Service']['schema:description']);
 
     /* ClassNames */
     const descriptionBlockClass = classNames({
@@ -100,9 +105,9 @@ const DescriptionBlock = (props: Props) => {
                         <Col className="h-100 d-flex flex-column">
                             <p className="fs-4 fs-lg-default fw-bold">Description</p>
 
-                            <div className="flex-grow-1 mt-1 overflow-scroll">
-                                <p className="fs-4">{taxonomicService.taxonomicService['schema:Service']['schema:description']}</p>
-                            </div>
+                            <div className="flex-grow-1 mt-1 overflow-scroll"
+                                dangerouslySetInnerHTML={{ __html: description }}
+                            />
                         </Col>
                     </Row>
                 </Col>

@@ -1,7 +1,7 @@
 /* Root variables */
 :root {
   --primary: #FF8E3E;
-  --secondary: #21614A;
+  --secondary: hsl(158, 49%, 25%);
   --tertiary: #7BC1DC;
   --accent: #78D3AC;
   --dark: #05041D;
