@@ -262,7 +262,7 @@
                     "@type": {
                         "type": "string",
                         "description": "The type of the additional property",
-                        "const": "ods:PropertyValue"
+                        "const": "PropertyValue"
                     },
                     "name": {
                         "type": "string",
@@ -589,12 +589,46 @@
                     "examples": [
                         "https://creativecommons.org/public-domain/cc0/"
                     ]
+                },
+                "additionalProperty": {
+                    "type": "array",
+                    "description": "Generic property for additional properties not covered by schema.org",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "@type": {
+                                "type": "string",
+                                "description": "The type of the additional property",
+                                "const": "PropertyValue"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the additional property",
+                                "examples": [
+                                    "isOpenSource"
+                                ]
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "A description of the additional property",
+                                "examples": [
+                                    "Boolean indicating is the software source code is available by open source."
+                                ]
+                            },
+                            "value": {
+                                "type": "boolean",
+                                "description": "The value of the additional property",
+                                "examples": [
+                                    true
+                                ]
+                            }
+                        }
+                    }
                 }
             },
             "required": [
                 "schema:codeRepository"
-            ],
-            "additionalProperties": false
+            ]
         },
         "schema:AssociatedMedia": {
             "type": "array",
