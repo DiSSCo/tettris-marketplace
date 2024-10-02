@@ -31,6 +31,14 @@
                 "2023-07-10T12:02:00.000Z"
             ]
         },
+        "schema:dateModified": {
+            "type": "string",
+            "description": "The date on which the Service was most recently modified or when the item's entry was modified within a DataFeed.",
+            "format": "date-time",
+            "examples": [
+                "2023-07-10T12:02:00.000Z"
+            ]
+        },
         "schema:datePublished": {
             "type": "string",
             "description": "Date the service was published",
@@ -268,7 +276,6 @@
                         "type": "string",
                         "description": "The name of the additional property",
                         "examples": [
-                            "updateFrequency",
                             "organismGroup",
                             "availableOnAppStore",
                             "paymentModel"
@@ -278,7 +285,6 @@
                         "type": "string",
                         "description": "A description of the additional property",
                         "examples": [
-                            "Indicator if the service is frequently updated or not, 'frequently updated' if the resource is updated multiple times a year.",
                             "Common names for groups of organisms.",
                             "Application is available on the following app stores, relevant for apps.",
                             "URL to webpage with the supported payment models and restrictions that apply to the Resource."
@@ -291,7 +297,6 @@
                         ],
                         "description": "The value of the additional property",
                         "examples": [
-                            "yes",
                             [
                                 "Bees"
                             ],
@@ -357,20 +362,51 @@
                         "https://eosc.eu/wp-content/uploads/2022/09/New-guidelines-for-EOSC-family-branding.jpg"
                     ]
                 },
-                "schema:dateModified": {
-                    "type": "string",
-                    "description": "The date on which the Service was most recently modified or when the item's entry was modified within a DataFeed.",
-                    "format": "date-time",
-                    "examples": [
-                        "2023-07-10T12:02:00.000Z"
-                    ]
-                },
+           
                 "schema:termsOfService": {
                     "type": "string",
                     "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service.",
                     "examples": [
                         "http://service-name.service-provid-er.eu/TermsOfUse"
                     ]
+                },
+                "additionalProperty": {
+                    "type": "array",
+                    "description": "Generic property for additional properties not covered by schema.org",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "@type": {
+                                "type": "string",
+                                "description": "The type of the additional property",
+                                "const": "PropertyValue"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the additional property",
+                                "examples": [
+                                    "updateFrequency"
+                                ]
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "A description of the additional property",
+                                "examples": [
+                                    "Indicator if the service is frequently updated or not, 'frequently updated' if the resource is updated multiple times a year."
+                                ]
+                            },
+                            "value": {
+                                "type": [
+                                    "string",
+                                    "array"
+                                ],
+                                "description": "The value of the additional property",
+                                "examples": [
+                                    "yes"
+                                ]
+                            }
+                        }
+                    }
                 }
             },
             "required": [
