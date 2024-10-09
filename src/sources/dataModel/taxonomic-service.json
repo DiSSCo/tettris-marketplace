@@ -220,7 +220,7 @@
             "type": "string",
             "description": "The geographic area associated with the service, e.g. World, Palearctic, South-East Europe, Mediterranean",
             "examples": [
-                "Annen"
+                "Mediterranean"
             ]
         },
         "schema:url": {
@@ -264,7 +264,7 @@
         },
         "schema:additionalProperty": {
             "type": "array",
-            "description": "Generic property for additional properties not covered by schema.org",
+            "description": "Generic property for handling domain specific values.",
             "items": {
                 "type": "object",
                 "properties": {
@@ -327,18 +327,18 @@
                     "items": {
                         "type": "string",
                         "enum": [
-                            "AITrainingDataset",
-                            "communityGroup",
-                            "crowdSourcing",
-                            "dataTool",
-                            "e-LearningService",
-                            "factsheet",
-                            "identification tool",
-                            "knowledge website",
-                            "mobile app",
-                            "service inventory",
-                            "referenceCollection",
-                            "specimenDatasetNotInGBIF"
+                            "AI training dataset",
+                            "Community group",
+                            "CrowdSourcing",
+                            "Data tool",
+                            "e-Learning service",
+                            "Factsheet",
+                            "Identification tool",
+                            "Knowledge website",
+                            "Mobile app",
+                            "Service inventory",
+                            "Reference collection",
+                            "Specimen dataset not in GBIF"
                         ]
                     }
                 },
@@ -379,7 +379,7 @@
                 },
                 "schema:additionalProperty": {
                     "type": "array",
-                    "description": "Generic property for additional properties not covered by schema.org",
+                    "description": "Generic property for handling domain specific values.",
                     "items": {
                         "type": "object",
                         "properties": {
@@ -599,7 +599,7 @@
                             "type": "string",
                             "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
                             "examples": [
-                                "101081903"
+                                "https://ror.org/0566bfb96"
                             ]
                         },
                         "schema:description": {
@@ -693,7 +693,7 @@
                 },
                 "schema:additionalProperty": {
                     "type": "array",
-                    "description": "Generic property for additional properties not covered by schema.org",
+                    "description": "Generic property for handling domain specific values.",
                     "items": {
                         "type": "object",
                         "properties": {
