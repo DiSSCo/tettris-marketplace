@@ -132,10 +132,9 @@ const TaxonomicService = () => {
                                                         topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
                                                         geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
-                                                        version: taxonomicService.taxonomicService['schema:version'],
-                                                        lastUpdated: moment(taxonomicService.taxonomicService['schema:Service']['schema:dateModified']).format('MMM DD - YYYY'),
-                                                        paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:url'],
-                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funder']?.['schema:name']
+                                                        published: moment(taxonomicService.taxonomicService['schema:datePublished']).format('MMM DD - YYYY'),
+                                                        paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:identifier'],
+                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:description']
                                                     }}
                                                 />
                                             </Col>
@@ -147,7 +146,7 @@ const TaxonomicService = () => {
                                                     properties={{
                                                         contactEmail: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:email'],
                                                         contactWebpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
-                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:sameAs'],
+                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
                                                         documentationWebpage: taxonomicService.taxonomicService['schema:documentation'],
                                                         maintainers: taxonomicService.taxonomicService['schema:Maintainer']
                                                     }}
@@ -164,7 +163,7 @@ const TaxonomicService = () => {
                                                             codeRepository: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:codeRepository'],
                                                             runtimePlatform: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:runtimePlatform'],
                                                             status: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:creativeWorkStatus'],
-                                                            changeLog: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:about'],
+                                                            changeLog: taxonomicService.taxonomicService['schema:about'],
                                                             programmingLanguages: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:programmingLanguage']
                                                         }}
                                                     />
