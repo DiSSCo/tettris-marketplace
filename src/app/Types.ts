@@ -57,6 +57,19 @@ export type Filter = {
     }[]
 };
 
+/* Type for a form field */
+export type FormField = {
+    jsonPath: string,
+    title: string,
+    description: string,
+    type: string,
+    options?: string[],
+    mapping?: {
+        [option: string]: string
+    },
+    required?: boolean
+};
+
 /* Type for a Dropdown item */
 export type DropdownItem = {
     label: string,

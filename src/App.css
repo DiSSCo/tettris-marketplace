@@ -225,6 +225,10 @@ p {
   border: 1px solid var(--primary);
 }
 
+.b-grey {
+  border: 1px solid var(--grey);
+}
+
 .b-none {
   border: none;
 }

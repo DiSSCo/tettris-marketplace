@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -25,6 +25,7 @@ import { Button } from 'components/general/CustomComponents';
 const TopBar = () => {
     /* Hooks */
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     /* Base variables */
     const [filtersToggle, setFiltersToggle] = useState<boolean>(false);
@@ -76,10 +77,7 @@ const TopBar = () => {
                     <Button type="button"
                         variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
                         className="fs-5 fs-lg-4"
-                        OnClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf6ug3jMZnZaZrP0WYv7GgFvnn06QIdi2GFekEqynwsoTCfUQ/viewform?usp=sf_link',
-                            '_blank',
-                            'noopener'
-                        )}
+                        OnClick={() => navigate('/ts/suggestNewTaxonomicService')}
                     >
                         Suggest a new service
                     </Button>

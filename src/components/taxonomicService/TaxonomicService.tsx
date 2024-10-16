@@ -132,7 +132,6 @@ const TaxonomicService = () => {
                                                         topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
                                                         geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
-                                                        version: taxonomicService.taxonomicService['schema:version'],
                                                         lastUpdated: moment(taxonomicService.taxonomicService['schema:Service']['schema:dateModified']).format('MMM DD - YYYY'),
                                                         paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:url'],
                                                         fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funder']?.['schema:name']
@@ -164,7 +163,7 @@ const TaxonomicService = () => {
                                                             codeRepository: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:codeRepository'],
                                                             runtimePlatform: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:runtimePlatform'],
                                                             status: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:creativeWorkStatus'],
-                                                            changeLog: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:about'],
+                                                            changeLog: taxonomicService.taxonomicService['schema:about'],
                                                             programmingLanguages: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:programmingLanguage']
                                                         }}
                                                     />
