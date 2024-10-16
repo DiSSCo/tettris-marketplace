@@ -15,6 +15,7 @@ import { FormField, Dict } from "app/Types";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
 /* Import Components */
+import BooleanField from "./BooleanField";
 import DateField from "./DateField";
 import MultiSelectField from "./MultiSelectField";
 import SelectField from "./SelectField";
@@ -123,6 +124,8 @@ const FormBuilder = (props: Props) => {
     /* Function to construct form field based upon given field */
     const ConstructFormField = (field: FormField, fieldValues?: any, SetFieldValue?: Function) => {
         switch (field.type) {
+            case 'boolean':
+                return <BooleanField field={field} />
             case 'date':
                 let dateValue: Date;
 
@@ -158,10 +161,8 @@ const FormBuilder = (props: Props) => {
     return (
         <div>
             <Formik initialValues={initialFormValues}
-                onSubmit={async (values) => {
+                onSubmit={async (_values) => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
-
-                    console.log(values);
                 }}
             >
                 {({ values, setFieldValue }) => (
@@ -239,7 +240,7 @@ const FormBuilder = (props: Props) => {
                                                                             localField.jsonPath = field.jsonPath.replace('index', String(index));
 
                                                                             return (
-                                                                                <Row>
+                                                                                <Row key={localField.jsonPath}>
                                                                                     <Col>
                                                                                         {ConstructFormField(localField, jp.value(values, localField.jsonPath))}
                                                                                     </Col>

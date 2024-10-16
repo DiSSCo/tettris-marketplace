@@ -56,7 +56,7 @@ const StringArrayField = (props: Props) => {
                             </Col>
                         </Row>
                         {fieldValues.map((_fieldValue, index) => {
-                            const key = `${jsonPath}_${index}`;
+                            const key = `${jsonPath}-${index}`;
 
                             return (
                                 <Row key={key}
