@@ -469,7 +469,7 @@
                             "https://orcid.org/0000-0001-9790-9277"
                         ]
                     },
-                    "schema:affiliation": {
+                    "schema:Affiliation": {
                         "type": "object",
                         "properties": {
                             "@type": {
@@ -541,7 +541,7 @@
                             "John Doe"
                         ]
                     },
-                    "schema:affiliation": {
+                    "schema:Affiliation": {
                         "type": "object",
                         "description": "The organisation the maintainer is affiliated with",
                         "properties": {
