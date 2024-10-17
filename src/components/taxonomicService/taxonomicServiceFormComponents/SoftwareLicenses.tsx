@@ -16,12 +16,12 @@ type Props = {
 
 
 /**
- * Component that renders a select field for single selection
+ * Component that renders a select field for software licenses
  * @param field The provided form field
  * @param SetFieldValue Function to set the value of a field in the form
  * @returns JSX Component
  */
-const SelectField = (props: Props) => {
+const SoftwareLicenses = (props: Props) => {
     const { field, SetFieldValue } = props;
 
     /* Base variables */
@@ -31,24 +31,11 @@ const SelectField = (props: Props) => {
         value: string
     }[] = [];
 
-    /* Construct select items */
-    field.options?.forEach(option => {
-        /* Define label */
-        let label: string = '';
-
-        if (field.mapping) {
-            if (typeof (field.mapping) === 'object') {
-                label = field.mapping[option]
-            } else if (field.mapping === 'licenses') {
-                label = SPDXLicenses.licenses.find(license => license.detailsUrl === option)?.name ?? option;
-            }
-        } else {
-            label = option;
-        }
-
+    /* Construct select items by querying the SPDX source file */
+    SPDXLicenses.licenses?.forEach(license => {
         selectItems.push({
-            label,
-            value: option
+            label: license.name,
+            value: license.detailsUrl
         });
     });
 
@@ -66,4 +53,4 @@ const SelectField = (props: Props) => {
     );
 };
 
-export default SelectField;
+export default SoftwareLicenses;
