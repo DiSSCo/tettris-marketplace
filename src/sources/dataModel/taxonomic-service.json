@@ -159,37 +159,37 @@
         "schema:availableLanguage": {
             "type": "array",
             "description": "A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard.",
-            "enum": [
-                "bg",
-                "hr",
-                "cs",
-                "da",
-                "lb",
-                "nl",
-                "en",
-                "et",
-                "fi",
-                "fr",
-                "de",
-                "el",
-                "hu",
-                "ga",
-                "it",
-                "lv",
-                "lt",
-                "mt",
-                "pl",
-                "pt",
-                "ro",
-                "ru",
-                "sk",
-                "es",
-                "sv",
-                "tk",
-                "uk"
-            ],
             "items": {
-                "type": "string"
+                "type": "string",
+                "enum": [
+                    "bg",
+                    "hr",
+                    "cs",
+                    "da",
+                    "lb",
+                    "nl",
+                    "en",
+                    "et",
+                    "fi",
+                    "fr",
+                    "de",
+                    "el",
+                    "hu",
+                    "ga",
+                    "it",
+                    "lv",
+                    "lt",
+                    "mt",
+                    "pl",
+                    "pt",
+                    "ro",
+                    "ru",
+                    "sk",
+                    "es",
+                    "sv",
+                    "tk",
+                    "uk"
+                ]
             }
         },
         "ods:topicDiscipline": {
@@ -358,28 +358,28 @@
                 },
                 "schema:slogan": {
                     "type": "string",
-                    "description": "A slogan or motto associated with the Service (english).",
+                    "description": "A slogan or motto associated with the Service (english)",
                     "examples": [
                         "A Bombus reference collection"
                     ]
                 },
                 "schema:logo": {
                     "type": "string",
-                    "description": "An associated logo URL.",
+                    "description": "An associated logo URL",
                     "examples": [
                         "https://eosc.eu/wp-content/uploads/2022/09/New-guidelines-for-EOSC-family-branding.jpg"
                     ]
                 },
                 "schema:termsOfService": {
                     "type": "string",
-                    "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service.",
+                    "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service",
                     "examples": [
                         "http://service-name.service-provid-er.eu/TermsOfUse"
                     ]
                 },
                 "schema:additionalProperty": {
                     "type": "array",
-                    "description": "Generic property for handling domain specific values.",
+                    "description": "Generic property for handling domain specific values",
                     "items": {
                         "type": "object",
                         "properties": {
@@ -432,18 +432,18 @@
         },
         "schema:ContactPoint": {
             "type": "object",
-            "description": "A contact point—for example, a Customer Complaints department.",
+            "description": "A contact point—for example, a Customer Complaints department",
             "properties": {
                 "schema:email": {
                     "type": "string",
-                    "description": "Email address of the contact point.",
+                    "description": "Email address of the contact point",
                     "examples": [
                         "info@cetaf.org"
                     ]
                 },
                 "schema:url": {
                     "type": "string",
-                    "description": "URL to a contact webpage or contact form for the resource.",
+                    "description": "URL to a contact webpage or contact form for the resource",
                     "examples": [
                         "cetaf.org"
                     ]
@@ -453,7 +453,7 @@
         },
         "schema:Author": {
             "type": "array",
-            "description": "An array of authors of this service.",
+            "description": "An array of authors of this service",
             "items": {
                 "type": "object",
                 "properties": {
@@ -502,14 +502,14 @@
                 "required": [
                     "@type",
                     "schema:identifier",
-                    "schema:affiliation"
+                    "schema:Affiliation"
                 ],
                 "additionalProperties": false
             }
         },
         "schema:Maintainer": {
             "type": "array",
-            "description": "An array of maintainers of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artefact.",
+            "description": "An array of maintainers of this service",
             "items": {
                 "type": "object",
                 "properties": {
@@ -519,7 +519,7 @@
                         "const": "schema:Person"
                     },
                     "schema:identifier": {
-                        "type": "string",
+                        "type": "array",
                         "description": "A unique identifier to identify the maintainer; GitHub and ORCID identifiers are valid",
                         "items": {
                             "type": "string"
@@ -570,7 +570,7 @@
                 "required": [
                     "@type",
                     "schema:identifier",
-                    "schema:affiliation"
+                    "schema:Affiliation"
                 ],
                 "additionalProperties": false
             }
@@ -592,7 +592,7 @@
                     "properties": {
                         "schema:identifier": {
                             "type": "string",
-                            "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
+                            "description": "A unique identifier to identify the grant",
                             "examples": [
                                 "https://ror.org/0566bfb96"
                             ]
@@ -741,7 +741,7 @@
                 "properties": {
                     "schema:contentUrl": {
                         "type": "string",
-                        "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain."
+                        "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain"
                     }
                 },
                 "required": [

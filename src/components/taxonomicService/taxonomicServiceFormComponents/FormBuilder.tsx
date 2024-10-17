@@ -174,8 +174,10 @@ const FormBuilder = (props: Props) => {
     return (
         <div>
             <Formik initialValues={initialFormValues}
-                onSubmit={async (_values) => {
+                onSubmit={async (values) => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
+
+                    console.log(values);
                 }}
             >
                 {({ values, setFieldValue }) => (
