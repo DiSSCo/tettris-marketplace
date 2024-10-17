@@ -59,7 +59,7 @@ const SelectField = (props: Props) => {
             </p>
             <Select
                 placeholder="Select an option"
-                options={selectItems.sort((a, b) => a.label > b.label ? 1 : 0)}
+                options={selectItems.toSorted((a, b) => a.label > b.label ? 1 : 0)}
                 onChange={(dropdownOption) => SetFieldValue(jsonPath, dropdownOption?.value)}
             />
         </div>
