@@ -20,6 +20,7 @@ import DateField from "./DateField";
 import MultiSelectField from "./MultiSelectField";
 import RORField from "./RORField";
 import SelectField from "./SelectField";
+import SoftwareLicenses from "./SoftwareLicenses";
 import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
 import TextField from "./TextField";
@@ -126,7 +127,7 @@ const FormBuilder = (props: Props) => {
     const ConstructFormField = (field: FormField, fieldValues?: any, SetFieldValue?: Function) => {
         switch (field.type) {
             case 'boolean':
-                return <BooleanField field={field} />
+                return <BooleanField field={field} />;
             case 'date':
                 let dateValue: Date;
 
@@ -139,30 +140,34 @@ const FormBuilder = (props: Props) => {
                 return <DateField field={field}
                     fieldValue={dateValue}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
+                />;
             case 'multi-string':
                 return <StringArrayField field={field}
                     fieldValues={fieldValues as string[]}
-                />
+                />;
             case 'select':
                 return <SelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
+                />;
             case 'multi-select':
                 return <MultiSelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
+                />;
             case 'ror':
                 return <RORField field={field}
                     fieldValue={fieldValues as Dict}
                     SetFieldValue={(fieldName: string, value: Dict) => {
                         SetFieldValue?.(fieldName, value)
                     }}
-                />
+                />;
+            case 'softwareLicense':
+                return <SoftwareLicenses field={field}
+                    SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
+                />;
             case 'text':
-                return <TextField field={field} />
+                return <TextField field={field} />;
             default:
-                return <StringField field={field} />
+                return <StringField field={field} />;
         };
     };
 

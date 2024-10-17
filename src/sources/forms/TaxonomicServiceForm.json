@@ -169,7 +169,8 @@
                     "https://spdx.org/licenses/OGL-UK-2.0.json",
                     "https://spdx.org/licenses/OGL-UK-3.0.json",
                     "https://data.gov.ro/pages/licence"
-                ]
+                ],
+                "mapping": "licenses"
             },
             {
                 "jsonPath": "$['schema:availableLanguage']",
@@ -426,7 +427,7 @@
                 "jsonPath": "$['schema:softwareSourceCode']['schema:license']",
                 "title": "Software License",
                 "description": "A license document that applies to this content, typically indicated by URL",
-                "type": "string"
+                "type": "softwareLicense"
             },
             {
                 "jsonPath": "$['schema:softwareSourceCode']['schema:additionalProperty'][0]",
