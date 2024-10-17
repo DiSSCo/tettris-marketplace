@@ -18,6 +18,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import BooleanField from "./BooleanField";
 import DateField from "./DateField";
 import MultiSelectField from "./MultiSelectField";
+import RORField from "./RORField";
 import SelectField from "./SelectField";
 import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
@@ -151,6 +152,13 @@ const FormBuilder = (props: Props) => {
                 return <MultiSelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
                 />
+            case 'ror':
+                return <RORField field={field}
+                    fieldValue={fieldValues as Dict}
+                    SetFieldValue={(fieldName: string, value: Dict) => {
+                        SetFieldValue?.(fieldName, value)
+                    }}
+                />
             case 'text':
                 return <TextField field={field} />
             default:
@@ -240,9 +248,11 @@ const FormBuilder = (props: Props) => {
                                                                             localField.jsonPath = field.jsonPath.replace('index', String(index));
 
                                                                             return (
-                                                                                <Row key={localField.jsonPath}>
+                                                                                <Row key={localField.jsonPath}
+                                                                                    className="mt-2"
+                                                                                >
                                                                                     <Col>
-                                                                                        {ConstructFormField(localField, jp.value(values, localField.jsonPath))}
+                                                                                        {ConstructFormField(localField, jp.value(values, localField.jsonPath), setFieldValue)}
                                                                                     </Col>
                                                                                 </Row>
                                                                             );
