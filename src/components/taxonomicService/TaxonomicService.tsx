@@ -1,6 +1,5 @@
 /* Import Dependencies */
 import classNames from 'classnames';
-import moment from 'moment';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -132,9 +131,7 @@ const TaxonomicService = () => {
                                                         topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
                                                         geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
-                                                        lastUpdated: moment(taxonomicService.taxonomicService['schema:Service']['schema:dateModified']).format('MMM DD - YYYY'),
-                                                        paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:url'],
-                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funder']?.['schema:name']
+                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:identifier']
                                                     }}
                                                 />
                                             </Col>
@@ -146,7 +143,7 @@ const TaxonomicService = () => {
                                                     properties={{
                                                         contactEmail: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:email'],
                                                         contactWebpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
-                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:sameAs'],
+                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
                                                         documentationWebpage: taxonomicService.taxonomicService['schema:documentation'],
                                                         maintainers: taxonomicService.taxonomicService['schema:Maintainer']
                                                     }}
