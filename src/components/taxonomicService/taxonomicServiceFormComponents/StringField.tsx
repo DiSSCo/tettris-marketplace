@@ -1,35 +1,53 @@
 /* Import Dependencies */
 import classNames from 'classnames';
 import { Field } from "formik";
+import jp from 'jsonpath'
+import { isEmpty } from 'lodash';
+import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
-import { FormField } from "app/Types";
+import { FormField, Dict } from "app/Types";
 
 
 /* Props Type */
 type Props = {
-    field: FormField
+    field: FormField,
+    values: Dict
 };
 
 
 /**
  * Component that renders an input field for a free text insert
  * @param field The provided form field
+ * @param values The current values in the form state
  * @returns JSX Component
  */
 const StringField = (props: Props) => {
-    const { field } = props;
+    const { field, values } = props;
 
     /* Class Names */
     const formFieldClass = classNames({
-        'b-primary': field.required
+        'b-error': (field.required && !isEmpty(values) && !jp.value(values, field.jsonPath))
     });
 
     return (
         <div>
-            <p>
-                {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
-            </p>
+            <Row>
+                <Col lg="auto"
+                    className="pe-0"
+                >
+                    <p>
+                        {field.title}
+                    </p>
+                </Col>
+                {(field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)) &&
+                    <Col className="d-flex align-items-center">
+                        <p className="fs-4 tc-error">
+                            This field is required
+                        </p>
+                    </Col>
+                }
+            </Row>
             <Field name={field.jsonPath.replace('$', '')}
                 className={`${formFieldClass} w-100 mt-1 py-1 px-2 br-corner`}
             />

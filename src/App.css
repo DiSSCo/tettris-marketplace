@@ -229,6 +229,10 @@ p {
   border: 1px solid var(--grey);
 }
 
+.b-error {
+  border: 1px solid var(--error);
+}
+
 .b-none {
   border: none;
 }
