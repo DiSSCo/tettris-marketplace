@@ -1,6 +1,5 @@
 /* Import Dependencies */
 import classNames from 'classnames';
-import moment from 'moment';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
