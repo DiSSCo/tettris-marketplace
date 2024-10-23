@@ -93,18 +93,16 @@ const FormBuilder = (props: Props) => {
         }
 
         formSection.fields.forEach(field => {
-            let jsonPath: string;
+            let jsonPath: string = '';
 
             if (formSection.type === 'array') {
                 let pathSuffix: string = FlattenJSONPath(field.jsonPath).split('_').at(-1) as string;
 
-                jsonPath = `${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`;
+                jsonPath = jsonPath.concat(`${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`);
 
                 /* Add to initial form values array zero index */
                 jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type));
             } else {
-                jsonPath = FlattenJSONPath(field.jsonPath);
-
                 /* Add to initial form values */
                 jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type));
             }
