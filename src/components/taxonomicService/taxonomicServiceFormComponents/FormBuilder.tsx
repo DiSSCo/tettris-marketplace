@@ -1,22 +1,16 @@
 /* Import Dependencies */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Formik, Form, FieldArray } from "formik";
+import { Formik, Form } from "formik";
 import jp from 'jsonpath';
-import { cloneDeep, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import { Row, Col } from 'react-bootstrap';
-
-/* Import Utilities */
-import { MakeReadableString } from "app/Utilities";
 
 /* Import Types */
 import { FormField, Dict } from "app/Types";
 
-/* Import Icons */
-import { faX } from "@fortawesome/free-solid-svg-icons";
-
 /* Import Components */
 import BooleanField from "./BooleanField";
 import DateField from "./DateField";
+import FormBuilderFieldArray from "./FormBuilderFieldArray";
 import MultiSelectField from "./MultiSelectField";
 import RORField from "./RORField";
 import SelectField from "./SelectField";
@@ -112,8 +106,6 @@ const FormBuilder = (props: Props) => {
                 /* Add to initial form values array zero index */
                 jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type));
             } else {
-                jsonPath = jsonPath.concat(FlattenJSONPath(field.jsonPath));
-
                 /* Add to initial form values */
                 jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type));
             }
@@ -133,9 +125,9 @@ const FormBuilder = (props: Props) => {
      */
     const ConstructFormField = (field: FormField, values: Dict, SetFieldValue: Function, fieldValues?: any) => {
         switch (field.type) {
-            case 'boolean':
+            case 'boolean': {
                 return <BooleanField field={field} />;
-            case 'date':
+            } case 'date': {
                 let dateValue: Date;
 
                 if (fieldValues) {
@@ -148,22 +140,22 @@ const FormBuilder = (props: Props) => {
                     fieldValue={dateValue}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
                 />;
-            case 'multi-string':
+            } case 'multi-string': {
                 return <StringArrayField field={field}
                     fieldValues={fieldValues as string[]}
                     values={values}
                 />;
-            case 'select':
+            } case 'select': {
                 return <SelectField field={field}
                     values={values}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
                 />;
-            case 'multi-select':
+            } case 'multi-select': {
                 return <MultiSelectField field={field}
                     values={values}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
                 />;
-            case 'ror':
+            } case 'ror': {
                 return <RORField field={field}
                     fieldValue={fieldValues as Dict}
                     values={values}
@@ -171,18 +163,19 @@ const FormBuilder = (props: Props) => {
                         SetFieldValue?.(fieldName, value)
                     }}
                 />;
-            case 'softwareLicense':
+            } case 'softwareLicense': {
                 return <SoftwareLicenses field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
                 />;
-            case 'text':
+            } case 'text': {
                 return <TextField field={field}
                     values={values}
                 />;
-            default:
+            } default: {
                 return <StringField field={field}
                     values={values}
                 />;
+            }
         };
     };
 
@@ -201,7 +194,7 @@ const FormBuilder = (props: Props) => {
                                 Object.values(field).forEach(value => {
                                     if (Array.isArray(value) && isEmpty(value)) {
                                         validationFlag = false;
-                                    } else if (typeof(value) === 'object') {
+                                    } else if (typeof (value) === 'object') {
                                         Object.values(value).forEach(subValue => {
                                             if (isEmpty(subValue)) {
                                                 validationFlag = false;
@@ -232,118 +225,48 @@ const FormBuilder = (props: Props) => {
                     }
                 }}
             >
-                {({ values, setFieldValue }) => {
-                    return (
-                        <Form>
-                            {Object.entries(formSections).map(([title, section]) => (
-                                <Row key={title}>
-                                    <Col>
-                                        {section.type === 'object' ?
-                                            <div className="mt-4">
-                                                <p className="fw-lightBold">{`${title}`}</p>
-
-                                                {section.fields.map(field => (
-                                                    <Row key={field.jsonPath}
-                                                        className="mt-2"
-                                                    >
-                                                        <Col>
-                                                            {ConstructFormField(field, values, setFieldValue, jp.value(values, field.jsonPath))}
-                                                        </Col>
-                                                    </Row>
-                                                ))}
-                                            </div>
-                                            : <FieldArray name={section.jsonPath.replace('$', '')}>
-                                                {({ push, remove }) => (
-                                                    <div className="mt-4">
-                                                        <Row>
-                                                            <Col>
-                                                                <p className="fw-lightBold">{`${title}${title.at(-1) !== 'a' ? 's' : ''}`}</p>
-                                                            </Col>
-                                                            <Col lg="auto">
-                                                                <Button type="button"
-                                                                    variant="blank"
-                                                                    className="px-0 py-0"
-                                                                    OnClick={() => {
-                                                                        push(jp.value(initialFormValues, section.jsonPath)[0]);
-                                                                    }}
-                                                                >
-                                                                    <p className="tc-primary">
-                                                                        {`Add ${title}`}
-                                                                    </p>
-                                                                </Button>
-                                                            </Col>
-                                                        </Row>
-
-                                                        {jp.value(values, section.jsonPath).map((_fields: Dict, index: number) => {
-                                                            const key = `${section.jsonPath}-${index}`;
-
-                                                            return (
-                                                                <div key={key}
-                                                                    className="mt-2 px-3 py-2 b-grey"
-                                                                >
-                                                                    <Row>
-                                                                        <Col>
-                                                                            <p className="fw-lightBold">
-                                                                                {`${title} #${index + 1}`}
-                                                                            </p>
-                                                                        </Col>
-                                                                        {jp.value(values, section.jsonPath).length > 1 &&
-                                                                            <Col lg="auto">
-                                                                                <Button type="button"
-                                                                                    variant="blank"
-                                                                                    OnClick={() => remove(index)}
-                                                                                >
-                                                                                    <FontAwesomeIcon icon={faX}
-                                                                                        className="tc-grey"
-                                                                                    />
-                                                                                </Button>
-                                                                            </Col>
-                                                                        }
-                                                                    </Row>
-                                                                    <Row className="my-2">
-                                                                        <Col>
-                                                                            {formSections[MakeReadableString(FlattenJSONPath(section.jsonPath)).split(' ').slice(1).join(' ')].fields.map(field => {
-                                                                                let localField = cloneDeep(field);
-
-                                                                                localField.jsonPath = field.jsonPath.replace('index', String(index));
-
-                                                                                return (
-                                                                                    <Row key={localField.jsonPath}
-                                                                                        className="mt-2"
-                                                                                    >
-                                                                                        <Col>
-                                                                                            {ConstructFormField(localField, values, setFieldValue, jp.value(values, localField.jsonPath))}
-                                                                                        </Col>
-                                                                                    </Row>
-                                                                                );
-                                                                            })}
-                                                                        </Col>
-                                                                    </Row>
-
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                )}
-                                            </FieldArray>
-                                        }
-                                    </Col>
-                                </Row>
-                            ))}
-                            <Row className="mt-4">
+                {({ values, setFieldValue }) => (
+                    <Form>
+                        {Object.entries(formSections).map(([title, section]) => (
+                            <Row key={title}>
                                 <Col>
-                                    <Button type="submit"
-                                        variant="primary"
-                                    >
-                                        <p>
-                                            Submit
-                                        </p>
-                                    </Button>
+                                    {section.type === 'object' ?
+                                        <div className="mt-4">
+                                            <p className="fw-lightBold">{`${title}`}</p>
+
+                                            {section.fields.map(field => (
+                                                <Row key={field.jsonPath}
+                                                    className="mt-2"
+                                                >
+                                                    <Col>
+                                                        {ConstructFormField(field, values, setFieldValue, jp.value(values, field.jsonPath))}
+                                                    </Col>
+                                                </Row>
+                                            ))}
+                                        </div>
+                                        : <FormBuilderFieldArray section={section}
+                                            title={title}
+                                            initialFormValues={initialFormValues}
+                                            values={values}
+                                            formSections={formSections}
+                                            FlattenJSONPath={FlattenJSONPath}
+                                            ConstructFormField={ConstructFormField}
+                                        />
+                                    }
                                 </Col>
                             </Row>
-                        </Form>
-                    );
-                }}
+                        ))}
+                        <Row className="mt-4">
+                            <Col>
+                                <Button type="submit"
+                                    variant="primary"
+                                >
+                                    Submit
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                )}
             </Formik>
         </div>
     );
