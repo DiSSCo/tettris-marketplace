@@ -1,22 +1,15 @@
 /* Import Dependencies */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Formik, Form, FieldArray } from "formik";
+import { Formik, Form } from "formik";
 import jp from 'jsonpath';
-import { cloneDeep } from "lodash";
 import { Row, Col } from 'react-bootstrap';
-
-/* Import Utilities */
-import { MakeReadableString } from "app/Utilities";
 
 /* Import Types */
 import { FormField, Dict } from "app/Types";
 
-/* Import Icons */
-import { faX } from "@fortawesome/free-solid-svg-icons";
-
 /* Import Components */
 import BooleanField from "./BooleanField";
 import DateField from "./DateField";
+import FormBuilderFieldArray from "./FormBuilderFieldArray";
 import MultiSelectField from "./MultiSelectField";
 import SelectField from "./SelectField";
 import StringField from "./StringField";
@@ -100,17 +93,17 @@ const FormBuilder = (props: Props) => {
         }
 
         formSection.fields.forEach(field => {
-            let jsonPath: string = '';
+            let jsonPath: string;
 
             if (formSection.type === 'array') {
                 let pathSuffix: string = FlattenJSONPath(field.jsonPath).split('_').at(-1) as string;
 
-                jsonPath = jsonPath.concat(`${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`);
+                jsonPath = `${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`;
 
                 /* Add to initial form values array zero index */
                 jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type));
             } else {
-                jsonPath = jsonPath.concat(FlattenJSONPath(field.jsonPath));
+                jsonPath = FlattenJSONPath(field.jsonPath);
 
                 /* Add to initial form values */
                 jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type));
@@ -124,9 +117,9 @@ const FormBuilder = (props: Props) => {
     /* Function to construct form field based upon given field */
     const ConstructFormField = (field: FormField, fieldValues?: any, SetFieldValue?: Function) => {
         switch (field.type) {
-            case 'boolean':
-                return <BooleanField field={field} />
-            case 'date':
+            case 'boolean': {
+                return <BooleanField field={field} />;
+            } case 'date': {
                 let dateValue: Date;
 
                 if (fieldValues) {
@@ -138,23 +131,24 @@ const FormBuilder = (props: Props) => {
                 return <DateField field={field}
                     fieldValue={dateValue}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
-            case 'multi-string':
+                />;
+            } case 'multi-string': {
                 return <StringArrayField field={field}
                     fieldValues={fieldValues as string[]}
-                />
-            case 'select':
+                />;
+            } case 'select': {
                 return <SelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
-            case 'multi-select':
+                />;
+            } case 'multi-select': {
                 return <MultiSelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
-            case 'text':
-                return <TextField field={field} />
-            default:
-                return <StringField field={field} />
+                />;
+            } case 'text': {
+                return <TextField field={field} />;
+            } default: {
+                return <StringField field={field} />;
+            }
         };
     };
 
@@ -184,78 +178,14 @@ const FormBuilder = (props: Props) => {
                                                 </Row>
                                             ))}
                                         </div>
-                                        : <FieldArray name={section.jsonPath.replace('$', '')}>
-                                            {({ push, remove }) => (
-                                                <div className="mt-4">
-                                                    <Row>
-                                                        <Col>
-                                                            <p className="fw-lightBold">{`${title}${title.at(-1) !== 'a' ? 's' : ''}`}</p>
-                                                        </Col>
-                                                        <Col lg="auto">
-                                                            <Button type="button"
-                                                                variant="blank"
-                                                                className="px-0 py-0"
-                                                                OnClick={() => {
-                                                                    push(jp.value(initialFormValues, section.jsonPath)[0]);
-                                                                }}
-                                                            >
-                                                                <p className="tc-primary">
-                                                                    {`Add ${title}`}
-                                                                </p>
-                                                            </Button>
-                                                        </Col>
-                                                    </Row>
-
-                                                    {jp.value(values, section.jsonPath).map((_fields: Dict, index: number) => {
-                                                        const key = `${section.jsonPath}-${index}`;
-
-                                                        return (
-                                                            <div key={key}
-                                                                className="mt-2 px-3 py-2 b-grey"
-                                                            >
-                                                                <Row>
-                                                                    <Col>
-                                                                        <p className="fw-lightBold">
-                                                                            {`${title} #${index + 1}`}
-                                                                        </p>
-                                                                    </Col>
-                                                                    {jp.value(values, section.jsonPath).length > 1 &&
-                                                                        <Col lg="auto">
-                                                                            <Button type="button"
-                                                                                variant="blank"
-                                                                                OnClick={() => remove(index)}
-                                                                            >
-                                                                                <FontAwesomeIcon icon={faX}
-                                                                                    className="tc-grey"
-                                                                                />
-                                                                            </Button>
-                                                                        </Col>
-                                                                    }
-                                                                </Row>
-                                                                <Row className="my-2">
-                                                                    <Col>
-                                                                        {formSections[MakeReadableString(FlattenJSONPath(section.jsonPath)).split(' ').slice(1).join(' ')].fields.map(field => {
-                                                                            let localField = cloneDeep(field);
-
-                                                                            localField.jsonPath = field.jsonPath.replace('index', String(index));
-
-                                                                            return (
-                                                                                <Row key={localField.jsonPath}>
-                                                                                    <Col>
-                                                                                        {ConstructFormField(localField, jp.value(values, localField.jsonPath))}
-                                                                                    </Col>
-                                                                                </Row>
-                                                                            );
-                                                                        })}
-                                                                    </Col>
-                                                                </Row>
-
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            )}
-                                        </FieldArray>
+                                        : <FormBuilderFieldArray section={section}
+                                            title={title}
+                                            initialFormValues={initialFormValues}
+                                            values={values}
+                                            formSections={formSections}
+                                            FlattenJSONPath={FlattenJSONPath}
+                                            ConstructFormField={ConstructFormField}
+                                        />
                                     }
                                 </Col>
                             </Row>

@@ -132,9 +132,7 @@ const TaxonomicService = () => {
                                                         topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
                                                         geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
-                                                        lastUpdated: moment(taxonomicService.taxonomicService['schema:Service']['schema:dateModified']).format('MMM DD - YYYY'),
-                                                        paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:url'],
-                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funder']?.['schema:name']
+                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:identifier']
                                                     }}
                                                 />
                                             </Col>
