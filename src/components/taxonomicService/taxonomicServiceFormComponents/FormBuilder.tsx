@@ -125,9 +125,9 @@ const FormBuilder = (props: Props) => {
     /* Function to construct form field based upon given field */
     const ConstructFormField = (field: FormField, fieldValues?: any, SetFieldValue?: Function) => {
         switch (field.type) {
-            case 'boolean':
-                return <BooleanField field={field} />
-            case 'date':
+            case 'boolean': {
+                return <BooleanField field={field} />;
+            } case 'date': {
                 let dateValue: Date;
 
                 if (fieldValues) {
@@ -139,30 +139,31 @@ const FormBuilder = (props: Props) => {
                 return <DateField field={field}
                     fieldValue={dateValue}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
-            case 'multi-string':
+                />;
+            } case 'multi-string': {
                 return <StringArrayField field={field}
                     fieldValues={fieldValues as string[]}
-                />
-            case 'select':
+                />;
+            } case 'select': {
                 return <SelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
-            case 'multi-select':
+                />;
+            } case 'multi-select': {
                 return <MultiSelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
-                />
-            case 'ror':
+                />;
+            } case 'ror': {
                 return <RORField field={field}
                     fieldValue={fieldValues as Dict}
                     SetFieldValue={(fieldName: string, value: Dict) => {
                         SetFieldValue?.(fieldName, value)
                     }}
-                />
-            case 'text':
-                return <TextField field={field} />
-            default:
-                return <StringField field={field} />
+                />;
+            } case 'text': {
+                return <TextField field={field} />;
+            } default: {
+                return <StringField field={field} />;
+            }
         };
     };
 
