@@ -76,7 +76,7 @@ export type FormField = {
     options?: string[],
     mapping?: {
         [option: string]: string
-    },
+    } | string,
     required?: boolean
 };
 

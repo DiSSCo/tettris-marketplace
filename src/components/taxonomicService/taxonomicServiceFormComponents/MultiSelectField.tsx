@@ -30,8 +30,19 @@ const MultiSelectField = (props: Props) => {
 
     /* Construct select items */
     field.options?.forEach(option => {
+        /* Define label */
+        let label: string = '';
+
+        if (field.mapping) {
+            if (typeof(field.mapping) === 'object') {
+                label = field.mapping[option]
+            }
+        } else {
+            label = option;
+        }
+
         selectItems.push({
-            label: field.mapping ? field.mapping[option] : option,
+            label,
             value: option
         });
     });

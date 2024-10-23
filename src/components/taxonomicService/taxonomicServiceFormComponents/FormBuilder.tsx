@@ -13,6 +13,7 @@ import FormBuilderFieldArray from "./FormBuilderFieldArray";
 import MultiSelectField from "./MultiSelectField";
 import RORField from "./RORField";
 import SelectField from "./SelectField";
+import SoftwareLicenses from "./SoftwareLicenses";
 import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
 import TextField from "./TextField";
@@ -149,6 +150,10 @@ const FormBuilder = (props: Props) => {
                     SetFieldValue={(fieldName: string, value: Dict) => {
                         SetFieldValue?.(fieldName, value)
                     }}
+                />;
+            } case 'softwareLicense': {
+                return <SoftwareLicenses field={field}
+                    SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
                 />;
             } case 'text': {
                 return <TextField field={field} />;
