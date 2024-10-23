@@ -250,6 +250,7 @@ const FormBuilder = (props: Props) => {
                                             values={values}
                                             formSections={formSections}
                                             FlattenJSONPath={FlattenJSONPath}
+                                            SetFieldValue={setFieldValue}
                                             ConstructFormField={ConstructFormField}
                                         />
                                     }

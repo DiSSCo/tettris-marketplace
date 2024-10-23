@@ -32,12 +32,13 @@ type Props = {
         }
     },
     FlattenJSONPath: Function,
+    SetFieldValue: Function,
     ConstructFormField: Function
 };
 
 
 const FormBuilderFieldArray = (props: Props) => {
-    const { section, title, initialFormValues, values, formSections, FlattenJSONPath, ConstructFormField } = props;
+    const { section, title, initialFormValues, values, formSections, FlattenJSONPath, SetFieldValue, ConstructFormField } = props;
 
     return (
         <FieldArray name={section.jsonPath.replace('$', '')}>
@@ -98,7 +99,7 @@ const FormBuilderFieldArray = (props: Props) => {
                                             return (
                                                 <Row key={localField.jsonPath}>
                                                     <Col>
-                                                        {ConstructFormField(localField, jp.value(values, localField.jsonPath))}
+                                                        {ConstructFormField(localField, values, SetFieldValue, jp.value(values, localField.jsonPath))}
                                                     </Col>
                                                 </Row>
                                             );
