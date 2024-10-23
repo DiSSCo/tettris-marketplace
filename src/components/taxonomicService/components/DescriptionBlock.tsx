@@ -4,9 +4,6 @@ import MarkdownIt from 'markdown-it';
 import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
 
-/* Import Utilities */
-import { MakeReadableString } from 'app/Utilities';
-
 /* Import Types */
 import { TaxonomicService } from 'app/Types';
 
@@ -64,7 +61,7 @@ const DescriptionBlock = (props: Props) => {
                         {/* Type */}
                         <Col xs={{ span: 12 }} lg="auto">
                             <p className="fs-5 fw-bold">Taxonomic service type</p>
-                            <p className="tc-primary fw-bold">{MakeReadableString(taxonomicService.taxonomicService['schema:Service']['schema:serviceType'])}</p>
+                            <p className="tc-primary fw-bold">{taxonomicService.taxonomicService['schema:Service']['schema:serviceType']}</p>
                         </Col>
                         {/* Taxonomic scope */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}

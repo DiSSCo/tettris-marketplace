@@ -146,7 +146,7 @@ const TaxonomicService = () => {
                                                     properties={{
                                                         contactEmail: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:email'],
                                                         contactWebpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
-                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:sameAs'],
+                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
                                                         documentationWebpage: taxonomicService.taxonomicService['schema:documentation'],
                                                         maintainers: taxonomicService.taxonomicService['schema:Maintainer']
                                                     }}

@@ -4,9 +4,6 @@ import classNames from 'classnames';
 import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
 
-/* Import Utilities */
-import { MakeReadableString } from 'app/Utilities';
-
 /* Import Hooks */
 import { useAppDispatch } from 'app/Hooks';
 
@@ -96,7 +93,7 @@ const SearchResult = (props: Props) => {
                         {/* Service Type and Publishing Date if preview image is not present */}
                         <Row>
                             <Col>
-                                <p className="fs-5 fs-lg-4">{MakeReadableString(taxonomicService.taxonomicService['schema:Service']['schema:serviceType'] ?? 'Taxonomic Service')}</p>
+                                <p className="fs-5 fs-lg-4">{taxonomicService.taxonomicService['schema:Service']['schema:serviceType']}</p>
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
                                 <Col xs="auto" lg="auto">

@@ -37,9 +37,11 @@ export type TaxonomicService = {
 
 /* Type for an Agent */
 export type Maintainer = {
-    "schema:identifier"?: string;
+    "@type": string,
+    "schema:identifier"?: string | Dict[];
     "schema:name"?: string;
-    "schema:Organization"?: {
+    "schema:Affiliation"?: {
+        "@type": string,
         "schema:identifier"?: string;
         "schema:legalName"?: string;
     };
