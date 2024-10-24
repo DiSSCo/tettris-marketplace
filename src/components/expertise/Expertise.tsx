@@ -59,7 +59,7 @@ const Expertise = () => {
                     <button type="button" className="btn btn-primary">Register your expertise</button>
                 </Col>
             </Container>
-            <Container fluid className="flex-grow-1 overflow-hidden">
+            <Container fluid className="flex-grow-1 p-3 overflow-hidden">
                 <Row className="h-100">
                     <Col md={3}>
                         <div className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
