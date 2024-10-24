@@ -212,16 +212,20 @@ const FormBuilder = (props: Props) => {
                     /* Check if all required fields are present */
                     let validationFlag: boolean = true;
 
+                    const ValidateArrayComponentObject = (value: Dict) => {
+                        Object.values(value).forEach(subValue => {
+                            if (isEmpty(subValue)) {
+                                validationFlag = false;
+                            }
+                        });
+                    };
+
                     const ValidateArrayComponent = (field: Dict) => {
                         Object.values(field).forEach(value => {
                             if (Array.isArray(value) && isEmpty(value)) {
                                 validationFlag = false;
                             } else if (typeof (value) === 'object') {
-                                Object.values(value).forEach(subValue => {
-                                    if (isEmpty(subValue)) {
-                                        validationFlag = false;
-                                    }
-                                });
+                                ValidateArrayComponentObject(value);
                             } else if (!value) {
                                 validationFlag = false;
                             }
