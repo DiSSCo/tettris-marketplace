@@ -212,22 +212,26 @@ const FormBuilder = (props: Props) => {
                     /* Check if all required fields are present */
                     let validationFlag: boolean = true;
 
-                    const ValidateArray = (fieldArray: Dict[]) => {
-                        fieldArray.forEach(field => {
-                            if (typeof (field) === 'object') {
-                                Object.values(field).forEach(value => {
-                                    if (Array.isArray(value) && isEmpty(value)) {
-                                        validationFlag = false;
-                                    } else if (typeof (value) === 'object') {
-                                        Object.values(value).forEach(subValue => {
-                                            if (isEmpty(subValue)) {
-                                                validationFlag = false;
-                                            }
-                                        });
-                                    } else if (!value) {
+                    const ValidateArrayComponent = (field: Dict) => {
+                        Object.values(field).forEach(value => {
+                            if (Array.isArray(value) && isEmpty(value)) {
+                                validationFlag = false;
+                            } else if (typeof (value) === 'object') {
+                                Object.values(value).forEach(subValue => {
+                                    if (isEmpty(subValue)) {
                                         validationFlag = false;
                                     }
                                 });
+                            } else if (!value) {
+                                validationFlag = false;
+                            }
+                        });
+                    };
+
+                    const ValidateArray = (fieldArray: Dict[]) => {
+                        fieldArray.forEach(field => {
+                            if (typeof (field) === 'object') {
+                                ValidateArrayComponent(field);
                             }
                         });
                     };
