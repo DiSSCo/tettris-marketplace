@@ -6,8 +6,6 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
 import React, { useState } from 'react';
-import { set } from 'lodash';
-
 
 /**
  * Component that renders the Expertise page
@@ -100,7 +98,7 @@ const Expertise = () => {
                     </Col>
                 </Row>
             </Container>
-            
+
             {/* Render Footer */}
             <Footer />
         </div>
