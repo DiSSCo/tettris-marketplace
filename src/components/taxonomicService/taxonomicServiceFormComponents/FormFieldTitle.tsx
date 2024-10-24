@@ -31,6 +31,9 @@ const FormFieldTitle = (props: Props) => {
                 <p>
                     {field.title}
                 </p>
+                <p className="fs-5 tc-grey">
+                    {field.description}
+                </p>
             </Col>
             {(field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)) &&
                 <Col className="d-flex align-items-center">
