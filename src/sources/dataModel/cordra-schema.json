@@ -14,7 +14,7 @@
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:Service"
+        "schema:service"
       ],
       "properties": {
         "@id": {
@@ -30,8 +30,7 @@
         "@type": {
           "type": "string",
           "title": "Object Type",
-          "description": "The type of the object, in this case TaxonomicService",
-          "const": "TaxonomicService"
+          "description": "The type of the object, in this case TaxonomicService"
         },
         "schema:dateCreated": {
           "type": "string",
@@ -258,36 +257,16 @@
         },
         "schema:additionalProperty": {
           "type": "array",
+          "title": "Additional Properties (organismGroup, availableOnAppStore and paymentModel)",
           "description": "Generic property for handling domain specific values.",
           "items": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "description": "The type of the additional property",
-                "const": "PropertyValue"
-              },
-              "name": {
-                "type": "string",
-                "description": "The name of the additional property: organismGroup / availableOnAppStore / paymentModel"
-              },
-              "description": {
-                "type": "string",
-                "description": "A description of the additional property"
-              },
-              "value": {
-                "type": [
-                  "string",
-                  "array"
-                ],
-                "description": "The value of the additional property"
-              }
-            },
-            "required": [
-              "@type",
-              "name",
-              "description",
-              "value"
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "array",
+              "object",
+              "null"
             ]
           }
         },
@@ -362,36 +341,16 @@
             },
             "schema:additionalProperty": {
               "type": "array",
+              "title": "Additional properties (updateFrequency)",
               "description": "Generic property for handling domain specific values",
               "items": {
-                "type": "object",
-                "properties": {
-                  "@type": {
-                    "type": "string",
-                    "description": "The type of the additional property",
-                    "const": "PropertyValue"
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "The name of the additional property: updateFrequency"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "A description of the additional property"
-                  },
-                  "value": {
-                    "type": [
-                      "string",
-                      "array"
-                    ],
-                    "description": "The value of the additional property"
-                  }
-                },
-                "required": [
-                  "@type",
-                  "name",
-                  "description",
-                  "value"
+                "type": [
+                  "string",
+                  "number",
+                  "boolean",
+                  "array",
+                  "object",
+                  "null"
                 ]
               }
             }
@@ -422,16 +381,14 @@
               "@type": {
                 "type": "string",
                 "title": "Author type",
-                "description": "The type of the author",
-                "const": "schema:Person"
+                "description": "The type of the author"
               },
               "schema:Affiliation": {
                 "type": "object",
                 "properties": {
                   "@type": {
                     "type": "string",
-                    "description": "The type of the affiliation",
-                    "const": "schema:Organization"
+                    "description": "The type of the affiliation"
                   },
                   "schema:identifier": {
                     "type": "string",
@@ -466,8 +423,7 @@
               "@type": {
                 "type": "string",
                 "title": "Maintainer type",
-                "description": "The type of the maintainer",
-                "const": "schema:Person"
+                "description": "The type of the maintainer"
               },
               "schema:identifier": {
                 "type": "array",
@@ -487,8 +443,7 @@
                 "properties": {
                   "@type": {
                     "type": "string",
-                    "description": "The type of the affiliation",
-                    "const": "schema:Organization"
+                    "description": "The type of the affiliation"
                   },
                   "schema:identifier": {
                     "type": "string",
@@ -505,13 +460,13 @@
                   "@type",
                   "schema:identifier"
                 ]
-              },
-              "required": [
-                "@type",
-                "schema:identifier",
-                "schema:Affiliation"
-              ]
-            }
+              }
+            },
+            "required": [
+              "@type",
+              "schema:identifier",
+              "schema:Affiliation"
+            ]
           }
         },
         "schema:FundingScheme": {
@@ -549,8 +504,7 @@
                 "@type": {
                   "type": "string",
                   "title": "Funder type",
-                  "description": "The type of funder",
-                  "const": "schema:Organization"
+                  "description": "The type of funder"
                 },
                 "schema:identifier": {
                   "type": "string",
@@ -604,33 +558,16 @@
             },
             "schema:additionalProperty": {
               "type": "array",
+              "title": "Additional properties (isOpenSource)",
               "description": "Generic property for handling domain specific values.",
               "items": {
-                "type": "object",
-                "properties": {
-                  "@type": {
-                    "type": "string",
-                    "description": "The type of the additional property",
-                    "const": "PropertyValue"
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "The name of the additional property: isOpenSource"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "A description of the additional property"
-                  },
-                  "value": {
-                    "type": "boolean",
-                    "description": "The value of the additional property"
-                  }
-                },
-                "required": [
-                  "@type",
-                  "name",
-                  "description",
-                  "value"
+                "type": [
+                  "string",
+                  "number",
+                  "boolean",
+                  "array",
+                  "object",
+                  "null"
                 ]
               }
             }

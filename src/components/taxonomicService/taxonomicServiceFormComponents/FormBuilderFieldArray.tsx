@@ -37,6 +37,18 @@ type Props = {
 };
 
 
+/**
+ * Component that renders a field array when rendering array instances in the form builder
+ * @param section The form section to be rendered
+ * @param title The title of the form section
+ * @param initialFormValues The initial values of the form state
+ * @param values The current values of the form state
+ * @param formSections The original form sections array holding the different form sections
+ * @param FlattenJSONPath Function to flatten a JSON path
+ * @param SetFieldValue Function to set the value of a form field
+ * @param ConstructFormField Function to construct a form field component based upon the provided field object
+ * @returns JSX Component
+ */
 const FormBuilderFieldArray = (props: Props) => {
     const { section, title, initialFormValues, values, formSections, FlattenJSONPath, SetFieldValue, ConstructFormField } = props;
 

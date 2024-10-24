@@ -65,6 +65,7 @@ export type FormField = {
     title: string,
     description: string,
     type: string,
+    const?: string,
     options?: string[],
     mapping?: {
         [option: string]: string

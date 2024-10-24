@@ -327,6 +327,13 @@
         "type": "array",
         "fields": [
             {
+                "jsonPath": "$['schema:author']['index']['@type']",
+                "title": "@type",
+                "description": "The author type",
+                "type": "hidden",
+                "const": "schema:Person"
+            },
+            {
                 "jsonPath": "$['schema:author']['index']['schema:identifier']",
                 "title": "ORCID",
                 "description": "A unique identifier to identify the author; ORCID identifiers are valid",
@@ -347,6 +354,13 @@
         "jsonPath": "$['schema:maintainer']",
         "type": "array",
         "fields": [
+            {
+                "jsonPath": "$['schema:maintainer']['index']['@type']",
+                "title": "@type",
+                "description": "The author type",
+                "type": "hidden",
+                "const": "schema:Person"
+            },
             {
                 "jsonPath": "$['schema:maintainer']['index']['schema:identifier']",
                 "title": "GitHub / ORCID Identifier",

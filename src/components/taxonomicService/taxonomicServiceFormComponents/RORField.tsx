@@ -143,6 +143,7 @@ const RORField = (props: Props) => {
                                 });
 
                                 SetFieldValue(jsonPath, {
+                                    "@type": "schema:Organization",
                                     "schema:identifier": dropdownOption?.value,
                                     "schema:name": dropdownOption?.label
                                 });

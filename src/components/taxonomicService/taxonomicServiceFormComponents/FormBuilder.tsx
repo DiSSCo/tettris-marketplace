@@ -1,16 +1,22 @@
 /* Import Dependencies */
+import { useCaptchaHook } from "@aacn.eu/use-friendly-captcha";
 import { Formik, Form } from "formik";
 import jp from 'jsonpath';
-import { isEmpty } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
+import { useState } from "react";
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
 import { FormField, Dict } from "app/Types";
 
+/* Import API */
+import InsertTaxonomicService from "api/taxonomicService/InsertTaxonomicService";
+
 /* Import Components */
 import BooleanField from "./BooleanField";
 import DateField from "./DateField";
 import FormBuilderFieldArray from "./FormBuilderFieldArray";
+import HiddenField from "./HiddenField";
 import MultiSelectField from "./MultiSelectField";
 import RORField from "./RORField";
 import SelectField from "./SelectField";
@@ -18,7 +24,7 @@ import SoftwareLicenses from "./SoftwareLicenses";
 import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
 import TextField from "./TextField";
-import { Button } from "components/general/CustomComponents";
+import { Button, Spinner } from "components/general/CustomComponents";
 
 
 /* Props Type */
@@ -30,7 +36,8 @@ type Props = {
             jsonPath?: string,
             fields: FormField[]
         }
-    }
+    },
+    SetCompleted: Function
 };
 
 
@@ -40,9 +47,20 @@ type Props = {
  * @returns JSX Component
  */
 const FormBuilder = (props: Props) => {
-    const { formTemplate } = props;
+    const { formTemplate, SetCompleted } = props;
+
+    /* Hooks */
+    const captchaHook = useCaptchaHook({
+        siteKey: import.meta.env.VITE_FRIENDLY_CAPTCHA_SITEKEY,
+        endpoint: "GLOBAL1",
+        language: "en",
+        startMode: "none",
+        showAttribution: true
+    });
 
     /* Base variables */
+    const [loading, setLoading] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>();
     const formSections: {
         [section: string]: {
             type: string,
@@ -64,7 +82,7 @@ const FormBuilder = (props: Props) => {
      * Function to determine the initial form field type 
      * @param fieldType
      */
-    const DetermineInitialFormValue = (fieldType: string) => {
+    const DetermineInitialFormValue = (fieldType: string, fieldConst?: string) => {
         switch (fieldType) {
             case 'boolean':
                 return false;
@@ -74,11 +92,12 @@ const FormBuilder = (props: Props) => {
                 return [''];
             case 'ror':
                 return {
+                    "@type": "schema:Organization",
                     "schema:identifier": '',
                     "schema:name": ''
                 };
             default:
-                return '';
+                return fieldConst ?? '';
         };
     };
 
@@ -104,10 +123,10 @@ const FormBuilder = (props: Props) => {
                 jsonPath = jsonPath.concat(`${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`);
 
                 /* Add to initial form values array zero index */
-                jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type));
+                jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type, field.const));
             } else {
                 /* Add to initial form values */
-                jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type));
+                jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type, field.const));
             }
 
             /* Push to form fields */
@@ -125,7 +144,9 @@ const FormBuilder = (props: Props) => {
      */
     const ConstructFormField = (field: FormField, values: Dict, SetFieldValue: Function, fieldValues?: any) => {
         switch (field.type) {
-            case 'boolean': {
+            case 'hidden': {
+                return <HiddenField field={field} />
+            } case 'boolean': {
                 return <BooleanField field={field} />;
             } case 'date': {
                 let dateValue: Date;
@@ -185,6 +206,9 @@ const FormBuilder = (props: Props) => {
                 onSubmit={async (values) => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
 
+                    /* Start loading indication */
+                    setLoading(true);
+
                     /* Check if all required fields are present */
                     let validationFlag: boolean = true;
 
@@ -220,8 +244,32 @@ const FormBuilder = (props: Props) => {
                         });
                     });
 
-                    if (validationFlag) {
-                        console.log(values);
+                    if (validationFlag && captchaHook.captchaStatus.solution !== null) {
+                        const RemoveEmptyProperties = (obj: Dict) => {
+                            for (const key in obj) {
+                                if (isEmpty(obj[key]) || (Array.isArray(obj[key]) && !obj[key].find((value: string) => !!value))) {
+                                    delete obj[key];
+                                } else if (typeof obj[key] === 'object') {
+                                    RemoveEmptyProperties(obj[key]);
+                                }
+                            };
+                        };
+
+                        let taxonomicServiceRecord = cloneDeep(values);
+
+                        RemoveEmptyProperties(taxonomicServiceRecord);
+
+                        try {
+                            await InsertTaxonomicService({
+                                taxonomicServiceRecord
+                            });
+
+                            SetCompleted();
+                        } catch {
+                            setErrorMessage('Something went wrong during the submission of the Taxonomic Service, please try again');
+                        } finally {
+                            setLoading(false);
+                        }
                     }
                 }}
             >
@@ -257,13 +305,39 @@ const FormBuilder = (props: Props) => {
                                 </Col>
                             </Row>
                         ))}
-                        <Row className="mt-4">
+                        <Row className="mt-3">
                             <Col>
-                                <Button type="submit"
-                                    variant="primary"
-                                >
-                                    Submit
-                                </Button>
+                                {captchaHook.CaptchaWidget({ className: 'min-w-full pl-2 pb-1 mt-6 bg-cyan-800 rounded' })}
+                            </Col>
+                        </Row>
+                        {errorMessage &&
+                            <Row className="mt-3">
+                                <Col>
+                                    <p className="fs-4 tc-error">
+                                        {errorMessage}
+                                    </p>
+                                </Col>
+                            </Row>
+                        }
+                        <Row className="mt-5">
+                            <Col>
+                                <Row>
+                                    <Col lg="auto">
+                                        <Button type="submit"
+                                            variant="primary"
+                                            disabled={captchaHook.captchaStatus.solution === null}
+                                        >
+                                            <p>
+                                                Submit
+                                            </p>
+                                        </Button>
+                                    </Col>
+                                    {loading &&
+                                        <Col>
+                                            <Spinner />
+                                        </Col>
+                                    }
+                                </Row>
                             </Col>
                         </Row>
                     </Form>
