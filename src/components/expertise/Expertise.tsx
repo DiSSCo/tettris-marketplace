@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import { Container, Row, Col } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 /* Import Components */
 import Header from 'components/general/header/Header';
@@ -59,11 +60,11 @@ const Expertise = () => {
             <Container fluid className="flex-grow-1 overflow-hidden">
                 <Row className="h-100">
                     <Col md={3}>
-                        <div className="border rounded p-3">
+                        <div className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
                             <h2 className="fs-6">Filter Experts</h2>
                             <form>
-                                {SelectFields(fieldsOfContries, "Country")}
-                                {SelectFields(fieldsOfLanguages, "Language")}
+                                {SelectFields(fieldsOfContries, "Country", "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
+                                {SelectFields(fieldsOfLanguages, "Language", "A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
                                 {SelectFields(fieldsOfTaxonomy, "Taxonomy")}
                                 {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy")}
                                 {SelectFields(fieldsOfOrder, "Order")}
@@ -83,7 +84,7 @@ const Expertise = () => {
                             {expertiseCard()}
                             {expertiseCard()}
                         </Col>
-                        <Col className="d-flex justify-content-center mt-3">
+                        <Col className="d-flex justify-content-center p-3">
                             <button type="button" className="btn btn-secondary me-2">Previous</button>
                             <button type="button" className="btn btn-secondary">Next</button>
                         </Col>
@@ -99,23 +100,39 @@ const Expertise = () => {
 export default Expertise;
 
 function expertiseCard() {
-    return <Col>
-        <div className="border rounded p-3 mt-3">
-            <h2 className="fs-6">Expert 1   headline sentence describing expertise</h2>
-            <p>Professional Status | Taxonomic scope | Contry</p>
-        </div>
+    return <Col className="border rounded p-3 mt-3"  style={{ backgroundColor: '#f2f2f2' }}>
+        <Row>
+            <Col><span className='fw-bold'>Expert 1</span><span className='ms-3'>headline sentence describing expertise</span></Col>
+            <Col></Col>
+        </Row>
+        <Row>
+            <Col><p>Professional Status</p></Col>
+            <Col><p>Taxonomic scope</p></Col>
+            <Col><p>Country</p></Col>
+        </Row>
     </Col>;
 }
 
-function SelectFields(fieldsOfContries: { value: string; label: string; }[], name: string) {
-    return <div className="mb-3">
-        <label htmlFor={`${name}Field`} className="form-label">{name} (i)</label>
-        <select className="form-select" id={`${name}Field`}>
-            {fieldsOfContries.map((field) => (
-                <option key={field.value} value={field.value}>
-                    {field.label}
-                </option>
-            ))}
-        </select>
-    </div>;
+function SelectFields(fieldsOfContries: { value: string; label: string; }[], name: string, info?: string) {
+    return (
+        <div className="mb-3">
+            <label htmlFor={`${name}Field`} className="form-label">
+                {name} {info && 
+                <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip id={`${name}Tooltip`}>{info}</Tooltip>}
+                >
+                <span>(i)</span>
+                </OverlayTrigger>
+            }
+            </label>
+            <select className="form-select" id={`${name}Field`}>
+                {fieldsOfContries.map((field) => (
+                    <option key={field.value} value={field.value}>
+                        {field.label}
+                    </option>
+                ))}
+            </select>
+        </div>
+    );
 }
