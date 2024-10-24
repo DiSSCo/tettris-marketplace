@@ -1,5 +1,8 @@
 /* Import Dependencies */
-import { MDXEditor, UndoRedo, BlockTypeSelect, BoldItalicUnderlineToggles, InsertImage, imagePlugin, CreateLink, linkDialogPlugin, ListsToggle, listsPlugin, headingsPlugin, ChangeCodeMirrorLanguage, ConditionalContents, InsertCodeBlock, InsertSandpack, SandpackConfig, ShowSandpackInfo, codeBlockPlugin, codeMirrorPlugin, sandpackPlugin, toolbarPlugin } from '@mdxeditor/editor'
+import { 
+    MDXEditor, UndoRedo, BlockTypeSelect, BoldItalicUnderlineToggles, CreateLink, 
+    linkDialogPlugin, ListsToggle, listsPlugin, headingsPlugin, codeMirrorPlugin, toolbarPlugin 
+} from '@mdxeditor/editor';
 import classNames from 'classnames';
 import jp from 'jsonpath'
 import { isEmpty } from 'lodash';
