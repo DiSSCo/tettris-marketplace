@@ -69,7 +69,7 @@ const MultiSelectField = (props: Props) => {
                 placeholder="Select an option"
                 options={selectItems}
                 isMulti={true}
-                className={formFieldClass}
+                className={`${formFieldClass} mt-2`}
                 onChange={(dropdownOptions) => {
                     /* Create array of all dropdown options values */
                     const valuesArray: string[] = [];

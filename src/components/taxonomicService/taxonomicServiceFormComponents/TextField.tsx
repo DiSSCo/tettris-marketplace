@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import { 
     MDXEditor, UndoRedo, BlockTypeSelect, BoldItalicUnderlineToggles, CreateLink, 
-    linkDialogPlugin, ListsToggle, listsPlugin, headingsPlugin, codeMirrorPlugin, toolbarPlugin 
+    linkDialogPlugin, ListsToggle, listsPlugin, headingsPlugin, toolbarPlugin 
 } from '@mdxeditor/editor';
 import classNames from 'classnames';
 import jp from 'jsonpath'
@@ -42,15 +42,9 @@ const TextField = (props: Props) => {
             <FormFieldTitle field={field}
                 values={values}
             />
-            {/* <Field name={field.jsonPath.replace('$', '')}
-                as="textarea"
-                rows="6"
-                className={`${formFieldClass} w-100 mt-1 py-1 px-2 br-corner`}
-            /> */}
             <MDXEditor markdown=""
                 className={`${formFieldClass} b-grey br-corner mt-1 z-0`}
                 plugins={[
-                    codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS' } }),
                     headingsPlugin(),
                     linkDialogPlugin(),
                     listsPlugin(),
