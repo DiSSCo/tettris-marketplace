@@ -2,7 +2,6 @@
 import classNames from 'classnames';
 import jp from 'jsonpath';
 import { isEmpty } from 'lodash';
-import { Row, Col } from 'react-bootstrap';
 import Select from "react-select";
 
 /* Import Types */
@@ -10,6 +9,9 @@ import { Dict, FormField } from "app/Types";
 
 /* Import Sources */
 import SPDXLicenses from 'sources/spdxLicenses/SPDXLicenses.json';
+
+/* Import Components */
+import FormFieldTitle from './FormFieldTitle';
 
 
 /* Props Type */
@@ -65,22 +67,9 @@ const SelectField = (props: Props) => {
 
     return (
         <div>
-            <Row>
-                <Col lg="auto"
-                    className="pe-0"
-                >
-                    <p>
-                        {field.title}
-                    </p>
-                </Col>
-                {(field.required && !isEmpty(values) && isEmpty(jp.value(values, field.jsonPath))) &&
-                    <Col className="d-flex align-items-center">
-                        <p className="fs-4 tc-error">
-                            This field is required
-                        </p>
-                    </Col>
-                }
-            </Row>
+            <FormFieldTitle field={field}
+                values={values}
+            />
             <Select placeholder="Select an option"
                 options={selectItems.toSorted((a, b) => a.label > b.label ? 1 : 0)}
                 className={formFieldClass}

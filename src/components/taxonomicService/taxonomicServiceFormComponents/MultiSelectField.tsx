@@ -2,11 +2,13 @@
 import classNames from 'classnames';
 import jp from 'jsonpath'
 import { isEmpty } from 'lodash';
-import { Row, Col } from 'react-bootstrap';
 import Select from "react-select";
 
 /* Import Types */
 import { FormField, Dict } from "app/Types";
+
+/* Import Components */
+import FormFieldTitle from './FormFieldTitle';
 
 
 /* Props Type */
@@ -25,7 +27,7 @@ type Props = {
  * @returns JSX Component
  */
 const MultiSelectField = (props: Props) => {
-    const { field, values, SetFieldValue} = props;
+    const { field, values, SetFieldValue } = props;
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
@@ -60,22 +62,9 @@ const MultiSelectField = (props: Props) => {
 
     return (
         <div>
-            <Row>
-                <Col lg="auto"
-                    className="pe-0"
-                >
-                    <p>
-                        {field.title}
-                    </p>
-                </Col>
-                {(field.required && !isEmpty(values) && isEmpty(jp.value(values, field.jsonPath))) &&
-                    <Col className="d-flex align-items-center">
-                        <p className="fs-4 tc-error">
-                            This field is required
-                        </p>
-                    </Col>
-                }
-            </Row>
+            <FormFieldTitle field={field}
+                values={values}
+            />
             <Select
                 placeholder="Select an option"
                 options={selectItems}

@@ -3,10 +3,12 @@ import classNames from 'classnames';
 import { Field } from "formik";
 import jp from 'jsonpath'
 import { isEmpty } from 'lodash';
-import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
 import { FormField, Dict } from "app/Types";
+
+/* Import Components */
+import FormFieldTitle from './FormFieldTitle';
 
 
 /* Props Type */
@@ -32,22 +34,9 @@ const TextField = (props: Props) => {
 
     return (
         <div>
-            <Row>
-                <Col lg="auto"
-                    className="pe-0"
-                >
-                    <p>
-                        {field.title}
-                    </p>
-                </Col>
-                {(field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)) &&
-                    <Col className="d-flex align-items-center">
-                        <p className="fs-4 tc-error">
-                            This field is required
-                        </p>
-                    </Col>
-                }
-            </Row>
+            <FormFieldTitle field={field}
+                values={values}
+            />
             <Field name={field.jsonPath.replace('$', '')}
                 as="textarea"
                 rows="6"
