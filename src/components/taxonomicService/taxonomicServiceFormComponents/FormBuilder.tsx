@@ -11,6 +11,7 @@ import BooleanField from "./BooleanField";
 import DateField from "./DateField";
 import FormBuilderFieldArray from "./FormBuilderFieldArray";
 import MultiSelectField from "./MultiSelectField";
+import RORField from "./RORField";
 import SelectField from "./SelectField";
 import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
@@ -141,6 +142,13 @@ const FormBuilder = (props: Props) => {
             } case 'multi-select': {
                 return <MultiSelectField field={field}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue?.(fieldName, value)}
+                />;
+            } case 'ror': {
+                return <RORField field={field}
+                    fieldValue={fieldValues as Dict}
+                    SetFieldValue={(fieldName: string, value: Dict) => {
+                        SetFieldValue?.(fieldName, value)
+                    }}
                 />;
             } case 'text': {
                 return <TextField field={field} />;
