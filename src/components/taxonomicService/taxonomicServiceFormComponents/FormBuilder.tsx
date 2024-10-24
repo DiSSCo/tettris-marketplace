@@ -207,9 +207,6 @@ const FormBuilder = (props: Props) => {
                 onSubmit={async (values) => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
 
-                    /* Start loading indication */
-                    setLoading(true);
-
                     /* Check if all required fields are present */
                     let validationFlag: boolean = true;
 
@@ -254,6 +251,9 @@ const FormBuilder = (props: Props) => {
                     });
 
                     if (validationFlag && captchaHook.captchaStatus.solution !== null) {
+                        /* Start loading indication */
+                        setLoading(true);
+
                         const RemoveEmptyProperties = (obj: Dict) => {
                             for (const key in obj) {
                                 if (isEmpty(obj[key]) || (Array.isArray(obj[key]) && !obj[key].find((value: string) => !!value))) {
@@ -279,6 +279,8 @@ const FormBuilder = (props: Props) => {
                         } finally {
                             setLoading(false);
                         }
+                    } else {
+                        setErrorMessage('Please provide values for all required fields')
                     }
                 }}
             >
@@ -293,7 +295,7 @@ const FormBuilder = (props: Props) => {
 
                                             {section.fields.map(field => (
                                                 <Row key={field.jsonPath}
-                                                    className="mt-2"
+                                                    className="mt-3 mt-lg-2"
                                                 >
                                                     <Col>
                                                         {ConstructFormField(field, values, setFieldValue, jp.value(values, field.jsonPath))}

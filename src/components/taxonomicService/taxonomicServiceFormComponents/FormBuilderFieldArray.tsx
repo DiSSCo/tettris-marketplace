@@ -103,13 +103,15 @@ const FormBuilderFieldArray = (props: Props) => {
                                 </Row>
                                 <Row className="my-2">
                                     <Col>
-                                        {formSections[MakeReadableString(FlattenJSONPath(section.jsonPath)).split(' ').slice(1).join(' ')].fields.map(field => {
+                                        {formSections[MakeReadableString(FlattenJSONPath(section.jsonPath)).split(' ').slice(1).join(' ')].fields.map((field, localIndex) => {
                                             let localField = cloneDeep(field);
 
                                             localField.jsonPath = field.jsonPath.replace('index', String(index));
 
                                             return (
-                                                <Row key={localField.jsonPath}>
+                                                <Row key={localField.jsonPath}
+                                                    className={localIndex > 1 ? 'mt-3' : ''}
+                                                >
                                                     <Col>
                                                         {ConstructFormField(localField, values, SetFieldValue, jp.value(values, localField.jsonPath))}
                                                     </Col>

@@ -28,7 +28,7 @@ const TaxonomicServiceForm = () => {
             <Container fluid className="flex-grow-1 overflow-hidden">
                 <Row className="h-100">
                     <Col lg={{ span: 6, offset: 3 }}
-                        className="h-100 pt-5 pb-4 overflow-scroll"
+                        className="h-100 pt-4 pt-lg-5 pb-4 overflow-scroll"
                     >
                         <Card className="w-100 px-4 py-3">
                             {/* Form title and description */}

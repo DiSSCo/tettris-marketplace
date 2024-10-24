@@ -29,7 +29,7 @@ const DateField = (props: Props) => {
     return (
         <div>
             <p>
-                {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
+                {field.title}
             </p>
             <DatePicker selected={fieldValue}
                 onChange={(date) => SetFieldValue(jsonPath, date)}

@@ -23,25 +23,33 @@ type Props = {
 const FormFieldTitle = (props: Props) => {
     const { field, values } = props;
 
+    console.log(field.title, values);
+
     return (
         <Row>
             <Col lg="auto"
                 className="pe-0"
             >
-                <p>
-                    {field.title}
-                </p>
-                <p className="fs-5 tc-grey">
+                <Row>
+                    <Col lg="auto"
+                        className="pe-0"
+                    >
+                        <p>
+                            {field.title}
+                        </p>
+                    </Col>
+                    {(field.required && !isEmpty(values) && isEmpty(jp.value(values, field.jsonPath))) &&
+                        <Col className="d-flex align-items-center">
+                            <p className="fs-5 fs-lg-4 tc-error">
+                                This field is required
+                            </p>
+                        </Col>
+                    }
+                </Row>
+                <p className="mt-1 mt-lg-0 fs-5 tc-grey">
                     {field.description}
                 </p>
             </Col>
-            {(field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)) &&
-                <Col className="d-flex align-items-center">
-                    <p className="fs-4 tc-error">
-                        This field is required
-                    </p>
-                </Col>
-            }
         </Row>
     );
 };
