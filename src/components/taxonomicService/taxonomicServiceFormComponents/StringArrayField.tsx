@@ -1,10 +1,13 @@
 /* Import Dependencies */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from 'classnames';
 import { FieldArray, Field } from "formik";
+import jp from 'jsonpath';
+import { isEmpty } from "lodash";
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
-import { FormField } from "app/Types";
+import { FormField, Dict } from "app/Types";
 
 /* Import Icons */
 import { faX } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +19,8 @@ import { Button } from "components/general/CustomComponents";
 /* Props Type */
 type Props = {
     field: FormField,
-    fieldValues: string[]
+    fieldValues: string[],
+    values: Dict
 };
 
 
@@ -24,13 +28,19 @@ type Props = {
  * Component that returns a section of an array with string fields in the form
  * @param field The provided form field
  * @param fieldValues The current values of the field in the form state
+ * @param values The current values in the form state
  * @returns JSX Component
  */
 const StringArrayField = (props: Props) => {
-    const { field, fieldValues } = props;
+    const { field, fieldValues, values } = props;
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
+
+    /* Class Names */
+    const formFieldClass = classNames({
+        'b-error': (field.required && !jp.value(values, field.jsonPath)?.find((value: string) => !!value))
+    });
 
     return (
         <div>
@@ -39,9 +49,22 @@ const StringArrayField = (props: Props) => {
                     <div>
                         <Row>
                             <Col>
-                                <p>
-                                    {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
-                                </p>
+                                <Row>
+                                    <Col lg="auto"
+                                        className="pe-0"
+                                    >
+                                        <p>
+                                            {field.title}
+                                        </p>
+                                    </Col>
+                                    {(field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)?.find((value: string) => !!value)) &&
+                                        <Col className="d-flex align-items-center">
+                                            <p className="fs-4 tc-error">
+                                                This field is required
+                                            </p>
+                                        </Col>
+                                    }
+                                </Row>
                             </Col>
                             <Col lg="auto">
                                 <Button type="button"
@@ -64,7 +87,7 @@ const StringArrayField = (props: Props) => {
                                 >
                                     <Col className="ps-4">
                                         <Field name={`${jsonPath}[${index}]`}
-                                            className="w-100 py-1 px-2 br-corner"
+                                            className={`${formFieldClass} w-100 py-1 px-2 br-corner`}
                                         />
                                     </Col>
                                     {fieldValues.length > 1 &&

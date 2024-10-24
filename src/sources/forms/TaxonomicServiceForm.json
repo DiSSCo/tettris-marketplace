@@ -241,7 +241,7 @@
                 "jsonPath": "$['ods:topicDiscipline']",
                 "title": "Topic Discipline",
                 "description": "The topic discipline relevant to the taxonomic range of the service",
-                "type": "select",
+                "type": "multi-select",
                 "options": [
                     "Anthropology",
                     "Botany",
@@ -327,16 +327,25 @@
         "type": "array",
         "fields": [
             {
+                "jsonPath": "$['schema:author']['index']['@type']",
+                "title": "@type",
+                "description": "The author type",
+                "type": "hidden",
+                "const": "schema:Person"
+            },
+            {
                 "jsonPath": "$['schema:author']['index']['schema:identifier']",
                 "title": "ORCID",
                 "description": "A unique identifier to identify the author; ORCID identifiers are valid",
-                "type": "string"
+                "type": "string",
+                "required": true
             },
             {
                 "jsonPath": "$['schema:author']['index']['schema:affiliation']",
                 "title": "Affiliated Organisation",
                 "description": "The affiliated organisation",
-                "type": "ror"
+                "type": "ror",
+                "required": true
             }
         ]
     },
@@ -346,22 +355,32 @@
         "type": "array",
         "fields": [
             {
+                "jsonPath": "$['schema:maintainer']['index']['@type']",
+                "title": "@type",
+                "description": "The author type",
+                "type": "hidden",
+                "const": "schema:Person"
+            },
+            {
                 "jsonPath": "$['schema:maintainer']['index']['schema:identifier']",
                 "title": "GitHub / ORCID Identifier",
                 "description": "A unique identifier to identify the maintainer; ORCID and GitHub identifiers are valid",
-                "type": "multi-string"
+                "type": "multi-string",
+                "required": true
             },
             {
                 "jsonPath": "$['schema:maintainer']['index']['schema:name']",
                 "title": "Full Name",
                 "description": "Full name of the maintainer",
-                "type": "string"
+                "type": "string",
+                "required": true
             },
             {
                 "jsonPath": "$['schema:maintainer']['index']['schema:affiliation']",
                 "title": "Affiliated Organisation",
                 "description": "The affiliated organisation",
-                "type": "ror"
+                "type": "ror",
+                "required": true
             }
         ]
     },
@@ -379,7 +398,8 @@
                 "jsonPath": "$['schema:fundingscheme']['schema:funding']['schema:identifier']",
                 "title": "Grant Identifier",
                 "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
-                "type": "string"
+                "type": "string",
+                "required": true
             },
             {
                 "jsonPath": "$['schema:fundingscheme']['schema:funding']['schema:description']",
@@ -391,7 +411,8 @@
                 "jsonPath": "$['schema:fundingscheme']['schema:funding']['schema:funder']",
                 "title": "Funding Organisation",
                 "description": "An organization that supports (sponsors) something through some kind of financial contribution",
-                "type": "ror"
+                "type": "ror",
+                "required": true
             }
         ]
     },
@@ -403,7 +424,8 @@
                 "jsonPath": "$['schema:softwareSourceCode']['schema:codeRepository']",
                 "title": "Code Repository",
                 "description": "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)",
-                "type": "string"
+                "type": "string",
+                "required": true
             },
             {
                 "jsonPath": "$['schema:softwareSourceCode']['schema:runtimePlatform']",
@@ -446,7 +468,8 @@
                 "jsonPath": "$['schema:associatedMedia']['index']['schema:contentUrl']",
                 "title": "Content URL",
                 "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain",
-                "type": "string"
+                "type": "string",
+                "required": true
             }
         ]
     }

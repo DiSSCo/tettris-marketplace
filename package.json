@@ -12,6 +12,7 @@
     "test:coverage": "vitest run --coverage --watch=false"
   },
   "dependencies": {
+    "@aacn.eu/use-friendly-captcha": "^1.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",

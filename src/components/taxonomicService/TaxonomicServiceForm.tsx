@@ -1,4 +1,5 @@
 /* Import Dependencies */
+import { useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 /* Import Sources */
@@ -15,6 +16,9 @@ import FormBuilder from './taxonomicServiceFormComponents/FormBuilder';
  * @returns JSX Component
  */
 const TaxonomicServiceForm = () => {
+    /* Base variables */
+    const [completed, setCompleted] = useState<boolean>(false);
+
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -31,20 +35,34 @@ const TaxonomicServiceForm = () => {
                             <Row>
                                 <Col>
                                     <h1 className="fs-2 tc-primary">
-                                        Suggest a new taxonomic e-service
+                                        {!completed ?
+                                            'Suggest a new taxonomic e-service'
+                                            : 'Submission received'
+                                        }
                                     </h1>
-                                    <p className="mt-3 fs-4">
-                                        Use this form to suggest new taxonomic e-services or tools that should be listed in the CETAF Marketplace.
-                                        Please fill in the required fields and add as much additional information as you can.
-                                        The CETAF secretariat will review submissions and may alter your service description before adding
-                                        it to the marketplace, or reject it if the suggested resource does not meet CETAF requirements of relevance and quality.
-                                    </p>
+                                    {!completed ?
+                                        <p className="mt-3 fs-4">
+                                            Use this form to suggest new taxonomic e-services or tools that should be listed in the CETAF Marketplace.
+                                            Please fill in the required fields and add as much additional information as you can.
+                                            The CETAF secretariat will review submissions and may alter your service description before adding
+                                            it to the marketplace, or reject it if the suggested resource does not meet CETAF requirements of relevance and quality."
+                                        </p>
+                                        : <p className="mt-3 fs-4">
+                                            Your submission is received and will be processed by the Marketplace! A CETAF administrator will review 
+                                            and score the taxonomic service. When the score is sufficient, the service will be published in the 
+                                            Marketplace catalog.
+                                            <br />
+                                            Thank you for using the Taxonomic Marketplace!
+                                        </p>
+                                    }
                                 </Col>
                             </Row>
                             {/* Form content */}
                             <Row>
                                 <Col>
-                                    <FormBuilder formTemplate={TaxonomicServiceFormJSON} />
+                                    <FormBuilder formTemplate={TaxonomicServiceFormJSON}
+                                        SetCompleted={() => setCompleted(true)}
+                                    />
                                 </Col>
                             </Row>
                         </Card>
