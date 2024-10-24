@@ -282,7 +282,7 @@ export interface TaxonomicService {
      * A unique identifier to identify the author; ORCID identifiers are valid
      */
     "schema:identifier": string;
-    "schema:affiliation": {
+    "schema:Affiliation"?: {
       /**
        * The type of the affiliation
        */
@@ -324,7 +324,7 @@ export interface TaxonomicService {
     /**
      * The organisation the maintainer is affiliated with
      */
-    "schema:affiliation": {
+    "schema:Affiliation"?: {
       /**
        * The type of the affiliation
        */

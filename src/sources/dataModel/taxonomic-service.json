@@ -518,22 +518,17 @@
                         "description": "The type of the maintainer",
                         "const": "schema:Person"
                     },
-                    "schema:identifier": [
-                        {
-                            "type": "string",
-                            "description": "A unique identifier to identify the maintainer; GitHub identifiers are valid",
-                            "examples": [
-                                "https://api.github.com/users/username"
-                            ]
+                    "schema:identifier": {
+                        "type": "string",
+                        "description": "A unique identifier to identify the maintainer; GitHub and ORCID identifiers are valid",
+                        "items": {
+                            "type": "string"
                         },
-                        {
-                            "type": "string",
-                            "description": "A unique identifier to identify the maintainer; ORCID identifiers are valid",
-                            "examples": [
-                                "https://orcid.org/0000-0001-9790-9277"
-                            ]
-                        }
-                    ],
+                        "examples": [
+                            "https://api.github.com/users/username",
+                            "https://orcid.org/0000-0001-9790-9277"
+                        ]
+                    },
                     "schema:name": {
                         "type": "string",
                         "description": "Full name of the maintainer",
