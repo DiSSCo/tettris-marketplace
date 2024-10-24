@@ -39,12 +39,11 @@ const InsertTaxonomicService = async ({ taxonomicServiceRecord }: { taxonomicSer
                 },
                 data: newTaxonomicService,
                 headers: {
-                    'Content-type': 'application/json',
-                    // 'Authorization': `Basic ${KeycloakService.GetToken()}`
+                    'Content-type': 'application/json'
                 },
                 auth: {
                     username: 'TaxonomicMarketplace',
-                    password: 'mJ07O0VHH8Gv'
+                    password: import.meta.env.VITE_CORDRA_PASSWORD
                 },
                 responseType: 'json'
             });
