@@ -5,6 +5,8 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 /* Import Components */
 import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
+import React, { useState } from 'react';
+import { set } from 'lodash';
 
 
 /**
@@ -14,6 +16,7 @@ import Footer from 'components/general/footer/Footer';
 const Expertise = () => {
     const fieldsOfContries = [
         { value: "", label: "Select country" },
+        { value: "be", label: "Belgium" },
         { value: "usa", label: "United States" },
         { value: "uk", label: "United Kingdom" },
         { value: "germany", label: "Germany" },
@@ -21,9 +24,9 @@ const Expertise = () => {
     ];
     const fieldsOfLanguages = [
         { value: "", label: "Select language" },
-        { value: "english", label: "English" },
-        { value: "spanish", label: "Spanish" },
-        { value: "french", label: "French" },
+        { value: "en", label: "English" },
+        { value: "es", label: "Spanish" },
+        { value: "fr", label: "French" },
     ];
     const fieldsOfTaxonomy = [
         { value: "", label: "Select taxonomy" },
@@ -43,7 +46,8 @@ const Expertise = () => {
         { value: "Ascendant", label: "Ascendant" },
     ];
     
-    let result = 0;
+    let result = 25;
+    const [index, setIndex] = useState(0);
 
     return (
         <div className="h-100 d-flex flex-column">
@@ -68,7 +72,9 @@ const Expertise = () => {
                                 {SelectFields(fieldsOfTaxonomy, "Taxonomy")}
                                 {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy")}
                                 {SelectFields(fieldsOfOrder, "Order")}
-                                <button type="submit" className="btn btn-primary">Apply</button>
+                                <div className="d-flex justify-content-center">
+                                    <button type="submit" className="btn btn-primary">Apply</button>
+                                </div>
                             </form>
                         </div>
                     </Col>
@@ -78,19 +84,23 @@ const Expertise = () => {
                             <Col>Result found {result}</Col>
                         </Row>
                         <Col className="overflow-auto flex-grow-1">
-                            {expertiseCard()}
-                            {expertiseCard()}
-                            {expertiseCard()}
-                            {expertiseCard()}
-                            {expertiseCard()}
+                            {Array.from({ length: Math.min(result - index, 5)}, (_, i) => (
+                                <React.Fragment key={i + index}>
+                                    {expertiseCard(i + index)}
+                                </React.Fragment>
+                            ))}
                         </Col>
-                        <Col className="d-flex justify-content-center p-3">
-                            <button type="button" className="btn btn-secondary me-2">Previous</button>
-                            <button type="button" className="btn btn-secondary">Next</button>
-                        </Col>
+                        {result > 5 && (
+                            <Col className="d-flex justify-content-center p-3">
+                                {index > 0 && <button type="button" className="btn btn-secondary me-2" onClick={() => setIndex(index - 5)}>Previous</button>}
+                                {index + 5 < result && <button type="button" className="btn btn-secondary" onClick={() => setIndex(index + 5)}>Next</button>}
+                                
+                            </Col>
+                        )}
                     </Col>
                 </Row>
             </Container>
+            
             {/* Render Footer */}
             <Footer />
         </div>
@@ -99,10 +109,10 @@ const Expertise = () => {
 
 export default Expertise;
 
-function expertiseCard() {
+function expertiseCard(i: number) {
     return <Col className="border rounded p-3 mt-3"  style={{ backgroundColor: '#f2f2f2' }}>
         <Row>
-            <Col><span className='fw-bold'>Expert 1</span><span className='ms-3'>headline sentence describing expertise</span></Col>
+            <Col><span className='fw-bold'>Expert {i + 1}</span><span className='ms-3'>headline sentence describing expertise</span></Col>
             <Col></Col>
         </Row>
         <Row>
