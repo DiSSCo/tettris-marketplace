@@ -44,6 +44,9 @@ const SoftwareLicenses = (props: Props) => {
             <p>
                 {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
             </p>
+            <p className="fs-5 tc-grey">
+                {field.description}
+            </p>
             <Select
                 placeholder="Select an option"
                 options={selectItems.toSorted((a, b) => a.label > b.label ? 1 : 0)}

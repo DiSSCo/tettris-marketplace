@@ -368,3 +368,8 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* MDX editor toolbar */
+.mdxeditor-toolbar {
+  z-index: 0 !important;
+}

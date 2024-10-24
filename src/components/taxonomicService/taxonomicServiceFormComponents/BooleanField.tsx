@@ -43,6 +43,13 @@ const BooleanField = (props: Props) => {
                     />
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <p className="fs-5 tc-grey">
+                        {field.description}
+                    </p>
+                </Col>
+            </Row>
         </div>
     );
 };

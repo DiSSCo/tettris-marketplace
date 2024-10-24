@@ -72,7 +72,7 @@ const SelectField = (props: Props) => {
             />
             <Select placeholder="Select an option"
                 options={selectItems.toSorted((a, b) => a.label > b.label ? 1 : 0)}
-                className={formFieldClass}
+                className={`${formFieldClass} mt-1`}
                 onChange={(dropdownOption) => SetFieldValue(jsonPath, dropdownOption?.value)}
             />
         </div>

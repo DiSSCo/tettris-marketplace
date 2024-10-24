@@ -191,6 +191,7 @@ const FormBuilder = (props: Props) => {
             } case 'text': {
                 return <TextField field={field}
                     values={values}
+                    SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
                 />;
             } default: {
                 return <StringField field={field}
