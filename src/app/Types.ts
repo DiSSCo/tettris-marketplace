@@ -37,13 +37,21 @@ export type TaxonomicService = {
 
 /* Type for an Agent */
 export type Maintainer = {
-    "@type": string,
-    "schema:identifier"?: string | Dict[];
+    "@type": string;
+    "schema:identifier": string | [{
+        type: "string";
+        description: "A unique identifier to identify the maintainer; GitHub identifiers are valid";
+        examples: ["https://api.github.com/users/username"];
+    }, {
+        type: "string";
+        description: "A unique identifier to identify the maintainer; ORCID identifiers are valid";
+        examples: ["https://orcid.org/0000-0001-9790-9277"];
+    }];
     "schema:name"?: string;
     "schema:Affiliation"?: {
-        "@type": string,
-        "schema:identifier"?: string;
-        "schema:legalName"?: string;
+        "@type": "schema:Organization";
+        "schema:identifier": string;
+        "schema:name"?: string;
     };
 }
 
