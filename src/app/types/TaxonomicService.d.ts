@@ -131,7 +131,35 @@ export interface TaxonomicService {
   /**
    * A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard.
    */
-  "schema:availableLanguage": string[];
+  "schema:availableLanguage": (
+    | "bg"
+    | "hr"
+    | "cs"
+    | "da"
+    | "lb"
+    | "nl"
+    | "en"
+    | "et"
+    | "fi"
+    | "fr"
+    | "de"
+    | "el"
+    | "hu"
+    | "ga"
+    | "it"
+    | "lv"
+    | "lt"
+    | "mt"
+    | "pl"
+    | "pt"
+    | "ro"
+    | "ru"
+    | "sk"
+    | "es"
+    | "sv"
+    | "tk"
+    | "uk"
+  )[];
   /**
    * The topic discipline relevant to the taxonomic range of the service
    */
@@ -224,19 +252,19 @@ export interface TaxonomicService {
      */
     "schema:description": string;
     /**
-     * A slogan or motto associated with the Service (english).
+     * A slogan or motto associated with the Service (english)
      */
     "schema:slogan"?: string;
     /**
-     * An associated logo URL.
+     * An associated logo URL
      */
     "schema:logo"?: string;
     /**
-     * URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service.
+     * URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service
      */
     "schema:termsOfService"?: string;
     /**
-     * Generic property for handling domain specific values.
+     * Generic property for handling domain specific values
      */
     "schema:additionalProperty"?: {
       /**
@@ -258,20 +286,20 @@ export interface TaxonomicService {
     }[];
   };
   /**
-   * A contact point—for example, a Customer Complaints department.
+   * A contact point—for example, a Customer Complaints department
    */
   "schema:ContactPoint"?: {
     /**
-     * Email address of the contact point.
+     * Email address of the contact point
      */
     "schema:email"?: string;
     /**
-     * URL to a contact webpage or contact form for the resource.
+     * URL to a contact webpage or contact form for the resource
      */
     "schema:url"?: string;
   };
   /**
-   * An array of authors of this service.
+   * An array of authors of this service
    */
   "schema:Author"?: {
     /**
@@ -282,7 +310,7 @@ export interface TaxonomicService {
      * A unique identifier to identify the author; ORCID identifiers are valid
      */
     "schema:identifier": string;
-    "schema:Affiliation"?: {
+    "schema:Affiliation": {
       /**
        * The type of the affiliation
        */
@@ -298,25 +326,17 @@ export interface TaxonomicService {
     };
   }[];
   /**
-   * An array of maintainers of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artefact.
+   * An array of maintainers of this service
    */
   "schema:Maintainer"?: {
     /**
      * The type of the maintainer
      */
     "@type": "schema:Person";
-    "schema:identifier": [
-      {
-        type: "string";
-        description: "A unique identifier to identify the maintainer; GitHub identifiers are valid";
-        examples: ["https://api.github.com/users/username"];
-      },
-      {
-        type: "string";
-        description: "A unique identifier to identify the maintainer; ORCID identifiers are valid";
-        examples: ["https://orcid.org/0000-0001-9790-9277"];
-      }
-    ];
+    /**
+     * A unique identifier to identify the maintainer; GitHub and ORCID identifiers are valid
+     */
+    "schema:identifier": string[];
     /**
      * Full name of the maintainer
      */
@@ -324,7 +344,7 @@ export interface TaxonomicService {
     /**
      * The organisation the maintainer is affiliated with
      */
-    "schema:Affiliation"?: {
+    "schema:Affiliation": {
       /**
        * The type of the affiliation
        */
@@ -352,7 +372,7 @@ export interface TaxonomicService {
      */
     "schema:Funding"?: {
       /**
-       * A unique identifier to identify the funder organisation; ROR identifiers are valid
+       * A unique identifier to identify the grant
        */
       "schema:identifier": string;
       /**
@@ -417,7 +437,7 @@ export interface TaxonomicService {
    */
   "schema:AssociatedMedia"?: {
     /**
-     * JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain.
+     * JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain
      */
     "schema:contentUrl": string;
   }[];

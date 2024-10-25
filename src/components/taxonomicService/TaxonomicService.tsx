@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
+import moment from 'moment';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -131,6 +132,8 @@ const TaxonomicService = () => {
                                                         topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
                                                         geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
+                                                        datePublished: moment(taxonomicService.taxonomicService['schema:datePublished']).format('MMM DD - YYYY'),
+                                                        paymentModel: taxonomicService.taxonomicService['schema:additionalProperty']?.[2].value as string,
                                                         fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:identifier']
                                                     }}
                                                 />

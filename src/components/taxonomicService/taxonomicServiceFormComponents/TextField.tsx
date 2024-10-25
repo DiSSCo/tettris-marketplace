@@ -1,35 +1,42 @@
 /* Import Dependencies */
 import classNames from 'classnames';
 import { Field } from "formik";
+import jp from 'jsonpath'
+import { isEmpty } from 'lodash';
 
 /* Import Types */
-import { FormField } from "app/Types";
+import { FormField, Dict } from "app/Types";
+
+/* Import Components */
+import FormFieldTitle from './FormFieldTitle';
 
 
 /* Props Type */
 type Props = {
-    field: FormField
+    field: FormField,
+    values: Dict
 };
 
 
 /**
  * Component that renders an input text field for a free, long text insert
  * @param field The provided form field
+ * @param values The current values in the form state
  * @returns JSX Component
  */
 const TextField = (props: Props) => {
-    const { field } = props;
+    const { field, values } = props;
 
     /* Class Names */
     const formFieldClass = classNames({
-        'b-primary': field.required
+        'b-error': (field.required && !isEmpty(values) && !jp.value(values, field.jsonPath))
     });
 
     return (
         <div>
-            <p>
-                {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
-            </p>
+            <FormFieldTitle field={field}
+                values={values}
+            />
             <Field name={field.jsonPath.replace('$', '')}
                 as="textarea"
                 rows="6"

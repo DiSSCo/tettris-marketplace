@@ -1,5 +1,8 @@
 /* Import Dependencies */
+import classNames from 'classnames';
 import { Field } from "formik";
+import jp from 'jsonpath';
+import { isEmpty } from "lodash";
 import { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Select from "react-select";
@@ -18,6 +21,7 @@ import { Button, Spinner } from 'components/general/CustomComponents';
 type Props = {
     field: FormField,
     fieldValue: Dict,
+    values: Dict,
     SetFieldValue: Function
 };
 
@@ -26,11 +30,12 @@ type Props = {
  * Component that renders a dynamic ROR field for defining the organisation (affiliation) identifier and name
  * @param field The provided form field
  * @param fieldValue The current value of the field
+ * @param values The current values of the form state
  * @param SetFieldValue Function to set the value of a field in the form
  * @returns JSX Component
  */
 const RORField = (props: Props) => {
-    const { field, fieldValue, SetFieldValue } = props;
+    const { field, fieldValue, values, SetFieldValue } = props;
 
     /* Base variables */
     const [query, setQuery] = useState<string>('');
@@ -65,15 +70,33 @@ const RORField = (props: Props) => {
         setLoading(false);
     };
 
+    /* Class Names */
+    const formFieldClass = classNames({
+        'b-error': (field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)?.['schema:identifier'])
+    });
+
     return (
         <div>
-            <p>
-                {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
-            </p>
+            <Row>
+                <Col lg="auto"
+                    className="pe-0"
+                >
+                    <p>
+                        {field.title}
+                    </p>
+                </Col>
+                {(field.required && !isEmpty(values) && isEmpty(jp.value(values, field.jsonPath)?.['schema:identifier'])) &&
+                    <Col className="d-flex align-items-center">
+                        <p className="fs-4 tc-error">
+                            This field is required
+                        </p>
+                    </Col>
+                }
+            </Row>
             <Row className="mt-1">
                 <Col>
                     <Field name="rorSearch"
-                        className="w-100 br-corner px-2 py-1"
+                        className={`${formFieldClass} w-100 br-corner px-2 py-1`}
                         onChange={(field: Dict) => setQuery(field.target.value as string)}
                     />
                 </Col>
@@ -104,6 +127,7 @@ const RORField = (props: Props) => {
                                 value: fieldValue['schema:identifier']
                             } : undefined}
                             placeholder="Select an option"
+                            className={formFieldClass}
                             onChange={(dropdownOption) => {
                                 let jsonPath: string = '';
 
@@ -119,6 +143,7 @@ const RORField = (props: Props) => {
                                 });
 
                                 SetFieldValue(jsonPath, {
+                                    "@type": "schema:Organization",
                                     "schema:identifier": dropdownOption?.value,
                                     "schema:name": dropdownOption?.label
                                 });

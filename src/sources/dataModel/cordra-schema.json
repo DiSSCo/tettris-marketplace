@@ -11,11 +11,10 @@
         "@id",
         "@type",
         "schema:dateCreated",
-        "schema:dateModified",
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:Service"
+        "schema:service"
       ],
       "properties": {
         "@id": {
@@ -31,8 +30,7 @@
         "@type": {
           "type": "string",
           "title": "Object Type",
-          "description": "The type of the object, in this case TaxonomicService",
-          "const": "TaxonomicService"
+          "description": "The type of the object, in this case TaxonomicService"
         },
         "schema:dateCreated": {
           "type": "string",
@@ -67,40 +65,160 @@
         "schema:license": {
           "type": "string",
           "title": "Licence",
-          "description": "A license document that applies to this content, typically indicated by URL"
+          "description": "A license document that applies to this content, typically indicated by URL",
+          "enum": [
+            "https://spdx.org/licenses/CC-BY-1.0.json",
+            "https://spdx.org/licenses/CC-BY-2.0.json",
+            "https://spdx.org/licenses/CC-BY-2.5.json",
+            "https://spdx.org/licenses/CC-BY-2.5-AU.json",
+            "https://spdx.org/licenses/CC-BY-3.0.json",
+            "https://spdx.org/licenses/CC-BY-3.0-AT.json",
+            "https://spdx.org/licenses/CC-BY-3.0-AU.json",
+            "https://spdx.org/licenses/CC-BY-3.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-3.0-IGO.json",
+            "https://spdx.org/licenses/CC-BY-3.0-NL.json",
+            "https://spdx.org/licenses/CC-BY-3.0-US.json",
+            "https://spdx.org/licenses/CC-BY-4.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-1.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-2.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-2.5.json",
+            "https://spdx.org/licenses/CC-BY-NC-3.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-3.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-NC-4.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-1.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-2.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-2.5.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-3.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-3.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-3.0-IGO.json",
+            "https://spdx.org/licenses/CC-BY-NC-ND-4.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-1.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-2.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-2.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-2.0-FR.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-2.0-UK.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-2.5.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-3.0.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-3.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-3.0-IGO.json",
+            "https://spdx.org/licenses/CC-BY-NC-SA-4.0.json",
+            "https://spdx.org/licenses/CC-BY-ND-1.0.json",
+            "https://spdx.org/licenses/CC-BY-ND-2.0.json",
+            "https://spdx.org/licenses/CC-BY-ND-2.5.json",
+            "https://spdx.org/licenses/CC-BY-ND-3.0.json",
+            "https://spdx.org/licenses/CC-BY-ND-3.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-ND-4.0.json",
+            "https://spdx.org/licenses/CC-BY-SA-1.0.json",
+            "https://spdx.org/licenses/CC-BY-SA-2.0.json",
+            "https://spdx.org/licenses/CC-BY-SA-2.0-UK.json",
+            "https://spdx.org/licenses/CC-BY-SA-2.1-JP.json",
+            "https://spdx.org/licenses/CC-BY-SA-2.5.json",
+            "https://spdx.org/licenses/CC-BY-SA-3.0.json",
+            "https://spdx.org/licenses/CC-BY-SA-3.0-AT.json",
+            "https://spdx.org/licenses/CC-BY-SA-3.0-DE.json",
+            "https://spdx.org/licenses/CC-BY-SA-3.0-IGO.json",
+            "https://spdx.org/licenses/CC-BY-SA-4.0.json",
+            "https://spdx.org/licenses/CC-PDDC.json",
+            "https://spdx.org/licenses/CC0-1.0.json",
+            "https://spdx.org/licenses/DL-DE-BY-2.0.json",
+            "https://spdx.org/licenses/DL-DE-ZERO-2.0.json",
+            "https://www.govdata.de/dl-de/by-1-0",
+            "https://www.govdata.de/dl-de/by-nc-1-0",
+            "https://spdx.org/licenses/EUPL-1.0.json",
+            "https://spdx.org/licenses/EPL-2.0.json",
+            "https://spdx.org/licenses/EUPL-1.2.json",
+            "https://www.etalab.gouv.fr/licence-ouverte-open-licence/",
+            "https://spdx.org/licenses/GFDL-1.1-invariants-only.json",
+            "https://spdx.org/licenses/GFDL-1.1-invariants-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.1-no-invariants-only.json",
+            "https://spdx.org/licenses/GFDL-1.1-no-invariants-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.1-only.json",
+            "https://spdx.org/licenses/GFDL-1.1-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.2-invariants-only.json",
+            "https://spdx.org/licenses/GFDL-1.2-invariants-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.2-no-invariants-only.json",
+            "https://spdx.org/licenses/GFDL-1.2-no-invariants-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.2-only.json",
+            "https://spdx.org/licenses/GFDL-1.2-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.3-invariants-only.json",
+            "https://spdx.org/licenses/GFDL-1.3-invariants-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.3-no-invariants-only.json",
+            "https://spdx.org/licenses/GFDL-1.3-no-invariants-or-later.json",
+            "https://spdx.org/licenses/GFDL-1.3-only.json",
+            "https://spdx.org/licenses/GFDL-1.3-or-later.json",
+            "https://data.gov.hr/open-licence-republic-croatia",
+            "https://www.dati.gov.it/iodl/2.0/",
+            "https://spdx.org/licenses/NLOD-1.0.json",
+            "https://spdx.org/licenses/NLOD-2.0.json",
+            "https://spdx.org/licenses/ODC-By-1.0.json",
+            "https://spdx.org/licenses/ODbL-1.0.json",
+            "https://spdx.org/licenses/PDDL-1.0.json",
+            "https://spdx.org/licenses/OGL-Canada-2.0.json",
+            "https://spdx.org/licenses/OGL-UK-1.0.json",
+            "https://spdx.org/licenses/OGL-UK-2.0.json",
+            "https://spdx.org/licenses/OGL-UK-3.0.json",
+            "https://data.gov.ro/pages/licence"
+          ]
         },
         "schema:availableLanguage": {
           "type": "array",
           "title": "Supported Languages",
           "description": "A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard which uses two lettered codes like: en, de or es.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "bg",
+              "hr",
+              "cs",
+              "da",
+              "lb",
+              "nl",
+              "en",
+              "et",
+              "fi",
+              "fr",
+              "de",
+              "el",
+              "hu",
+              "ga",
+              "it",
+              "lv",
+              "lt",
+              "mt",
+              "pl",
+              "pt",
+              "ro",
+              "ru",
+              "sk",
+              "es",
+              "sv",
+              "tk",
+              "uk"
+            ]
           }
-        },
-        "schema:version": {
-          "type": "string",
-          "title": "Version of the Taxonomic Service",
-          "description": "The version of the Service embodied by a specified resource."
         },
         "ods:topicDiscipline": {
           "type": "string",
           "title": "Topic Discipline",
           "description": "The topic discipline relevant to the taxonomic range of the service",
-          "enum": [
-            "Anthropology",
-            "Botany",
-            "Microbiology",
-            "Palaeontology",
-            "Zoology",
-            "Ecology",
-            "Other Biodiversity",
-            "Unclassified"
-          ]
+          "items": {
+            "type": "string",
+            "enum": [
+              "Anthropology",
+              "Botany",
+              "Microbiology",
+              "Palaeontology",
+              "Zoology",
+              "Ecology",
+              "Other Biodiversity",
+              "Unclassified"
+            ]
+          }
         },
         "schema:taxonomicRange": {
           "type": "array",
           "title": "Taxonomic Range",
-          "description": "The taxonomic grouping of the organism.",
+          "description": "The taxonomic grouping of the organism, e.g. 'No specific range' or 'Agromyzidae, Braconidae'",
           "items": {
             "type": "string"
           }
@@ -108,7 +226,17 @@
         "schema:geographicArea": {
           "type": "string",
           "title": "Geographic Area",
-          "description": "The geographic area associated with the service."
+          "description": "The geographic area associated with the service, e.g. World, Palearctic, South-East Europe, Mediterranean"
+        },
+        "schema:url": {
+          "type": "string",
+          "title": "Resource URL",
+          "description": "URL of the item that leads to the resource of the service"
+        },
+        "schema:about": {
+          "type": "string",
+          "title": "Change Log",
+          "description": "The subject matter of the service including a summary of the Resource features updated from the previous version."
         },
         "schema:documentation": {
           "type": "string",
@@ -127,6 +255,21 @@
           "format": "textarea",
           "maxLength": 2048
         },
+        "schema:additionalProperty": {
+          "type": "array",
+          "title": "Additional Properties (organismGroup, availableOnAppStore and paymentModel)",
+          "description": "Generic property for handling domain specific values.",
+          "items": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "array",
+              "object",
+              "null"
+            ]
+          }
+        },
         "schema:Service": {
           "type": "object",
           "description": "A service provided by an organization, e.g. delivery service, print services, etc.",
@@ -141,17 +284,18 @@
               "title": "Service Type",
               "description": "A type that defines the kind of Taxonomic Service",
               "enum": [
-                "AITrainingDataset",
-                "communityGroup",
-                "crowdSourcing",
-                "dataTool",
-                "e-LearningService",
-                "factsheet",
-                "identification",
-                "inventory",
-                "referenceCollection",
-                "specimenDatasetNotInGBIF",
-                "website"
+                "AI training dataset",
+                "Community group",
+                "CrowdSourcing",
+                "Data tool",
+                "e-Learning service",
+                "Factsheet",
+                "Identification tool",
+                "Knowledge website",
+                "Mobile app",
+                "Service inventory",
+                "Reference collection",
+                "Specimen dataset not in GBIF"
               ]
             },
             "schema:name": {
@@ -181,107 +325,204 @@
             },
             "schema:slogan": {
               "type": "string",
-              "maxLength": 200,
               "title": "Slogan",
-              "description": "Short catchphrase for marketing and advertising purposes. It will be usually displayed close to the Resource name and should refer to the main value or purpose of the Resource."
+              "description": "A slogan or motto associated with the Service (english)",
+              "maxLength": 200
             },
             "schema:logo": {
               "type": "string",
               "title": "Logo URL",
-              "description": "An associated logo URL."
-            },
-            "cetaf:dateModified": {
-              "type": "string",
-              "title": "Last updated",
-              "description": "The date on which the Service was most recently modified or when the item's entry was modified within a DataFeed."
+              "description": "An associated logo URL"
             },
             "schema:termsOfService": {
               "type": "string",
               "title": "Terms Of Service",
-              "description": "Human-readable terms of service documentation."
+              "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service"
+            },
+            "schema:additionalProperty": {
+              "type": "array",
+              "title": "Additional properties (updateFrequency)",
+              "description": "Generic property for handling domain specific values",
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean",
+                  "array",
+                  "object",
+                  "null"
+                ]
+              }
             }
           }
         },
         "schema:ContactPoint": {
           "type": "object",
-          "description": "A contact point—for example, a Customer Complaints department.",
+          "description": "A contact point—for example, a Customer Complaints department",
           "properties": {
             "schema:email": {
               "type": "string",
               "title": "Contact Email",
-              "description": "Email address of the contact point."
+              "description": "Email address of the contact point"
             },
             "schema:url": {
               "type": "string",
               "title": "Contact Webpage",
-              "description": "URL of the item that leads to the point of contact"
-            },
-            "schema:sameAs": {
-              "type": "string",
-              "title": "Webpage",
-              "description": "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website."
+              "description": "URL to a contact webpage or contact form for the resource"
             }
+          }
+        },
+        "schema:Author": {
+          "type": "array",
+          "description": "An array of authors of this service",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "title": "Author type",
+                "description": "The type of the author"
+              },
+              "schema:Affiliation": {
+                "type": "object",
+                "properties": {
+                  "@type": {
+                    "type": "string",
+                    "description": "The type of the affiliation"
+                  },
+                  "schema:identifier": {
+                    "type": "string",
+                    "title": "Affiliation identifier",
+                    "description": "A unique identifier to identify the author's affiliation; ROR identifiers are valid"
+                  },
+                  "schema:name": {
+                    "type": "string",
+                    "title": "Affiliation name",
+                    "description": "Full name of the author's affiliated orgnisation"
+                  }
+                },
+                "required": [
+                  "@type",
+                  "schema:identifier"
+                ]
+              }
+            },
+            "required": [
+              "@type",
+              "schema:identifier",
+              "schema:Affiliation"
+            ]
           }
         },
         "schema:Maintainer": {
           "type": "array",
-          "description": "An array of maintainers of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artefact.",
+          "description": "An array of maintainers of this service",
           "items": {
             "type": "object",
             "properties": {
-              "schema:identifier": {
+              "@type": {
                 "type": "string",
+                "title": "Maintainer type",
+                "description": "The type of the maintainer"
+              },
+              "schema:identifier": {
+                "type": "array",
                 "title": "ORCID/Wikidata Identifier",
-                "description": "A unique identifier to identify the maintainer; ORCID or Wikidata identifiers are valid"
+                "description": "A unique identifier to identify the maintainer; GitHub and ORCID identifiers are valid",
+                "items": {
+                  "type": "string"
+                }
               },
               "schema:name": {
                 "type": "string",
                 "title": "Full Name",
                 "description": "Full name of the maintainer"
               },
-              "schema:Organization": {
+              "schema:Affiliation": {
                 "type": "object",
-                "description": "The organisation the maintainer is affiliated with",
                 "properties": {
+                  "@type": {
+                    "type": "string",
+                    "description": "The type of the affiliation"
+                  },
                   "schema:identifier": {
                     "type": "string",
-                    "title": "Organisation ROR",
-                    "description": "The ROR identifier of the organisation."
+                    "title": "Affiliation identifier",
+                    "description": "A unique identifier to identify the maintainer's affiliation; ROR identifiers are valid"
                   },
-                  "schema:legalName": {
+                  "schema:name": {
                     "type": "string",
-                    "title": "Organisation Name",
-                    "description": "The official name of the organization, e.g. the registered company name."
+                    "title": "Affiliation name",
+                    "description": "Full name of the maintainer's affiliated orgnisation"
                   }
                 },
-                "additionalProperties": false
+                "required": [
+                  "@type",
+                  "schema:identifier"
+                ]
               }
-            }
+            },
+            "required": [
+              "@type",
+              "schema:identifier",
+              "schema:Affiliation"
+            ]
           }
         },
         "schema:FundingScheme": {
           "type": "object",
           "description": "A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.",
           "properties": {
-            "schema:url": {
+            "schema:award": {
               "type": "string",
-              "title": "Payment model URL",
-              "description": "URL to webpage with the supported payment models and restrictions that apply to the Resource."
+              "title": "Award",
+              "description": "An award won by or for this service"
+            },
+            "schema:Funding": {
+              "type": "object",
+              "description": "A Grant that directly or indirectly provide funding or sponsorship for this service",
+              "properties": {
+                "schema:identifier": {
+                  "type": "string",
+                  "title": "Grant identifier",
+                  "description": "A unique identifier to identify the grant"
+                },
+                "schema:description": {
+                  "type": "string",
+                  "title": "Funding grant",
+                  "description": "A description of the service's grant"
+                }
+              },
+              "required": [
+                "schema:identifier"
+              ]
             },
             "schema:Funder": {
-              "type": "object",
-              "description": "A person or organization that supports (sponsors) something through some kind of financial contribution.",
+              "type": "array",
+              "description": "An organization that supports (sponsors) something through some kind of financial contribution.",
               "properties": {
+                "@type": {
+                  "type": "string",
+                  "title": "Funder type",
+                  "description": "The type of funder"
+                },
+                "schema:identifier": {
+                  "type": "string",
+                  "title": "Funder identifier",
+                  "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid"
+                },
                 "schema:name": {
                   "type": "string",
-                  "title": "Funder Name",
+                  "title": "Funder name",
                   "description": "The name of the funder (funding program)"
                 }
               },
-              "additionalProperties": false
+              "required": [
+                "@type",
+                "schema:identifier"
+              ]
             }
-          },
-          "additionalProperties": false
+          }
         },
         "schema:SoftwareSourceCode": {
           "type": "object",
@@ -294,11 +535,6 @@
               "type": "string",
               "title": "Code Repository URL",
               "description": "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex). "
-            },
-            "schema:about": {
-              "type": "string",
-              "title": "Change Log",
-              "description": "The subject matter of the content including a summary of the Resource features updated from the previous version."
             },
             "schema:runtimePlatform": {
               "type": "string",
@@ -319,6 +555,21 @@
               "type": "string",
               "title": "License",
               "description": "A license document that applies to this content, typically indicated by URL."
+            },
+            "schema:additionalProperty": {
+              "type": "array",
+              "title": "Additional properties (isOpenSource)",
+              "description": "Generic property for handling domain specific values.",
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean",
+                  "array",
+                  "object",
+                  "null"
+                ]
+              }
             }
           }
         },
@@ -334,12 +585,7 @@
               "schema:contentUrl": {
                 "type": "string",
                 "title": "Media URL",
-                "description": "Actual bytes of the media object, for example the image file or video file."
-              },
-              "schema:license": {
-                "type": "string",
-                "title": "License",
-                "description": "A license document that applies to this content, typically indicated by URL"
+                "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain"
               }
             }
           }
