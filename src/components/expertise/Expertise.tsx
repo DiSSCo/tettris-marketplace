@@ -123,13 +123,15 @@ const Expertise = () => {
             {/* Render Header */}
             <Header />
 
-            {/* Expertise page body */}
+            {/* Expertise page header */}
             <Container fluid className="p-4">
                 <Col className="d-flex justify-content-between align-items-center">
                     <h1 className="fs-1 fw-bold">Browse taxonomic experts</h1>
                     <button type="button" className="btn btn-primary"  onClick={handleShow}>Register your expertise</button>
                 </Col>
             </Container>
+
+            {/* Expertise page body */}
             <Container fluid className="flex-grow-1 p-3 overflow-auto">
                 <Row className="h-100 flex-column flex-md-row">
                     <Col className='overflow-auto pb-3' md={3}>
@@ -145,36 +147,15 @@ const Expertise = () => {
                                 >
                                     {open ? 'Hide Filters' : 'Show Filters'}
                                 </Button>
-                                
                                 <Collapse in={open}>
                                     <div id="filter-collapse">
-                                        <Form onSubmit={handleSubmit} onReset={handleReset}>
-                                            {SelectFields(fieldsOfContries, "Country", countryRef, "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
-                                            {SelectFields(fieldsOfLanguages, "Language", languageRef, "A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
-                                            {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
-                                            {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
-                                            {SelectFields(fieldsOfOrder, "Order", orderRef)}
-                                            <div className="d-flex justify-content-center">
-                                                <Button type="reset" className="btn btn-primary">Reset</Button>
-                                                <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
-                                            </div>
-                                        </Form>
+                                        {filterForm(handleSubmit, handleReset, fieldsOfContries, countryRef, fieldsOfLanguages, languageRef, fieldsOfTaxonomy, taxonomyRef, fieldsOfSubTaxonomy, subTaxonomyRef, fieldsOfOrder, orderRef)}
                                     </div>
                                 </Collapse>
                             </Row>
                             {/* Desktop */}
                             <div className="d-none d-md-block">
-                                <Form onSubmit={handleSubmit} onReset={handleReset}>
-                                    {SelectFields(fieldsOfContries, "Country", countryRef, "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
-                                    {SelectFields(fieldsOfLanguages, "Language", languageRef, "A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
-                                    {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
-                                    {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
-                                    {SelectFields(fieldsOfOrder, "Order", orderRef)}
-                                    <div className="d-flex justify-content-center">
-                                        <Button type="reset" className="btn btn-primary">Reset</Button>
-                                        <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
-                                    </div>
-                                </Form>
+                                {filterForm(handleSubmit, handleReset, fieldsOfContries, countryRef, fieldsOfLanguages, languageRef, fieldsOfTaxonomy, taxonomyRef, fieldsOfSubTaxonomy, subTaxonomyRef, fieldsOfOrder, orderRef)}
                             </div>
                         </Row>
                     </Col>
@@ -206,49 +187,67 @@ const Expertise = () => {
             {/* Render Footer */}
             <Footer />
             {/* Modal for registering expertise */}
-            <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Register Your Expertise</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group controlId="formName">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your name" />
-                        </Form.Group>
-                        <Form.Group controlId="formEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter your email" />
-                        </Form.Group>
-                        <Form.Group controlId='formCountry'>
-                            <Form.Label>Country</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your country" />
-                        </Form.Group>
-                        <Form.Group controlId="formLanguage">
-                            <Form.Label>Language</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your language" />
-                        </Form.Group>
-                        <Form.Group controlId="formTaxonomy">
-                            <Form.Label>Taxonomy</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your taxonomy" />
-                        </Form.Group>
-                        <Form.Group controlId="formSubTaxonomy">
-                            <Form.Label>Sub-Taxonomy</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your sub-taxonomy" />
-                        </Form.Group>
-                        <div className="d-flex justify-content-center mt-3">
-                            <Button variant="primary" type="submit">
-                                Request
-                            </Button>
-                        </div>
-                    </Form>
-                </Modal.Body>
-            </Modal>
+            {showExpertiseModal(showModal, handleClose)}
         </div>
     );
 }
 
 export default Expertise;
+
+function showExpertiseModal(showModal: boolean, handleClose: () => void) {
+    return <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+            <Modal.Title>Register Your Expertise</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form>
+                <Form.Group controlId="formName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter your name" />
+                </Form.Group>
+                <Form.Group controlId="formEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter your email" />
+                </Form.Group>
+                <Form.Group controlId='formCountry'>
+                    <Form.Label>Country</Form.Label>
+                    <Form.Control type="text" placeholder="Enter your country" />
+                </Form.Group>
+                <Form.Group controlId="formLanguage">
+                    <Form.Label>Language</Form.Label>
+                    <Form.Control type="text" placeholder="Enter your language" />
+                </Form.Group>
+                <Form.Group controlId="formTaxonomy">
+                    <Form.Label>Taxonomy</Form.Label>
+                    <Form.Control type="text" placeholder="Enter your taxonomy" />
+                </Form.Group>
+                <Form.Group controlId="formSubTaxonomy">
+                    <Form.Label>Sub-Taxonomy</Form.Label>
+                    <Form.Control type="text" placeholder="Enter your sub-taxonomy" />
+                </Form.Group>
+                <div className="d-flex justify-content-center mt-3">
+                    <Button variant="primary" type="submit">
+                        Request
+                    </Button>
+                </div>
+            </Form>
+        </Modal.Body>
+    </Modal>;
+}
+
+function filterForm(handleSubmit: (e: any) => void, handleReset: (e: any) => void, fieldsOfContries: { value: string; label: string; }[], countryRef: React.RefObject<HTMLSelectElement>, fieldsOfLanguages: { value: string; label: string; }[], languageRef: React.RefObject<HTMLSelectElement>, fieldsOfTaxonomy: { value: string; label: string; }[], taxonomyRef: React.RefObject<HTMLSelectElement>, fieldsOfSubTaxonomy: { value: string; label: string; }[], subTaxonomyRef: React.RefObject<HTMLSelectElement>, fieldsOfOrder: { value: string; label: string; }[], orderRef: React.RefObject<HTMLSelectElement>) {
+    return <Form onSubmit={handleSubmit} onReset={handleReset}>
+        {SelectFields(fieldsOfContries, "Country", countryRef, "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
+        {SelectFields(fieldsOfLanguages, "Language", languageRef, "A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
+        {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
+        {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
+        {SelectFields(fieldsOfOrder, "Order", orderRef)}
+        <div className="d-flex justify-content-center">
+            <Button type="reset" className="btn btn-primary">Reset</Button>
+            <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
+        </div>
+    </Form>;
+}
 
 function expertiseCard(expert: any) {
     return <Col className="border rounded p-3 mt-3"  style={{ backgroundColor: '#f2f2f2' }}>
