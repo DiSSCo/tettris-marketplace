@@ -78,39 +78,44 @@ const RORField = (props: Props) => {
     return (
         <div>
             <Row>
-                <Col lg="auto"
+                <Col xs={{ span: 12 }} lg="auto"
                     className="pe-0"
                 >
                     <p>
                         {field.title}
                     </p>
-                    <p className="fs-5 tc-grey">
-                        {field.description}
-                    </p>
                 </Col>
                 {(field.required && !isEmpty(values) && isEmpty(jp.value(values, field.jsonPath)?.['schema:identifier'])) &&
                     <Col className="d-flex align-items-center">
-                        <p className="fs-4 tc-error">
+                        <p className="fs-5 fs-lg-4 tc-error">
                             This field is required
                         </p>
                     </Col>
                 }
+                <Row>
+                    <Col>
+                        <p className="fs-5 tc-grey">
+                            {field.description}
+                        </p>
+                    </Col>
+                </Row>
             </Row>
             <Row className="mt-1">
-                <Col>
+                <Col xs={{ span: 12 }} lg>
                     <Field name="rorSearch"
                         className={`${formFieldClass} w-100 br-corner px-2 py-1`}
                         onChange={(field: Dict) => setQuery(field.target.value as string)}
                     />
                 </Col>
                 {loading &&
-                    <Col lg="auto">
+                    <Col xs="auto" lg="auto">
                         <Spinner />
                     </Col>
                 }
-                <Col lg="auto">
+                <Col xs="auto" lg="auto">
                     <Button type="button"
                         variant="primary"
+                        className="fs-5 fs-lg-4 mt-2 mt-lg-0"
                         OnClick={() => SearchForROR()}
                     >
                         <p>

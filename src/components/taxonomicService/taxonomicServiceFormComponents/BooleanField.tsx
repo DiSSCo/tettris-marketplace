@@ -29,11 +29,11 @@ const BooleanField = (props: Props) => {
     return (
         <div>
             <Row>
-                <Col lg="auto"
+                <Col xs="auto" lg="auto"
                     className="pe-0"
                 >
                     <p>
-                        {field.title}{field.required ? <span className="tc-grey"> *</span> : ''}
+                        {field.title}
                     </p>
                 </Col>
                 <Col>

@@ -56,9 +56,6 @@ const StringArrayField = (props: Props) => {
                                         <p>
                                             {field.title}
                                         </p>
-                                        <p className="fs-5 tc-grey">
-                                            {field.description}
-                                        </p>
                                     </Col>
                                     {(field.required && !isEmpty(values) && !jp.value(values, field.jsonPath)?.find((value: string) => !!value)) &&
                                         <Col className="d-flex align-items-center">
@@ -67,6 +64,11 @@ const StringArrayField = (props: Props) => {
                                             </p>
                                         </Col>
                                     }
+                                    <Col lg={{ span: 12 }}>
+                                        <p className="fs-5 tc-grey">
+                                            {field.description}
+                                        </p>
+                                    </Col>
                                 </Row>
                             </Col>
                             <Col lg="auto">
@@ -94,7 +96,7 @@ const StringArrayField = (props: Props) => {
                                         />
                                     </Col>
                                     {fieldValues.length > 1 &&
-                                        <Col lg="auto"
+                                        <Col xs="auto" lg="auto"
                                             className="d-flex align-items-center"
                                         >
                                             <Button type="button"
