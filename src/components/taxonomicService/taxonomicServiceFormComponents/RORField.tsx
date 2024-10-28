@@ -84,6 +84,9 @@ const RORField = (props: Props) => {
                     <p>
                         {field.title}
                     </p>
+                    <p className="fs-5 tc-grey">
+                        {field.description}
+                    </p>
                 </Col>
                 {(field.required && !isEmpty(values) && isEmpty(jp.value(values, field.jsonPath)?.['schema:identifier'])) &&
                     <Col className="d-flex align-items-center">
