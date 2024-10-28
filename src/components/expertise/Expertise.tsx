@@ -1,5 +1,5 @@
 /* Import Dependencies */
-import { Container, Row, Col, Modal, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Form, Button, Collapse } from 'react-bootstrap';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import React, { useRef, useState } from 'react';
 
@@ -7,6 +7,10 @@ import React, { useRef, useState } from 'react';
 import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
 import experts from './../../sources/dataModel/experts.json';
+
+/* Import Icons */
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
  * Component that renders the Expertise page
@@ -93,10 +97,25 @@ const Expertise = () => {
         // Further processing with formData if needed
     };
 
+    const handleSearch = (e: any) => {
+        const searchTerm = e.currentTarget.value.toLowerCase();
+        const filteredExperts = experts.experts.filter((expert: any) => 
+            expert.name.toLowerCase().includes(searchTerm) ||
+            expert.description.toLowerCase().includes(searchTerm) ||
+            expert.country.toLowerCase().includes(searchTerm) ||
+            expert.scope.toLowerCase().includes(searchTerm)
+        );
+        setIndex(0);
+        setExpertsList({ experts: filteredExperts });
+    }
+
     const [showModal, setShowModal] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleShow = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
+    const handleToggle = () => setOpen(!open);
+
 
     return (
         <div className="h-100 d-flex flex-column">
@@ -111,26 +130,55 @@ const Expertise = () => {
                 </Col>
             </Container>
             <Container fluid className="flex-grow-1 p-3 overflow-hidden">
-                <Row className="h-100">
+                <Row className="h-100 flex-column flex-md-row">
                     <Col md={3}>
                         <div className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
                             <h2 className="fs-6">Filter Experts</h2>
-                            <Form onSubmit={handleSubmit} onReset={handleReset}>
-                                {SelectFields(fieldsOfContries, "Country", countryRef,"A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
-                                {SelectFields(fieldsOfLanguages, "Language", languageRef,"A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
-                                {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
-                                {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
-                                {SelectFields(fieldsOfOrder, "Order", orderRef)}
-                                <div className="d-flex justify-content-center">
-                                    <Button type="reset" className="btn btn-primary">Reset</Button>
-                                    <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
-                                </div>
-                            </Form>
+                            <div className="d-md-none">
+                                <Button
+                                    onClick={handleToggle}
+                                    aria-controls="filter-collapse"
+                                    aria-expanded={open}
+                                    className="mb-3"
+                                >
+                                    {open ? 'Hide Filters' : 'Show Filters'}
+                                </Button>
+                                <Collapse in={open}>
+                                    <div id="filter-collapse">
+                                        <Form onSubmit={handleSubmit} onReset={handleReset}>
+                                            {SelectFields(fieldsOfContries, "Country", countryRef, "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
+                                            {SelectFields(fieldsOfLanguages, "Language", languageRef, "A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
+                                            {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
+                                            {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
+                                            {SelectFields(fieldsOfOrder, "Order", orderRef)}
+                                            <div className="d-flex justify-content-center">
+                                                <Button type="reset" className="btn btn-primary">Reset</Button>
+                                                <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
+                                            </div>
+                                        </Form>
+                                    </div>
+                                </Collapse>
+                            </div>
+                            <div className="d-none d-md-block">
+                                <Form onSubmit={handleSubmit} onReset={handleReset}>
+                                    {SelectFields(fieldsOfContries, "Country", countryRef, "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
+                                    {SelectFields(fieldsOfLanguages, "Language", languageRef, "A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
+                                    {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
+                                    {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
+                                    {SelectFields(fieldsOfOrder, "Order", orderRef)}
+                                    <div className="d-flex justify-content-center">
+                                        <Button type="reset" className="btn btn-primary">Reset</Button>
+                                        <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
+                                    </div>
+                                </Form>
+                            </div>
                         </div>
                     </Col>
                     <Col>
                         <Row className="align-items-center">
-                            <Col><input type="text" className="form-control me-2" placeholder="Search experts" style={{ maxWidth: '300px' }} /></Col>
+                            <Col>
+                                <input type="text" className="form-control me-2" placeholder="Search experts" style={{ maxWidth: '300px' }} onInput={handleSearch}/>
+                            </Col>
                             <Col>Result found {expertsList.experts.length}</Col>
                         </Row>
                         <Col className="overflow-auto flex-grow-1">
@@ -186,7 +234,7 @@ const Expertise = () => {
                         </Form.Group>
                         <div className="d-flex justify-content-center mt-3">
                             <Button variant="primary" type="submit">
-                                Submit
+                                Request
                             </Button>
                         </div>
                     </Form>
@@ -221,7 +269,7 @@ function SelectFields(fields: { value: string; label: string; }[], name: string,
                     placement="top"
                     overlay={<Tooltip id={`${name}Tooltip`}>{info}</Tooltip>}
                 >
-                <span>(i)</span>
+                <span><FontAwesomeIcon icon={faInfoCircle} /></span>
                 </OverlayTrigger>
             }
             </Form.Label>
