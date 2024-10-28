@@ -1,5 +1,5 @@
 /* Import Dependencies */
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Form, Button } from 'react-bootstrap';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import React, { useRef, useState } from 'react';
 
@@ -93,6 +93,11 @@ const Expertise = () => {
         // Further processing with formData if needed
     };
 
+    const [showModal, setShowModal] = useState(false);
+
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
+
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -102,7 +107,7 @@ const Expertise = () => {
             <Container fluid className="overflow-hidden p-4">
                 <Col className="d-flex justify-content-between align-items-center">
                     <h1 className="fs-1 fw-bold">Browse taxonomic experts</h1>
-                    <button type="button" className="btn btn-primary">Register your expertise</button>
+                    <button type="button" className="btn btn-primary"  onClick={handleShow}>Register your expertise</button>
                 </Col>
             </Container>
             <Container fluid className="flex-grow-1 p-3 overflow-hidden">
@@ -110,17 +115,17 @@ const Expertise = () => {
                     <Col md={3}>
                         <div className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
                             <h2 className="fs-6">Filter Experts</h2>
-                            <form onSubmit={handleSubmit} onReset={handleReset}>
+                            <Form onSubmit={handleSubmit} onReset={handleReset}>
                                 {SelectFields(fieldsOfContries, "Country", countryRef,"A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
                                 {SelectFields(fieldsOfLanguages, "Language", languageRef,"A language is a structured system of symbols (like words or signs) that are used for communication. Each language has its own grammar, vocabulary, and pronunciation rules.")}
                                 {SelectFields(fieldsOfTaxonomy, "Taxonomy", taxonomyRef)}
                                 {SelectFields(fieldsOfSubTaxonomy, "Sub-taxonomy", subTaxonomyRef)}
                                 {SelectFields(fieldsOfOrder, "Order", orderRef)}
                                 <div className="d-flex justify-content-center">
-                                    <button type="reset" className="btn btn-primary">Reset</button>
-                                    <button type="submit" className="btn btn-primary ms-2">Apply</button>
+                                    <Button type="reset" className="btn btn-primary">Reset</Button>
+                                    <Button type="submit" className="btn btn-primary ms-2">Apply</Button>
                                 </div>
-                            </form>
+                            </Form>
                         </div>
                     </Col>
                     <Col>
@@ -148,6 +153,45 @@ const Expertise = () => {
 
             {/* Render Footer */}
             <Footer />
+            {/* Modal for registering expertise */}
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Register Your Expertise</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formName">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your name" />
+                        </Form.Group>
+                        <Form.Group controlId="formEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter your email" />
+                        </Form.Group>
+                        <Form.Group controlId='formCountry'>
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your country" />
+                        </Form.Group>
+                        <Form.Group controlId="formLanguage">
+                            <Form.Label>Language</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your language" />
+                        </Form.Group>
+                        <Form.Group controlId="formTaxonomy">
+                            <Form.Label>Taxonomy</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your taxonomy" />
+                        </Form.Group>
+                        <Form.Group controlId="formSubTaxonomy">
+                            <Form.Label>Sub-Taxonomy</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your sub-taxonomy" />
+                        </Form.Group>
+                        <div className="d-flex justify-content-center mt-3">
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                        </div>
+                    </Form>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }
@@ -171,7 +215,7 @@ function expertiseCard(expert: any) {
 function SelectFields(fields: { value: string; label: string; }[], name: string, ref: React.RefObject<HTMLSelectElement>, info?: string) {
     return (
         <div className="mb-3">
-            <label htmlFor={`${name}Field`} className="form-label">
+            <Form.Label htmlFor={`${name}Field`} className="form-label">
                 {name} {info && 
                 <OverlayTrigger
                     placement="top"
@@ -180,14 +224,14 @@ function SelectFields(fields: { value: string; label: string; }[], name: string,
                 <span>(i)</span>
                 </OverlayTrigger>
             }
-            </label>
-            <select ref={ref} className="form-select" id={`${name}Field`}>
+            </Form.Label>
+            <Form.Select ref={ref} className="form-select" id={`${name}Field`}>
                 {fields.map((field) => (
                     <option key={field.value} value={field.value}>
                         {field.label}
                     </option>
                 ))}
-            </select>
+            </Form.Select>
         </div>
     );
 }
