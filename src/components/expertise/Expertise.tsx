@@ -123,17 +123,18 @@ const Expertise = () => {
             <Header />
 
             {/* Expertise page body */}
-            <Container fluid className="overflow-hidden p-4">
+            <Container fluid className="p-4">
                 <Col className="d-flex justify-content-between align-items-center">
                     <h1 className="fs-1 fw-bold">Browse taxonomic experts</h1>
                     <button type="button" className="btn btn-primary"  onClick={handleShow}>Register your expertise</button>
                 </Col>
             </Container>
-            <Container fluid className="flex-grow-1 p-3 overflow-hidden">
+            <Container fluid className="flex-grow-1 p-3 overflow-auto">
                 <Row className="h-100 flex-column flex-md-row">
-                    <Col md={3}>
+                    <Col className='overflow-auto' md={3}>
                         <div className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
                             <h2 className="fs-6">Filter Experts</h2>
+                            {/* Mobile */}
                             <div className="d-md-none">
                                 <Button
                                     onClick={handleToggle}
@@ -159,6 +160,7 @@ const Expertise = () => {
                                     </div>
                                 </Collapse>
                             </div>
+                            {/* Desktop */}
                             <div className="d-none d-md-block">
                                 <Form onSubmit={handleSubmit} onReset={handleReset}>
                                     {SelectFields(fieldsOfContries, "Country", countryRef, "A country is a distinct territorial body or political entity that is recognized as an independent nation. Countries have defined geographical boundaries, governments, and often a population that shares common cultural, historical, or linguistic ties.")}
@@ -174,7 +176,7 @@ const Expertise = () => {
                             </div>
                         </div>
                     </Col>
-                    <Col>
+                    <Col className='overflow-auto'>
                         <Row className="align-items-center">
                             <Col>
                                 <input type="text" className="form-control me-2" placeholder="Search experts" style={{ maxWidth: '300px' }} onInput={handleSearch}/>
