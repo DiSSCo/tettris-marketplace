@@ -66,6 +66,7 @@ const Expertise = () => {
         subTaxonomyRef.current!.value = "";
         orderRef.current!.value = "";
         setExpertsList({ experts: experts.experts });
+        setOpen(false);
     }
 
     const handleSubmit = (e: any) => {
@@ -93,6 +94,7 @@ const Expertise = () => {
             filteredExperts.sort((a: any, b: any) => b.name.localeCompare(a.name));
         }
         setIndex(0);
+        setOpen(false);
         setExpertsList({ experts: filteredExperts });
         // Further processing with formData if needed
     };
@@ -116,7 +118,6 @@ const Expertise = () => {
     const handleClose = () => setShowModal(false);
     const handleToggle = () => setOpen(!open);
 
-
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -131,11 +132,11 @@ const Expertise = () => {
             </Container>
             <Container fluid className="flex-grow-1 p-3 overflow-auto">
                 <Row className="h-100 flex-column flex-md-row">
-                    <Col className='overflow-auto' md={3}>
-                        <div className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
-                            <h2 className="fs-6">Filter Experts</h2>
+                    <Col className='overflow-auto pb-3' md={3}>
+                        <Row className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
+                            <Col className="fw-bold p-3">Filter Experts</Col>
                             {/* Mobile */}
-                            <div className="d-md-none">
+                            <Row className="d-md-none ">
                                 <Button
                                     onClick={handleToggle}
                                     aria-controls="filter-collapse"
@@ -144,6 +145,7 @@ const Expertise = () => {
                                 >
                                     {open ? 'Hide Filters' : 'Show Filters'}
                                 </Button>
+                                
                                 <Collapse in={open}>
                                     <div id="filter-collapse">
                                         <Form onSubmit={handleSubmit} onReset={handleReset}>
@@ -159,7 +161,7 @@ const Expertise = () => {
                                         </Form>
                                     </div>
                                 </Collapse>
-                            </div>
+                            </Row>
                             {/* Desktop */}
                             <div className="d-none d-md-block">
                                 <Form onSubmit={handleSubmit} onReset={handleReset}>
@@ -174,9 +176,10 @@ const Expertise = () => {
                                     </div>
                                 </Form>
                             </div>
-                        </div>
+                        </Row>
                     </Col>
-                    <Col className='overflow-auto'>
+                    {/* open need to change when is on desktop */}
+                    {!open && <Col className='overflow-auto'>
                         <Row className="align-items-center">
                             <Col>
                                 <input type="text" className="form-control me-2" placeholder="Search experts" style={{ maxWidth: '300px' }} onInput={handleSearch}/>
@@ -194,10 +197,9 @@ const Expertise = () => {
                             <Col className="d-flex justify-content-center p-3">
                                 {index > 0 && <button type="button" className="btn btn-secondary me-2" onClick={() => setIndex(index - 5)}>Previous</button>}
                                 {index + 5 < expertsList.experts.length && <button type="button" className="btn btn-secondary" onClick={() => setIndex(index + 5)}>Next</button>}
-                                
                             </Col>
                         )}
-                    </Col>
+                    </Col>}
                 </Row>
             </Container>
 
