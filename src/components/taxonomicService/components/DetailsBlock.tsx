@@ -29,6 +29,8 @@ type Props = {
 const DetailsBlock = (props: Props) => {
     const { name, properties } = props;
 
+    console.log(properties);
+
     return (
         <div className="h-100 d-flex flex-column">
             {/* Name of block */}

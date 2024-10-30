@@ -14,7 +14,7 @@
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:service"
+        "schema:Service"
       ],
       "properties": {
         "@id": {
@@ -198,7 +198,7 @@
           }
         },
         "ods:topicDiscipline": {
-          "type": "string",
+          "type": "array",
           "title": "Topic Discipline",
           "description": "The topic discipline relevant to the taxonomic range of the service",
           "items": {
@@ -280,23 +280,26 @@
           ],
           "properties": {
             "schema:serviceType": {
-              "type": "string",
+              "type": "array",
               "title": "Service Type",
               "description": "A type that defines the kind of Taxonomic Service",
-              "enum": [
-                "AI training dataset",
-                "Community group",
-                "CrowdSourcing",
-                "Data tool",
-                "e-Learning service",
-                "Factsheet",
-                "Identification tool",
-                "Knowledge website",
-                "Mobile app",
-                "Service inventory",
-                "Reference collection",
-                "Specimen dataset not in GBIF"
-              ]
+              "items": {
+                "type": "string",
+                "enum": [
+                  "AI training dataset",
+                  "Community group",
+                  "CrowdSourcing",
+                  "Data tool",
+                  "e-Learning service",
+                  "Factsheet",
+                  "Identification tool",
+                  "Knowledge website",
+                  "Mobile app",
+                  "Service inventory",
+                  "Reference collection",
+                  "Specimen dataset not in GBIF"
+                ]
+              }
             },
             "schema:name": {
               "type": "string",
@@ -382,6 +385,11 @@
                 "type": "string",
                 "title": "Author type",
                 "description": "The type of the author"
+              },
+              "schema:identifier": {
+                "type": "string",
+                "title": "Identifier",
+                "description": "A unique identifier to identify the author; ORCID identifiers are valid"
               },
               "schema:Affiliation": {
                 "type": "object",
@@ -500,27 +508,30 @@
             "schema:Funder": {
               "type": "array",
               "description": "An organization that supports (sponsors) something through some kind of financial contribution.",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "title": "Funder type",
-                  "description": "The type of funder"
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@type": {
+                    "type": "string",
+                    "title": "Funder type",
+                    "description": "The type of funder"
+                  },
+                  "schema:identifier": {
+                    "type": "string",
+                    "title": "Funder identifier",
+                    "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid"
+                  },
+                  "schema:name": {
+                    "type": "string",
+                    "title": "Funder name",
+                    "description": "The name of the funder (funding program)"
+                  }
                 },
-                "schema:identifier": {
-                  "type": "string",
-                  "title": "Funder identifier",
-                  "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid"
-                },
-                "schema:name": {
-                  "type": "string",
-                  "title": "Funder name",
-                  "description": "The name of the funder (funding program)"
-                }
-              },
-              "required": [
-                "@type",
-                "schema:identifier"
-              ]
+                "required": [
+                  "@type",
+                  "schema:identifier"
+                ]
+              }
             }
           }
         },

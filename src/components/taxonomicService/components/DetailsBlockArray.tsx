@@ -24,6 +24,8 @@ type Props = {
 const DetailsBlockArray = (props: Props) => {
     const { name, propertiesArray } = props;
 
+    console.log(propertiesArray);
+
     return (
         <Row>
             <Col>

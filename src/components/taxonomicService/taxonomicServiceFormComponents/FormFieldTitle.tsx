@@ -23,8 +23,6 @@ type Props = {
 const FormFieldTitle = (props: Props) => {
     const { field, values } = props;
 
-    console.log(field.title, values);
-
     return (
         <Row>
             <Col lg="auto"
