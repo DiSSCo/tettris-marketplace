@@ -15,6 +15,9 @@ import { getTaxonomicService, setTaxonomicService } from 'redux-store/TaxonomicS
 /* Import Types */
 import { TaxonomicService as TaxonomicServiceType } from 'app/Types';
 
+/* Import API */
+import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
+
 /* Import Components */
 import Header from 'components/general/header/Header';
 import TopBar from './components/TopBar';
@@ -22,10 +25,7 @@ import DescriptionBlock from './components/DescriptionBlock';
 import DetailsBlock from './components/DetailsBlock';
 import MultimediaBlock from './components/MultimediaBlock';
 import Footer from 'components/general/footer/Footer';
-import { Button, Spinner } from 'components/general/CustomComponents';
-
-/* Import API */
-import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
+import { BreadCrumbs, Button, Spinner } from 'components/general/CustomComponents';
 
 
 const TaxonomicService = () => {
@@ -69,7 +69,7 @@ const TaxonomicService = () => {
     const detailBlocksClass = classNames({
         'pt-4': !taxonomicService?.taxonomicService['schema:AssociatedMedia']
     });
-    
+
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -95,16 +95,10 @@ const TaxonomicService = () => {
                         {/* If taxonomic service is present */}
                         {taxonomicService &&
                             <>
-                                {/* MOBILE: Back to search button */}
-                                <Row className="d-lg-none">
+                                {/* Bread crumbs */}
+                                <Row>
                                     <Col>
-                                        <Button type="button"
-                                            variant="blank"
-                                            className="px-0"
-                                            OnClick={() => navigate(-1)}
-                                        >
-                                            {`< Back to search`}
-                                        </Button>
+                                        <BreadCrumbs />
                                     </Col>
                                 </Row>
                                 {/* Top bar */}

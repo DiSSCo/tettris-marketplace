@@ -121,7 +121,7 @@ const FiltersBar = (props: Props) => {
                             </Col>
                             {/* Deselect all filters button */}
                             <Col lg="auto"
-                                className="ps-0"
+                                className="ps-0 d-none d-lg-block"
                             >
                                 <Button type="submit"
                                     variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
