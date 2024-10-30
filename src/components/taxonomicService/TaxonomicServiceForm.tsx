@@ -27,7 +27,8 @@ const TaxonomicServiceForm = () => {
             {/* Home page Body */}
             <Container fluid className="flex-grow-1 overflow-hidden">
                 <Row className="h-100">
-                    <Col lg={{ span: 6, offset: 3 }}
+                    <Col xs={{ span: 10, offset: 1 }}
+                        lg={{ span: 6, offset: 3 }}
                         className="h-100 pt-4 pt-lg-5 pb-4 overflow-scroll"
                     >
                         <Card className="w-100 px-4 py-3">
@@ -48,8 +49,8 @@ const TaxonomicServiceForm = () => {
                                             it to the marketplace, or reject it if the suggested resource does not meet CETAF requirements of relevance and quality."
                                         </p>
                                         : <p className="mt-3 fs-4">
-                                            Your submission is received and will be processed by the Marketplace! A CETAF administrator will review 
-                                            and score the taxonomic service. When the score is sufficient, the service will be published in the 
+                                            Your submission is received and will be processed by the Marketplace! A CETAF administrator will review
+                                            and score the taxonomic service. When the score is sufficient, the service will be published in the
                                             Marketplace catalog.
                                             <br />
                                             Thank you for using the Taxonomic Marketplace!

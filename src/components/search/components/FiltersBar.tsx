@@ -1,7 +1,10 @@
 /* Import Dependencies */
-import { useSearchParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Formik, Form } from 'formik';
 import { Row, Col } from 'react-bootstrap';
+
+/* Import Hooks */
+import { useSearchParams } from 'react-router-dom';
 
 /* Import Types */
 import { Dict, Filter as FilterType } from 'app/Types';
@@ -10,12 +13,12 @@ import { Dict, Filter as FilterType } from 'app/Types';
 import TaxonomicServiceFilters from 'sources/searchFilters/TaxonomicServiceFilters.json';
 
 /* Import Icons */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 /* Import Components */
-import { QueryBar } from 'components/general/FormComponents';
 import Filter from './Filter';
+import { QueryBar } from 'components/general/FormComponents';
+import { Button } from 'components/general/CustomComponents';
 
 
 /* Props Type */
@@ -74,40 +77,63 @@ const FiltersBar = (props: Props) => {
         >
             {({ values, setFieldValue, submitForm }) => {
                 return (
-                <Form>
-                    <Row>
-                        {/* Search Bar */}
-                        <Col xs={{ span: 12 }} 
-                            lg={{ span: 4 }}
-                            className="mb-4 mb-lg-0"
-                        >
-                            <QueryBar name="query"
-                                placeholder="Enter a search query"
+                    <Form>
+                        <Row>
+                            {/* Search Bar */}
+                            <Col xs={{ span: 12 }}
+                                lg={{ span: 4 }}
+                                className="mb-4 mb-lg-0"
                             >
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </QueryBar>
-                        </Col>
-                        {/* Filters */}
-                        <Col>
-                            <Row>
-                                {filters.map((filter) => (
-                                    <Col key={filter.name}
-                                        xs={{ span: 12 }}
-                                        lg={{ span: 3 }}
-                                        className="mb-2 mb-lg-0"
-                                    >
-                                        <Filter filter={filter}
-                                            currentValue={values[filter.name as keyof typeof values]}
-                                            hasDefault={!!filters.find(originalFilter => originalFilter.name === filter.name)?.default}
-                                            SetFilterValue={(value: string | number | boolean) => setFieldValue(filter.name, value)}
-                                            SubmitForm={() => submitForm()}
-                                        />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </Col>
-                    </Row>
-                </Form>
+                                <QueryBar name="query"
+                                    placeholder="Enter a search query"
+                                >
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                </QueryBar>
+                            </Col>
+                            {/* Filters */}
+                            <Col>
+                                <Row>
+                                    {filters.map((filter) => (
+                                        <Col key={filter.name}
+                                            xs={{ span: 12 }}
+                                            lg={{ span: 3 }}
+                                            className="mb-2 mb-lg-0"
+                                        >
+                                            <Filter filter={filter}
+                                                currentValue={values[filter.name as keyof typeof values]}
+                                                hasDefault={!!filters.find(originalFilter => originalFilter.name === filter.name)?.default}
+                                                SetFilterValue={(value: string | number | boolean) => setFieldValue(filter.name, value)}
+                                                SubmitForm={() => submitForm()}
+                                            />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Col>
+                            {/* Search button */}
+                            <Col lg="auto"
+                                className="d-none d-lg-block"
+                            >
+                                <Button type="submit"
+                                    variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                >
+                                    <p>Search</p>
+                                </Button>
+                            </Col>
+                            {/* Deselect all filters button */}
+                            <Col lg="auto"
+                                className="ps-0"
+                            >
+                                <Button type="submit"
+                                    variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                    OnClick={() => setSearchParams()}
+                                >
+                                    <FontAwesomeIcon icon={faFilterCircleXmark}
+                                        size="lg"
+                                    />
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
                 )
             }}
         </Formik>

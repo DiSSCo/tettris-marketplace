@@ -9,7 +9,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useFocus } from 'app/Hooks';
 
 /* Import Icons */
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 /* Import Styles */
 import styles from 'components/search/search.module.scss';
@@ -24,7 +24,7 @@ import { Button } from 'components/general/CustomComponents';
 */
 const TopBar = () => {
     /* Hooks */
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
     /* Base variables */
@@ -62,6 +62,13 @@ const TopBar = () => {
                             <span className="pe-2">Filters</span>
                             <FontAwesomeIcon icon={faFilter} />
                         </>
+                    </Button>
+                    <Button type="button"
+                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        className="fs-5 ms-2"
+                        OnClick={() => setSearchParams()}
+                    >
+                        <FontAwesomeIcon icon={faFilterCircleXmark} />
                     </Button>
 
                     {/* Absolute position filters bar */}
