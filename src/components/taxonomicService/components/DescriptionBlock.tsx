@@ -49,7 +49,7 @@ const DescriptionBlock = (props: Props) => {
                         <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center `}>
                             <img src={taxonomicService.taxonomicService['schema:AssociatedMedia'][0]['schema:contentUrl']}
                                 alt={taxonomicService.taxonomicService['schema:AssociatedMedia'][0]['schema:contentUrl']}
-                                className="h-100"
+                                className="h-100 w-100 object-fit-contain"
                             />
                         </div>
                     </Col>

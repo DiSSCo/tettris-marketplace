@@ -132,6 +132,10 @@ p {
   color: var(--primary);
 }
 
+.tc-primary-hover:hover {
+  color: var(--primary);
+}
+
 .tc-secondary {
   color: var(--secondary);
 }
@@ -335,6 +339,13 @@ p {
 /* Transition */
 .tr-smooth {
   transition: 0.3s;
+}
+
+/* Text overflow */
+.horizontalScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 /* Buttons */

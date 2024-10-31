@@ -35,6 +35,17 @@ export type TaxonomicService = {
     taxonomicService: TaxonomicServiceType
 }
 
+/* Type for an Author */
+export type Author = {
+    "@type": "schema:Person";
+    "schema:identifier": string;
+    "schema:Affiliation": {
+        "@type": "schema:Organization";
+        "schema:identifier": string;
+        "schema:name"?: string;
+    }
+};
+
 /* Type for an Agent */
 export type Maintainer = {
     "@type": string;
@@ -46,6 +57,13 @@ export type Maintainer = {
         "schema:name"?: string;
     };
 }
+
+/* Type for a Funder */
+export type Funder = {
+    "@type": "schema:Person";
+    "schema:identifier": string;
+    "schema:name": string
+};
 
 /* Type for a Filter */
 export type Filter = {

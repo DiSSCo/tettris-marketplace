@@ -757,7 +757,7 @@
     "required": [
         "@id",
         "@type",
-        "schema:dateCreated",
+        "schema:datePublished",
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
