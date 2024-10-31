@@ -2,7 +2,7 @@
 import classNames from 'classnames';
 import moment from 'moment';
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -31,7 +31,6 @@ import { BreadCrumbs, Spinner } from 'components/general/CustomComponents';
 const TaxonomicService = () => {
     /* Hooks */
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const params = useParams();
     const fetch = useFetch();
 
