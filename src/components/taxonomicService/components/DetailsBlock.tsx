@@ -6,17 +6,18 @@ import { Row, Col } from 'react-bootstrap';
 import { MakeReadableString } from 'app/Utilities';
 
 /* Import Types */
-import { Maintainer } from 'app/Types';
+import { Author, Maintainer, Funder } from 'app/Types';
 
 /* Import Components */
 import DetailsBlockArray from './DetailsBlockArray';
+import PersonAffiliation from './PersonAffiliation';
 
 
 /* Props Type */
 type Props = {
     name: string,
     properties: {
-        [property: string]: string | number | string[] | Maintainer[] | undefined
+        [property: string]: string | number | string[] | Maintainer[] | Author[] | Funder[] | undefined
     }
 };
 
@@ -50,12 +51,19 @@ const DetailsBlock = (props: Props) => {
                                 <Col>
                                     {
                                         Array.isArray(value) ?
-                                            <DetailsBlockArray name={key}
-                                                propertiesArray={value}
-                                            />
+                                            <>
+                                                {typeof (value[0]) === 'object' ?
+                                                    <PersonAffiliation name={key}
+                                                        objectsArray={value as Maintainer[]}
+                                                    />
+                                                    : <DetailsBlockArray name={key}
+                                                        propertiesArray={value}
+                                                    />
+                                                }
+                                            </>
                                             : <>
                                                 <p className="fs-5 fw-bold">{MakeReadableString(key)}</p>
-                                                <p>{!isEmpty(value) ? value : '-'}</p>
+                                                <p className="textOverflow">{!isEmpty(value) ? value : '-'}</p>
                                             </>
                                     }
                                 </Col>

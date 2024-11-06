@@ -110,7 +110,7 @@ const Search = () => {
                             </Col>
                         </Row>
                         {/* Search Results body */}
-                        <Row className={`${searchResultsClassScrollBlock} flex-grow-1 mt-4`}>
+                        <Row className={`${searchResultsClassScrollBlock} flex-grow-1 mt-4 mb-4`}>
                             <Col className="h-100 d-flex flex-column">
                                 {/* Search Result blocks */}
                                 <Row className={searchResultsClass}>
@@ -158,6 +158,6 @@ const Search = () => {
             <Footer />
         </div >
     );
-}
+};
 
 export default Search;

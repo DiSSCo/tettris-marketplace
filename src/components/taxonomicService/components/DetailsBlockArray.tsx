@@ -51,7 +51,7 @@ const DetailsBlockArray = (props: Props) => {
                                                     {Object.entries(value).map(([key, value]: [string, any]) => (
                                                         <div key={key}>
                                                             <p className="fs-5 fw-bold">{MakeReadableString(key.replace('schema:', ''))}</p>
-                                                            <p className="fs-4">{value}</p>
+                                                            <p className="fs-4 textOverflow">{value}</p>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -62,7 +62,7 @@ const DetailsBlockArray = (props: Props) => {
                                                     className="my-1"
                                                 >
                                                     <p className="fs-5 fw-bold">{MakeReadableString(key.replace('schema:', ''))}</p>
-                                                    <p className="fs-4">{value}</p>
+                                                    <p className="fs-4 textOverflow">{value}</p>
                                                 </div>
                                             );
                                         }
