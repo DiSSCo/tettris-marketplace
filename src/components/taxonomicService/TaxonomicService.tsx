@@ -13,7 +13,7 @@ import { setIsApiOnline } from 'redux-store/AppStore';
 import { getTaxonomicService, setTaxonomicService } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
-import { TaxonomicService as TaxonomicServiceType, Funder } from 'app/Types';
+import { TaxonomicService as TaxonomicServiceType, Funder, Dict } from 'app/Types';
 
 /* Import API */
 import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
@@ -180,7 +180,7 @@ const TaxonomicService = () => {
                                                             award: taxonomicService.taxonomicService['schema:FundingScheme']['schema:award'],
                                                             fundingId: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funding']?.['schema:identifier'],
                                                             fundingDescription: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funding']?.['schema:description'],
-                                                            funders: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funder'] as Funder[]
+                                                            funders: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funder'] as Dict[] as Funder[]
                                                         }}
                                                     />
                                                 </Col>
