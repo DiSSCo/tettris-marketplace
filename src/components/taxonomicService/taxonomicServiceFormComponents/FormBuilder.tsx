@@ -34,7 +34,8 @@ type Props = {
             title: string,
             type: string,
             jsonPath?: string,
-            fields: FormField[]
+            fields: FormField[],
+            applicableToServiceTypes?: string[]
         }
     },
     SetCompleted: Function
@@ -59,6 +60,7 @@ const FormBuilder = (props: Props) => {
     });
 
     /* Base variables */
+    const [serviceType, setServiceType] = useState<string | undefined>();
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>();
     const formSections: {
@@ -103,35 +105,37 @@ const FormBuilder = (props: Props) => {
 
     /* Construct initial form values */
     Object.entries(formTemplate).forEach(([_key, formSection]) => {
-        formSections[formSection.title] = {
-            type: formSection.type,
-            jsonPath: formSection.jsonPath ?? '',
-            fields: []
-        };
+        if ((serviceType && formSection.applicableToServiceTypes?.includes(serviceType)) || !formSection.applicableToServiceTypes) {
+            formSections[formSection.title] = {
+                type: formSection.type,
+                jsonPath: formSection.jsonPath ?? '',
+                fields: []
+            };
 
-        /* If is array, push to initial form values */
-        if (formSection.type === 'array') {
-            jp.value(initialFormValues, formSection.jsonPath ?? '', []);
-        }
-
-        formSection.fields.forEach(field => {
-            let jsonPath: string = '';
-
+            /* If is array, push to initial form values */
             if (formSection.type === 'array') {
-                let pathSuffix: string = FlattenJSONPath(field.jsonPath).split('_').at(-1) as string;
-
-                jsonPath = jsonPath.concat(`${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`);
-
-                /* Add to initial form values array zero index */
-                jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type, field.const));
-            } else {
-                /* Add to initial form values */
-                jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type, field.const));
+                jp.value(initialFormValues, formSection.jsonPath ?? '', []);
             }
 
-            /* Push to form fields */
-            formSections[formSection.title].fields.push(field);
-        });
+            formSection.fields.forEach(field => {
+                let jsonPath: string = '';
+
+                if (formSection.type === 'array') {
+                    let pathSuffix: string = FlattenJSONPath(field.jsonPath).split('_').at(-1) as string;
+
+                    jsonPath = jsonPath.concat(`${formSection.jsonPath ?? ''}[0]['${pathSuffix}']`);
+
+                    /* Add to initial form values array zero index */
+                    jp.value(initialFormValues, jsonPath, DetermineInitialFormValue(field.type, field.const));
+                } else {
+                    /* Add to initial form values */
+                    jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type, field.const));
+                }
+
+                /* Push to form fields */
+                formSections[formSection.title].fields.push(field);
+            });
+        }
     });
 
     /**
@@ -170,6 +174,7 @@ const FormBuilder = (props: Props) => {
                 return <SelectField field={field}
                     values={values}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
+                    SetServiceType={field.title === 'Service Type' ? (serviceType: string) => setServiceType(serviceType) : undefined}
                 />;
             } case 'multi-select': {
                 return <MultiSelectField field={field}
@@ -204,6 +209,7 @@ const FormBuilder = (props: Props) => {
     return (
         <div>
             <Formik initialValues={initialFormValues}
+                // enableReinitialize
                 onSubmit={async (values) => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
 

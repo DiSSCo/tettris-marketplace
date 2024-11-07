@@ -414,6 +414,9 @@
                 "type": "ror",
                 "required": true
             }
+        ],
+        "applicableToServiceTypes": [
+            "AI training dataset"
         ]
     },
     "softwareSourceCode": {
@@ -457,6 +460,9 @@
                 "description": "Boolean indicating is the software source code is available by open source",
                 "type": "boolean"
             }
+        ],
+        "applicableToServiceTypes": [
+            "AI training dataset"
         ]
     },
     "associatedMedia": {
