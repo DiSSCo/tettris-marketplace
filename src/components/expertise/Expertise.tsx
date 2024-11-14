@@ -125,16 +125,20 @@ const Expertise = () => {
             <Header />
 
             {/* Expertise page header */}
-            <Container fluid className="p-4">
-                <Col className="d-flex justify-content-between align-items-center">
-                    <h1 className="fs-1 fw-bold">Browse taxonomic experts</h1>
-                    <button type="button" className="btn btn-primary"  onClick={handleShow}>Register your expertise</button>
-                </Col>
+            <Container fluid className="p-4 mx-4">
+                <Row className="d-flex justify-content-between align-items-center">
+                    <Col>
+                        <h1 className="fs-1 fw-bold">Browse taxonomic experts</h1>
+                    </Col>
+                    <Col className="d-flex justify-content-end me-4">
+                        <button type="button" className="btn btn-primary" onClick={handleShow}>Register your expertise</button>
+                    </Col>
+                </Row>
             </Container>
 
             {/* Expertise page body */}
             <Container fluid className="flex-grow-1 p-3 overflow-auto">
-                <Row className="h-100 flex-column flex-md-row">
+                <Row className="h-100 flex-column flex-md-row mx-4">
                     <Col className='overflow-auto pb-3' md={3}>
                         <Row className="border rounded p-3" style={{ backgroundColor: '#f2f2f2' }}>
                             <Col className="fw-bold p-3">Filter Experts</Col>
