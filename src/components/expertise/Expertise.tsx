@@ -11,6 +11,7 @@ import experts from './../../sources/dataModel/experts.json';
 /* Import Icons */
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Component that renders the Expertise page
@@ -250,17 +251,26 @@ function filterForm(handleSubmit: (e: any) => void, handleReset: (e: any) => voi
 }
 
 function expertiseCard(expert: any) {
-    return <Col className="border rounded p-3 mt-3"  style={{ backgroundColor: '#f2f2f2' }}>
-        <Row>
-            <Col><span className='fw-bold'>{expert.name}</span><span className='ms-3'>{expert.description}</span></Col>
-            <Col></Col>
-        </Row>
-        <Row>
-            <Col><p>{expert.status}</p></Col>
-            <Col><p>{expert.scope}</p></Col>
-            <Col><p>{expert.country}</p></Col>
-        </Row>
-    </Col>;
+    const navigate = useNavigate();
+
+    const goToExpertProfile = (expertName: string) => {
+      console.log('Navigating to expert profile:', expertName);
+      navigate(`/expertise/${expertName}`);
+    };
+    
+    return (
+        <Col className="border rounded p-3 mt-3" style={{ backgroundColor: '#f2f2f2' }} onClick={() => goToExpertProfile(expert.name)}>
+            <Row>
+                <Col><span className='fw-bold'>{expert.name}</span><span className='ms-3'>{expert.description}</span></Col>
+                <Col></Col>
+            </Row>
+            <Row>
+                <Col><p>{expert.status}</p></Col>
+                <Col><p>{expert.scope}</p></Col>
+                <Col><p>{expert.country}</p></Col>
+            </Row>
+        </Col>
+    );
 }
 
 function SelectFields(fields: { value: string; label: string; }[], name: string, ref: React.RefObject<HTMLSelectElement>, info?: string) {
