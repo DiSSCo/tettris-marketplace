@@ -5,7 +5,7 @@ import Footer from 'components/general/footer/Footer';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 import AvatarLogo from 'webroot/img/avatar.png';
-
+import { FaBook, FaCalendarAlt, FaGithub, FaGlobe, FaGraduationCap, FaLinkedin, FaUserTie } from 'react-icons/fa';
 
 const ExpertProfile: React.FC = () => {
     const { name } = useParams<{ name: string | undefined }>();
@@ -79,18 +79,51 @@ const ExpertiseBlock = () => {
                 </Row>
                 <Row className="mt-4">
                     <Col>
-                        <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary p-1">
-                            Visit Example
+                        <a 
+                            href="https://www.github.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-primary d-flex align-items-center p-2"
+                            style={{
+                                textDecoration: 'none',
+                                color: '#fff',
+                                gap: '8px',
+                            }}
+                        >
+                            <FaGithub size={20} style={{ color: '#fff' }} />
+                            <span>Visit Github</span>
                         </a>
                     </Col>
                     <Col>
-                        <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary p-1">
-                            Visit Example
+                        <a 
+                            href="https://www.example.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-primary d-flex align-items-center p-2"
+                            style={{
+                                textDecoration: 'none',
+                                color: '#fff',
+                                gap: '8px',
+                            }}
+                        >
+                            <FaGlobe size={20} style={{ color: '#fff' }} />
+                            <span>Visit Website</span>
                         </a>
                     </Col>
                     <Col>
-                        <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary p-1">
-                            Visit Example
+                    <a 
+                            href="https://www.linkedin.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-primary d-flex align-items-center p-2"
+                            style={{
+                                textDecoration: 'none',
+                                color: '#fff',
+                                gap: '8px',
+                            }}
+                        >
+                            <FaLinkedin size={20} style={{ color: '#fff' }} />
+                            <span>Visit Linkedin</span>
                         </a>
                     </Col>
                 </Row>
@@ -111,15 +144,34 @@ const ExperienceBlock = () => {
                 </Col>
             </Row>
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
-                <Row>
+                <Row className="mt-4">
                     <Col>
-                        <h1 className="text-left w-100"><strong>Job title</strong></h1>
-                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <h4 className="text-left"><strong>Qualifications</strong></h4>
+                        <FaGraduationCap size={30} style={{ color: '#007bff' }} />
+                        <span className="text-left">Graduate</span>
                     </Col>
                 </Row>
                 <Row className="mt-4">
+                    <Col>
+                        <h4 className="text-left"><strong>Employment Status</strong></h4>
+                        <FaUserTie  size={30} style={{ color: '#007bff' }} />
+                        <span className="text-left">Part-time Scientist</span>
+                    </Col>
                 </Row>
+                <Row className="mt-4">
+                    <Col>
+                        <h4 className="text-left"><strong>Professional Experience</strong></h4>
+                        <FaCalendarAlt size={30} style={{ color: '#007bff' }} />
+                        <span className="text-left">21 - 25 years</span>
+                    </Col>
+                </Row>
+                <Row className="mt-4">
+                    <Col>
+                        <h4 className="text-left"><strong>Taxonomic Publications</strong></h4>
+                        <FaBook size={30} style={{ color: '#007bff' }} />
+                        <span className="text-left">3</span>
+                    </Col>
+                </Row> 
             </Row>
         </Container>
     );
@@ -167,11 +219,35 @@ const ScopeBlock = () => {
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
                 <Row>
                     <Col>
-                        <h1 className="text-left w-100"><strong>Taxonomic Discipline</strong></h1>
-                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <h3 className="text-left w-100"><strong>Taxonomic Discipline 1</strong></h3>
+                        <h5 className="text-center w-100">Taxonomic  sub-discipline 1</h5>
+                        <h5 className="text-center w-100">Taxonomic  sub-discipline 2</h5>
+                        <h5 className="text-center w-100">Taxonomic  sub-discipline 3</h5>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3 className="text-left w-100"><strong>Taxonomic Discipline 2</strong></h3>
+                        <h5 className="text-center w-100">Taxonomic  sub-discipline 1</h5>
+                        <h5 className="text-center w-100">Taxonomic  sub-discipline 2</h5>
+                        <h5 className="text-center w-100">Taxonomic  sub-discipline 3</h5>
                     </Col>
                 </Row>
                 <Row className="mt-4">
+                    <Col>
+                        <h3 className="text-left w-100"><strong>Taxonomic Order</strong></h3>
+                        <h5 className="text-center w-100">Taxonomic Sub-order 1</h5>
+                        <h5 className="text-center w-100">Taxonomic Sub-order 2</h5>
+                        <h5 className="text-center w-100">Taxonomic Sub-order 3</h5>
+                    </Col>
+                </Row>
+                <Row className="mt-4">
+                    <Col>
+                        <h3 className="text-left w-100"><strong>Taxonomic order common names</strong></h3>
+                        <h5 className="text-center w-100">Bees</h5>
+                        <h5 className="text-center w-100">Ants</h5>
+                        <h5 className="text-center w-100">Dragonflies</h5>
+                    </Col>
                 </Row>
             </Row>
         </Container>
@@ -192,7 +268,7 @@ const MapBlock = () => {
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
                 <Row>
                     <Col>
-                        <h1 className="text-left w-100"><strong>Taxonomic Map</strong></h1>
+                        <h1 className="text-left w-100"><strong>Geographic region</strong></h1>
                         <div style={{ height: '400px', width: '100%' }}>
                             <iframe
                                 width="100%"
