@@ -332,7 +332,7 @@ const FormBuilder = (props: Props) => {
                             setErrorMessage('Something went wrong during the submission of the Taxonomic Service, please try again');
                         } finally {
                             setLoading(false);
-                        }
+                        };
                     } else {
                         setErrorMessage('Please provide values for all required fields')
                     }
@@ -341,34 +341,38 @@ const FormBuilder = (props: Props) => {
                 {({ values, setFieldValue }) => (
                     <Form>
                         {Object.entries(formSections).map(([title, section]) => (
-                            <Row key={title}>
-                                <Col>
-                                    {section.type === 'object' ?
-                                        <div className="mt-4">
-                                            <p className="fw-lightBold">{`${title}`}</p>
+                            <>
+                                {((serviceType && section.applicableToServiceTypes?.includes(serviceType)) || !section.applicableToServiceTypes) &&
+                                    <Row key={title}>
+                                        <Col>
+                                            {section.type === 'object' ?
+                                                <div className="mt-4">
+                                                    <p className="fw-lightBold">{`${title}`}</p>
 
-                                            {section.fields.map(field => (
-                                                <Row key={field.jsonPath}
-                                                    className="mt-3 mt-lg-2"
-                                                >
-                                                    <Col>
-                                                        {ConstructFormField(field, values, setFieldValue, jp.value(values, field.jsonPath))}
-                                                    </Col>
-                                                </Row>
-                                            ))}
-                                        </div>
-                                        : <FormBuilderFieldArray section={section}
-                                            title={title}
-                                            initialFormValues={initialFormValues}
-                                            values={values}
-                                            formSections={formSections}
-                                            FlattenJSONPath={FlattenJSONPath}
-                                            SetFieldValue={setFieldValue}
-                                            ConstructFormField={ConstructFormField}
-                                        />
-                                    }
-                                </Col>
-                            </Row>
+                                                    {section.fields.map(field => (
+                                                        <Row key={field.jsonPath}
+                                                            className="mt-3 mt-lg-2"
+                                                        >
+                                                            <Col>
+                                                                {ConstructFormField(field, values, setFieldValue, jp.value(values, field.jsonPath))}
+                                                            </Col>
+                                                        </Row>
+                                                    ))}
+                                                </div>
+                                                : <FormBuilderFieldArray section={section}
+                                                    title={title}
+                                                    initialFormValues={initialFormValues}
+                                                    values={values}
+                                                    formSections={formSections}
+                                                    FlattenJSONPath={FlattenJSONPath}
+                                                    SetFieldValue={setFieldValue}
+                                                    ConstructFormField={ConstructFormField}
+                                                />
+                                            }
+                                        </Col>
+                                    </Row>
+                                }
+                            </>
                         ))}
                         <Row className="mt-3">
                             <Col>

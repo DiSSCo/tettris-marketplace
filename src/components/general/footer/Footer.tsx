@@ -29,7 +29,7 @@ const Footer = () => {
                                     <p className="fs-5 tc-white">{`CETAF ${currentYear}`}</p>
                                 </Col>
                             </Row>
-                            <Row className="mt-3">
+                            <Row className="mt-2">
                                 <Col>
                                     <Row className="mt-2 align-items-end">
                                         <Col>
@@ -42,6 +42,9 @@ const Footer = () => {
                                             <Row>
                                                 <Col>
                                                     <div className="h-100 fs-5 tc-white fw-lightBold text-end">
+                                                        <a href="https://marketplace.cetaf.org/cordra/#urls/openapi/index.html">
+                                                            API Docs
+                                                        </a>
                                                         <p>Privacy policy</p>
                                                     </div>
                                                 </Col>
@@ -67,6 +70,12 @@ const Footer = () => {
                         </Col>
                         <Col className="col-lg-auto">
                             <div className="h-100 d-flex align-items-center fs-5 tc-white fw-lightBold">
+                                <span>
+                                    <a href="https://marketplace.cetaf.org/cordra/#urls/openapi/index.html">
+                                        API Docs
+                                    </a>
+                                </span>
+                                <span className="px-2">|</span>
                                 <span>
                                     <a href="https://cetaf.org/privacy/"
                                         target="_blank"
