@@ -5,7 +5,7 @@ import Footer from 'components/general/footer/Footer';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 import AvatarLogo from 'webroot/img/avatar.png';
-import { FaBook, FaCalendarAlt, FaGithub, FaGlobe, FaGraduationCap, FaLinkedin, FaUserTie } from 'react-icons/fa';
+import { FaBook, FaCalendarAlt, FaDog, FaGithub, FaGlobe, FaGraduationCap, FaLinkedin, FaUserTie } from 'react-icons/fa';
 
 //import { ComposableMap, Geographies, Geography } from "react-simple-maps"
 import { IconType } from 'react-icons';
@@ -18,9 +18,9 @@ const ExpertProfile: React.FC = () => {
     return (
         <div className="h-100 d-flex flex-column">
             <Header />
-            <Container fluid className="flex-grow-1 p-3 overflow-auto" style={{ marginLeft: '150px', marginRight: '150px' }}>                
+            <Container fluid className="flex-grow-1 p-3 overflow-auto" style={{ marginLeft: '10%', marginRight: '10%' }} >                
                 <Row className="h-100">
-                    <Col md={2} className="d-flex flex-column align-items-center h-100 mt-4" style={{ border: '1px solid var(--tertiary)'}}>
+                    <Col md={2} className="d-flex flex-column align-items-center mt-4" style={{ borderRight: '1px solid var(--tertiary)'}}>
                         <Row className="avatar-logo img-fluid mb-3 mt-5" style={{ 
                             width: '100px', 
                             height: '100px', 
@@ -34,21 +34,80 @@ const ExpertProfile: React.FC = () => {
                             {AvatarLogo ? <img src={AvatarLogo} alt="AvatarLogo" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} /> : (name ? name.charAt(0) : 'E')}
                         </Row>
                         <Row className='p-1'>
-                            <h1 className="text-center w-100"><strong>{name || "Expert"}</strong></h1>
+                            <h2 className="text-center w-100"><strong>{name || "Expert"}</strong></h2>
                         </Row>
-                        <Row className="mt-5" style={{ marginLeft: '10px' }}>
-                            <p className="text-left w-100"><strong>Email:</strong> expert@example.com</p>
+                        <Row>
+                            <h4 className="text-left w-100">Headline expertise</h4>
+                        </Row>
+                        {/* <Row>
+                            <span className="text-center w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                        </Row> */}
+                        <Row className="mt-4 p-3" style={{ marginLeft: '10px', marginRight: '10px', backgroundColor: 'lightgrey', borderRadius: '10px' }}>
                             <p className="text-left w-100"><strong>ORCID:</strong> 0000-0001-2345-6789</p>
-                            <p className="text-left w-100"><strong>Nationality:</strong> American</p>
-                            <p className="text-left w-100"><strong>Language:</strong> en</p>
+                            <p className="text-left w-100"><strong>Email:</strong> expert@example.com</p>
+                            {/* <p className="text-left w-100"><strong>Nationality:</strong> American</p> */}
+                            <p className="text-left w-100"><strong>Language:</strong> English</p>
+                            <p className="text-left w-100"><strong>Institution:</strong> CETAF</p>
+                            <p className="text-left w-100"><strong>Address:</strong> Brussels</p>
+                            <p className="text-left w-100"><strong>RoR ID:</strong> ID</p>
                         </Row>
-                       
+                        <Row className="m-4">
+                            <Row className='mb-2'>
+                                <a 
+                                    href="https://www.github.com" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="btn btn-primary d-flex align-items-center p-2"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: '#fff',
+                                        gap: '8px',
+                                    }}
+                                >
+                                    <FaGithub size={20} style={{ color: '#fff' }} />
+                                    <span>Visit Github</span>
+                                </a>
+                            </Row>
+                            <Row className='mb-2'>
+                                <a 
+                                    href="https://www.example.com" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="btn btn-primary d-flex align-items-center p-2"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: '#fff',
+                                        gap: '8px',
+                                    }}
+                                >
+                                    <FaGlobe size={20} style={{ color: '#fff' }} />
+                                    <span>Personal page</span>
+                                </a>
+                            </Row>
+                            <Row className='mb-2'>
+                            <a 
+                                    href="https://www.linkedin.com" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="btn btn-primary d-flex align-items-center p-2"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: '#fff',
+                                        gap: '8px',
+                                    }}
+                                >
+                                    <FaLinkedin size={20} style={{ color: '#fff' }} />
+                                    <span>Visit Linkedin</span>
+                                </a>
+                            </Row>
+                        </Row>
                     </Col>
                     <Col md={8}>
                         <Row className='mb-3'>
                             <Col md={8}>
-                                <ExpertiseBlock />
                                 <ScopeBlock />
+                                <ProfessionalBlock />
+                                {/* <ExpertiseBlock /> */}
                                 <MapBlock />
                             </Col>
                             <Col>
@@ -79,58 +138,75 @@ const ExpertiseBlock = () => {
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
                 <Row>
                     <Col>
-                        <h1 className="text-left w-100"><strong>Headline expertise</strong></h1>
+                        {/* <h2 className="text-left w-100"><strong>Headline expertise</strong></h2> */}
                         <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </Col>
                 </Row>
-                <Row className="mt-4">
+                
+            </Row>
+        </Container>
+    );
+}
+
+const ProfessionalBlock = () => {
+
+    return (
+        <Container className="mt-4">
+            <Row className='mx-4'>
+                <Col className="col-md-auto">
+                    <div className="bgc-tertiary px-4 py-1">
+                        <p className="fw-lightBold">Professional Experience</p>
+                    </div>
+                </Col>
+            </Row>
+            <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
+                <Row>
                     <Col>
-                        <a 
-                            href="https://www.github.com" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="btn btn-primary d-flex align-items-center p-2"
-                            style={{
-                                textDecoration: 'none',
-                                color: '#fff',
-                                gap: '8px',
-                            }}
-                        >
-                            <FaGithub size={20} style={{ color: '#fff' }} />
-                            <span>Visit Github</span>
-                        </a>
+                        <h3 className="text-left w-100"><strong>Expertise Biography</strong></h3>
+                        <div className='mb-3 mt-3' style={{ maxHeight: "200px", overflowY: "auto", border: "1px solid #ddd", padding: "10px" }}>
+        <p className="text-left w-100">
+            The world of technology evolves at a pace that often feels impossible to keep up with. Every year, 
+            groundbreaking innovations reshape how we live, work, and connect with one another. Artificial intelligence, 
+            for instance, has transitioned from a distant concept to a practical tool powering everything from virtual 
+            assistants to predictive analytics in healthcare. Similarly, renewable energy technologies are advancing 
+            rapidly, offering cleaner alternatives to fossil fuels and promising a more sustainable future.
+            <br /><br />
+            However, with progress comes challenges. The rapid digital transformation has raised concerns about privacy, 
+            cybersecurity, and the ethical implications of new technologies. Questions about data ownership and the 
+            societal impact of automation have become central to global discussions. How do we ensure these advancements 
+            benefit everyone and not just a select few?
+            <br /><br />
+            As we navigate this era of innovation, adaptability and education are crucial. Staying informed and embracing 
+            lifelong learning will empower individuals to thrive in a world driven by constant change. While challenges are 
+            inevitable, the potential of technology to solve pressing global issues and improve lives is boundless.
+            <br /><br />
+            In this dynamic environment, the intersection of human creativity and technological progress holds the key to 
+            shaping a future that is equitable, inclusive, and sustainable for all.
+        </p>
+    </div> </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3 className="text-left w-100"><strong>Qualifications</strong></h3>
+                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </Col>
+                </Row>
+                <Row>
                     <Col>
-                        <a 
-                            href="https://www.example.com" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="btn btn-primary d-flex align-items-center p-2"
-                            style={{
-                                textDecoration: 'none',
-                                color: '#fff',
-                                gap: '8px',
-                            }}
-                        >
-                            <FaGlobe size={20} style={{ color: '#fff' }} />
-                            <span>Visit Website</span>
-                        </a>
+                        <h3 className="text-left w-100"><strong>Employment Status</strong></h3>
+                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </Col>
+                </Row>
+                <Row>
                     <Col>
-                    <a 
-                            href="https://www.linkedin.com" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="btn btn-primary d-flex align-items-center p-2"
-                            style={{
-                                textDecoration: 'none',
-                                color: '#fff',
-                                gap: '8px',
-                            }}
-                        >
-                            <FaLinkedin size={20} style={{ color: '#fff' }} />
-                            <span>Visit Linkedin</span>
-                        </a>
+                        <h3 className="text-left w-100"><strong>Professional Experience</strong></h3>
+                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3 className="text-left w-100"><strong>Taxonomic Publications</strong></h3>
+                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </Col>
                 </Row>
             </Row>
@@ -145,15 +221,27 @@ const ExperienceBlock = () => {
             <Row className='mx-4'>
                 <Col className="col-md-auto">
                     <div className="bgc-tertiary px-4 py-1">
-                        <p className="fw-lightBold">Experiences</p>
+                        <p className="fw-lightBold">Methods & Applied Research Field</p>
                     </div>
                 </Col>
             </Row>
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
-                <RowExperiences title="Qualifications" content="Graduate" IconElement={FaGraduationCap} />
+                <Row>
+                    <Col>
+                        <h3 className="text-left w-100">Taxonomic methodologies</h3>
+                        <p className="text-left w-100">Morphological</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3 className="text-left w-100">Fields of Applied Research</h3>
+                        <p className="text-left w-100">Fresh marine ecosystem</p>
+                    </Col>
+                </Row>
+                {/* <RowExperiences title="Qualifications" content="Graduate" IconElement={FaGraduationCap} />
                 <RowExperiences title="Employment Status" content="Part-time Scientist" IconElement={FaUserTie} />
                 <RowExperiences title="Professional Experience" content="21 - 25 years" IconElement={FaCalendarAlt} />
-                <RowExperiences title="Taxonomic Publications" content="3 publications" IconElement={FaBook} />
+                <RowExperiences title="Taxonomic Publications" content="3 publications" IconElement={FaBook} />  */}
             </Row>
         </Container>
     );
@@ -193,19 +281,17 @@ const TrainingBlock = () => {
                 </Col>
             </Row>
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
-                <Row>
+                <Row className='mt-3'>
                     <Col>
-                        <Row>
-                            <h1 className="text-left w-100"><strong>Training</strong></h1>
-                        </Row>
+                        {/* <Row>
+                            <h2 className="text-left w-100 mb-3"><strong>Training</strong></h2>
+                        </Row> */}
                         <Row>
                             <TrainingRow title="Training 1" link="https://www.example.com" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
                             <TrainingRow title="Training 2" link="https://www.example.com" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-                            <TrainingRow title="Training 3" link="https://www.example.com" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+                            {/* <TrainingRow title="Training 3" link="https://www.example.com" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." /> */}
                         </Row>
                     </Col>
-                </Row>
-                <Row className="mt-4">
                 </Row>
             </Row>
         </Container>
@@ -221,9 +307,9 @@ interface TrainingRowProps {
 
 const TrainingRow: React.FC<TrainingRowProps> = ({ title, link, description }) => {
     return (
-        <Row>
-            <h5 className="text-left w-100">{title}</h5>
-            <span className="text-left w-100">{description}</span>
+        <Row className='mb-3'>
+            <h4 className="text-left w-100 mb-3">{title}</h4>
+            <span className="text-left w-100 mb-2">{description}</span>
             <a 
                 href={link}
                 target="_blank" 
@@ -254,40 +340,42 @@ const ScopeBlock = () => {
                 </Col>
             </Row>
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
-                <Row>
-                    <Col>
-                        <h3 className="text-left w-100"><strong>Taxonomic Discipline 1</strong></h3>
-                        <h5 className="text-center w-100">Taxonomic  sub-discipline 1</h5>
-                        <h5 className="text-center w-100">Taxonomic  sub-discipline 2</h5>
-                        <h5 className="text-center w-100">Taxonomic  sub-discipline 3</h5>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h3 className="text-left w-100"><strong>Taxonomic Discipline 2</strong></h3>
-                        <h5 className="text-center w-100">Taxonomic  sub-discipline 1</h5>
-                        <h5 className="text-center w-100">Taxonomic  sub-discipline 2</h5>
-                        <h5 className="text-center w-100">Taxonomic  sub-discipline 3</h5>
-                    </Col>
-                </Row>
+                {disciplineRow("Taxonomic Discipline 1", ["Taxonomic  sub-discipline 1", "Taxonomic  sub-discipline 2", "Taxonomic  sub-discipline 3"])}
+                {/* {disciplineRow("Taxonomic Discipline 2", ["Taxonomic  sub-discipline 1", "Taxonomic  sub-discipline 2", "Taxonomic  sub-discipline 3"])} */}
                 <Row className="mt-4">
                     <Col>
-                        <h3 className="text-left w-100"><strong>Taxonomic Order</strong></h3>
-                        <h5 className="text-center w-100">Taxonomic Sub-order 1</h5>
+                        <h4 className="text-left w-100 mb-3"><strong>Taxonomic Order</strong></h4>
+                        {/* <h5 className="text-center w-100">Taxonomic Sub-order 1</h5>
                         <h5 className="text-center w-100">Taxonomic Sub-order 2</h5>
-                        <h5 className="text-center w-100">Taxonomic Sub-order 3</h5>
+                        <h5 className="text-center w-100">Taxonomic Sub-order 3</h5> */}
                     </Col>
                 </Row>
                 <Row className="mt-4">
                     <Col>
-                        <h3 className="text-left w-100"><strong>Taxonomic order common names</strong></h3>
-                        <h5 className="text-center w-100">Bees</h5>
+                        <h4 className="text-left w-100 mb-3"><strong>Taxonomic order common names</strong></h4>
+                        <h5 className="text-center w-100">Hymenoptera</h5>
                         <h5 className="text-center w-100">Ants</h5>
                         <h5 className="text-center w-100">Dragonflies</h5>
                     </Col>
                 </Row>
             </Row>
         </Container>
+    );
+}
+
+const disciplineRow = (title: string, subdisciplines: string[]) => {
+    return (
+        <Row className='mb-3'>
+            <Col>
+                <h4 className="text-left w-100 mb-3"><strong>{title}</strong></h4>
+                {subdisciplines.map((subdiscipline, index) => (
+                    <Col className="d-flex justify-content-between">
+                        <h5 key={index} className="text-center w-100">{subdiscipline}</h5>
+                        <FaDog size={20} style={{ color: '#007bff' }} />
+                    </Col>
+                ))}
+            </Col>
+        </Row>
     );
 }
 
@@ -305,7 +393,7 @@ const MapBlock = () => {
             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
                 <Row>
                     <Col>
-                        <h1 className="text-left w-100"><strong>Geographic region</strong></h1>
+                        <h2 className="text-left w-100"><strong>Geographic region</strong></h2>
                         {/* <ComposableMap>
                             <Geographies geography={geoUrl}>
                                 {({ geographies }) =>
