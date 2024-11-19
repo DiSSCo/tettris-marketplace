@@ -285,7 +285,7 @@ const FormBuilder = (props: Props) => {
                     };
 
                     Object.values(formSections).forEach(formSection => {
-                        if ((formSection?.applicableToServiceTypes && formSection.applicableToServiceTypes.includes(values['schema:service']['schema:serviceType'])) || !formSection.applicableToServiceTypes) {
+                        if ((formSection?.applicableToServiceTypes?.includes(values['schema:service']['schema:serviceType'])) || !formSection.applicableToServiceTypes) {
                             formSection.fields.filter(field => field.required).forEach(field => {
                                 if (field.jsonPath.includes('index')) {
                                     const array = jp.value(values, field.jsonPath.split("['index']").at(0) as string);
