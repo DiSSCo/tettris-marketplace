@@ -89,9 +89,9 @@ const BreadCrumbs = () => {
                         {/* Bread crumb */}
                         {breadCrumb.path ?
                             <Link to={breadCrumb.path}>
-                                <span className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
+                                <span className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-5 fs-lg-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
                             </Link>
-                            : <span className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
+                            : <span className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-5 fs-lg-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
                         }
                     </Col>
                 ))}

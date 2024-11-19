@@ -65,8 +65,118 @@
         {
             "name": "language",
             "alias": "schema:availableLanguage",
-            "type": "string",
-            "default": ""
+            "type": "select",
+            "default": "",
+            "options": [
+                {
+                    "label": "Bulgarian",
+                    "value": "bg"
+                },
+                {
+                    "label": "Croatian",
+                    "value": "hr"
+                },
+                {
+                    "label": "Czech",
+                    "value": "cs"
+                },
+                {
+                    "label": "Danish",
+                    "value": "da"
+                },
+                {
+                    "label": "Dutch",
+                    "value": "nl"
+                },
+                {
+                    "label": "Luxembourgish",
+                    "value": "lb"
+                },
+                {
+                    "label": "English",
+                    "value": "en"
+                },
+                {
+                    "label": "Estonian",
+                    "value": "es"
+                },
+                {
+                    "label": "Finnish",
+                    "value": "fi"
+                },
+                {
+                    "label": "French",
+                    "value": "fr"
+                },
+                {
+                    "label": "German",
+                    "value": "de"
+                },
+                {
+                    "label": "Greek",
+                    "value": "el"
+                },
+                {
+                    "label": "Hungarian",
+                    "value": "hu"
+                },
+                {
+                    "label": "Irish",
+                    "value": "ga"
+                },
+                {
+                    "label": "Italian",
+                    "value": "it"
+                },
+                {
+                    "label": "Latvian",
+                    "value": "lv"
+                },
+                {
+                    "label": "Lithuanian",
+                    "value": "lt"
+                },
+                {
+                    "label": "Maltese",
+                    "value": "mt"
+                },
+                {
+                    "label": "Polish",
+                    "value": "pl"
+                },
+                {
+                    "label": "Portugese",
+                    "value": "pt"
+                },
+                {
+                    "label": "Romanian",
+                    "value": "ro"
+                },
+                {
+                    "label": "Russian",
+                    "value": "ru"
+                },
+                {
+                    "label": "Slovakian",
+                    "value": "sk"
+                },
+                {
+                    "label": "Spanish",
+                    "value": "es"
+                },
+                {
+                    "label": "Swedish",
+                    "value": "sv"
+                },
+                {
+                    "label": "Turkish",
+                    "value": "tk"
+                },
+                {
+                    "label": "Ukranian",
+                    "value": "uk"
+                }
+            ]
         }
     ]
 }

@@ -4,9 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 /* Import Types */
 import { TaxonomicService } from 'app/Types';
 
-/* Import Components */
-import { Button } from 'components/general/CustomComponents';
-
 
 /* Props Type */
 type Props = {
@@ -25,7 +22,9 @@ const TopBar = (props: Props) => {
     return (
         <Row>
             {taxonomicService.taxonomicService['schema:Service']['schema:logo'] &&
-                <Col lg={{ span: 1 }}>
+                <Col lg={{ span: 1 }}
+                    className="d-none d-lg-block"
+                >
                     <img src={taxonomicService.taxonomicService['schema:Service']['schema:logo']}
                         alt={taxonomicService.taxonomicService['schema:Service']['schema:logo']}
                         className="w-100"
@@ -33,21 +32,13 @@ const TopBar = (props: Props) => {
                 </Col>
             }
             {/* State and Title */}
-            <Col xs={{ span: 12 }} lg>
-                <h1 className="fs-3 fs-lg-2">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</h1>
-            </Col>
-            {/* Apply for usage button */}
-            <Col xs lg="auto"
-                className="mt-3 mt-lg-0"
-            >
-                <Button type="button"
-                    variant="primary"
-                    className="fs-5 fs-lg-4"
-                    disabled={!taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url']}
-                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
+            <Col xs={{ span: 12 }} lg="auto">
+                <a href={`https://${taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url']?.replace('http://', '').replace('https://', '')}`}
+                    target="_blank"
+                    rel="noreferer"
                 >
-                    Apply for usage
-                </Button>
+                    <h1 className="fs-3 fs-lg-2 tc-primary-hover">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</h1>
+                </a>
             </Col>
         </Row>
     );
