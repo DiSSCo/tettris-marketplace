@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -97,7 +97,7 @@ const SearchResult = (props: Props) => {
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
                                 <Col xs="auto" lg="auto">
-                                    <p className="fs-5 fs-lg-4 fw-bold">{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
+                                    <p className="fs-5 fs-lg-4 fw-bold">{format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}</p>
                                 </Col>
                             }
                         </Row>
@@ -123,7 +123,7 @@ const SearchResult = (props: Props) => {
                         {/* Publishing Date */}
                         <Row>
                             <Col className="d-flex justify-content-end">
-                                <p className="tc-white fw-bold fs-4">{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
+                                <p className="tc-white fw-bold fs-4">{format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}</p>
                             </Col>
                         </Row>
                     </Col>

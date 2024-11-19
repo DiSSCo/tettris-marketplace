@@ -1,6 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -129,7 +129,7 @@ const TaxonomicService = () => {
                                                         licence: taxonomicService.taxonomicService['schema:license'],
                                                         sourceURL: taxonomicService.taxonomicService['schema:url'],
                                                         changeLog: taxonomicService.taxonomicService['schema:about'],
-                                                        datePublished: moment(taxonomicService.taxonomicService['schema:datePublished']).format('MMM DD - YYYY'),
+                                                        datePublished: taxonomicService.taxonomicService['schema:datePublished'] && format(taxonomicService.taxonomicService['schema:datePublished'], 'MMMM dd - yyyy'),
                                                         availableOnAppStore: taxonomicService.taxonomicService['schema:additionalProperty']?.[1] as string[] | undefined,
                                                         documentationURL: taxonomicService.taxonomicService['schema:documentation'],
                                                         paymentModel: taxonomicService.taxonomicService['schema:additionalProperty']?.[2] as string | undefined,

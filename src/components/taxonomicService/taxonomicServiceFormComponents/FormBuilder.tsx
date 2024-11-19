@@ -3,7 +3,7 @@ import { useCaptchaHook } from "@aacn.eu/use-friendly-captcha";
 import { Formik, Form } from "formik";
 import jp from 'jsonpath';
 import { cloneDeep, isEmpty } from "lodash";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
@@ -25,7 +25,6 @@ import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
 import TextField from "./TextField";
 import { Button, Spinner } from "components/general/CustomComponents";
-import { MakeReadableString } from "app/Utilities";
 
 
 /* Props Type */
@@ -236,6 +235,18 @@ const FormBuilder = (props: Props) => {
         };
     };
 
+    /**
+     * Function to remove irrelevant classes from the form values object
+     * @param obj The form values object
+     */
+    const CheckForIrrelevantClasses = (obj: Dict) => {
+        Object.keys(obj).forEach(key => {
+            if (Object.values(inactiveFormSections).find(values => values.jsonPath === `$['${key}']`)) {
+                delete obj[key];
+            }
+        });
+    };
+
     return (
         <div>
             <Formik initialValues={initialFormValues}
@@ -274,7 +285,7 @@ const FormBuilder = (props: Props) => {
                     };
 
                     Object.values(formSections).forEach(formSection => {
-                        if ((formSection.applicableToServiceTypes && formSection.applicableToServiceTypes.includes(values['schema:service']['schema:serviceType'])) || !formSection.applicableToServiceTypes) {
+                        if ((formSection?.applicableToServiceTypes && formSection.applicableToServiceTypes.includes(values['schema:service']['schema:serviceType'])) || !formSection.applicableToServiceTypes) {
                             formSection.fields.filter(field => field.required).forEach(field => {
                                 if (field.jsonPath.includes('index')) {
                                     const array = jp.value(values, field.jsonPath.split("['index']").at(0) as string);
@@ -303,18 +314,6 @@ const FormBuilder = (props: Props) => {
                                     RemoveEmptyProperties(obj[key]);
                                 }
                             };
-                        };
-
-                        /**
-                         * Function to remove irrelevant classes from the form values object
-                         * @param obj The form values object
-                         */
-                        const CheckForIrrelevantClasses = (obj: Dict) => {
-                            Object.keys(obj).forEach(key => {
-                                if (Object.values(inactiveFormSections).find(values => values.jsonPath === `$['${key}']`)) {
-                                    delete obj[key];
-                                }
-                            });
                         };
 
                         let taxonomicServiceRecord = cloneDeep(values);
