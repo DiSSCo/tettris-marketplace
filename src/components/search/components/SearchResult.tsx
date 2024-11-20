@@ -72,7 +72,7 @@ const SearchResult = (props: Props) => {
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
                                 <Col xs="auto" lg={{ span: 3 }}
-                                 
+
                                 >
                                     <p className="fw-bold fs-5 fs-lg-4 text-end textOverflow">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                                 </Col>
@@ -97,7 +97,9 @@ const SearchResult = (props: Props) => {
                             </Col>
                             {(!previewImage || window.innerWidth < 768) &&
                                 <Col xs="auto" lg="auto">
-                                    <p className="fs-5 fs-lg-4 fw-bold">{format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}</p>
+                                    <p className="fs-5 fs-lg-4 fw-bold">{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                        format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}
+                                    </p>
                                 </Col>
                             }
                         </Row>
@@ -123,7 +125,9 @@ const SearchResult = (props: Props) => {
                         {/* Publishing Date */}
                         <Row>
                             <Col className="d-flex justify-content-end">
-                                <p className="tc-white fw-bold fs-4">{format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}</p>
+                                <p className="tc-white fw-bold fs-4">{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                    format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')
+                                }</p>
                             </Col>
                         </Row>
                     </Col>

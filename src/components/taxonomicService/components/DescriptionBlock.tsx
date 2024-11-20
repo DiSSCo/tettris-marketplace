@@ -82,7 +82,9 @@ const DescriptionBlock = (props: Props) => {
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Publishing date</p>
-                            <p>{format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}</p>
+                            <p>{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}
+                            </p>
                         </Col>
                         {/* Quality score */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}
