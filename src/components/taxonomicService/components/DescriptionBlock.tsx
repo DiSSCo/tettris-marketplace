@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import classNames from 'classnames';
+import { format } from 'date-fns';
 import MarkdownIt from 'markdown-it';
-import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
@@ -82,7 +82,9 @@ const DescriptionBlock = (props: Props) => {
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Publishing date</p>
-                            <p>{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
+                            <p>{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}
+                            </p>
                         </Col>
                         {/* Quality score */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}

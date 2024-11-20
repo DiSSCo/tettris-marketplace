@@ -347,6 +347,16 @@
                 "type": "ror",
                 "required": true
             }
+        ],
+        "applicableToServiceTypes": [
+            "AI training dataset",
+            "e-Learning service",
+            "Factsheet",
+            "Identification tool",
+            "Knowledge website",
+            "Mobile app",
+            "Reference collection",
+            "Specimen dataset not in GBIF"
         ]
     },
     "maintainer": {
@@ -382,33 +392,38 @@
                 "type": "ror",
                 "required": true
             }
+        ],
+        "applicableToServiceTypes": [
+            "Data tool",
+            "Identification tool"
         ]
     },
     "funding": {
         "title": "Funding",
+        "jsonPath": "$['schema:fundingScheme']",
         "type": "object",
         "fields": [
             {
-                "jsonPath": "$['schema:fundingscheme']['schema:award']",
+                "jsonPath": "$['schema:fundingScheme']['schema:award']",
                 "title": "Award",
                 "description": "An award won by or for this service",
                 "type": "string"
             },
             {
-                "jsonPath": "$['schema:fundingscheme']['schema:funding']['schema:identifier']",
+                "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:identifier']",
                 "title": "Grant Identifier",
                 "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
                 "type": "string",
                 "required": true
             },
             {
-                "jsonPath": "$['schema:fundingscheme']['schema:funding']['schema:description']",
+                "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:description']",
                 "title": "Grant Description",
                 "description": "A description of the service's grant",
                 "type": "string"
             },
             {
-                "jsonPath": "$['schema:fundingscheme']['schema:funding']['schema:funder']",
+                "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:funder']",
                 "title": "Funding Organisation",
                 "description": "An organization that supports (sponsors) something through some kind of financial contribution",
                 "type": "ror",
@@ -416,11 +431,22 @@
             }
         ],
         "applicableToServiceTypes": [
-            "AI training dataset"
+            "AI training dataset",
+            "CrowdSourcing",
+            "Data tool",
+            "e-Learning service",
+            "Factsheet",
+            "Identification tool",
+            "Knowledge website",
+            "Mobile app",
+            "Service inventory",
+            "Reference collection",
+            "Specimen dataset not in GBIF"
         ]
     },
     "softwareSourceCode": {
         "title": "Software Source Code",
+        "jsonPath": "$['schema:softwareSourceCode']",
         "type": "object",
         "fields": [
             {
@@ -462,7 +488,8 @@
             }
         ],
         "applicableToServiceTypes": [
-            "AI training dataset"
+            "Data tool",
+            "Identification tool"
         ]
     },
     "associatedMedia": {

@@ -71,6 +71,14 @@ const FormBuilder = (props: Props) => {
             applicableToServiceTypes?: string[]
         }
     } = {};
+    const inactiveFormSections: {
+        [section: string]: {
+            type: string,
+            jsonPath: string,
+            fields: FormField[],
+            applicableToServiceTypes?: string[]
+        }
+    } = {};
     const initialFormValues: Dict = {};
 
     /**
@@ -105,14 +113,8 @@ const FormBuilder = (props: Props) => {
     };
 
     /* Construct initial form values */
-    Object.entries(formTemplate).forEach(([_key, formSection]) => {
-        if ((serviceType && formSection.applicableToServiceTypes?.includes(serviceType)) || !formSection.applicableToServiceTypes) {
-            formSections[formSection.title] = {
-                type: formSection.type,
-                jsonPath: formSection.jsonPath ?? '',
-                fields: []
-            };
-
+    if (isEmpty(initialFormValues)) {
+        Object.entries(formTemplate).forEach(([_key, formSection]) => {
             /* If is array, push to initial form values */
             if (formSection.type === 'array') {
                 jp.value(initialFormValues, formSection.jsonPath ?? '', []);
@@ -132,9 +134,35 @@ const FormBuilder = (props: Props) => {
                     /* Add to initial form values */
                     jp.value(initialFormValues, field.jsonPath, DetermineInitialFormValue(field.type, field.const));
                 }
+            });
+        });
+    }
 
+    /* Construct form sections */
+    Object.entries(formTemplate).forEach(([_key, formSection]) => {
+        if ((serviceType && formSection.applicableToServiceTypes?.includes(serviceType)) || !formSection.applicableToServiceTypes || !serviceType) {
+            formSections[formSection.title] = {
+                type: formSection.type,
+                jsonPath: formSection.jsonPath ?? '',
+                fields: [],
+                applicableToServiceTypes: formSection.applicableToServiceTypes
+            };
+
+            formSection.fields.forEach(field => {
                 /* Push to form fields */
                 formSections[formSection.title].fields.push(field);
+            });
+        } else {
+            inactiveFormSections[formSection.title] = {
+                type: formSection.type,
+                jsonPath: formSection.jsonPath ?? '',
+                fields: [],
+                applicableToServiceTypes: formSection.applicableToServiceTypes
+            };
+
+            formSection.fields.forEach(field => {
+                /* Push to form fields */
+                inactiveFormSections[formSection.title].fields.push(field);
             });
         }
     });
@@ -207,10 +235,21 @@ const FormBuilder = (props: Props) => {
         };
     };
 
+    /**
+     * Function to remove irrelevant classes from the form values object
+     * @param obj The form values object
+     */
+    const CheckForIrrelevantClasses = (obj: Dict) => {
+        Object.keys(obj).forEach(key => {
+            if (Object.values(inactiveFormSections).find(values => values.jsonPath === `$['${key}']`)) {
+                delete obj[key];
+            }
+        });
+    };
+
     return (
         <div>
             <Formik initialValues={initialFormValues}
-                // enableReinitialize
                 onSubmit={async (values) => {
                     await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -246,21 +285,27 @@ const FormBuilder = (props: Props) => {
                     };
 
                     Object.values(formSections).forEach(formSection => {
-                        formSection.fields.filter(field => field.required).forEach(field => {
-                            if (field.jsonPath.includes('index')) {
-                                const array = jp.value(values, field.jsonPath.split("['index']").at(0) as string);
+                        if ((formSection?.applicableToServiceTypes?.includes(values['schema:service']['schema:serviceType'])) || !formSection.applicableToServiceTypes) {
+                            formSection.fields.filter(field => field.required).forEach(field => {
+                                if (field.jsonPath.includes('index')) {
+                                    const array = jp.value(values, field.jsonPath.split("['index']").at(0) as string);
 
-                                ValidateArray(array);
-                            } else if (isEmpty(jp.value(values, field.jsonPath))) {
-                                validationFlag = false;
-                            }
-                        });
+                                    ValidateArray(array);
+                                } else if (isEmpty(jp.value(values, field.jsonPath))) {
+                                    validationFlag = false;
+                                }
+                            });
+                        }
                     });
 
                     if (validationFlag && captchaHook.captchaStatus.solution !== null) {
                         /* Start loading indication */
                         setLoading(true);
 
+                        /**
+                         * Function to search for and remove empty properties in the given form values object
+                         * @param obj The form values object
+                         */
                         const RemoveEmptyProperties = (obj: Dict) => {
                             for (const key in obj) {
                                 if (isEmpty(obj[key]) || (Array.isArray(obj[key]) && !obj[key].find((value: string) => !!value))) {
@@ -274,6 +319,7 @@ const FormBuilder = (props: Props) => {
                         let taxonomicServiceRecord = cloneDeep(values);
 
                         RemoveEmptyProperties(taxonomicServiceRecord);
+                        CheckForIrrelevantClasses(taxonomicServiceRecord);
 
                         try {
                             await InsertTaxonomicService({
