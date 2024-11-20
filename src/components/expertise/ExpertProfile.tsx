@@ -5,10 +5,10 @@ import Footer from 'components/general/footer/Footer';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 import AvatarLogo from 'webroot/img/avatar.png';
-import { FaBook, FaCalendarAlt, FaDog, FaGithub, FaGlobe, FaGraduationCap, FaLinkedin, FaUserTie } from 'react-icons/fa';
+import {FaDog, FaGithub, FaGlobe, FaLinkedin } from 'react-icons/fa';
 
 //import { ComposableMap, Geographies, Geography } from "react-simple-maps"
-import { IconType } from 'react-icons';
+// import { IconType } from 'react-icons';
 
 //const geoUrl =  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
 
@@ -124,29 +124,29 @@ const ExpertProfile: React.FC = () => {
 };
 
 
-const ExpertiseBlock = () => {
+// const ExpertiseBlock = () => {
 
-    return (
-        <Container className="mt-4">
-            <Row className='mx-4'>
-                <Col className="col-md-auto">
-                    <div className="bgc-tertiary px-4 py-1">
-                        <p className="fw-lightBold">Description expertise</p>
-                    </div>
-                </Col>
-            </Row>
-            <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
-                <Row>
-                    <Col>
-                        {/* <h2 className="text-left w-100"><strong>Headline expertise</strong></h2> */}
-                        <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </Col>
-                </Row>
+//     return (
+//         <Container className="mt-4">
+//             <Row className='mx-4'>
+//                 <Col className="col-md-auto">
+//                     <div className="bgc-tertiary px-4 py-1">
+//                         <p className="fw-lightBold">Description expertise</p>
+//                     </div>
+//                 </Col>
+//             </Row>
+//             <Row className="flex-grow-1 mx-1" style={{ border: '1px solid var(--tertiary)', padding: '10px' }}>
+//                 <Row>
+//                     <Col>
+//                         {/* <h2 className="text-left w-100"><strong>Headline expertise</strong></h2> */}
+//                         <p className="text-left w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+//                     </Col>
+//                 </Row>
                 
-            </Row>
-        </Container>
-    );
-}
+//             </Row>
+//         </Container>
+//     );
+// }
 
 const ProfessionalBlock = () => {
 
@@ -248,25 +248,25 @@ const ExperienceBlock = () => {
 }
 
 
-interface RowExperiencesProps {
-    title: string;
-    content: string;
-    IconElement: IconType;
-}
+// interface RowExperiencesProps {
+//     title: string;
+//     content: string;
+//     IconElement: IconType;
+// }
 
-const RowExperiences: React.FC<RowExperiencesProps> = ({ title, content, IconElement }) => {
-    return (
-        <Row className="mt-4 align-items-center">
-            <Col md={2} className="d-flex justify-content-center">
-                <IconElement size={40} style={{ color: '#007bff' }} />
-            </Col>
-            <Col md={10}>
-                <h5 className="text-left font-weight-bold" style={{ color: '#333' }}>{title}</h5>
-                <p className="text-left" style={{ color: '#555', fontSize: '16px' }}>{content}</p>
-            </Col>
-        </Row>
-    );
-}
+// const RowExperiences: React.FC<RowExperiencesProps> = ({ title, content, IconElement }) => {
+//     return (
+//         <Row className="mt-4 align-items-center">
+//             <Col md={2} className="d-flex justify-content-center">
+//                 <IconElement size={40} style={{ color: '#007bff' }} />
+//             </Col>
+//             <Col md={10}>
+//                 <h5 className="text-left font-weight-bold" style={{ color: '#333' }}>{title}</h5>
+//                 <p className="text-left" style={{ color: '#555', fontSize: '16px' }}>{content}</p>
+//             </Col>
+//         </Row>
+//     );
+// }
 
 
 const TrainingBlock = () => {

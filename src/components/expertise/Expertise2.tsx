@@ -1,7 +1,6 @@
 /* Import Dependencies */
-import { Container, Row, Col, Modal, Form, Button, Collapse } from 'react-bootstrap';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import React, { useRef, useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
 /* Import Components */
@@ -11,8 +10,6 @@ import experts from '../../sources/dataModel/experts.json';
 import AvatarLogo from 'webroot/img/avatar.png';
 
 /* Import Icons */
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 /**
  * Component that renders the Expertise page
@@ -204,7 +201,8 @@ function filterDropDown(fields: { value: string; label: string; }[]) {
 }
 
 function filterDropDownSub(fields: { value: string; label: string; }[], subfields: { value: string; label: string; }[]) {
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
+    subfields;
     return <Col md={2} className="me-2">
         <Form.Group controlId="taxonomy">
             <Form.Select>

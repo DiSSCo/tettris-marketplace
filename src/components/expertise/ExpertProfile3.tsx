@@ -7,14 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 import AvatarLogo from 'webroot/img/avatar.png';
 import MapImage from 'webroot/img/map.png'
-import { FaBook, FaCalendarAlt, FaDog, FaEnvelope, FaGithub, FaGlobe, FaGraduationCap, FaLinkedin, FaUserTie } from 'react-icons/fa';
-
-//import { ComposableMap, Geographies, Geography } from "react-simple-maps"
-import { IconType } from 'react-icons';
-import { words } from 'lodash';
-
-//const geoUrl =  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
-
+import { FaEnvelope, FaGithub, FaGlobe, FaLinkedin, FaUserTie } from 'react-icons/fa';
 const longText = "In today’s fast-paced world, technology continues to shape our daily lives in profound ways. From the way we communicate to how we work, digital innovations have made life more connected, efficient, and accessible. One of the most influential changes has been the rise of the internet, which has created a vast network of information that anyone with access can tap into. The internet has transformed industries, from healthcare and education to business and entertainment, offering new opportunities and challenges for individuals and organizations alike. Moreover, the rapid advancement of artificial intelligence (AI) and machine learning (ML) has begun to revolutionize various sectors. AI applications are now used to automate tasks, enhance decision-making, and even create new solutions to complex problems. As these technologies evolve, they have the potential to improve everything from product development to customer service, making businesses more agile and competitive. However, with these advancements also come new ethical concerns and questions about data privacy, security, and the future of work. As we continue to navigate the digital age, it is essential that we strike a balance between innovation and responsibility, ensuring that technology serves to benefit society as a whole while addressing the challenges it may bring."
 
 
