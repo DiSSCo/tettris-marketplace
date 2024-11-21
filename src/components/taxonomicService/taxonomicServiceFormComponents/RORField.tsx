@@ -99,6 +99,13 @@ const RORField = (props: Props) => {
                         </p>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        <p className="fs-5 tc-grey">
+                            Using the ROR lookup will use the identifier and name of the selected organisation
+                        </p>
+                    </Col>
+                </Row>
             </Row>
             <Row className="mt-1">
                 <Col xs={{ span: 12 }} lg>

@@ -74,7 +74,8 @@ export type Filter = {
         label: string,
         value: string,
         action?: Function
-    }[]
+    }[],
+    placeholder?: string
 };
 
 /* Type for a form field */

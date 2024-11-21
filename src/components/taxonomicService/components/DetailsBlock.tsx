@@ -31,7 +31,7 @@ const DetailsBlock = (props: Props) => {
     const { name, properties } = props;
 
     return (
-        <div className="h-100 d-flex flex-column">
+        <div className="h-100 d-flex flex-column bgc-white">
             {/* Name of block */}
             <Row>
                 <Col className="col-md-auto">

@@ -36,7 +36,7 @@ const SearchResult = (props: Props) => {
     const navigate = useNavigate();
 
     /* Base variables */
-    const previewImage: string | undefined = taxonomicService.taxonomicService['schema:AssociatedMedia']?.[0]?.['schema:contentUrl'];
+    const logoImage: string | undefined = taxonomicService.taxonomicService['schema:Service']['schema:logo'];
 
     /**
      * Function for selecting a taxonomic service
@@ -52,8 +52,8 @@ const SearchResult = (props: Props) => {
 
     /* ClassNames */
     const imageColClass = classNames({
-        'd-none d-lg-none': !previewImage,
-        'd-none d-lg-flex': previewImage
+        'd-none d-lg-none': !logoImage,
+        'd-none d-lg-flex': logoImage
     });
 
     return (
@@ -64,19 +64,19 @@ const SearchResult = (props: Props) => {
             >
                 <Row className="h-100">
                     {/* Basic column with all the details */}
-                    <Col className="h-100 d-flex flex-column">
+                    <Col lg={{ ...(logoImage && { span: 8 }) }} className="h-100 d-flex flex-column">
                         {/* Title and language if image is not present */}
                         <Row>
-                            <Col lg={{ span: (!previewImage || window.innerWidth < 768) ? 9 : 12 }}>
+                            <Col xs lg={{ span: (!logoImage || window.innerWidth < 768) ? 9 : 12 }}>
                                 <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</p>
                             </Col>
-                            {(!previewImage || window.innerWidth < 768) &&
+                            
                                 <Col xs="auto" lg={{ span: 3 }}
-
+                                    className={!logoImage ? 'd-lg-block' : 'd-lg-none'}
                                 >
                                     <p className="fw-bold fs-5 fs-lg-4 text-end textOverflow">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                                 </Col>
-                            }
+                            
                         </Row>
                         {/* Taxomomic range */}
                         <Row>
@@ -95,37 +95,42 @@ const SearchResult = (props: Props) => {
                             <Col>
                                 <p className="fs-5 fs-lg-4">{taxonomicService.taxonomicService['schema:Service']['schema:serviceType']}</p>
                             </Col>
-                            {(!previewImage || window.innerWidth < 768) &&
-                                <Col xs="auto" lg="auto">
-                                    <p className="fs-5 fs-lg-4 fw-bold">{taxonomicService.taxonomicService['schema:dateCreated'] &&
-                                        format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}
-                                    </p>
-                                </Col>
-                            }
+                            <Col xs="auto" lg="auto"
+                                className={!logoImage ? 'd-lg-block' : 'd-lg-none'}
+                            >
+                                <p className="fs-5 fs-lg-4 fw-bold">{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                    format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMM dd - yyyy')}
+                                </p>
+                            </Col>
                         </Row>
                     </Col>
                     {/* If preview image is present, render this additional column which takes over some details from the original one */}
                     <Col lg={{ span: 4 }}
                         className={`${imageColClass} h-100 flex-column`}
-                        style={{
-                            backgroundImage: `Url(${previewImage})`,
-                            backgroundColor: '#333333',
-                            backgroundBlendMode: 'difference',
-                            filter: 'contrast(1.2)',
-                            backgroundSize: 'cover',
-                            backgroundPosition: '0%'
-                        }}
                     >
                         {/* Language */}
                         <Row className="flex-grow-1">
                             <Col className="d-flex justify-content-end">
-                                <p className="tc-white fw-bold fs-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
+                                <p className="fw-bold fs-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                             </Col>
                         </Row>
+                        {/* Logo, if present */}
+                        {taxonomicService.taxonomicService['schema:Service']['schema:logo'] &&
+                            <Row>
+                                <Col>
+                                    <div className="h-100 w-100 overflow-hidden">
+                                        <img src={logoImage}
+                                            alt={logoImage}
+                                            className="h-100 w-100 object-fit-contain"
+                                        />
+                                    </div>
+                                </Col>
+                            </Row>
+                        }
                         {/* Publishing Date */}
                         <Row>
                             <Col className="d-flex justify-content-end">
-                                <p className="tc-white fw-bold fs-4">{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                <p className="fw-bold fs-4">{taxonomicService.taxonomicService['schema:dateCreated'] &&
                                     format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')
                                 }</p>
                             </Col>

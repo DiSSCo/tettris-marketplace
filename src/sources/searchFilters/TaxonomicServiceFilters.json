@@ -20,7 +20,8 @@
             "name": "taxonomicRange",
             "alias": "schema:taxonomicRange",
             "type": "string",
-            "default": ""
+            "default": "",
+            "placeholder": "Lepidoptera"
         },
         {
             "name": "topicDiscipline",

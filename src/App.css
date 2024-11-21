@@ -209,6 +209,10 @@ p {
   background-color: var(--greyLight);
 }
 
+.bgc-error {
+  background-color: var(--error);
+}
+
 .bgc-none {
   background-color: transparent;
 }

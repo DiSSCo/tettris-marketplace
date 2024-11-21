@@ -14,7 +14,7 @@
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:Service"
+        "schema:service"
       ],
       "properties": {
         "@id": {
@@ -275,7 +275,7 @@
             ]
           }
         },
-        "schema:Service": {
+        "schema:service": {
           "type": "object",
           "description": "A service provided by an organization, e.g. delivery service, print services, etc.",
           "required": [
@@ -364,7 +364,7 @@
             }
           }
         },
-        "schema:ContactPoint": {
+        "schema:contactPoint": {
           "type": "object",
           "description": "A contact point—for example, a Customer Complaints department",
           "properties": {
@@ -380,7 +380,7 @@
             }
           }
         },
-        "schema:Author": {
+        "schema:author": {
           "type": "array",
           "description": "An array of authors of this service",
           "items": {
@@ -396,7 +396,7 @@
                 "title": "Identifier",
                 "description": "A unique identifier to identify the author; ORCID identifiers are valid"
               },
-              "schema:Affiliation": {
+              "schema:affiliation": {
                 "type": "object",
                 "properties": {
                   "@type": {
@@ -423,11 +423,11 @@
             "required": [
               "@type",
               "schema:identifier",
-              "schema:Affiliation"
+              "schema:affiliation"
             ]
           }
         },
-        "schema:Maintainer": {
+        "schema:maintainer": {
           "type": "array",
           "description": "An array of maintainers of this service",
           "items": {
@@ -451,7 +451,7 @@
                 "title": "Full Name",
                 "description": "Full name of the maintainer"
               },
-              "schema:Affiliation": {
+              "schema:affiliation": {
                 "type": "object",
                 "properties": {
                   "@type": {
@@ -478,11 +478,11 @@
             "required": [
               "@type",
               "schema:identifier",
-              "schema:Affiliation"
+              "schema:affiliation"
             ]
           }
         },
-        "schema:FundingScheme": {
+        "schema:fundingScheme": {
           "type": "object",
           "description": "A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.",
           "properties": {
@@ -491,7 +491,7 @@
               "title": "Award",
               "description": "An award won by or for this service"
             },
-            "schema:Funding": {
+            "schema:funding": {
               "type": "object",
               "description": "A Grant that directly or indirectly provide funding or sponsorship for this service",
               "properties": {
@@ -510,7 +510,7 @@
                 "schema:identifier"
               ]
             },
-            "schema:Funder": {
+            "schema:funder": {
               "type": "array",
               "description": "An organization that supports (sponsors) something through some kind of financial contribution.",
               "items": {
@@ -540,7 +540,7 @@
             }
           }
         },
-        "schema:SoftwareSourceCode": {
+        "schema:softwareSourceCode": {
           "type": "object",
           "description": "Object representing the service's software source code",
           "required": [
@@ -589,7 +589,7 @@
             }
           }
         },
-        "schema:AssociatedMedia": {
+        "schema:associatedMedia": {
           "type": "array",
           "description": "Array of media objects that encodes this Service. This property is a synonym for encoding.",
           "items": {
