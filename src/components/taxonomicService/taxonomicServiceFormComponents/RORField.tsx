@@ -61,7 +61,7 @@ const RORField = (props: Props) => {
 
         rors.forEach(ror => {
             dropdownOptions.push({
-                label: ror.names[0].value,
+                label: ror.names.find((nameObject: { lang: string, value: string }) => nameObject.lang === 'en').value ?? ror.names[0].value,
                 value: ror.id
             });
         })
