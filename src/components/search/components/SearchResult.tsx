@@ -36,7 +36,7 @@ const SearchResult = (props: Props) => {
     const navigate = useNavigate();
 
     /* Base variables */
-    const logoImage: string | undefined = taxonomicService.taxonomicService['schema:Service']['schema:logo'];
+    const logoImage: string | undefined = taxonomicService.taxonomicService['schema:service']['schema:logo'];
 
     /**
      * Function for selecting a taxonomic service
@@ -68,7 +68,7 @@ const SearchResult = (props: Props) => {
                         {/* Title and language if image is not present */}
                         <Row>
                             <Col xs lg={{ span: (!logoImage || window.innerWidth < 768) ? 9 : 12 }}>
-                                <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicService.taxonomicService['schema:Service']['schema:name']}</p>
+                                <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicService.taxonomicService['schema:service']['schema:name']}</p>
                             </Col>
                             
                                 <Col xs="auto" lg={{ span: 3 }}
@@ -87,13 +87,13 @@ const SearchResult = (props: Props) => {
                         {/* Description */}
                         <Row className='flex-grow-1 my-2'>
                             <Col>
-                                <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicService.taxonomicService['schema:Service']['schema:description']}</p>
+                                <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicService.taxonomicService['schema:service']['schema:description']}</p>
                             </Col>
                         </Row>
                         {/* Service Type and Publishing Date if preview image is not present */}
                         <Row>
                             <Col>
-                                <p className="fs-5 fs-lg-4">{taxonomicService.taxonomicService['schema:Service']['schema:serviceType']}</p>
+                                <p className="fs-5 fs-lg-4">{taxonomicService.taxonomicService['schema:service']['schema:serviceType']}</p>
                             </Col>
                             <Col xs="auto" lg="auto"
                                 className={!logoImage ? 'd-lg-block' : 'd-lg-none'}
@@ -115,7 +115,7 @@ const SearchResult = (props: Props) => {
                             </Col>
                         </Row>
                         {/* Logo, if present */}
-                        {taxonomicService.taxonomicService['schema:Service']['schema:logo'] &&
+                        {taxonomicService.taxonomicService['schema:service']['schema:logo'] &&
                             <Row>
                                 <Col>
                                     <div className="h-100 w-100 overflow-hidden">

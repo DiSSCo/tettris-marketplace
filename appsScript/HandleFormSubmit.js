@@ -65,7 +65,7 @@ const AddToTaxonomicService = (taxonomicService, itemTitle, itemResponse) => {
     case 'Logo':
     case 'Date Modified':
     case 'Terms of Service':
-      taxonomicService['schema:Service'][ReferenceField(itemTitle)] = itemResponse;
+      taxonomicService['schema:service'][ReferenceField(itemTitle)] = itemResponse;
 
       break;
     case 'Contact Email':

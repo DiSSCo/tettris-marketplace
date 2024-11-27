@@ -761,6 +761,6 @@
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:Service"
+        "schema:service"
     ]
 }
