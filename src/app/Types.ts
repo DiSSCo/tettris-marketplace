@@ -39,7 +39,7 @@ export type TaxonomicService = {
 export type Author = {
     "@type": "schema:Person";
     "schema:identifier": string;
-    "schema:Affiliation": {
+    "schema:affiliation": {
         "@type": "schema:Organization";
         "schema:identifier": string;
         "schema:name"?: string;
@@ -51,7 +51,7 @@ export type Maintainer = {
     "@type": string;
     "schema:identifier": string[];
     "schema:name"?: string;
-    "schema:Affiliation": {
+    "schema:affiliation": {
         "@type": "schema:Organization";
         "schema:identifier": string;
         "schema:name"?: string;
@@ -74,7 +74,8 @@ export type Filter = {
         label: string,
         value: string,
         action?: Function
-    }[]
+    }[],
+    placeholder?: string
 };
 
 /* Type for a form field */

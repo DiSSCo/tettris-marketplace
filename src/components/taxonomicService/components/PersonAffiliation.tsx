@@ -7,6 +7,13 @@ import { Capitalize } from "app/Utilities";
 /* Import Types */
 import { Author, Maintainer, Funder } from "app/Types";
 
+/* Import Webroot */
+import githubIcon from 'webroot/img/githubLogo.png';
+import ORCIDIcon from 'webroot/img/ORCIDLogo.png';
+
+/* Import Styles */
+import styles from '../taxonomicService.module.scss';
+
 
 /* Props Type */
 type Props = {
@@ -50,9 +57,23 @@ const PersonAffiliation = (props: Props) => {
                                                         target="_blank"
                                                         rel="noreferer"
                                                     >
-                                                        <p className="tc-primary-hover">
-                                                            {personObject["schema:name"] ? `${personObject["schema:name"]} - ${identifierObject}` : identifierObject}
-                                                        </p>
+                                                        <Row>
+                                                            {(identifierObject.toLowerCase().includes('orcid') || identifierObject.toLowerCase().includes('github')) &&
+                                                                <Col xs="auto" lg="auto"
+                                                                    className="pe-0"
+                                                                >
+                                                                    <img src={identifierObject.toLowerCase().includes('orcid') ? ORCIDIcon : githubIcon}
+                                                                        alt="Identifier icon"
+                                                                        className={styles.identifierLogo}
+                                                                    />
+                                                                </Col>
+                                                            }
+                                                            <Col>
+                                                                <p className="tc-primary-hover">
+                                                                    {personObject["schema:name"] ? `${personObject["schema:name"]} - ${identifierObject}` : identifierObject}
+                                                                </p>
+                                                            </Col>
+                                                        </Row>
                                                     </a>
                                                 );
                                             })}
@@ -61,9 +82,25 @@ const PersonAffiliation = (props: Props) => {
                                             target="_blank"
                                             rel="noreferer"
                                         >
-                                            <p className="tc-primary-hover">
-                                                {personObject["schema:name"] ?? personObject["schema:identifier"]}
-                                            </p>
+                                            <Row>
+                                                {((personObject["schema:identifier"] as string).toLowerCase().includes('orcid') ||
+                                                    (personObject["schema:identifier"] as string).toLowerCase().includes('github')
+                                                ) &&
+                                                    <Col xs="auto" lg="auto"
+                                                        className="pe-0"
+                                                    >
+                                                        <img src={(personObject["schema:identifier"] as string).toLowerCase().includes('orcid') ? ORCIDIcon : githubIcon}
+                                                            alt="Identifier icon"
+                                                            className={styles.identifierLogo}
+                                                        />
+                                                    </Col>
+                                                }
+                                                <Col>
+                                                    <p className="tc-primary-hover">
+                                                        {personObject["schema:name"] ?? personObject["schema:identifier"]}
+                                                    </p>
+                                                </Col>
+                                            </Row>
                                         </a>
                                     }
                                 </Col>
@@ -71,12 +108,12 @@ const PersonAffiliation = (props: Props) => {
                             {/* Organisation information */}
                             <Row>
                                 <Col>
-                                    <a href={personObject["schema:Affiliation"]["schema:identifier"]}
+                                    <a href={personObject["schema:affiliation"]["schema:identifier"]}
                                         target="_blank"
                                         rel="noreferer"
                                     >
                                         <p className="tc-primary-hover">
-                                            {personObject["schema:Affiliation"]["schema:name"]}
+                                            {personObject["schema:affiliation"]["schema:name"]}
                                         </p>
                                     </a>
                                 </Col>

@@ -1,6 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
@@ -60,6 +60,30 @@ const Search = () => {
         allowSearchParams: true
     });
 
+    /* On search: check if there are any more records to be shown with the show more button */
+    useEffect(() => {
+        if (!noMoreResults) {
+            const searchFilters = [...searchParams.entries()].reduce((filtersObject, [key, value]) => {
+                return {
+                    ...filtersObject,
+                    [key]: value
+                }
+            }, {});
+
+            GetTaxonomicServices({
+                pageNumber: paginator.currentPage + 1,
+                pageSize: 12,
+                searchFilters
+            }).then(({ taxonomicServices }) => {
+                console.log(taxonomicServices);
+
+                if (!taxonomicServices.length) {
+                    setNoMoreResults(true);
+                }
+            });
+        }
+    }, [paginator]);
+
     /* ClassNames */
     const mainBodyClass = classNames({
         'gradient-primary': true,
@@ -98,7 +122,7 @@ const Search = () => {
                             </Col>
                         </Row>
                         {/* Filters Bar */}
-                        <Row className="mt-3 d-none d-lg-flex">
+                        <Row className="mt-1 d-none d-lg-flex">
                             <Col>
                                 <FiltersBar />
                             </Col>

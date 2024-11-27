@@ -20,7 +20,7 @@ export interface TaxonomicService {
   /**
    * The date on which the Taxonomic Service was created or the item was added to a DataFeed, following the ISO Date Time Format yyyy-MM-dd'T'HH:mm:ss.SSSXXX
    */
-  "schema:dateCreated": string;
+  "schema:dateCreated"?: string;
   /**
    * The date on which the Service was most recently modified or when the item's entry was modified within a DataFeed, following the ISO Date Time Format yyyy-MM-dd'T'HH:mm:ss.SSSXXX
    */
@@ -28,7 +28,7 @@ export interface TaxonomicService {
   /**
    * Date the service was published, following the ISO Date Time Format yyyy-MM-dd'T'HH:mm:ss.SSSXXX
    */
-  "schema:datePublished"?: string;
+  "schema:datePublished": string;
   /**
    * The status of the record
    */
@@ -225,7 +225,7 @@ export interface TaxonomicService {
   /**
    * A service provided by an organization, e.g. delivery service, print services, etc.
    */
-  "schema:Service": {
+  "schema:service": {
     /**
      * A type that defines the kind of taxonomic service
      */
@@ -288,7 +288,7 @@ export interface TaxonomicService {
   /**
    * A contact point—for example, a Customer Complaints department
    */
-  "schema:ContactPoint"?: {
+  "schema:contactPoint"?: {
     /**
      * Email address of the contact point
      */
@@ -301,7 +301,7 @@ export interface TaxonomicService {
   /**
    * An array of authors of this service
    */
-  "schema:Author"?: {
+  "schema:author"?: {
     /**
      * The type of the author
      */
@@ -310,7 +310,7 @@ export interface TaxonomicService {
      * A unique identifier to identify the author; ORCID identifiers are valid
      */
     "schema:identifier": string;
-    "schema:Affiliation": {
+    "schema:affiliation": {
       /**
        * The type of the affiliation
        */
@@ -328,7 +328,7 @@ export interface TaxonomicService {
   /**
    * An array of maintainers of this service
    */
-  "schema:Maintainer"?: {
+  "schema:maintainer"?: {
     /**
      * The type of the maintainer
      */
@@ -344,7 +344,7 @@ export interface TaxonomicService {
     /**
      * The organisation the maintainer is affiliated with
      */
-    "schema:Affiliation": {
+    "schema:affiliation": {
       /**
        * The type of the affiliation
        */
@@ -362,7 +362,7 @@ export interface TaxonomicService {
   /**
    * A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.
    */
-  "schema:FundingScheme"?: {
+  "schema:fundingScheme"?: {
     /**
      * An award won by or for this service
      */
@@ -370,7 +370,7 @@ export interface TaxonomicService {
     /**
      * A Grant that directly or indirectly provide funding or sponsorship for this service
      */
-    "schema:Funding"?: {
+    "schema:funding"?: {
       /**
        * A unique identifier to identify the grant
        */
@@ -383,12 +383,25 @@ export interface TaxonomicService {
     /**
      * An organization that supports (sponsors) something through some kind of financial contribution.
      */
-    "schema:Funder"?: unknown[];
+    "schema:funder"?: {
+      /**
+       * The type of funder
+       */
+      "@type": "schema:Organization";
+      /**
+       * A unique identifier to identify the funder organisation; ROR identifiers are valid
+       */
+      "schema:identifier": string;
+      /**
+       * The name of the funder (funding program)
+       */
+      "schema:name"?: string;
+    }[];
   };
   /**
    * Object representing the service's software source code
    */
-  "schema:SoftwareSourceCode"?: {
+  "schema:softwareSourceCode"?: {
     /**
      * Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex).
      */
@@ -435,7 +448,7 @@ export interface TaxonomicService {
   /**
    * Array of media objects that encodes this Service. This property is a synonym for encoding.
    */
-  "schema:AssociatedMedia"?: {
+  "schema:associatedMedia"?: {
     /**
      * JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain
      */

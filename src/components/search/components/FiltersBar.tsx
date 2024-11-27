@@ -1,6 +1,8 @@
 /* Import Dependencies */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { Formik, Form } from 'formik';
+import { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -41,11 +43,34 @@ const FiltersBar = (props: Props) => {
 
     /* Base variables */
     const filters: FilterType[] = [...TaxonomicServiceFilters.taxonomicServiceFilters];
-    const initialValues: Dict = {};
+    const [initialValues, setInitialValues] = useState<Dict>({});
 
     /* Set initial values */
     filters.forEach((filter) => {
         initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
+    });
+
+    /**
+     * Function that resets all search filters, except for taonomic service type
+     */
+    const ResetSearchFilters = () => {
+        /* Reset search params */
+        filters.filter(filter => filter.name !== 'serviceType').forEach(filter => {
+            searchParams.delete(filter.name);
+            delete initialValues[filter.name];
+        });
+
+        setSearchParams(searchParams);
+
+        /* Reset form values */
+        setInitialValues({ ...initialValues });
+    };
+
+    /* Class Names */
+    const serviceTypeClass = classNames({
+        'tr-smooth': true,
+        'tc-primary': !searchParams.get('serviceType'),
+        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection'
     });
 
     return (
@@ -78,14 +103,15 @@ const FiltersBar = (props: Props) => {
             {({ values, setFieldValue, submitForm }) => {
                 return (
                     <Form>
-                        <Row>
+                        <Row className="align-items-end">
                             {/* Search Bar */}
                             <Col xs={{ span: 12 }}
                                 lg={{ span: 4 }}
                                 className="mb-4 mb-lg-0"
                             >
+                                <p className={`${serviceTypeClass} fs-5 fw-lightBold`}>Search query</p>
                                 <QueryBar name="query"
-                                    placeholder="Enter a search query"
+                                    placeholder="Pollinator Academy"
                                 >
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                 </QueryBar>
@@ -123,9 +149,10 @@ const FiltersBar = (props: Props) => {
                             <Col lg="auto"
                                 className="ps-0 d-none d-lg-block"
                             >
-                                <Button type="submit"
-                                    variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
-                                    OnClick={() => setSearchParams()}
+                                <Button type="button"
+                                    variant="primary"
+                                    className="bgc-error"
+                                    OnClick={() => ResetSearchFilters()}
                                 >
                                     <FontAwesomeIcon icon={faFilterCircleXmark}
                                         size="lg"

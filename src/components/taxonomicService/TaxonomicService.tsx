@@ -133,8 +133,8 @@ const TaxonomicService = () => {
                                                         availableOnAppStore: taxonomicService.taxonomicService['schema:additionalProperty']?.[1] as string[] | undefined,
                                                         documentationURL: taxonomicService.taxonomicService['schema:documentation'],
                                                         paymentModel: taxonomicService.taxonomicService['schema:additionalProperty']?.[2] as string | undefined,
-                                                        termsOfService: taxonomicService.taxonomicService['schema:Service']['schema:termsOfService'],
-                                                        updateFrequency: taxonomicService.taxonomicService['schema:Service']['schema:additionalProperty']?.[0] as string | undefined
+                                                        termsOfService: taxonomicService.taxonomicService['schema:service']['schema:termsOfService'],
+                                                        updateFrequency: taxonomicService.taxonomicService['schema:service']['schema:additionalProperty']?.[0] as string | undefined
                                                     }}
                                                 />
                                             </Col>
@@ -144,53 +144,53 @@ const TaxonomicService = () => {
                                             >
                                                 <DetailsBlock name="Contact Information"
                                                     properties={{
-                                                        contactEmail: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:email'],
-                                                        contactWebpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
-                                                        authors: taxonomicService.taxonomicService['schema:Author'],
-                                                        maintainers: taxonomicService.taxonomicService['schema:Maintainer'],
+                                                        contactEmail: taxonomicService.taxonomicService['schema:contactPoint']?.['schema:email'],
+                                                        contactWebpage: taxonomicService.taxonomicService['schema:contactPoint']?.['schema:url'],
+                                                        authors: taxonomicService.taxonomicService['schema:author'],
+                                                        maintainers: taxonomicService.taxonomicService['schema:maintainer'],
                                                     }}
                                                 />
                                             </Col>
                                             {/* Show software details if software object is present in taxonomic service */}
-                                            {taxonomicService.taxonomicService['schema:SoftwareSourceCode'] &&
+                                            {taxonomicService.taxonomicService['schema:softwareSourceCode'] &&
                                                 <Col xs={{ span: 12 }}
                                                     lg={{ span: 4 }}
                                                     className="mt-4 mt-lg-0 mb-lg-3"
                                                 >
                                                     <DetailsBlock name="Software"
                                                         properties={{
-                                                            codeRepository: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:codeRepository'],
-                                                            runtimePlatform: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:runtimePlatform'],
-                                                            status: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:creativeWorkStatus'],
-                                                            programmingLanguages: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:programmingLanguage'],
-                                                            softwareLicense: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:license'],
-                                                            isOpenSource: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:additionalProperty']?.[0] ? 'True' : 'False'
+                                                            codeRepository: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:codeRepository'],
+                                                            runtimePlatform: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:runtimePlatform'],
+                                                            status: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:creativeWorkStatus'],
+                                                            programmingLanguages: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:programmingLanguage'],
+                                                            softwareLicense: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:license'],
+                                                            isOpenSource: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:additionalProperty']?.[0] ? 'True' : 'False'
                                                         }}
                                                     />
                                                 </Col>
                                             }
-                                             {/* Show funding details if funding object is present in taxonomic service */}
-                                             {taxonomicService.taxonomicService['schema:FundingScheme'] &&
+                                            {/* Show funding details if funding object is present in taxonomic service */}
+                                            {taxonomicService.taxonomicService['schema:fundingScheme'] &&
                                                 <Col xs={{ span: 12 }}
                                                     lg={{ span: 4 }}
                                                     className="mt-4 mt-lg-0 mb-lg-3"
                                                 >
                                                     <DetailsBlock name="Funding"
                                                         properties={{
-                                                            award: taxonomicService.taxonomicService['schema:FundingScheme']['schema:award'],
-                                                            fundingId: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funding']?.['schema:identifier'],
-                                                            fundingDescription: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funding']?.['schema:description'],
-                                                            funders: taxonomicService.taxonomicService['schema:FundingScheme']['schema:Funder'] as Dict[] as Funder[]
+                                                            award: taxonomicService.taxonomicService['schema:fundingScheme']['schema:award'],
+                                                            fundingId: taxonomicService.taxonomicService['schema:fundingScheme']['schema:funding']?.['schema:identifier'],
+                                                            fundingDescription: taxonomicService.taxonomicService['schema:fundingScheme']['schema:funding']?.['schema:description'],
+                                                            funders: taxonomicService.taxonomicService['schema:fundingScheme']['schema:funder'] as Dict[] as Funder[]
                                                         }}
                                                     />
                                                 </Col>
                                             }
                                             {/* Show multimedia block, if multimedia is present */}
-                                            {taxonomicService.taxonomicService['schema:AssociatedMedia'] &&
+                                            {taxonomicService.taxonomicService['schema:associatedMedia'] &&
                                                 <Col xs={{ span: 12 }} lg
                                                     className="mt-4 mt-lg-0 mb-lg-3"
                                                 >
-                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['schema:AssociatedMedia']} />
+                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['schema:associatedMedia']} />
                                                 </Col>
                                             }
                                         </Row>

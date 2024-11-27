@@ -317,7 +317,7 @@
                 "additionalProperties": false
             }
         },
-        "schema:Service": {
+        "schema:service": {
             "type": "object",
             "description": "A service provided by an organization, e.g. delivery service, print services, etc.",
             "properties": {
@@ -430,7 +430,7 @@
             ],
             "additionalProperties": false
         },
-        "schema:ContactPoint": {
+        "schema:contactPoint": {
             "type": "object",
             "description": "A contact point—for example, a Customer Complaints department",
             "properties": {
@@ -451,7 +451,7 @@
             },
             "additionalProperties": false
         },
-        "schema:Author": {
+        "schema:author": {
             "type": "array",
             "description": "An array of authors of this service",
             "items": {
@@ -469,7 +469,7 @@
                             "https://orcid.org/0000-0001-9790-9277"
                         ]
                     },
-                    "schema:Affiliation": {
+                    "schema:affiliation": {
                         "type": "object",
                         "properties": {
                             "@type": {
@@ -502,12 +502,12 @@
                 "required": [
                     "@type",
                     "schema:identifier",
-                    "schema:Affiliation"
+                    "schema:affiliation"
                 ],
                 "additionalProperties": false
             }
         },
-        "schema:Maintainer": {
+        "schema:maintainer": {
             "type": "array",
             "description": "An array of maintainers of this service",
             "items": {
@@ -536,7 +536,7 @@
                             "John Doe"
                         ]
                     },
-                    "schema:Affiliation": {
+                    "schema:affiliation": {
                         "type": "object",
                         "description": "The organisation the maintainer is affiliated with",
                         "properties": {
@@ -570,12 +570,12 @@
                 "required": [
                     "@type",
                     "schema:identifier",
-                    "schema:Affiliation"
+                    "schema:affiliation"
                 ],
                 "additionalProperties": false
             }
         },
-        "schema:FundingScheme": {
+        "schema:fundingScheme": {
             "type": "object",
             "description": "A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.",
             "properties": {
@@ -586,7 +586,7 @@
                         "National Award 2024"
                     ]
                 },
-                "schema:Funding": {
+                "schema:funding": {
                     "type": "object",
                     "description": "A Grant that directly or indirectly provide funding or sponsorship for this service",
                     "properties": {
@@ -610,7 +610,7 @@
                     ],
                     "additionalProperties": false
                 },
-                "schema:Funder": {
+                "schema:funder": {
                     "type": "array",
                     "description": "An organization that supports (sponsors) something through some kind of financial contribution.",
                     "items": {
@@ -646,7 +646,7 @@
             },
             "additionalProperties": false
         },
-        "schema:SoftwareSourceCode": {
+        "schema:softwareSourceCode": {
             "type": "object",
             "description": "Object representing the service's software source code",
             "properties": {
@@ -736,7 +736,7 @@
                 "schema:codeRepository"
             ]
         },
-        "schema:AssociatedMedia": {
+        "schema:associatedMedia": {
             "type": "array",
             "description": "Array of media objects that encodes this Service. This property is a synonym for encoding.",
             "items": {
@@ -761,6 +761,6 @@
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:Service"
+        "schema:service"
     ]
 }

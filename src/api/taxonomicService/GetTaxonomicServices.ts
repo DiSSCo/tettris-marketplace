@@ -35,6 +35,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
 
             switch (key) {
                 case 'language':
+                case 'topicDiscipline':
                     /* Set array search for language */
                     filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
 
@@ -42,15 +43,15 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
                 case 'query':
                     /* Set query to name search */
                     filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:Service/schema\\:name:` + `${value}*`
-                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`
-                        + ` OR ` + `/taxonomicService/ods\\:topicDiscipline:` + `${value}*`
+                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`
+                        + ` OR ` + `/taxonomicService/ods\\:topicDiscipline/_:` + `${value}*`
                         + `)`
                     );
 
                     break;
                 case 'taxonomicRange':
                     /* Set taxonomic range search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`);
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`);
 
                     break;
                 case 'serviceType':

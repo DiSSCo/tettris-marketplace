@@ -61,7 +61,7 @@ const RORField = (props: Props) => {
 
         rors.forEach(ror => {
             dropdownOptions.push({
-                label: ror.names[0].value,
+                label: ror.names.find((nameObject: { lang: string, value: string }) => nameObject.lang === 'en').value ?? ror.names[0].value,
                 value: ror.id
             });
         })
@@ -96,6 +96,13 @@ const RORField = (props: Props) => {
                     <Col>
                         <p className="fs-5 tc-grey">
                             {field.description}
+                        </p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <p className="fs-5 tc-grey">
+                            Using the ROR lookup will use the identifier and name of the selected organisation
                         </p>
                     </Col>
                 </Row>

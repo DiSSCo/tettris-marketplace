@@ -61,7 +61,7 @@ const BreadCrumbs = () => {
                     });
                 } else {
                     breadCrumbs.push({
-                        crumb: `${taxonomicService?.taxonomicService['schema:Service']['schema:name']}`
+                        crumb: `${taxonomicService?.taxonomicService['schema:service']?.['schema:name']}`
                     });
                 }
 
