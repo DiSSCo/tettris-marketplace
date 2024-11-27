@@ -108,12 +108,12 @@ const PersonAffiliation = (props: Props) => {
                             {/* Organisation information */}
                             <Row>
                                 <Col>
-                                    <a href={personObject["schema:Affiliation"]["schema:identifier"]}
+                                    <a href={personObject["schema:affiliation"]["schema:identifier"]}
                                         target="_blank"
                                         rel="noreferer"
                                     >
                                         <p className="tc-primary-hover">
-                                            {personObject["schema:Affiliation"]["schema:name"]}
+                                            {personObject["schema:affiliation"]["schema:name"]}
                                         </p>
                                     </a>
                                 </Col>
