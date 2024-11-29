@@ -44,7 +44,7 @@ const Search = () => {
         },
         Method: GetTaxonomicServices,
         Handler: (taxonomicServices: TaxonomicService[]) => {
-            /* On receival of a new page with records, add them to the total */
+            /* On receival of a new page with records and add them to the total */
             dispatch(concatToTaxonomicServices(taxonomicServices));
             dispatch(setIsApiOnline(true))
 

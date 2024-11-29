@@ -19,7 +19,6 @@ import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
 
 /* Import Components */
 import Header from "components/general/header/Header";
-import SearchBar from './components/SearchBar';
 import HomeCategory from './components/HomeCategory';
 import Footer from 'components/general/footer/Footer';
 
@@ -111,7 +110,13 @@ const Home = () => {
                                         <Col xs={{ span: 12 }} lg={{ span: 5 }}
                                             className="position-relative mt-2 mt-lg-0"
                                         >
-                                            <SearchBar />
+                                            <div className=" bgc-white-transparent bgc-lg-white-transparent py-3 px-3 position-absolute position-lg-static top-0 start-0 w-100 br-corner">
+                                                <p className="fs-5 fs-lg-3">
+                                                    Explore the Marketplace's catalog to discover taxonomic services offered by a wide range of organisations, 
+                                                    explore the different reference collections and engage with fellow taxonomists to share expertise. 
+                                                    Designed for taxonomists, this Marketplace will aid you in your important field of work.
+                                                </p>
+                                            </div>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -119,7 +124,7 @@ const Home = () => {
                             {/* Search Category representation */}
                             <Row className="mt-5 mt-lg-0 px-2 px-lg-0">
                                 <Col lg={{ span: 1 }}
-                                    className="p-0"
+                                    className="mt-4 p-0"
                                 >
                                     <div className={`${styles.homeCategoryBar} bgc-grey d-none d-lg-block py-3`} />
                                 </Col>

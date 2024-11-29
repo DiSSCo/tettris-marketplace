@@ -18,8 +18,7 @@ import FormFieldTitle from './FormFieldTitle';
 type Props = {
     field: FormField,
     values: Dict,
-    SetFieldValue: Function,
-    SetServiceType?: Function
+    SetFieldValue: Function
 };
 
 
@@ -28,11 +27,10 @@ type Props = {
  * @param field The provided form field
  * @param values The current values in the form state
  * @param SetFieldValue Function to set the value of a field in the form
- * @param SetServiceType Function to set the service type state
  * @returns JSX Component
  */
 const SelectField = (props: Props) => {
-    const { field, values, SetFieldValue, SetServiceType } = props;
+    const { field, values, SetFieldValue } = props;
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
@@ -75,10 +73,7 @@ const SelectField = (props: Props) => {
             <Select placeholder="Select an option"
                 options={selectItems.toSorted((a, b) => a.label > b.label ? 1 : 0)}
                 className={`${formFieldClass} mt-1`}
-                onChange={(dropdownOption) => {
-                    SetFieldValue(jsonPath, dropdownOption?.value);
-                    SetServiceType?.(dropdownOption?.value);
-                }}
+                onChange={(dropdownOption) => SetFieldValue(jsonPath, dropdownOption?.value)}
             />
         </div>
     );

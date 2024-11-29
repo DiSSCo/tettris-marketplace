@@ -15,7 +15,8 @@ import FormFieldTitle from './FormFieldTitle';
 type Props = {
     field: FormField,
     values: Dict
-    SetFieldValue: Function
+    SetFieldValue: Function,
+    SetServiceTypes?: Function
 };
 
 
@@ -24,10 +25,11 @@ type Props = {
  * @param field The provided form field
  * @param values The current values object of the form
  * @param SetFieldValue Function to set the value of a field in the form
+ * @param SetServiceTypes Function to set the service types state
  * @returns JSX Component
  */
 const MultiSelectField = (props: Props) => {
-    const { field, values, SetFieldValue } = props;
+    const { field, values, SetFieldValue, SetServiceTypes } = props;
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
@@ -79,6 +81,7 @@ const MultiSelectField = (props: Props) => {
                     });
 
                     SetFieldValue(jsonPath, valuesArray);
+                    SetServiceTypes?.(valuesArray);
                 }}
             />
         </div>
