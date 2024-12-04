@@ -7,7 +7,7 @@
                 "jsonPath": "$['schema:service']['schema:serviceType']",
                 "title": "Service Type",
                 "description": "A type that defines the kind of taxonomic service",
-                "type": "select",
+                "type": "multi-select",
                 "options": [
                     "AI training dataset",
                     "Community group",

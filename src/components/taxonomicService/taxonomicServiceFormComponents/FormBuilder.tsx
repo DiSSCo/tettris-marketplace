@@ -60,7 +60,7 @@ const FormBuilder = (props: Props) => {
     });
 
     /* Base variables */
-    const [serviceType, setServiceType] = useState<string | undefined>();
+    const [serviceTypes, setServiceTypes] = useState<string[] | undefined>();
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>();
     const formSections: {
@@ -80,6 +80,8 @@ const FormBuilder = (props: Props) => {
         }
     } = {};
     const initialFormValues: Dict = {};
+
+    console.log(serviceTypes);
 
     /**
      * Function to flatten a JSON path
@@ -140,7 +142,7 @@ const FormBuilder = (props: Props) => {
 
     /* Construct form sections */
     Object.entries(formTemplate).forEach(([_key, formSection]) => {
-        if ((serviceType && formSection.applicableToServiceTypes?.includes(serviceType)) || !formSection.applicableToServiceTypes || !serviceType) {
+        if ((serviceTypes && formSection.applicableToServiceTypes?.some(type => serviceTypes.includes(type))) || !formSection.applicableToServiceTypes || !serviceTypes) {
             formSections[formSection.title] = {
                 type: formSection.type,
                 jsonPath: formSection.jsonPath ?? '',
@@ -203,12 +205,12 @@ const FormBuilder = (props: Props) => {
                 return <SelectField field={field}
                     values={values}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
-                    SetServiceType={field.title === 'Service Type' ? (serviceType: string) => setServiceType(serviceType) : undefined}
                 />;
             } case 'multi-select': {
                 return <MultiSelectField field={field}
                     values={values}
                     SetFieldValue={(fieldName: string, value: string) => SetFieldValue(fieldName, value)}
+                    SetServiceTypes={field.title === 'Service Type' ? (serviceTypes: string[]) => setServiceTypes(serviceTypes) : undefined}
                 />;
             } case 'ror': {
                 return <RORField field={field}
@@ -285,7 +287,7 @@ const FormBuilder = (props: Props) => {
                     };
 
                     Object.values(formSections).forEach(formSection => {
-                        if ((formSection?.applicableToServiceTypes?.includes(values['schema:service']['schema:serviceType'])) || !formSection.applicableToServiceTypes) {
+                        if ((formSection?.applicableToServiceTypes?.some(type => values['schema:service']['schema:serviceType'].includes(type))) || !formSection.applicableToServiceTypes) {
                             formSection.fields.filter(field => field.required).forEach(field => {
                                 if (field.jsonPath.includes('index')) {
                                     const array = jp.value(values, field.jsonPath.split("['index']").at(0) as string);
@@ -340,8 +342,8 @@ const FormBuilder = (props: Props) => {
                 {({ values, setFieldValue }) => (
                     <Form>
                         {Object.entries(formSections).map(([title, section]) => (
-                            <>
-                                {((serviceType && section.applicableToServiceTypes?.includes(serviceType)) || !section.applicableToServiceTypes) &&
+                            <div key={title}>
+                                {((serviceTypes && section.applicableToServiceTypes?.some(type => serviceTypes.includes(type))) || !section.applicableToServiceTypes) &&
                                     <Row key={title}>
                                         <Col>
                                             {section.type === 'object' ?
@@ -371,7 +373,7 @@ const FormBuilder = (props: Props) => {
                                         </Col>
                                     </Row>
                                 }
-                            </>
+                            </div>
                         ))}
                         <Row className="mt-3">
                             <Col>

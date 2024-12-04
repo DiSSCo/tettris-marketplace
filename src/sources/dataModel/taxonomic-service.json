@@ -469,6 +469,13 @@
                             "https://orcid.org/0000-0001-9790-9277"
                         ]
                     },
+                    "schema:name": {
+                        "type": "string",
+                        "description": "Full name of the author",
+                        "examples": [
+                            "John Doe"
+                        ]
+                    },
                     "schema:affiliation": {
                         "type": "object",
                         "properties": {
@@ -502,6 +509,7 @@
                 "required": [
                     "@type",
                     "schema:identifier",
+                    "schema:name",
                     "schema:affiliation"
                 ],
                 "additionalProperties": false

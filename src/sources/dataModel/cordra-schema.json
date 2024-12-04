@@ -396,6 +396,11 @@
                 "title": "Identifier",
                 "description": "A unique identifier to identify the author; ORCID identifiers are valid"
               },
+              "schema:name": {
+                "type": "string",
+                "title": "Full Name",
+                "description": "Full name of the author"
+              },
               "schema:affiliation": {
                 "type": "object",
                 "properties": {

@@ -34,7 +34,6 @@ const TopBar = (props: Props) => {
                         disabled={!taxonomicService.taxonomicService['schema:contactPoint']?.['schema:url']}
                         OnClick={() => window.open(`https://${taxonomicService.taxonomicService['schema:contactPoint']?.['schema:url']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
                     >
-
                         <img src={taxonomicService.taxonomicService['schema:service']['schema:logo']}
                             alt={taxonomicService.taxonomicService['schema:service']['schema:logo']}
                             className="w-100"
@@ -43,21 +42,26 @@ const TopBar = (props: Props) => {
                 </Col>
             }
             {/* State and Title */}
-            <Col xs={{ span: 12 }} lg>
-                <h1 className="fs-3 fs-lg-2">{taxonomicService.taxonomicService['schema:service']['schema:name']}</h1>
+            <Col xs={{ span: 12 }} lg="auto">
+                <a href={`https://${taxonomicService.taxonomicService['schema:url']?.replace('http://', '').replace('https://', '')}`}
+                    target='_blank'
+                    rel="noreferer"
+                >
+                    <h1 className="fs-3 fs-lg-2 tc-primary-hover">{taxonomicService.taxonomicService['schema:service']['schema:name']}</h1>
+                </a>
             </Col>
             {/* Apply for usage button */}
-            <Col xs lg="auto"
-                className="mt-3 mt-lg-0"
+            <Col xs lg
+                className="mt-3 mt-lg-0 d-flex justify-content-end"
             >
                 <Button type="button"
                     variant="primary"
                     className="fs-5 fs-lg-4"
-                    disabled={!taxonomicService.taxonomicService['schema:contactPoint']?.['schema:url']}
-                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['schema:contactPoint']?.['schema:url']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
+                    disabled={!taxonomicService.taxonomicService['schema:url']}
+                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['schema:url']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
                 >
                     <p>
-                        Apply for usage
+                        Go to E-Service
                     </p>
                 </Button>
             </Col>
