@@ -413,8 +413,7 @@
                 "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:identifier']",
                 "title": "Grant Identifier",
                 "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
-                "type": "string",
-                "required": true
+                "type": "string"
             },
             {
                 "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:description']",

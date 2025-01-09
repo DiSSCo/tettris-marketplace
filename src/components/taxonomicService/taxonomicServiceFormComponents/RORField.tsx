@@ -57,11 +57,16 @@ const RORField = (props: Props) => {
         });
 
         /* Construct dropdown items from ROR */
-        const dropdownOptions: DropdownItem[] = [];
+        const dropdownOptions: DropdownItem[] = [
+            {
+                label: 'Select an organisation',
+                value: ''
+            }
+        ];
 
         rors.forEach(ror => {
             dropdownOptions.push({
-                label: ror.names.find((nameObject: { lang: string, value: string }) => nameObject.lang === 'en').value ?? ror.names[0].value,
+                label: ror?.names.find((nameObject: { lang: string, value: string }) => nameObject?.lang === 'en')?.value ?? ror?.names[0].value ?? '',
                 value: ror.id
             });
         })

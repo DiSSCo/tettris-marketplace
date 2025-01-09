@@ -510,10 +510,7 @@
                   "title": "Funding grant",
                   "description": "A description of the service's grant"
                 }
-              },
-              "required": [
-                "schema:identifier"
-              ]
+              }
             },
             "schema:funder": {
               "type": "array",

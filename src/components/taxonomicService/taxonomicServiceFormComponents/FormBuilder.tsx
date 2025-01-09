@@ -80,9 +80,7 @@ const FormBuilder = (props: Props) => {
         }
     } = {};
     const initialFormValues: Dict = {};
-
-    console.log(serviceTypes);
-
+    
     /**
      * Function to flatten a JSON path
      * @returns flattened JSON path string

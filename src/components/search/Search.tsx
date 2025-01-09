@@ -75,8 +75,6 @@ const Search = () => {
                 pageSize: 12,
                 searchFilters
             }).then(({ taxonomicServices }) => {
-                console.log(taxonomicServices);
-
                 if (!taxonomicServices.length) {
                     setNoMoreResults(true);
                 }

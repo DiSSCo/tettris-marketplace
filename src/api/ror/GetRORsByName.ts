@@ -14,13 +14,22 @@ const GetRORsByName = async ({ query }: { query?: string }) => {
     let rors: Dict[] = [];
 
     if (query) {
+        /* Escape special characters in query string */
+        let escapedQuery: string = '';
+
+        for(let index = 0; index < query.length; index++) {
+            const character = query.at(index) as string;
+
+            escapedQuery = escapedQuery.concat(character?.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, `\\${character}`));
+        };
+
         try {
             const result = await axios({
                 baseURL: 'https://api.ror.org/v2',
                 method: 'get',
                 url: '/organizations',
                 params: {
-                    query
+                    query: escapedQuery
                 },
                 responseType: 'json'
             });
