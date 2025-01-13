@@ -124,7 +124,7 @@ const Home = () => {
                             {/* Search Category representation */}
                             <Row className="mt-5 mt-lg-0 px-2 px-lg-0">
                                 <Col lg={{ span: 1 }}
-                                    className="mt-4 p-0"
+                                    className="mt-4 mt-lg-0 p-0"
                                 >
                                     <div className={`${styles.homeCategoryBar} bgc-grey d-none d-lg-block py-3`} />
                                 </Col>
