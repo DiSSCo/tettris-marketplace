@@ -68,7 +68,7 @@ const TaxonomicServiceForm = () => {
                                         </Col>
                                     </Row>
                                     {/* Form content */}
-                                    {completed &&
+                                    {!completed &&
                                         <Row>
                                             <Col>
                                                 <FormBuilder formTemplate={TaxonomicServiceFormJSON}
