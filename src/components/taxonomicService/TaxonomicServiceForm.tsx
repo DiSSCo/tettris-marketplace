@@ -53,8 +53,8 @@ const TaxonomicServiceForm = () => {
                                                 <p className="mt-3 fs-4">
                                                     Use this form to suggest new taxonomic e-services or tools that should be listed in the CETAF Marketplace.
                                                     Please fill in the required fields and add as much additional information as you can.
-                                                    The CETAF secretariat will review and curate your submission before adding it to the marketplace. 
-                                                    To be accepted it needs to be a taxonomic tool or service and it needs to be of sufficient quality. 
+                                                    The CETAF secretariat will review and curate your submission before adding it to the marketplace.
+                                                    To be accepted it needs to be a taxonomic tool or service and it needs to be of sufficient quality.
                                                     Please propose only services that are in production and maintained.
                                                 </p>
                                                 : <p className="mt-3 fs-4">
@@ -68,13 +68,15 @@ const TaxonomicServiceForm = () => {
                                         </Col>
                                     </Row>
                                     {/* Form content */}
-                                    <Row>
-                                        <Col>
-                                            <FormBuilder formTemplate={TaxonomicServiceFormJSON}
-                                                SetCompleted={() => setCompleted(true)}
-                                            />
-                                        </Col>
-                                    </Row>
+                                    {completed &&
+                                        <Row>
+                                            <Col>
+                                                <FormBuilder formTemplate={TaxonomicServiceFormJSON}
+                                                    SetCompleted={() => setCompleted(true)}
+                                                />
+                                            </Col>
+                                        </Row>
+                                    }
                                 </Card>
                             </Col>
                         </Row>
