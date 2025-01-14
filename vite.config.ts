@@ -32,5 +32,12 @@ export default defineConfig({
       exclude: [],
       provider: "v8"
     }
-  }
+  },
+  server: {
+    proxy: {
+      '/codra': {
+        target: 'https://marketplace.cetaf.org/cordra',
+      },
+    },
+  },
 })
