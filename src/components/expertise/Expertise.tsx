@@ -1,5 +1,6 @@
 /* Import Dependencies */
 import { Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 /* Import Components */
 import Header from 'components/general/header/Header';
@@ -10,16 +11,22 @@ import Footer from 'components/general/footer/Footer';
  * Component that renders the Expertise page
  * @returns JSX Component
  */
+
 const Expertise = () => {
+    const navigate = useNavigate();
+    
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
             <Header />
 
             {/* Expertise page body */}
-            <Container fluid className="flex-grow-1 overflow-hidden">
+            <Container fluid className="gradient-tertiary flex-grow-1 overflow-hidden tr-smooth">
                 <Row className="h-100">
                     <Col className="d-flex flex-column justify-content-center align-items-center">
+                        <button className="btn btn-primary mb-3" onClick={() => navigate('/expert-register')}>
+                            Register as a New Expert
+                        </button>
                         <p className="fs-2 fw-lightBold">This page will be implemented later this year</p>
                     </Col>
                 </Row>

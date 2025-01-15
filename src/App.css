@@ -241,6 +241,11 @@ p {
   background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(236, 248, 244, 1) 30%, rgba(198, 235, 222, 1) 60%, rgba(236, 248, 244, 1) 95%, rgba(249, 246, 244, 1) 100%);
 }
 
+.gradient-tertiary {
+  background: rgb(249, 250, 252);
+  background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(200, 235, 245, 1) 30%, rgba(200, 235, 245, 1) 60%, rgba(200, 235, 245, 1) 95%, rgba(249, 246, 244, 1) 100%);
+}
+
 /* Border */
 .b-primary {
   border: 1px solid var(--primary);

@@ -37,6 +37,12 @@ export default defineConfig({
     proxy: {
       '/codra': {
         target: 'https://marketplace.cetaf.org/cordra',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => {
+          console.log('Proxying:', path);
+          return path.replace(/^\/codra/, '');
+        },
       },
     },
   },

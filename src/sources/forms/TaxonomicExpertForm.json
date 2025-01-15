@@ -1,0 +1,14 @@
+{
+    "taxonomicExpert": {
+        "title": "Taxonomic Expert",
+        "type": "object",
+        "fields": [
+            {
+                "jsonPath": "$['schema:service']['schema:name']",
+                "title": "Full Name",
+                "type": "string",
+                "required": true
+            }
+        ]
+    }
+}
