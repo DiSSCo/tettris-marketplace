@@ -89,7 +89,8 @@ export type FormField = {
     mapping?: {
         [option: string]: string
     } | string,
-    required?: boolean
+    required?: boolean,
+    maxChars?: number
 };
 
 /* Type for a Dropdown item */
