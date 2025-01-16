@@ -6,7 +6,7 @@
             {
                 "jsonPath": "$['schema:service']['schema:serviceType']",
                 "title": "Service Type",
-                "description": "A type that defines the kind of taxonomic service, select Service inventory for a website that contains multiple taxonomic services of the same sort, like multiple identification keys",
+                "description": "A type that defines the kind of taxonomic service, select service inventory for a website that contains multiple taxonomic services of the same sort, like multiple identification keys",
                 "type": "multi-select",
                 "options": [
                     "AI training dataset",
