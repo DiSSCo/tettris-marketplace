@@ -6,7 +6,7 @@
             {
                 "jsonPath": "$['schema:service']['schema:serviceType']",
                 "title": "Service Type",
-                "description": "A type that defines the kind of taxonomic service",
+                "description": "A type that defines the kind of taxonomic service, select Service inventory for a website that contains multiple taxonomic services of the same sort, like multiple identification keys",
                 "type": "multi-select",
                 "options": [
                     "AI training dataset",
@@ -29,20 +29,23 @@
                 "title": "Name",
                 "description": "The preferred name of the service (can be in any language)",
                 "type": "string",
-                "required": true
+                "required": true,
+                "maxChars": 75
             },
             {
                 "jsonPath": "$['schema:service']['schema:description']",
                 "title": "Description",
                 "description": "A description of the service (english)",
                 "type": "text",
-                "required": true
+                "required": true,
+                "maxChars": 2000
             },
             {
                 "jsonPath": "$['schema:service']['schema:slogan']",
                 "title": "Slogan",
                 "description": "A slogan or motto associated with the Service (english)",
-                "type": "string"
+                "type": "string",
+                "maxChars": 200
             },
             {
                 "jsonPath": "$['schema:service']['schema:logo']",
@@ -299,7 +302,16 @@
                 "jsonPath": "$['schema:additionalProperty'][2]",
                 "title": "Payment Model",
                 "description": "URL to webpage with the supported payment models and restrictions that apply to the Resource",
-                "type": "string"
+                "type": "select",
+                "options": [
+                    "Free",
+                    "License-Based payment",
+                    "Usage-Based payment",
+                    "Freemium",
+                    "Ad-Based",
+                    "Value-Based or Voluntary payment",
+                    "Hybrid model"
+                ]
             }
         ]
     },
@@ -405,7 +417,7 @@
         "fields": [
             {
                 "jsonPath": "$['schema:fundingScheme']['schema:award']",
-                "title": "Award",
+                "title": "Award/Grant",
                 "description": "An award won by or for this service",
                 "type": "string"
             },
