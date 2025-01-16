@@ -10,15 +10,14 @@ import { FormField, Dict } from "app/Types";
 /* Import Components */
 import FormFieldTitle from './FormFieldTitle';
 
-
 /* Props Type */
 type Props = {
     field: FormField,
-    values: Dict
+    values: Dict,
     SetFieldValue: Function,
-    SetServiceTypes?: Function
+    SetServiceTypes?: Function,
+    maxSelections?: number
 };
-
 
 /**
  * Component that renders a select field for multi selection
@@ -26,11 +25,11 @@ type Props = {
  * @param values The current values object of the form
  * @param SetFieldValue Function to set the value of a field in the form
  * @param SetServiceTypes Function to set the service types state
+ * @param maxSelections Maximum number of selections allowed
  * @returns JSX Component
  */
 const MultiSelectField = (props: Props) => {
-    const { field, values, SetFieldValue, SetServiceTypes } = props;
-
+    const { field, values, SetFieldValue, SetServiceTypes, maxSelections } = props;
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
     const selectItems: {
@@ -79,6 +78,10 @@ const MultiSelectField = (props: Props) => {
                     dropdownOptions.forEach(dropdownOption => {
                         valuesArray.push(dropdownOption.value);
                     });
+
+                    if (maxSelections && valuesArray.length > maxSelections) {
+                        valuesArray.splice(maxSelections);
+                    }
 
                     SetFieldValue(jsonPath, valuesArray);
                     SetServiceTypes?.(valuesArray);
