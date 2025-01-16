@@ -1000,7 +1000,7 @@
                 "required": false
             },
             {
-                "jsonPath": "$['schema:EmploymentStatus']",
+                "jsonPath": "$['schema:education']['schema:EmploymentStatus']",
                 "title": "Employment Status",
                 "description": "Provide your current employment status. This information helps with statistical analysis and gives users of the marketplace insight into the professional experience of the expert. You can select up to two options.",
                 "type": "multi-select",
@@ -1031,6 +1031,30 @@
                 ],
                 "required": false,
                 "maxSelections": 2
+              },
+              {
+                "jsonPath": "$['schema:education']['schema:TaxonomyExperience']",
+                "title": "Taxonomy Experience",
+                "description": "Select your years of experience in taxonomy. This helps gauge your professional background in the field.",
+                "type": "select",
+                "options": [
+                  "0 - 5 years",
+                  "6 - 10 years",
+                  "11 - 15 years",
+                  "16 - 20 years",
+                  "21 - 25 years",
+                  "26 - 30 years",
+                  "> 30 years"
+                ],
+                "required": false
+              },
+              {
+                "jsonPath": "$['schema:education']['schema:PublicationNumber']",
+                "title": "Publication Number",
+                "description": "Enter the number of publications related to taxonomy. If you don’t have any publications, enter 0.",
+                "type": "number",
+                "minimum": 0,
+                "required": false
               }
         ]
     },

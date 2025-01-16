@@ -90,6 +90,7 @@ export type FormField = {
         [option: string]: string
     } | string,
     required?: boolean
+    maxSelections?: number
 };
 
 /* Type for a Dropdown item */
