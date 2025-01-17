@@ -70,8 +70,11 @@ const FiltersBar = (props: Props) => {
     const serviceTypeClass = classNames({
         'tr-smooth': true,
         'tc-primary': !searchParams.get('serviceType'),
-        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'tc-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
     });
+    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
+
 
     return (
         <Formik initialValues={{
@@ -140,7 +143,7 @@ const FiltersBar = (props: Props) => {
                                 className="d-none d-lg-block"
                             >
                                 <Button type="submit"
-                                    variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                    variant={variant}
                                 >
                                     <p>Search</p>
                                 </Button>

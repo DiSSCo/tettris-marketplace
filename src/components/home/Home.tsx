@@ -165,7 +165,7 @@ const Home = () => {
                                             <HomeCategory title="Expertise Taxonomists"
                                                 subTitle="Go engage"
                                                 count={counts.taxonomicExpertise}
-                                                link="/expertise"
+                                                link="/search?serviceType=taxonomicExpert"
                                                 color="tertiary"
                                             />
                                         </Col>

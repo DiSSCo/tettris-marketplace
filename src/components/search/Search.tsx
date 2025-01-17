@@ -85,7 +85,8 @@ const Search = () => {
     /* ClassNames */
     const mainBodyClass = classNames({
         'gradient-primary': true,
-        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'gradient-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
     });
 
     const searchResultsClassScrollBlock = classNames({
