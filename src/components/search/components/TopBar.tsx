@@ -49,7 +49,7 @@ const TopBar = () => {
     }
     else if (searchParams.get('serviceType') === 'taxonomicExpert') {
         textButton = "Register your expertise"
-        path = "/expert-register"
+        path = "/te/registerYourExpertise"
     }
     const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
 

@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Row, Col } from 'react-bootstrap';
-import { useLocation, useSearchParams, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 /* Import Hooks */
 import { useAppSelector } from 'app/Hooks';
@@ -11,6 +11,7 @@ import { getTaxonomicService } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Icons */
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
 
 
 /* Bread crumb type */
@@ -27,7 +28,6 @@ type BreadCrumb = {
 const BreadCrumbs = () => {
     /* Hooks */
     const location = useLocation();
-    const [searchParams] = useSearchParams();
 
     /* Base variables */
     const taxonomicService = useAppSelector(getTaxonomicService);
@@ -66,8 +66,25 @@ const BreadCrumbs = () => {
                 }
 
                 break;
+            }  case 'te': {
+                breadCrumbs.push({
+                    crumb: 'Taxonomic Experts',
+                    path: '/search?serviceType=taxonomicExpert'
+                });
+
+                if (location.pathname.includes('registerYourExpertise')) {
+                    breadCrumbs.push({
+                        crumb: 'Register your expertise'
+                    });
+                }
             }
         };
+    });
+
+    const serviceTypeClass = classNames({
+        'tc-primary': location.pathname.includes('/ts'),
+        'tc-tertiary': location.pathname.includes('/te'),
+        'tc-secondary': !location.pathname.includes('/ts') && !location.pathname.includes('/te')
     });
 
     return (
@@ -82,16 +99,16 @@ const BreadCrumbs = () => {
                         {/* Add arrow in between crumbs if index is greater than zero */}
                         {(index > 0) &&
                             <FontAwesomeIcon icon={faChevronRight}
-                                className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-4 fw-lightBold pe-2`}
+                                className={`${serviceTypeClass} fs-4 fw-lightBold pe-2`}
                             />
                         }
 
                         {/* Bread crumb */}
                         {breadCrumb.path ?
                             <Link to={breadCrumb.path}>
-                                <span className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-5 fs-lg-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
+                                <span className={`${serviceTypeClass} fs-5 fs-lg-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
                             </Link>
-                            : <span className={`${searchParams.get('serviceType') === 'referenceCollection' ? 'tc-secondary' : 'tc-primary'} fs-5 fs-lg-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
+                            : <span className={`${serviceTypeClass} fs-5 fs-lg-4 fw-lightBold pe-2`}>{breadCrumb.crumb}</span>
                         }
                     </Col>
                 ))}

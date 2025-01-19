@@ -16,7 +16,7 @@ import FormBuilder from 'components/taxonomicService/taxonomicServiceFormCompone
  * Component that renders the taxonomic service form
  * @returns JSX Component
  */
-const ExpertForm = () => {
+const TaxonomicExpertForm = () => {
     /* Base variables */
     const [completed, setCompleted] = useState<boolean>(false);
 
@@ -90,4 +90,4 @@ const ExpertForm = () => {
     );
 };
 
-export default ExpertForm;
+export default TaxonomicExpertForm;

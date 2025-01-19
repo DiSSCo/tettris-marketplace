@@ -2,7 +2,7 @@
 import { Route } from 'react-router-dom';
 
 /* Import Routes */
-import ExpertiseRoutes from 'components/expertise/Routes';
+import ExpertiseRoutes from 'components/taxonomicExpert/Routes';
 import HomeRoutes from 'components/home/Routes';
 import NotFound404 from 'components/general/NotFound404/NotFound404';
 import SearchRoutes from 'components/search/Routes';
