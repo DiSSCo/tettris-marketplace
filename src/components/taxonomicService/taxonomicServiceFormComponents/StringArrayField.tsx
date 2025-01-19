@@ -36,6 +36,9 @@ const StringArrayField = (props: Props) => {
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
+    /* Determine color */
+    const color = window.location.pathname.includes('/te') ? 'tc-tertiary' :
+    window.location.pathname.includes('/tc') ? 'tc-secondary' : 'tc-primary';
 
     /* Class Names */
     const formFieldClass = classNames({
@@ -77,7 +80,7 @@ const StringArrayField = (props: Props) => {
                                     className="px-0 py-0"
                                     OnClick={() => push('')}
                                 >
-                                    <p className="tc-primary">
+                                    <p className={color}>
                                         Add field
                                     </p>
                                 </Button>

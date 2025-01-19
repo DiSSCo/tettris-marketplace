@@ -250,6 +250,12 @@ p {
 .b-primary {
   border: 1px solid var(--primary);
 }
+.b-secondary {
+  border: 1px solid var(--secondary);
+}
+.b-tertiary {
+  border: 1px solid var(--tertiary);
+}
 
 .b-grey {
   border: 1px solid var(--grey);

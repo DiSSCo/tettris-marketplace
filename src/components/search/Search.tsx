@@ -82,6 +82,7 @@ const Search = () => {
         }
     }, [paginator]);
 
+    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
     /* ClassNames */
     const mainBodyClass = classNames({
         'gradient-primary': true,
@@ -153,7 +154,7 @@ const Search = () => {
                                     <Col className="d-flex justify-content-center">
                                         {(!paginator.loading && !noMoreResults && paginator.totalRecords > 0) &&
                                             <Button type="button"
-                                                variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                                variant={variant}
                                                 OnClick={() => paginator.Next?.()}
                                             >
                                                 Load more

@@ -22,8 +22,11 @@ const BooleanField = (props: Props) => {
     const { field } = props;
 
     /* Class Names */
+    /* Determine color */
+    const color = window.location.pathname.includes('/te') ? 'b-tertiary' :
+    window.location.pathname.includes('/tc') ? 'b-secondary' : 'b-primary';
     const formFieldClass = classNames({
-        'b-primary': field.required
+        [color]: field.required
     });
 
     return (

@@ -506,7 +506,7 @@
                     "tk": "Turkish",
                     "uk": "Ukranian"
                 },
-                "required": true
+                "required": false
             },
             {
                 "jsonPath": "$['schema:personal']['schema:Age']",

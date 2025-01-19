@@ -60,6 +60,10 @@ const FormBuilder = (props: Props) => {
     });
 
     /* Base variables */
+    /* Determine color */
+    const color = window.location.pathname.includes('/te') ? 'tertiary' :
+    window.location.pathname.includes('/tc') ? 'secondary' : 'primary';
+
     const [serviceTypes, setServiceTypes] = useState<string[] | undefined>();
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>();
@@ -392,7 +396,7 @@ const FormBuilder = (props: Props) => {
                                 <Row>
                                     <Col lg="auto">
                                         <Button type="submit"
-                                            variant="primary"
+                                            variant={color}
                                             disabled={captchaHook.captchaStatus.solution === null}
                                         >
                                             <p>
