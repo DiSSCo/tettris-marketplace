@@ -1,21 +1,20 @@
 /* Import Dependencies */
 import axios from 'axios';
 import { format } from 'date-fns';
-import { isEmpty } from 'lodash';
+// import { isEmpty } from 'lodash';
 
 /* Import Types */
 import { TaxonomicService, CordraResultArray, Dict } from 'app/Types';
 
 /* Import Sources */
-import TaxonomicServiceFilters from 'sources/searchFilters/TaxonomicServiceFilters.json';
-
+// import TaxonomicExpertFilters from 'sources/searchFilters/TaxonomicExpertFilters.json';
 
 /**
  * Function that fetches the latest taxonomic services from the API
  * @param pageNumber The number of the current page of records
  * @returns An array of Taxonomic Service instances or an empty array
  */
-const GetTaxonomicExperts = async ({ pageNumber, pageSize, searchFilters }: { pageNumber: number, pageSize: number, searchFilters: { [searchFilter: string]: string } }) => {
+const GetTaxonomicExperts = async ({ pageNumber, pageSize, /*searchFilters*/ }: { pageNumber: number, pageSize: number, searchFilters: { [searchFilter: string]: string } }) => {
     /* Base variables */
     let taxonomicServices: TaxonomicService[] = [];
     let metadata: Dict = {};
@@ -24,47 +23,37 @@ const GetTaxonomicExperts = async ({ pageNumber, pageSize, searchFilters }: { pa
     let filters: string = '';
 
     /* Filter for the object type to be a taxonomic service */
-    filters = filters.concat('/taxonomicService/@type:TaxonomicService');
+    filters = filters.concat('/taxonomicExpert/@type:TaxonomicExpert');
 
     /* Filter for state to be accepted */
-    filters = filters.concat(' AND /taxonomicService/schema\\:status:accepted');
+    // filters = filters.concat(' AND /taxonomicService/schema\\:status:accepted');
 
-    if (!isEmpty(searchFilters)) {
-        Object.entries(searchFilters).map(([key, value]) => {
-            const alias: string | undefined = TaxonomicServiceFilters.taxonomicServiceFilters.find(taxonomicSearchFilter => taxonomicSearchFilter.name === key)?.alias;
+    // if (!isEmpty(searchFilters)) {
+    //     Object.entries(searchFilters).map(([key, value]) => {
+    //         const alias: string | undefined = TaxonomicExpertFilters.taxonomicExpertFilters.find(taxonomicSearchFilter => taxonomicSearchFilter.name === key)?.alias;
 
-            switch (key) {
-                case 'language':
-                case 'topicDiscipline':
-                    /* Set array search for language */
-                    filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
+    //         switch (key) {
+    //             case 'language':
+    //             case 'query':
+    //                 /* Set query to name search */
+    //                 filters = filters.concat(` AND ` + `(` + `/TaxonomicExpert/schema\\:Service/schema\\:name:` + `${value}*`
+    //                     + ` OR ` + `/TaxonomicExpert/schema\\:taxonomicRange/_:` + `${value}*`
+    //                     + ` OR ` + `/TaxonomicExpert/ods\\:topicDiscipline/_:` + `${value}*`
+    //                     + `)`
+    //                 );
 
-                    break;
-                case 'query':
-                    /* Set query to name search */
-                    filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:Service/schema\\:name:` + `${value}*`
-                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`
-                        + ` OR ` + `/taxonomicService/ods\\:topicDiscipline/_:` + `${value}*`
-                        + `)`
-                    );
+    //                 break;
+    //             case 'serviceType':
+    //                 /* Set service type search */
+    //                 filters = filters.concat(` AND ` + `/TaxonomicExpert/schema\\:Service/schema\\:serviceType:` + `${value}`);
 
-                    break;
-                case 'taxonomicRange':
-                    /* Set taxonomic range search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`);
-
-                    break;
-                case 'serviceType':
-                    /* Set service type search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:Service/schema\\:serviceType:` + `${value}`);
-
-                    break;
-                default:
-                    /* Get field alias from taxonomic service filters source */
-                    filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replaceAll(':', '\\:')}:` + `${value}`);
-            };
-        });
-    };
+    //                 break;
+    //             default:
+    //                 /* Get field alias from taxonomic service filters source */
+    //                 filters = filters.concat(` AND ` + `/TaxonomicExpert/${(alias ?? key).replaceAll(':', '\\:')}:` + `${value}`);
+    //         };
+    //     });
+    // };
 
     try {
         const result = await axios({
@@ -78,11 +67,11 @@ const GetTaxonomicExperts = async ({ pageNumber, pageSize, searchFilters }: { pa
             },
             responseType: 'json'
         });
-
+        console.log(result.data);
         /* Get result data from JSON */
         const data: CordraResultArray = result.data;
 
-        /* Set Taxonomic Services */
+        /* Set Taxonomic Expert */
         data.results.forEach((dataFragment) => {
             const taxonomicService = dataFragment.attributes.content as TaxonomicService;
 

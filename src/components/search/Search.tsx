@@ -16,6 +16,7 @@ import { TaxonomicService } from 'app/Types';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
+import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from 'components/general/header/Header';
@@ -42,7 +43,7 @@ const Search = () => {
             dispatch(setTaxonomicServices([]));
             setNoMoreResults(false);
         },
-        Method: GetTaxonomicServices,
+        Method: searchParams.get('serviceType') === 'taxonomicExpert' ? GetTaxonomicExperts : GetTaxonomicServices,
         Handler: (taxonomicServices: TaxonomicService[]) => {
             /* On receival of a new page with records and add them to the total */
             dispatch(concatToTaxonomicServices(taxonomicServices));
@@ -56,7 +57,7 @@ const Search = () => {
             dispatch(setIsApiOnline(false));
         },
         pageSize: 12,
-        resultKey: 'taxonomicServices',
+        resultKey: searchParams.get('serviceType') === 'taxonomicExpert' ? 'taxonomicExperts' : 'taxonomicServices',
         allowSearchParams: true
     });
 
@@ -70,15 +71,28 @@ const Search = () => {
                 }
             }, {});
 
-            GetTaxonomicServices({
-                pageNumber: paginator.currentPage + 1,
-                pageSize: 12,
-                searchFilters
-            }).then(({ taxonomicServices }) => {
-                if (!taxonomicServices.length) {
-                    setNoMoreResults(true);
-                }
-            });
+            if (searchParams.get('serviceType') === 'taxonomicExpert') {
+                GetTaxonomicExperts({
+                    pageNumber: paginator.currentPage + 1,
+                    pageSize: 12,
+                    searchFilters
+                }).then(({ taxonomicServices }) => {
+                    if (!taxonomicServices.length) {
+                        setNoMoreResults(true);
+                    }
+                });
+            }
+            else {
+                GetTaxonomicServices({
+                    pageNumber: paginator.currentPage + 1,
+                    pageSize: 12,
+                    searchFilters
+                }).then(({ taxonomicServices }) => {
+                    if (!taxonomicServices.length) {
+                        setNoMoreResults(true);
+                    }
+                });
+            }
         }
     }, [paginator]);
 
