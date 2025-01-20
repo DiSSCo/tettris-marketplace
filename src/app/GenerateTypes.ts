@@ -9,5 +9,9 @@ const TaxonomicService = async () => {
     writeFileSync(resolve(__dirname, './types', 'TaxonomicService.d.ts'), await compileFromFile(resolve(__dirname, '../sources/dataModel', 'taxonomic-service.json'), {}));
 }
 
+const TaxonomicExpert = async () => {
+    writeFileSync(resolve(__dirname, './types', 'TaxonomicExpert.d.ts'), await compileFromFile(resolve(__dirname, '../sources/dataModel', 'taxonomic-expert.json'), {}));
+}
 
 TaxonomicService();
+TaxonomicExpert();
