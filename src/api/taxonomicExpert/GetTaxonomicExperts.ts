@@ -93,8 +93,8 @@ const GetTaxonomicExperts = async ({ pageNumber, pageSize, /*searchFilters*/ }: 
     };
 
     return {
-        // taxonomicExperts,
-        // metadata
+        taxonomicExperts,
+        metadata
     };
 }
 

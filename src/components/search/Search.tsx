@@ -10,9 +10,10 @@ import { usePaginator, useAppDispatch } from 'app/Hooks';
 /* Import Store */
 import { setIsApiOnline } from 'redux-store/AppStore';
 import { setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
+import { setTaxonomicExperts, concatToTaxonomicExperts } from 'redux-store/TaxonomicExpertSlice';
 
 /* Import Types */
-import { TaxonomicService } from 'app/Types';
+import { TaxonomicService, TaxonomicExpert } from 'app/Types';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
@@ -40,11 +41,19 @@ const Search = () => {
     /* Base variables */
     const paginator = usePaginator({
         Initiate: () => {
-            dispatch(setTaxonomicServices([]));
+            searchParams.get('serviceType') === 'taxonomicExpert' ? dispatch(setTaxonomicExperts([])) : dispatch(setTaxonomicServices([]));
             setNoMoreResults(false);
         },
         Method: searchParams.get('serviceType') === 'taxonomicExpert' ? GetTaxonomicExperts : GetTaxonomicServices,
-        Handler: (taxonomicServices: TaxonomicService[]) => {
+        Handler: searchParams.get('serviceType') === 'taxonomicExpert' ? (taxonomicExperts: TaxonomicExpert[]) => {
+            /* On receival of a new page with records and add them to the total */
+            dispatch(concatToTaxonomicExperts(taxonomicExperts));
+            dispatch(setIsApiOnline(true))
+
+            if (!taxonomicExperts.length) {
+                setNoMoreResults(true);
+            }
+        } : (taxonomicServices: TaxonomicService[]) => {
             /* On receival of a new page with records and add them to the total */
             dispatch(concatToTaxonomicServices(taxonomicServices));
             dispatch(setIsApiOnline(true))
@@ -76,8 +85,8 @@ const Search = () => {
                     pageNumber: paginator.currentPage + 1,
                     pageSize: 12,
                     searchFilters
-                }).then(({ taxonomicServices }) => {
-                    if (!taxonomicServices.length) {
+                }).then(({ taxonomicExperts }) => {
+                    if (!taxonomicExperts.length) {
                         setNoMoreResults(true);
                     }
                 });

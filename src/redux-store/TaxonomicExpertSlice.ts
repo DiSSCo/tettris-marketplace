@@ -3,45 +3,45 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'app/Store';
 
 /* Import Types */
-import { TaxonomicService } from 'app/Types';
+import { TaxonomicExpert } from 'app/Types';
 
 
-export interface TaxonomicServiceState {
-    taxonomicService?: TaxonomicService,
-    taxonomicServices: TaxonomicService[]
+export interface TaxonomicExpertState {
+    taxonomicExpert?: TaxonomicExpert,
+    taxonomicExperts: TaxonomicExpert[]
 };
 
-const initialState: TaxonomicServiceState = {
-    taxonomicService: undefined,
-    taxonomicServices: []
+const initialState: TaxonomicExpertState = {
+    taxonomicExpert: undefined,
+    taxonomicExperts: []
 };
 
-export const TaxonomicServiceSlice = createSlice({
-    name: 'taxonomicService',
+export const TaxonomicExpertSlice = createSlice({
+    name: 'taxonomicExpert',
     initialState,
     reducers: {
-        setTaxonomicService: (state, action: PayloadAction<TaxonomicService>) => {
-            state.taxonomicService = action.payload;
+        setTaxonomicExpert: (state, action: PayloadAction<TaxonomicExpert>) => {
+            state.taxonomicExpert = action.payload;
         },
-        setTaxonomicServices: (state, action: PayloadAction<TaxonomicService[]>) => {
-            state.taxonomicServices = action.payload;
+        setTaxonomicExperts: (state, action: PayloadAction<TaxonomicExpert[]>) => {
+            state.taxonomicExperts = action.payload;
         },
-        concatToTaxonomicServices: (state, action: PayloadAction<TaxonomicService[]>) => {
-            state.taxonomicServices = state.taxonomicServices.concat(action.payload);
-            state.taxonomicServices.sort((a, b) => a < b ? 1 : 0);
+        concatToTaxonomicExperts: (state, action: PayloadAction<TaxonomicExpert[]>) => {
+            state.taxonomicExperts = state.taxonomicExperts.concat(action.payload);
+            state.taxonomicExperts.sort((a, b) => a < b ? 1 : 0);
         }
     }
 })
 
 /* Action Creators */
 export const {
-    setTaxonomicService,
-    setTaxonomicServices,
-    concatToTaxonomicServices
-} = TaxonomicServiceSlice.actions;
+    setTaxonomicExpert,
+    setTaxonomicExperts,
+    concatToTaxonomicExperts
+} = TaxonomicExpertSlice.actions;
 
 /* Connect with Root State */
-export const getTaxonomicService = (state: RootState) => state.taxonomicService.taxonomicService;
-export const getTaxonomicServices = (state: RootState) => state.taxonomicService.taxonomicServices;
+export const getTaxonomicExpert = (state: RootState) => state.taxonomicExpert.taxonomicExpert;
+export const getTaxonomicExperts = (state: RootState) => state.taxonomicExpert.taxonomicExperts;
 
-export default TaxonomicServiceSlice.reducer;
+export default TaxonomicExpertSlice.reducer;
