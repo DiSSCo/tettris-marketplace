@@ -157,7 +157,7 @@ const SearchResult = (props: Props) => {
             dispatch(setTaxonomicExpert(taxonomicExpert));
 
             /* Navigate to the taxonomic service page */
-            navigate(`/ts/${taxonomicExpert.taxonomicExpert['@id'].replace(import.meta.env.VITE_HANDLE_URL as string, '')}`);
+            navigate(`/te/${taxonomicExpert.taxonomicExpert['@id'].replace(import.meta.env.VITE_HANDLE_URL as string, '')}`);
         }
         return (<div className={`${styles.searchResult} w-100 bgc-white mt-lg-1 pt-3 pb-2 px-3`}>
             <button type="button"
