@@ -1,6 +1,6 @@
 /* Import Types */
 import { TaxonomicService as TaxonomicServiceType } from "./types/TaxonomicService";
-
+import { TaxonomicExpert as TaxonomicExpertType } from "./types/TaxonomicExpert";
 
 /* General type for a dictionary */
 export type Dict = {
@@ -33,6 +33,11 @@ export type CordraResultArray = {
 /* Type for a Taxonomic Service */
 export type TaxonomicService = {
     taxonomicService: TaxonomicServiceType
+}
+
+/* Type for a Taxonomic Expert */
+export type TaxonomicExpert = {
+    taxonomicExpert: TaxonomicExpertType
 }
 
 /* Type for an Author */

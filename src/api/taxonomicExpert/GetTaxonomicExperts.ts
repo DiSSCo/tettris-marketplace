@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 // import { isEmpty } from 'lodash';
 
 /* Import Types */
-import { TaxonomicService, CordraResultArray, Dict } from 'app/Types';
+import { TaxonomicExpert, CordraResultArray, Dict } from 'app/Types';
 
 /* Import Sources */
 // import TaxonomicExpertFilters from 'sources/searchFilters/TaxonomicExpertFilters.json';
@@ -16,13 +16,13 @@ import { TaxonomicService, CordraResultArray, Dict } from 'app/Types';
  */
 const GetTaxonomicExperts = async ({ pageNumber, pageSize, /*searchFilters*/ }: { pageNumber: number, pageSize: number, searchFilters: { [searchFilter: string]: string } }) => {
     /* Base variables */
-    let taxonomicServices: TaxonomicService[] = [];
+    let taxonomicExperts: TaxonomicExpert[] = [];
     let metadata: Dict = {};
 
     /* Destructure search filters into string */
     let filters: string = '';
 
-    /* Filter for the object type to be a taxonomic service */
+    /* Filter for the object type to be a taxonomic expert */
     filters = filters.concat('/taxonomicExpert/@type:TaxonomicExpert');
 
     /* Filter for state to be accepted */
@@ -67,20 +67,19 @@ const GetTaxonomicExperts = async ({ pageNumber, pageSize, /*searchFilters*/ }: 
             },
             responseType: 'json'
         });
-        console.log(result.data);
         /* Get result data from JSON */
         const data: CordraResultArray = result.data;
 
         /* Set Taxonomic Expert */
         data.results.forEach((dataFragment) => {
-            const taxonomicService = dataFragment.attributes.content as TaxonomicService;
+            const taxonomicExpert = dataFragment.attributes.content as TaxonomicExpert;
 
             /* Set created and modified */
-            taxonomicService.taxonomicService['schema:dateCreated'] = format(new Date(dataFragment.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
-            taxonomicService.taxonomicService['schema:dateModified'] = format(new Date(dataFragment.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            taxonomicExpert.taxonomicExpert['schema:dateCreated'] = format(new Date(dataFragment.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            taxonomicExpert.taxonomicExpert['schema:dateModified'] = format(new Date(dataFragment.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 
             /* Push to taxonomic services array */
-            taxonomicServices.push(taxonomicService);
+            taxonomicExperts.push(taxonomicExpert);
         });
 
         /* Set metadata */
@@ -94,8 +93,8 @@ const GetTaxonomicExperts = async ({ pageNumber, pageSize, /*searchFilters*/ }: 
     };
 
     return {
-        taxonomicServices,
-        metadata
+        // taxonomicExperts,
+        // metadata
     };
 }
 

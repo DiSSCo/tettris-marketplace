@@ -3,7 +3,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 
 /* Import Types */
-import { TaxonomicService, CordraResult } from 'app/Types';
+import { TaxonomicExpert, CordraResult } from 'app/Types';
 
 
 /**
@@ -12,17 +12,17 @@ import { TaxonomicService, CordraResult } from 'app/Types';
  * @returns An instance of Taxonomic Service or undefined
  */
 const GetTaxonomicExpert = async ({ handle }: { handle?: string }) => {
-    let taxonomicService: TaxonomicService | undefined;
+    let taxonomicExpert: TaxonomicExpert | undefined;
 
     if (handle) {
-        const taxonomicServiceID: string = handle.replace(import.meta.env.VITE_HANDLE_URL as string, '');
+        const taxonomicExpertID: string = handle.replace(import.meta.env.VITE_HANDLE_URL as string, '');
 
         try {
             const result = await axios({
                 method: 'get',
                 url: '/Op.Retrieve',
                 params: {
-                    targetId: taxonomicServiceID
+                    targetId: taxonomicExpertID
                 },
                 responseType: 'json'
             });
@@ -31,16 +31,16 @@ const GetTaxonomicExpert = async ({ handle }: { handle?: string }) => {
             const data: CordraResult = result.data;
 
             /* Set Taxonomic Service */
-            taxonomicService = data.attributes.content as TaxonomicService;
+            taxonomicExpert = data.attributes.content as TaxonomicExpert;
 
-            /* Check if Taxonomic Service is published, otherwise throw error */
-            if (taxonomicService.taxonomicService['schema:status'] !== 'accepted') {
-                throw (new Error('This Taxonomic Service has not been published yet', { cause: 200 }));
-            };
+            // /* Check if Taxonomic Service is published, otherwise throw error */
+            // if (taxonomicService.taxonomicService['schema:status'] !== 'accepted') {
+            //     throw (new Error('This Taxonomic Service has not been published yet', { cause: 200 }));
+            // };
 
             /* Set created and modified */
-            taxonomicService.taxonomicService['schema:dateCreated'] = format(new Date(data.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
-            taxonomicService.taxonomicService['schema:dateModified'] = format(new Date(data.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            taxonomicExpert.taxonomicExpert['schema:dateCreated'] = format(new Date(data.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            taxonomicExpert.taxonomicExpert['schema:dateModified'] = format(new Date(data.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
         } catch (error) {
             console.error(error);
 
@@ -48,7 +48,7 @@ const GetTaxonomicExpert = async ({ handle }: { handle?: string }) => {
         }
     };
 
-    return taxonomicService;
+    return taxonomicExpert;
 }
 
 export default GetTaxonomicExpert;
