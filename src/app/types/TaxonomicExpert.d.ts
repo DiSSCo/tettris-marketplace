@@ -25,5 +25,38 @@ export interface TaxonomicExpert {
    * The email of the Taxonomic Expert
    */
   email?: string;
+  /**
+   * A short description of the Taxonomic Expert
+   */
+  topDescription?: string;
+  /**
+   * Languages the user is proficient or fluent in.
+   */
+  languages?: (
+    | "English (EN)"
+    | "French (FR)"
+    | "Dutch (NL)"
+    | "German (DE)"
+    | "Spanish (ES)"
+    | "Italian (IT)"
+    | "Portuguese (PT)"
+    | "Polish (PL)"
+    | "Swedish (SV)"
+    | "Czech (CS)"
+    | "Hungarian (HU)"
+    | "Romanian (RO)"
+    | "Greek (EL)"
+    | "Bulgarian (BG)"
+    | "Slovak (SK)"
+    | "Finnish (FI)"
+    | "Danish (DA)"
+    | "Lithuanian (LT)"
+    | "Latvian (LV)"
+    | "Estonian (ET)"
+    | "Slovenian (SL)"
+    | "Croatian (HR)"
+    | "Maltese (MT)"
+    | "Irish (GA)"
+  )[];
   [k: string]: unknown;
 }

@@ -153,10 +153,10 @@ const SearchResult = (props: Props) => {
          * @param taxonomicExpert The selected taxonomic Expert
          */
         const SelectTaxonomicExpert = (taxonomicExpert: TaxonomicExpert) => {
-            /* Dispatch taxonomic service to store */
+            /* Dispatch taxonomic expert to store */
             dispatch(setTaxonomicExpert(taxonomicExpert));
 
-            /* Navigate to the taxonomic service page */
+            /* Navigate to the taxonomic expert page */
             navigate(`/te/${taxonomicExpert.taxonomicExpert['@id'].replace(import.meta.env.VITE_HANDLE_URL as string, '')}`);
         }
         return (<div className={`${styles.searchResult} w-100 bgc-white mt-lg-1 pt-3 pb-2 px-3`}>
@@ -171,13 +171,12 @@ const SearchResult = (props: Props) => {
                         <Row>
                             <Col xs lg={{ span: (window.innerWidth < 768) ? 9 : 12 }}>
                                 <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicExpert.taxonomicExpert['name']}</p>
+                            </Col>        
+                            <Col xs="auto" lg={{ span: 3 }}
+                                className={'d-lg-block'}
+                            >
+                                <p className="fw-bold fs-5 fs-lg-4 text-end textOverflow">{taxonomicExpert.taxonomicExpert['languages']?.join(' / ').toUpperCase()}</p>
                             </Col>
-                            
-                                {/* <Col xs="auto" lg={{ span: 3 }}
-                                    className={'d-lg-block'}
-                                >
-                                    <p className="fw-bold fs-5 fs-lg-4 text-end textOverflow">{taxonomicExpert.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
-                                </Col> */}
                             
                         </Row>
                         {/* Taxomomic range */}
@@ -187,11 +186,11 @@ const SearchResult = (props: Props) => {
                             </Col>
                         </Row> */}
                         {/* Description */}
-                        {/* <Row className='flex-grow-1 my-2'>
+                        <Row className='flex-grow-1 my-2'>
                             <Col>
-                                <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicService.taxonomicService['schema:service']['schema:description']}</p>
+                                <p className={`${styles.searchResultDescription} h-100 fs-4`}>{taxonomicExpert.taxonomicExpert['topDescription']}</p>
                             </Col>
-                        </Row> */}
+                        </Row>
                         {/* Service Type and Publishing Date if preview image is not present */}
                         {/* <Row>
                             <Col>

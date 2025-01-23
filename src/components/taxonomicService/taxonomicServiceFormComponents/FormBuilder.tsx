@@ -11,6 +11,7 @@ import { FormField, Dict } from "app/Types";
 
 /* Import API */
 import InsertTaxonomicService from "api/taxonomicService/InsertTaxonomicService";
+import InsertTaxonomicExpert from "api/taxonomicExpert/InsertTaxonomicExpert";
 
 /* Import Components */
 import BooleanField from "./BooleanField";
@@ -320,22 +321,41 @@ const FormBuilder = (props: Props) => {
                             };
                         };
 
-                        let taxonomicServiceRecord = cloneDeep(values);
+                        if (window.location.pathname.includes('/ts')) {
+                            let taxonomicServiceRecord = cloneDeep(values);
 
-                        RemoveEmptyProperties(taxonomicServiceRecord);
-                        CheckForIrrelevantClasses(taxonomicServiceRecord);
+                            RemoveEmptyProperties(taxonomicServiceRecord);
+                            CheckForIrrelevantClasses(taxonomicServiceRecord);
 
-                        try {
-                            await InsertTaxonomicService({
-                                taxonomicServiceRecord
-                            });
+                            try {
+                                await InsertTaxonomicService({
+                                    taxonomicServiceRecord
+                                })
 
-                            SetCompleted();
-                        } catch {
-                            setErrorMessage('Something went wrong during the submission of the Taxonomic Service, please try again');
-                        } finally {
-                            setLoading(false);
-                        };
+                                SetCompleted();
+                            } catch {
+                                setErrorMessage('Something went wrong during the submission of the Taxonomic Service, please try again');
+                            } finally {
+                                setLoading(false);
+                            };
+                        } else if (window.location.pathname.includes('/te')) {  
+                            let taxonomicExpertRecord = cloneDeep(values);
+
+                            RemoveEmptyProperties(taxonomicExpertRecord);
+                            CheckForIrrelevantClasses(taxonomicExpertRecord);
+
+                            try {
+                                await InsertTaxonomicExpert({
+                                    taxonomicExpertRecord
+                                })
+
+                                SetCompleted();
+                            } catch {
+                                setErrorMessage('Something went wrong during the submission of the Taxonomic Expert, please try again');
+                            } finally {
+                                setLoading(false);
+                            };
+                        }
                     } else {
                         setErrorMessage('Please provide values for all required fields')
                     }

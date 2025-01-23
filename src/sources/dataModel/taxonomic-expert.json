@@ -37,6 +37,46 @@
             "examples": [
                 "john.doe@mail.com"
             ]
+        },
+        "topDescription": {
+          "type": "string",
+          "description": "A short description of the Taxonomic Expert",
+          "examples": [
+              "John Doe is a taxonomic expert with 10 years of experience in the field."
+          ]
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "English (EN)",
+              "French (FR)",
+              "Dutch (NL)",
+              "German (DE)",
+              "Spanish (ES)",
+              "Italian (IT)",
+              "Portuguese (PT)",
+              "Polish (PL)",
+              "Swedish (SV)",
+              "Czech (CS)",
+              "Hungarian (HU)",
+              "Romanian (RO)",
+              "Greek (EL)",
+              "Bulgarian (BG)",
+              "Slovak (SK)",
+              "Finnish (FI)",
+              "Danish (DA)",
+              "Lithuanian (LT)",
+              "Latvian (LV)",
+              "Estonian (ET)",
+              "Slovenian (SL)",
+              "Croatian (HR)",
+              "Maltese (MT)",
+              "Irish (GA)"
+            ]
+          },
+          "description": "Languages the user is proficient or fluent in."
         }
     },
     "required": [
