@@ -4,7 +4,7 @@
         "type": "object",
         "fields": [
             {
-                "jsonPath": "$['schema:personal']['schema:name']",
+                "jsonPath": "$['name']",
                 "title": "Full Name",
                 "type": "string",
                 "description": "The full name of the taxonomic expert.",
@@ -32,7 +32,7 @@
                 "required": false
             },
             {
-                "jsonPath": "$['schema:personal']['schema:nationality']",
+                "jsonPath": "$['nationality']",
                 "title": "Nationality",
                 "description": "Select your nationality. Please use the country name and ISO code (Alpha-2 code).",
                 "type": "select",
@@ -238,7 +238,7 @@
                 "required": false
             },
             {
-                "jsonPath": "$['schema:personal']['schema:location']",
+                "jsonPath": "$['location']",
                 "title": "Location",
                 "description": "Select your country of residence. Please use the country name and ISO code (Alpha-2 code).",
                 "type": "select",
@@ -444,7 +444,7 @@
                 "required": false
             },                               
             {
-                "jsonPath": "$['schema:personal']['schema:Languages']",
+                "jsonPath": "$['Languages']",
                 "title": "Supporting language",
                 "description": "The languages that you are proficient or fluent in. Please use one of the language codes from the IETF BCP 47 standard",
                 "type": "multi-select",
