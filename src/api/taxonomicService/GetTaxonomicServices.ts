@@ -42,7 +42,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
                     break;
                 case 'query':
                     /* Set query to name search */
-                    filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:Service/schema\\:name:` + `${value}*`
+                    filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:service/schema\\:name:` + `${value}*`
                         + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`
                         + ` OR ` + `/taxonomicService/ods\\:topicDiscipline/_:` + `${value}*`
                         + `)`
