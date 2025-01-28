@@ -15,7 +15,7 @@ const InsertTaxonomicExpert = async ({ taxonomicExpertRecord }: { taxonomicExper
     let taxonomicExpert: TaxonomicExpert | undefined;
 
     if (taxonomicExpertRecord) {
-        /* Craft taxonomic service object */
+        /* Craft taxonomic expert object */
         const newTaxonomicExpert = {
             type: 'TaxonomicExpert',
             attributes: {

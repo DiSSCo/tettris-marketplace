@@ -5,10 +5,6 @@
     "title": "Taxonomic Expert",
     "type": "object",
     "description": "A Taxonomic Expert is a person who is an expert in the field of taxonomy, the science of defining and naming groups of biological organisms on the basis of shared characteristics.",
-    "context": {
-        "schema": "http://schema.org",
-        "ods": ""
-    },
     "properties": {
         "@id": {
             "type": "string",
