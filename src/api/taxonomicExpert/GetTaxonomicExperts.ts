@@ -65,6 +65,10 @@ const GetTaxonomicExperts = async ({ pageNumber, pageSize, /*searchFilters*/ }: 
                 targetId: 'service',
                 query: filters
             },
+            auth: {
+                username: 'TaxonomicMarketplace',
+                password: import.meta.env.VITE_CORDRA_PASSWORD
+            },
             responseType: 'json'
         });
         /* Get result data from JSON */

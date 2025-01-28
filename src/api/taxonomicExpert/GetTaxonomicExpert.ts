@@ -24,6 +24,10 @@ const GetTaxonomicExpert = async ({ handle }: { handle?: string }) => {
                 params: {
                     targetId: taxonomicExpertID
                 },
+                auth: {
+                    username: 'TaxonomicMarketplace',
+                    password: import.meta.env.VITE_CORDRA_PASSWORD
+                },
                 responseType: 'json'
             });
 
