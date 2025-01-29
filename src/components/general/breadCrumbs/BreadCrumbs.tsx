@@ -8,6 +8,7 @@ import { useAppSelector } from 'app/Hooks';
 
 /* Import Store */
 import { getTaxonomicService } from 'redux-store/TaxonomicServiceSlice';
+import { getTaxonomicExpert } from 'redux-store/TaxonomicExpertSlice';
 
 /* Import Icons */
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -31,6 +32,7 @@ const BreadCrumbs = () => {
 
     /* Base variables */
     const taxonomicService = useAppSelector(getTaxonomicService);
+    const taxonomicExpert = useAppSelector(getTaxonomicExpert);
     const breadCrumbs: BreadCrumb[] = [];
 
     /* Construct bread crumbs based on location */
@@ -75,6 +77,10 @@ const BreadCrumbs = () => {
                 if (location.pathname.includes('registerYourExpertise')) {
                     breadCrumbs.push({
                         crumb: 'Register your expertise'
+                    });
+                } else {
+                    breadCrumbs.push({
+                        crumb: `${taxonomicExpert?.taxonomicExpert['name']}`
                     });
                 }
             }
