@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Col, Container, Row, } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Col, Container, Row, } from 'react-bootstrap';
 
 // /* Import Hooks */
 import { useAppSelector, useAppDispatch, useFetch } from 'app/Hooks';
@@ -20,7 +20,6 @@ import GetTaxonomicExpert from 'api/taxonomicExpert/GetTaxonomicExpert';
 import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
 import { BreadCrumbs, Spinner } from 'components/general/CustomComponents';
-import TopBar from 'components/taxonomicService/components/TopBar';
 
 
 const TaxonomicExpert = () => {
@@ -93,7 +92,64 @@ const TaxonomicExpert = () => {
                                 {/* Top bar */}
                                 <Row className="mt-3 pt-lg-0">
                                     <Col>
-                                        {/* <TopBar taxonomicService={taxonomicExpert} /> */}
+                                        {taxonomicExpert?.taxonomicExpert['name']}
+                                    </Col>
+                                    <Col>
+                                        ORCID ID
+                                    </Col>
+                                    <Col>
+                                        BELGIUM
+                                    </Col>
+                                    <Col>
+                                        FRENCH (FR)
+                                    </Col>
+                                    <Col>
+                                        <Button variant="tertiary">EMAIL</Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <img src="https://www.w3schools.com/images/picture.jpg" alt="John Doe" />
+                                    </Col>
+                                    <Col>
+                                        <Row>
+                                            <Col>
+                                                <p>Headline Description</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>Institution</p>
+                                            </Col>
+                                            <Col>
+                                                <p>URL</p>
+                                            </Col>
+                                            <Col>
+                                                <p>ROR ID</p>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Row>
+                                            <Col>
+                                                <p>Expert Bio</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>Experience and qualifications</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>Training Provision</p>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col>
+                                        <p>Taxonomic and research scope</p>
                                     </Col>
                                 </Row>
                                 {/* Scrollable content */}
@@ -127,7 +183,7 @@ const TaxonomicExpert = () => {
                                         <Col>
                                             <p>
                                                 Retry or go back to <Link to="/"
-                                                    className="tc-primary"
+                                                    className="tc-tertiary"
                                                 >
                                                     home
                                                 </Link></p>
