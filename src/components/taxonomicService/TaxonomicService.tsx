@@ -1,8 +1,8 @@
 /* Import Dependencies */
 import classNames from 'classnames';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
@@ -13,7 +13,10 @@ import { setIsApiOnline } from 'redux-store/AppStore';
 import { getTaxonomicService, setTaxonomicService } from 'redux-store/TaxonomicServiceSlice';
 
 /* Import Types */
-import { TaxonomicService as TaxonomicServiceType } from 'app/Types';
+import { TaxonomicService as TaxonomicServiceType, Funder, Dict } from 'app/Types';
+
+/* Import API */
+import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
 
 /* Import Components */
 import Header from 'components/general/header/Header';
@@ -22,16 +25,12 @@ import DescriptionBlock from './components/DescriptionBlock';
 import DetailsBlock from './components/DetailsBlock';
 import MultimediaBlock from './components/MultimediaBlock';
 import Footer from 'components/general/footer/Footer';
-import { Button, Spinner } from 'components/general/CustomComponents';
-
-/* Import API */
-import GetTaxonomicService from 'api/taxonomicService/GetTaxonomicService';
+import { BreadCrumbs, Spinner } from 'components/general/CustomComponents';
 
 
 const TaxonomicService = () => {
     /* Hooks */
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const params = useParams();
     const fetch = useFetch();
 
@@ -69,7 +68,7 @@ const TaxonomicService = () => {
     const detailBlocksClass = classNames({
         'pt-4': !taxonomicService?.taxonomicService['schema:AssociatedMedia']
     });
-    
+
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
@@ -95,16 +94,10 @@ const TaxonomicService = () => {
                         {/* If taxonomic service is present */}
                         {taxonomicService &&
                             <>
-                                {/* MOBILE: Back to search button */}
-                                <Row className="d-lg-none">
+                                {/* Bread crumbs */}
+                                <Row>
                                     <Col>
-                                        <Button type="button"
-                                            variant="blank"
-                                            className="px-0"
-                                            OnClick={() => navigate(-1)}
-                                        >
-                                            {`< Back to search`}
-                                        </Button>
+                                        <BreadCrumbs />
                                     </Col>
                                 </Row>
                                 {/* Top bar */}
@@ -125,56 +118,79 @@ const TaxonomicService = () => {
                                         {/* Detail blocks */}
                                         <Row className={`${detailBlocksClass} mt-4`}>
                                             <Col xs={{ span: 12 }}
-                                                lg={{ span: 3 }}
+                                                lg={{ span: 4 }}
+                                                className="mb-lg-3"
                                             >
                                                 <DetailsBlock name="Service Details"
                                                     properties={{
                                                         topicDiscipline: taxonomicService.taxonomicService['ods:topicDiscipline'],
+                                                        organismGroup: taxonomicService.taxonomicService['schema:additionalProperty']?.[0] as string[] | undefined,
                                                         geographicArea: taxonomicService.taxonomicService['schema:geographicArea'],
                                                         licence: taxonomicService.taxonomicService['schema:license'],
-                                                        published: moment(taxonomicService.taxonomicService['schema:datePublished']).format('MMM DD - YYYY'),
-                                                        paymentModel: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:identifier'],
-                                                        fundingProgram: taxonomicService.taxonomicService['schema:FundingScheme']?.['schema:Funding']?.['schema:description']
+                                                        sourceURL: taxonomicService.taxonomicService['schema:url'],
+                                                        changeLog: taxonomicService.taxonomicService['schema:about'],
+                                                        datePublished: taxonomicService.taxonomicService['schema:datePublished'] && format(taxonomicService.taxonomicService['schema:datePublished'], 'MMMM dd - yyyy'),
+                                                        availableOnAppStore: taxonomicService.taxonomicService['schema:additionalProperty']?.[1] as string[] | undefined,
+                                                        documentationURL: taxonomicService.taxonomicService['schema:documentation'],
+                                                        paymentModel: taxonomicService.taxonomicService['schema:additionalProperty']?.[2] as string | undefined,
+                                                        termsOfService: taxonomicService.taxonomicService['schema:service']['schema:termsOfService'],
+                                                        updateFrequency: taxonomicService.taxonomicService['schema:service']['schema:additionalProperty']?.[0] as string | undefined
                                                     }}
                                                 />
                                             </Col>
                                             <Col xs={{ span: 12 }}
-                                                lg={{ span: 3 }}
-                                                className="mt-4 mt-lg-0"
+                                                lg={{ span: 4 }}
+                                                className="mt-4 mt-lg-0 mb-lg-3"
                                             >
                                                 <DetailsBlock name="Contact Information"
                                                     properties={{
-                                                        contactEmail: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:email'],
-                                                        contactWebpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
-                                                        webpage: taxonomicService.taxonomicService['schema:ContactPoint']?.['schema:url'],
-                                                        documentationWebpage: taxonomicService.taxonomicService['schema:documentation'],
-                                                        maintainers: taxonomicService.taxonomicService['schema:Maintainer']
+                                                        contactEmail: taxonomicService.taxonomicService['schema:contactPoint']?.['schema:email'],
+                                                        contactWebpage: taxonomicService.taxonomicService['schema:contactPoint']?.['schema:url'],
+                                                        authors: taxonomicService.taxonomicService['schema:author'],
+                                                        maintainers: taxonomicService.taxonomicService['schema:maintainer'],
                                                     }}
                                                 />
                                             </Col>
                                             {/* Show software details if software object is present in taxonomic service */}
-                                            {taxonomicService.taxonomicService['schema:SoftwareSourceCode'] &&
+                                            {taxonomicService.taxonomicService['schema:softwareSourceCode'] &&
                                                 <Col xs={{ span: 12 }}
-                                                    lg={{ span: 3 }}
-                                                    className="mt-4 mt-lg-0"
+                                                    lg={{ span: 4 }}
+                                                    className="mt-4 mt-lg-0 mb-lg-3"
                                                 >
                                                     <DetailsBlock name="Software"
                                                         properties={{
-                                                            codeRepository: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:codeRepository'],
-                                                            runtimePlatform: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:runtimePlatform'],
-                                                            status: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:creativeWorkStatus'],
-                                                            changeLog: taxonomicService.taxonomicService['schema:about'],
-                                                            programmingLanguages: taxonomicService.taxonomicService['schema:SoftwareSourceCode']['schema:programmingLanguage']
+                                                            codeRepository: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:codeRepository'],
+                                                            runtimePlatform: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:runtimePlatform'],
+                                                            status: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:creativeWorkStatus'],
+                                                            programmingLanguages: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:programmingLanguage'],
+                                                            softwareLicense: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:license'],
+                                                            isOpenSource: taxonomicService.taxonomicService['schema:softwareSourceCode']['schema:additionalProperty']?.[0] ? 'True' : 'False'
+                                                        }}
+                                                    />
+                                                </Col>
+                                            }
+                                            {/* Show funding details if funding object is present in taxonomic service */}
+                                            {taxonomicService.taxonomicService['schema:fundingScheme'] &&
+                                                <Col xs={{ span: 12 }}
+                                                    lg={{ span: 4 }}
+                                                    className="mt-4 mt-lg-0 mb-lg-3"
+                                                >
+                                                    <DetailsBlock name="Funding"
+                                                        properties={{
+                                                            award: taxonomicService.taxonomicService['schema:fundingScheme']['schema:award'],
+                                                            fundingId: taxonomicService.taxonomicService['schema:fundingScheme']['schema:funding']?.['schema:identifier'],
+                                                            fundingDescription: taxonomicService.taxonomicService['schema:fundingScheme']['schema:funding']?.['schema:description'],
+                                                            funders: taxonomicService.taxonomicService['schema:fundingScheme']['schema:funder'] as Dict[] as Funder[]
                                                         }}
                                                     />
                                                 </Col>
                                             }
                                             {/* Show multimedia block, if multimedia is present */}
-                                            {taxonomicService.taxonomicService['schema:AssociatedMedia'] &&
+                                            {taxonomicService.taxonomicService['schema:associatedMedia'] &&
                                                 <Col xs={{ span: 12 }} lg
-                                                    className="mt-4 mt-lg-0"
+                                                    className="mt-4 mt-lg-0 mb-lg-3"
                                                 >
-                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['schema:AssociatedMedia']} />
+                                                    <MultimediaBlock multimediaItems={taxonomicService.taxonomicService['schema:associatedMedia']} />
                                                 </Col>
                                             }
                                         </Row>

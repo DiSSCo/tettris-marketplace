@@ -1,6 +1,6 @@
 /* Import Dependencies */
 import axios from 'axios';
-import moment from 'moment';
+import { format } from 'date-fns';
 
 /* Import Types */
 import { TaxonomicService, CordraResult } from 'app/Types';
@@ -39,8 +39,8 @@ const GetTaxonomicService = async ({ handle }: { handle?: string }) => {
             };
 
             /* Set created and modified */
-            taxonomicService.taxonomicService['schema:dateCreated'] = moment(new Date(data.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
-            taxonomicService.taxonomicService['schema:dateModified'] = moment(new Date(data.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+            taxonomicService.taxonomicService['schema:dateCreated'] = format(new Date(data.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            taxonomicService.taxonomicService['schema:dateModified'] = format(new Date(data.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
         } catch (error) {
             console.error(error);
 

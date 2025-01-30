@@ -1,6 +1,6 @@
 {
     "$id": "https://schemas.dissco.tech/schemas/fdo-type/tettris-service/0.1.0/tettris-service.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$schema": "https://json-schema.org/draft-07/schema#",
     "$comment": "Taxonomic Service Version 0.1.0",
     "title": "Taxonomic Service",
     "type": "object",
@@ -159,37 +159,37 @@
         "schema:availableLanguage": {
             "type": "array",
             "description": "A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard.",
-            "enum": [
-                "bg",
-                "hr",
-                "cs",
-                "da",
-                "lb",
-                "nl",
-                "en",
-                "et",
-                "fi",
-                "fr",
-                "de",
-                "el",
-                "hu",
-                "ga",
-                "it",
-                "lv",
-                "lt",
-                "mt",
-                "pl",
-                "pt",
-                "ro",
-                "ru",
-                "sk",
-                "es",
-                "sv",
-                "tk",
-                "uk"
-            ],
             "items": {
-                "type": "string"
+                "type": "string",
+                "enum": [
+                    "bg",
+                    "hr",
+                    "cs",
+                    "da",
+                    "lb",
+                    "nl",
+                    "en",
+                    "et",
+                    "fi",
+                    "fr",
+                    "de",
+                    "el",
+                    "hu",
+                    "ga",
+                    "it",
+                    "lv",
+                    "lt",
+                    "mt",
+                    "pl",
+                    "pt",
+                    "ro",
+                    "ru",
+                    "sk",
+                    "es",
+                    "sv",
+                    "tk",
+                    "uk"
+                ]
             }
         },
         "ods:topicDiscipline": {
@@ -317,7 +317,7 @@
                 "additionalProperties": false
             }
         },
-        "schema:Service": {
+        "schema:service": {
             "type": "object",
             "description": "A service provided by an organization, e.g. delivery service, print services, etc.",
             "properties": {
@@ -358,28 +358,28 @@
                 },
                 "schema:slogan": {
                     "type": "string",
-                    "description": "A slogan or motto associated with the Service (english).",
+                    "description": "A slogan or motto associated with the Service (english)",
                     "examples": [
                         "A Bombus reference collection"
                     ]
                 },
                 "schema:logo": {
                     "type": "string",
-                    "description": "An associated logo URL.",
+                    "description": "An associated logo URL",
                     "examples": [
                         "https://eosc.eu/wp-content/uploads/2022/09/New-guidelines-for-EOSC-family-branding.jpg"
                     ]
                 },
                 "schema:termsOfService": {
                     "type": "string",
-                    "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service.",
+                    "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service",
                     "examples": [
                         "http://service-name.service-provid-er.eu/TermsOfUse"
                     ]
                 },
                 "schema:additionalProperty": {
                     "type": "array",
-                    "description": "Generic property for handling domain specific values.",
+                    "description": "Generic property for handling domain specific values",
                     "items": {
                         "type": "object",
                         "properties": {
@@ -430,20 +430,20 @@
             ],
             "additionalProperties": false
         },
-        "schema:ContactPoint": {
+        "schema:contactPoint": {
             "type": "object",
-            "description": "A contact point—for example, a Customer Complaints department.",
+            "description": "A contact point—for example, a Customer Complaints department",
             "properties": {
                 "schema:email": {
                     "type": "string",
-                    "description": "Email address of the contact point.",
+                    "description": "Email address of the contact point",
                     "examples": [
                         "info@cetaf.org"
                     ]
                 },
                 "schema:url": {
                     "type": "string",
-                    "description": "URL to a contact webpage or contact form for the resource.",
+                    "description": "URL to a contact webpage or contact form for the resource",
                     "examples": [
                         "cetaf.org"
                     ]
@@ -451,9 +451,9 @@
             },
             "additionalProperties": false
         },
-        "schema:Author": {
+        "schema:author": {
             "type": "array",
-            "description": "An array of authors of this service.",
+            "description": "An array of authors of this service",
             "items": {
                 "type": "object",
                 "properties": {
@@ -469,7 +469,14 @@
                             "https://orcid.org/0000-0001-9790-9277"
                         ]
                     },
-                    "schema:Affiliation": {
+                    "schema:name": {
+                        "type": "string",
+                        "description": "Full name of the author",
+                        "examples": [
+                            "John Doe"
+                        ]
+                    },
+                    "schema:affiliation": {
                         "type": "object",
                         "properties": {
                             "@type": {
@@ -502,14 +509,15 @@
                 "required": [
                     "@type",
                     "schema:identifier",
+                    "schema:name",
                     "schema:affiliation"
                 ],
                 "additionalProperties": false
             }
         },
-        "schema:Maintainer": {
+        "schema:maintainer": {
             "type": "array",
-            "description": "An array of maintainers of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artefact.",
+            "description": "An array of maintainers of this service",
             "items": {
                 "type": "object",
                 "properties": {
@@ -518,22 +526,17 @@
                         "description": "The type of the maintainer",
                         "const": "schema:Person"
                     },
-                    "schema:identifier": [
-                        {
-                            "type": "string",
-                            "description": "A unique identifier to identify the maintainer; GitHub identifiers are valid",
-                            "examples": [
-                                "https://api.github.com/users/username"
-                            ]
+                    "schema:identifier": {
+                        "type": "array",
+                        "description": "A unique identifier to identify the maintainer; GitHub and ORCID identifiers are valid",
+                        "items": {
+                            "type": "string"
                         },
-                        {
-                            "type": "string",
-                            "description": "A unique identifier to identify the maintainer; ORCID identifiers are valid",
-                            "examples": [
-                                "https://orcid.org/0000-0001-9790-9277"
-                            ]
-                        }
-                    ],
+                        "examples": [
+                            "https://api.github.com/users/username",
+                            "https://orcid.org/0000-0001-9790-9277"
+                        ]
+                    },
                     "schema:name": {
                         "type": "string",
                         "description": "Full name of the maintainer",
@@ -541,7 +544,7 @@
                             "John Doe"
                         ]
                     },
-                    "schema:Affiliation": {
+                    "schema:affiliation": {
                         "type": "object",
                         "description": "The organisation the maintainer is affiliated with",
                         "properties": {
@@ -580,7 +583,7 @@
                 "additionalProperties": false
             }
         },
-        "schema:FundingScheme": {
+        "schema:fundingScheme": {
             "type": "object",
             "description": "A FundingScheme combines organizational, project and policy aspects of grant-based funding that sets guidelines, principles and mechanisms to support other kinds of projects and activities.",
             "properties": {
@@ -591,13 +594,13 @@
                         "National Award 2024"
                     ]
                 },
-                "schema:Funding": {
+                "schema:funding": {
                     "type": "object",
                     "description": "A Grant that directly or indirectly provide funding or sponsorship for this service",
                     "properties": {
                         "schema:identifier": {
                             "type": "string",
-                            "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
+                            "description": "A unique identifier to identify the grant",
                             "examples": [
                                 "https://ror.org/0566bfb96"
                             ]
@@ -610,45 +613,45 @@
                             ]
                         }
                     },
-                    "required": [
-                        "schema:identifier"
-                    ],
                     "additionalProperties": false
                 },
-                "schema:Funder": {
+                "schema:funder": {
                     "type": "array",
                     "description": "An organization that supports (sponsors) something through some kind of financial contribution.",
-                    "properties": {
-                        "@type": {
-                            "type": "string",
-                            "description": "The type of funder",
-                            "const": "schema:Organization"
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "@type": {
+                                "type": "string",
+                                "description": "The type of funder",
+                                "const": "schema:Organization"
+                            },
+                            "schema:identifier": {
+                                "type": "string",
+                                "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
+                                "examples": [
+                                    "https://ror.org/0566bfb96"
+                                ]
+                            },
+                            "schema:name": {
+                                "type": "string",
+                                "description": "The name of the funder (funding program)",
+                                "examples": [
+                                    "Horizon 2020"
+                                ]
+                            }
                         },
-                        "schema:identifier": {
-                            "type": "string",
-                            "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
-                            "examples": [
-                                "https://ror.org/0566bfb96"
-                            ]
-                        },
-                        "schema:name": {
-                            "type": "string",
-                            "description": "The name of the funder (funding program)",
-                            "examples": [
-                                "Horizon 2020"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "@type",
-                        "schema:identifier"
-                    ],
-                    "additionalProperties": false
+                        "required": [
+                            "@type",
+                            "schema:identifier"
+                        ],
+                        "additionalProperties": false
+                    }
                 }
             },
             "additionalProperties": false
         },
-        "schema:SoftwareSourceCode": {
+        "schema:softwareSourceCode": {
             "type": "object",
             "description": "Object representing the service's software source code",
             "properties": {
@@ -738,7 +741,7 @@
                 "schema:codeRepository"
             ]
         },
-        "schema:AssociatedMedia": {
+        "schema:associatedMedia": {
             "type": "array",
             "description": "Array of media objects that encodes this Service. This property is a synonym for encoding.",
             "items": {
@@ -746,7 +749,7 @@
                 "properties": {
                     "schema:contentUrl": {
                         "type": "string",
-                        "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain."
+                        "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain"
                     }
                 },
                 "required": [
@@ -759,10 +762,10 @@
     "required": [
         "@id",
         "@type",
-        "schema:dateCreated",
+        "schema:datePublished",
         "schema:status",
         "schema:availableLanguage",
         "schema:ratingValue",
-        "schema:Service"
+        "schema:service"
     ]
 }

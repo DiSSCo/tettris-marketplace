@@ -32,5 +32,14 @@ export default defineConfig({
       exclude: [],
       provider: "v8"
     }
-  }
+  },
+  server: {
+    proxy: {
+      '/cordra/doip': {
+        target: 'https://marketplace.cetaf.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/cordra\/doip/, '/cordra/doip'),
+      }
+    },
+  },
 })

@@ -28,6 +28,7 @@ export const TaxonomicServiceSlice = createSlice({
         },
         concatToTaxonomicServices: (state, action: PayloadAction<TaxonomicService[]>) => {
             state.taxonomicServices = state.taxonomicServices.concat(action.payload);
+            state.taxonomicServices.sort((a, b) => a < b ? 1 : 0);
         }
     }
 })

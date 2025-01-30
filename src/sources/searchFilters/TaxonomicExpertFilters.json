@@ -1,0 +1,228 @@
+{
+    "taxonomicExpertFilters": [
+        {
+            "name": "country",
+            "alias": "schema:countryOfOrigin",
+            "type": "select",
+            "default": "",
+            "options": [
+                {
+                    "label": "United States",
+                    "value": "us"
+                },
+                {
+                    "label": "Canada",
+                    "value": "ca"
+                },
+                {
+                    "label": "United Kingdom",
+                    "value": "uk"
+                },
+                {
+                    "label": "Australia",
+                    "value": "au"
+                },
+                {
+                    "label": "Germany",
+                    "value": "de"
+                },
+                {
+                    "label": "France",
+                    "value": "fr"
+                },
+                {
+                    "label": "Italy",
+                    "value": "it"
+                },
+                {
+                    "label": "Spain",
+                    "value": "es"
+                },
+                {
+                    "label": "China",
+                    "value": "cn"
+                },
+                {
+                    "label": "Japan",
+                    "value": "jp"
+                }
+            ]
+        },
+        {
+            "name": "taxonomicGroup",
+            "alias": "schema:taxonomicGroup",
+            "type": "select",
+            "default": "",
+            "options": [
+                {
+                    "label": "Mammals",
+                    "value": "mammals"
+                },
+                {
+                    "label": "Birds",
+                    "value": "birds"
+                },
+                {
+                    "label": "Reptiles",
+                    "value": "reptiles"
+                },
+                {
+                    "label": "Amphibians",
+                    "value": "amphibians"
+                },
+                {
+                    "label": "Fish",
+                    "value": "fish"
+                },
+                {
+                    "label": "Insects",
+                    "value": "insects"
+                },
+                {
+                    "label": "Arachnids",
+                    "value": "arachnids"
+                },
+                {
+                    "label": "Mollusks",
+                    "value": "mollusks"
+                },
+                {
+                    "label": "Crustaceans",
+                    "value": "crustaceans"
+                }
+            ]
+        },
+        {
+            "name": "language",
+            "alias": "schema:availableLanguage",
+            "type": "select",
+            "default": "",
+            "options": [
+                {
+                    "label": "Bulgarian",
+                    "value": "bg"
+                },
+                {
+                    "label": "Croatian",
+                    "value": "hr"
+                },
+                {
+                    "label": "Czech",
+                    "value": "cs"
+                },
+                {
+                    "label": "Danish",
+                    "value": "da"
+                },
+                {
+                    "label": "Dutch",
+                    "value": "nl"
+                },
+                {
+                    "label": "Luxembourgish",
+                    "value": "lb"
+                },
+                {
+                    "label": "English",
+                    "value": "en"
+                },
+                {
+                    "label": "Estonian",
+                    "value": "es"
+                },
+                {
+                    "label": "Finnish",
+                    "value": "fi"
+                },
+                {
+                    "label": "French",
+                    "value": "fr"
+                },
+                {
+                    "label": "German",
+                    "value": "de"
+                },
+                {
+                    "label": "Greek",
+                    "value": "el"
+                },
+                {
+                    "label": "Hungarian",
+                    "value": "hu"
+                },
+                {
+                    "label": "Irish",
+                    "value": "ga"
+                },
+                {
+                    "label": "Italian",
+                    "value": "it"
+                },
+                {
+                    "label": "Latvian",
+                    "value": "lv"
+                },
+                {
+                    "label": "Lithuanian",
+                    "value": "lt"
+                },
+                {
+                    "label": "Maltese",
+                    "value": "mt"
+                },
+                {
+                    "label": "Polish",
+                    "value": "pl"
+                },
+                {
+                    "label": "Portugese",
+                    "value": "pt"
+                },
+                {
+                    "label": "Romanian",
+                    "value": "ro"
+                },
+                {
+                    "label": "Russian",
+                    "value": "ru"
+                },
+                {
+                    "label": "Slovakian",
+                    "value": "sk"
+                },
+                {
+                    "label": "Spanish",
+                    "value": "es"
+                },
+                {
+                    "label": "Swedish",
+                    "value": "sv"
+                },
+                {
+                    "label": "Turkish",
+                    "value": "tk"
+                },
+                {
+                    "label": "Ukranian",
+                    "value": "uk"
+                }
+            ]
+        },
+        {
+            "name": "appliedResearch",
+            "alias": "schema:appliedResearch",
+            "type": "select",
+            "default": "",
+            "options": [
+                {
+                    "label": "Yes",
+                    "value": "yes"
+                },
+                {
+                    "label": "No",
+                    "value": "no"
+                }
+            ]
+        }
+    ]
+}

@@ -47,12 +47,14 @@ const Header = () => {
                                 <Col xs={{ span: 12 }} lg="auto"
                                     className="d-flex flex-column justify-content-center"
                                 >
-                                    <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
-                                        Marketplace
-                                    </h2>
-                                    <h3 className="fs-4 fs-lg-3 tc-grey fw-lightBold">
-                                        The Taxonomic Expertise and Services Marketplace
-                                    </h3>
+                                    <Link to="/">
+                                        <h2 className="w-auto fs-3 fs-lg-2 tc-primary fw-bold">
+                                            Marketplace
+                                        </h2>
+                                        <h3 className="fs-4 fs-lg-3 tc-grey fw-lightBold">
+                                            The Taxonomic Expertise and Services Marketplace
+                                        </h3>
+                                    </Link>
                                 </Col>
                                 {isApiOnline === false &&
                                     <Col xs={{ span: 12 }} lg

@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import classNames from 'classnames';
+import { format } from 'date-fns';
 import MarkdownIt from 'markdown-it';
-import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
@@ -27,11 +27,11 @@ const DescriptionBlock = (props: Props) => {
 
     /* Transform description's markdown */
     const md = new MarkdownIt();
-    const description = md.render(taxonomicService.taxonomicService['schema:Service']['schema:description']);
+    const description = md.render(taxonomicService.taxonomicService['schema:service']['schema:description']);
 
     /* ClassNames */
     const descriptionBlockClass = classNames({
-        [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['schema:AssociatedMedia']
+        [`${styles.descriptionBlock}`]: taxonomicService.taxonomicService['schema:associatedMedia']
     });
 
     const qualityScoreBarClass = classNames({
@@ -42,14 +42,14 @@ const DescriptionBlock = (props: Props) => {
         <div className={descriptionBlockClass}>
             <Row className="h-100">
                 {/* Preview image, if available */}
-                {taxonomicService.taxonomicService['schema:AssociatedMedia']?.length &&
+                {taxonomicService.taxonomicService['schema:associatedMedia']?.length &&
                     <Col xs={{ span: 12 }} lg={{ span: 3 }}
                         className="h-100 bgc-white me-3 mb-3 mb-lg-0"
                     >
                         <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center `}>
-                            <img src={taxonomicService.taxonomicService['schema:AssociatedMedia'][0]['schema:contentUrl']}
-                                alt={taxonomicService.taxonomicService['schema:AssociatedMedia'][0]['schema:contentUrl']}
-                                className="h-100"
+                            <img src={taxonomicService.taxonomicService['schema:associatedMedia'][0]['schema:contentUrl']}
+                                alt={taxonomicService.taxonomicService['schema:associatedMedia'][0]['schema:contentUrl']}
+                                className="h-100 w-100 object-fit-contain"
                             />
                         </div>
                     </Col>
@@ -61,7 +61,7 @@ const DescriptionBlock = (props: Props) => {
                         {/* Type */}
                         <Col xs={{ span: 12 }} lg="auto">
                             <p className="fs-5 fw-bold">Taxonomic service type</p>
-                            <p className="tc-primary fw-bold">{taxonomicService.taxonomicService['schema:Service']['schema:serviceType']}</p>
+                            <p className="tc-primary fw-bold">{taxonomicService.taxonomicService['schema:service']['schema:serviceType']}</p>
                         </Col>
                         {/* Taxonomic scope */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}
@@ -82,7 +82,9 @@ const DescriptionBlock = (props: Props) => {
                             className="mt-2 mt-lg-0"
                         >
                             <p className="fs-5 fw-bold">Publishing date</p>
-                            <p>{moment(taxonomicService.taxonomicService['schema:dateCreated']).format('MMM DD - YYYY')}</p>
+                            <p>{taxonomicService.taxonomicService['schema:dateCreated'] &&
+                                format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')}
+                            </p>
                         </Col>
                         {/* Quality score */}
                         <Col xs={{ span: 12 }} lg={{ span: 3 }}

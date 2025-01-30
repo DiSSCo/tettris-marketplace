@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { setupStore } from './app/Store';
 
 /* Import Styles */
+import '@mdxeditor/editor/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 

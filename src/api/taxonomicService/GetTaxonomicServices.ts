@@ -1,6 +1,6 @@
 /* Import Dependencies */
 import axios from 'axios';
-import moment from 'moment';
+import { format } from 'date-fns';
 import { isEmpty } from 'lodash';
 
 /* Import Types */
@@ -35,6 +35,7 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
 
             switch (key) {
                 case 'language':
+                case 'topicDiscipline':
                     /* Set array search for language */
                     filters = filters.concat(` AND ` + `/taxonomicService/${(alias ?? key).replace(':', '\\:')}/_:` + `${value}`);
 
@@ -42,15 +43,15 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
                 case 'query':
                     /* Set query to name search */
                     filters = filters.concat(` AND ` + `(` + `/taxonomicService/schema\\:Service/schema\\:name:` + `${value}*`
-                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`
-                        + ` OR ` + `/taxonomicService/ods\\:topicDiscipline:` + `${value}*`
+                        + ` OR ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`
+                        + ` OR ` + `/taxonomicService/ods\\:topicDiscipline/_:` + `${value}*`
                         + `)`
                     );
 
                     break;
                 case 'taxonomicRange':
                     /* Set taxonomic range search */
-                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}`);
+                    filters = filters.concat(` AND ` + `/taxonomicService/schema\\:taxonomicRange/_:` + `${value}*`);
 
                     break;
                 case 'serviceType':
@@ -86,8 +87,8 @@ const GetTaxonomicServices = async ({ pageNumber, pageSize, searchFilters }: { p
             const taxonomicService = dataFragment.attributes.content as TaxonomicService;
 
             /* Set created and modified */
-            taxonomicService.taxonomicService['schema:dateCreated'] = moment(new Date(dataFragment.attributes.metadata.createdOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
-            taxonomicService.taxonomicService['schema:dateModified'] = moment(new Date(dataFragment.attributes.metadata.modifiedOn)).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+            taxonomicService.taxonomicService['schema:dateCreated'] = format(new Date(dataFragment.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            taxonomicService.taxonomicService['schema:dateModified'] = format(new Date(dataFragment.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 
             /* Push to taxonomic services array */
             taxonomicServices.push(taxonomicService);

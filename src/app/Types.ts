@@ -1,6 +1,6 @@
 /* Import Types */
 import { TaxonomicService as TaxonomicServiceType } from "./types/TaxonomicService";
-
+import { TaxonomicExpert as TaxonomicExpertType } from "./types/TaxonomicExpert";
 
 /* General type for a dictionary */
 export type Dict = {
@@ -14,6 +14,7 @@ export type CordraResult = {
     attributes: {
         content: {
             taxonomicService?: TaxonomicServiceType,
+            taxonomicExpert?: TaxonomicExpertType,
             [property: string]: any
         },
         metadata: {
@@ -35,17 +36,40 @@ export type TaxonomicService = {
     taxonomicService: TaxonomicServiceType
 }
 
+/* Type for a Taxonomic Expert */
+export type TaxonomicExpert = {
+    taxonomicExpert: TaxonomicExpertType
+}
+
+/* Type for an Author */
+export type Author = {
+    "@type": "schema:Person";
+    "schema:identifier": string;
+    "schema:affiliation": {
+        "@type": "schema:Organization";
+        "schema:identifier": string;
+        "schema:name"?: string;
+    }
+};
+
 /* Type for an Agent */
 export type Maintainer = {
-    "@type": string,
-    "schema:identifier"?: string | Dict[];
+    "@type": string;
+    "schema:identifier": string[];
     "schema:name"?: string;
-    "schema:Affiliation"?: {
-        "@type": string,
-        "schema:identifier"?: string;
-        "schema:legalName"?: string;
+    "schema:affiliation": {
+        "@type": "schema:Organization";
+        "schema:identifier": string;
+        "schema:name"?: string;
     };
 }
+
+/* Type for a Funder */
+export type Funder = {
+    "@type": "schema:Person";
+    "schema:identifier": string;
+    "schema:name": string
+};
 
 /* Type for a Filter */
 export type Filter = {
@@ -56,7 +80,23 @@ export type Filter = {
         label: string,
         value: string,
         action?: Function
-    }[]
+    }[],
+    placeholder?: string
+};
+
+/* Type for a form field */
+export type FormField = {
+    jsonPath: string,
+    title: string,
+    description: string,
+    type: string,
+    const?: string,
+    options?: string[],
+    mapping?: {
+        [option: string]: string
+    } | string,
+    required?: boolean
+    maxSelections?: number
 };
 
 /* Type for a Dropdown item */

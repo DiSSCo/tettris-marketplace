@@ -1,0 +1,508 @@
+{
+    "taxonomicService": {
+        "title": "Taxonomic Service",
+        "type": "object",
+        "fields": [
+            {
+                "jsonPath": "$['schema:service']['schema:serviceType']",
+                "title": "Service Type",
+                "description": "A type that defines the kind of taxonomic service",
+                "type": "multi-select",
+                "options": [
+                    "AI training dataset",
+                    "Community group",
+                    "CrowdSourcing",
+                    "Data tool",
+                    "e-Learning service",
+                    "Factsheet",
+                    "Identification tool",
+                    "Knowledge website",
+                    "Mobile app",
+                    "Service inventory",
+                    "Reference collection",
+                    "Specimen dataset not in GBIF"
+                ],
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:service']['schema:name']",
+                "title": "Name",
+                "description": "The preferred name of the service (can be in any language)",
+                "type": "string",
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:service']['schema:description']",
+                "title": "Description",
+                "description": "A description of the service (english)",
+                "type": "text",
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:service']['schema:slogan']",
+                "title": "Slogan",
+                "description": "A slogan or motto associated with the Service (english)",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:service']['schema:logo']",
+                "title": "Logo",
+                "description": "An associated logo URL",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:datePublished']",
+                "title": "Date Published",
+                "description": "Date the service was published, following the ISO Date Time Format yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+                "type": "date"
+            },
+            {
+                "jsonPath": "$['schema:service']['schema:additionalProperty'][0]",
+                "title": "Update Frequency",
+                "description": "Indicator if the service is frequently updated or not, 'frequently updated' if the resource is updated multiple times a year",
+                "type": "select",
+                "options": [
+                    "published once",
+                    "frequently updated"
+                ]
+            },
+            {
+                "jsonPath": "$['schema:service']['schema:termsOfService']",
+                "title": "Terms of Service",
+                "description": "URL pointing to Terms of Service, Terms of Use or Terms and Conditions, the legal agreements between a service provider and a person who wants to use that service",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:license']",
+                "title": "Service License",
+                "description": "A license document that applies to this content, typically indicated by URL",
+                "type": "select",
+                "options": [
+                    "https://spdx.org/licenses/CC-BY-1.0.json",
+                    "https://spdx.org/licenses/CC-BY-2.0.json",
+                    "https://spdx.org/licenses/CC-BY-2.5.json",
+                    "https://spdx.org/licenses/CC-BY-2.5-AU.json",
+                    "https://spdx.org/licenses/CC-BY-3.0.json",
+                    "https://spdx.org/licenses/CC-BY-3.0-AT.json",
+                    "https://spdx.org/licenses/CC-BY-3.0-AU.json",
+                    "https://spdx.org/licenses/CC-BY-3.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-3.0-IGO.json",
+                    "https://spdx.org/licenses/CC-BY-3.0-NL.json",
+                    "https://spdx.org/licenses/CC-BY-3.0-US.json",
+                    "https://spdx.org/licenses/CC-BY-4.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-1.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-2.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-2.5.json",
+                    "https://spdx.org/licenses/CC-BY-NC-3.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-3.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-NC-4.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-1.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-2.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-2.5.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-3.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-3.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-3.0-IGO.json",
+                    "https://spdx.org/licenses/CC-BY-NC-ND-4.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-1.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-2.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-2.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-2.0-FR.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-2.0-UK.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-2.5.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-3.0.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-3.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-3.0-IGO.json",
+                    "https://spdx.org/licenses/CC-BY-NC-SA-4.0.json",
+                    "https://spdx.org/licenses/CC-BY-ND-1.0.json",
+                    "https://spdx.org/licenses/CC-BY-ND-2.0.json",
+                    "https://spdx.org/licenses/CC-BY-ND-2.5.json",
+                    "https://spdx.org/licenses/CC-BY-ND-3.0.json",
+                    "https://spdx.org/licenses/CC-BY-ND-3.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-ND-4.0.json",
+                    "https://spdx.org/licenses/CC-BY-SA-1.0.json",
+                    "https://spdx.org/licenses/CC-BY-SA-2.0.json",
+                    "https://spdx.org/licenses/CC-BY-SA-2.0-UK.json",
+                    "https://spdx.org/licenses/CC-BY-SA-2.1-JP.json",
+                    "https://spdx.org/licenses/CC-BY-SA-2.5.json",
+                    "https://spdx.org/licenses/CC-BY-SA-3.0.json",
+                    "https://spdx.org/licenses/CC-BY-SA-3.0-AT.json",
+                    "https://spdx.org/licenses/CC-BY-SA-3.0-DE.json",
+                    "https://spdx.org/licenses/CC-BY-SA-3.0-IGO.json",
+                    "https://spdx.org/licenses/CC-BY-SA-4.0.json",
+                    "https://spdx.org/licenses/CC-PDDC.json",
+                    "https://spdx.org/licenses/CC0-1.0.json",
+                    "https://spdx.org/licenses/DL-DE-BY-2.0.json",
+                    "https://spdx.org/licenses/DL-DE-ZERO-2.0.json",
+                    "https://www.govdata.de/dl-de/by-1-0",
+                    "https://www.govdata.de/dl-de/by-nc-1-0",
+                    "https://spdx.org/licenses/EUPL-1.0.json",
+                    "https://spdx.org/licenses/EPL-2.0.json",
+                    "https://spdx.org/licenses/EUPL-1.2.json",
+                    "https://www.etalab.gouv.fr/licence-ouverte-open-licence/",
+                    "https://spdx.org/licenses/GFDL-1.1-invariants-only.json",
+                    "https://spdx.org/licenses/GFDL-1.1-invariants-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.1-no-invariants-only.json",
+                    "https://spdx.org/licenses/GFDL-1.1-no-invariants-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.1-only.json",
+                    "https://spdx.org/licenses/GFDL-1.1-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.2-invariants-only.json",
+                    "https://spdx.org/licenses/GFDL-1.2-invariants-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.2-no-invariants-only.json",
+                    "https://spdx.org/licenses/GFDL-1.2-no-invariants-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.2-only.json",
+                    "https://spdx.org/licenses/GFDL-1.2-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.3-invariants-only.json",
+                    "https://spdx.org/licenses/GFDL-1.3-invariants-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.3-no-invariants-only.json",
+                    "https://spdx.org/licenses/GFDL-1.3-no-invariants-or-later.json",
+                    "https://spdx.org/licenses/GFDL-1.3-only.json",
+                    "https://spdx.org/licenses/GFDL-1.3-or-later.json",
+                    "https://data.gov.hr/open-licence-republic-croatia",
+                    "https://www.dati.gov.it/iodl/2.0/",
+                    "https://spdx.org/licenses/NLOD-1.0.json",
+                    "https://spdx.org/licenses/NLOD-2.0.json",
+                    "https://spdx.org/licenses/ODC-By-1.0.json",
+                    "https://spdx.org/licenses/ODbL-1.0.json",
+                    "https://spdx.org/licenses/PDDL-1.0.json",
+                    "https://spdx.org/licenses/OGL-Canada-2.0.json",
+                    "https://spdx.org/licenses/OGL-UK-1.0.json",
+                    "https://spdx.org/licenses/OGL-UK-2.0.json",
+                    "https://spdx.org/licenses/OGL-UK-3.0.json",
+                    "https://data.gov.ro/pages/licence"
+                ],
+                "mapping": "licenses"
+            },
+            {
+                "jsonPath": "$['schema:availableLanguage']",
+                "title": "Available Languages",
+                "description": "A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard",
+                "type": "multi-select",
+                "options": [
+                    "bg",
+                    "hr",
+                    "cs",
+                    "da",
+                    "lb",
+                    "nl",
+                    "en",
+                    "et",
+                    "fi",
+                    "fr",
+                    "de",
+                    "el",
+                    "hu",
+                    "ga",
+                    "it",
+                    "lv",
+                    "lt",
+                    "mt",
+                    "pl",
+                    "pt",
+                    "ro",
+                    "ru",
+                    "sk",
+                    "es",
+                    "sv",
+                    "tk",
+                    "uk"
+                ],
+                "mapping": {
+                    "bg": "Bulgarian",
+                    "hr": "Croatian",
+                    "cs": "Czech",
+                    "da": "Danish",
+                    "lb": "Luxembourgish",
+                    "nl": "Dutch",
+                    "en": "English",
+                    "et": "Estonian",
+                    "fi": "Finnish",
+                    "fr": "French",
+                    "de": "German",
+                    "el": "Greek",
+                    "hu": "Hungarian",
+                    "ga": "Irish",
+                    "it": "Italian",
+                    "lv": "Latvian",
+                    "lt": "Lithuanian",
+                    "mt": "Maltese",
+                    "pl": "Polish",
+                    "pt": "Portugese",
+                    "ro": "Romanian",
+                    "ru": "Russian",
+                    "sk": "Slovak",
+                    "es": "Spanish",
+                    "sv": "Swedish",
+                    "tk": "Turkish",
+                    "uk": "Ukranian"
+                },
+                "required": true
+            },
+            {
+                "jsonPath": "$['ods:topicDiscipline']",
+                "title": "Topic Discipline",
+                "description": "The topic discipline relevant to the taxonomic range of the service",
+                "type": "multi-select",
+                "options": [
+                    "Anthropology",
+                    "Botany",
+                    "Microbiology",
+                    "Palaeontology",
+                    "Zoology",
+                    "Ecology",
+                    "Other Biodiversity",
+                    "Unclassified"
+                ]
+            },
+            {
+                "jsonPath": "$['schema:taxonomicRange']",
+                "title": "Taxonomic Range",
+                "description": "The taxonomic grouping of the organism, e.g. 'No specific range' or 'Agromyzidae, Braconidae'",
+                "type": "multi-string"
+            },
+            {
+                "jsonPath": "$['schema:additionalProperty'][0]",
+                "title": "Organism Group",
+                "description": "Common names for groups of organisms",
+                "type": "multi-string"
+            },
+            {
+                "jsonPath": "$['schema:geographicArea']",
+                "title": "Geographic Area",
+                "description": "The geographic area associated with the service, e.g. World, Palearctic, South-East Europe, Mediterranean",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:url']",
+                "title": "Webpage",
+                "description": "URL of the item that leads to the resource of the service",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:documentation']",
+                "title": "Documentation URL",
+                "description": "URL to further documentation describing the service in more detail",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:about']",
+                "title": "Change Log",
+                "description": "The subject matter of the service including a summary of the Resource features updated from the previous version",
+                "type": "text"
+            },
+            {
+                "jsonPath": "$['schema:additionalProperty'][1]",
+                "title": "Available on App Store",
+                "description": "Application is available on the following app stores, relevant for apps",
+                "type": "multi-string"
+            },
+            {
+                "jsonPath": "$['schema:additionalProperty'][2]",
+                "title": "Payment Model",
+                "description": "URL to webpage with the supported payment models and restrictions that apply to the Resource",
+                "type": "string"
+            }
+        ]
+    },
+    "contactPoint": {
+        "title": "Contact Point",
+        "type": "object",
+        "fields": [
+            {
+                "jsonPath": "$['schema:contactPoint']['schema:email']",
+                "title": "Contact Email",
+                "description": "Email address of the contact point",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:contactPoint']['schema:url']",
+                "title": "Contact Webpage",
+                "description": "URL to a contact webpage or contact form for the resource",
+                "type": "string"
+            }
+        ]
+    },
+    "author": {
+        "title": "Author",
+        "jsonPath": "$['schema:author']",
+        "type": "array",
+        "fields": [
+            {
+                "jsonPath": "$['schema:author']['index']['@type']",
+                "title": "@type",
+                "description": "The author type",
+                "type": "hidden",
+                "const": "schema:Person"
+            },
+            {
+                "jsonPath": "$['schema:author']['index']['schema:identifier']",
+                "title": "ORCID",
+                "description": "A unique identifier to identify the author; ORCID identifiers are valid",
+                "type": "string",
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:author']['index']['schema:affiliation']",
+                "title": "Affiliated Organisation",
+                "description": "The affiliated organisation",
+                "type": "ror",
+                "required": true
+            }
+        ],
+        "applicableToServiceTypes": [
+            "AI training dataset",
+            "e-Learning service",
+            "Factsheet",
+            "Identification tool",
+            "Knowledge website",
+            "Mobile app",
+            "Reference collection",
+            "Specimen dataset not in GBIF"
+        ]
+    },
+    "maintainer": {
+        "title": "Maintainer",
+        "jsonPath": "$['schema:maintainer']",
+        "type": "array",
+        "fields": [
+            {
+                "jsonPath": "$['schema:maintainer']['index']['@type']",
+                "title": "@type",
+                "description": "The author type",
+                "type": "hidden",
+                "const": "schema:Person"
+            },
+            {
+                "jsonPath": "$['schema:maintainer']['index']['schema:identifier']",
+                "title": "GitHub / ORCID Identifier",
+                "description": "A unique identifier to identify the maintainer; ORCID and GitHub identifiers are valid",
+                "type": "multi-string",
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:maintainer']['index']['schema:name']",
+                "title": "Full Name",
+                "description": "Full name of the maintainer",
+                "type": "string",
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:maintainer']['index']['schema:affiliation']",
+                "title": "Affiliated Organisation",
+                "description": "The affiliated organisation",
+                "type": "ror",
+                "required": true
+            }
+        ],
+        "applicableToServiceTypes": [
+            "Data tool",
+            "Identification tool"
+        ]
+    },
+    "funding": {
+        "title": "Funding",
+        "jsonPath": "$['schema:fundingScheme']",
+        "type": "object",
+        "fields": [
+            {
+                "jsonPath": "$['schema:fundingScheme']['schema:award']",
+                "title": "Award",
+                "description": "An award won by or for this service",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:identifier']",
+                "title": "Grant Identifier",
+                "description": "A unique identifier to identify the funder organisation; ROR identifiers are valid",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:description']",
+                "title": "Grant Description",
+                "description": "A description of the service's grant",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:fundingScheme']['schema:funding']['schema:funder']",
+                "title": "Funding Organisation",
+                "description": "An organization that supports (sponsors) something through some kind of financial contribution",
+                "type": "ror",
+                "required": true
+            }
+        ],
+        "applicableToServiceTypes": [
+            "AI training dataset",
+            "CrowdSourcing",
+            "Data tool",
+            "e-Learning service",
+            "Factsheet",
+            "Identification tool",
+            "Knowledge website",
+            "Mobile app",
+            "Service inventory",
+            "Reference collection",
+            "Specimen dataset not in GBIF"
+        ]
+    },
+    "softwareSourceCode": {
+        "title": "Software Source Code",
+        "jsonPath": "$['schema:softwareSourceCode']",
+        "type": "object",
+        "fields": [
+            {
+                "jsonPath": "$['schema:softwareSourceCode']['schema:codeRepository']",
+                "title": "Code Repository",
+                "description": "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)",
+                "type": "string",
+                "required": true
+            },
+            {
+                "jsonPath": "$['schema:softwareSourceCode']['schema:runtimePlatform']",
+                "title": "Runtime Platform",
+                "description": "Runtime platform or script interpreter dependencies (example: Java v1, Python 2.3, .NET Framework 3.0)",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:softwareSourceCode']['schema:creativeWorkStatus']",
+                "title": "Status",
+                "description": "The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:softwareSourceCode']['schema:programmingLanguage']",
+                "title": "Programming Languages",
+                "description": "The computer programming language",
+                "type": "string"
+            },
+            {
+                "jsonPath": "$['schema:softwareSourceCode']['schema:license']",
+                "title": "Software License",
+                "description": "A license document that applies to this content, typically indicated by URL",
+                "type": "softwareLicense"
+            },
+            {
+                "jsonPath": "$['schema:softwareSourceCode']['schema:additionalProperty'][0]",
+                "title": "Is Open Source",
+                "description": "Boolean indicating is the software source code is available by open source",
+                "type": "boolean"
+            }
+        ],
+        "applicableToServiceTypes": [
+            "Data tool",
+            "Identification tool"
+        ]
+    },
+    "associatedMedia": {
+        "title": "Associated Media",
+        "jsonPath": "$['schema:associatedMedia']",
+        "type": "array",
+        "fields": [
+            {
+                "jsonPath": "$['schema:associatedMedia']['index']['schema:contentUrl']",
+                "title": "Content URL",
+                "description": "JPG, PNG or SVG file showing a screenshot or other relevant illustration of the resource. Add only files that are public domain",
+                "type": "string",
+                "required": true
+            }
+        ]
+    }
+}

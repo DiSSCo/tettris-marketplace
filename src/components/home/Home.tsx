@@ -16,10 +16,10 @@ import styles from './home.module.scss';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
+import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from "components/general/header/Header";
-import SearchBar from './components/SearchBar';
 import HomeCategory from './components/HomeCategory';
 import Footer from 'components/general/footer/Footer';
 
@@ -61,13 +61,21 @@ const Home = () => {
                         "schema:Service/schema:serviceType": 'referenceCollection'
                     }
                 }
+            },
+            {
+                alias: 'taxonomicExpertise',
+                Method: GetTaxonomicExperts,
+                params: {
+                    pageSize: 1,
+                    pageNumber: 0
+                }
             }
         ],
         Handler: (results: { [alias: string]: { metadata: Dict } }) => {
             setCounts({
                 taxonomicServices: results.taxonomicServices.metadata.totalRecords,
                 referenceCollections: results.referenceCollections.metadata.totalRecords,
-                taxonomicExpertise: 0
+                taxonomicExpertise: results.taxonomicExpertise.metadata.totalRecords
             });
             dispatch(setIsApiOnline(true))
         },
@@ -111,7 +119,13 @@ const Home = () => {
                                         <Col xs={{ span: 12 }} lg={{ span: 5 }}
                                             className="position-relative mt-2 mt-lg-0"
                                         >
-                                            <SearchBar />
+                                            <div className=" bgc-white-transparent bgc-lg-white-transparent py-3 px-3 position-absolute position-lg-static top-0 start-0 w-100 br-corner">
+                                                <p className="fs-5 fs-lg-3">
+                                                    Explore the Marketplace's catalog to discover taxonomic services offered by a wide range of organisations, 
+                                                    explore the different reference collections and engage with fellow taxonomists to share expertise. 
+                                                    Designed for taxonomists, this Marketplace will aid you in your important field of work.
+                                                </p>
+                                            </div>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -119,7 +133,7 @@ const Home = () => {
                             {/* Search Category representation */}
                             <Row className="mt-5 mt-lg-0 px-2 px-lg-0">
                                 <Col lg={{ span: 1 }}
-                                    className="p-0"
+                                    className="mt-4 mt-lg-0 p-0"
                                 >
                                     <div className={`${styles.homeCategoryBar} bgc-grey d-none d-lg-block py-3`} />
                                 </Col>
@@ -160,7 +174,7 @@ const Home = () => {
                                             <HomeCategory title="Expertise Taxonomists"
                                                 subTitle="Go engage"
                                                 count={counts.taxonomicExpertise}
-                                                link="/expertise"
+                                                link="/search?serviceType=taxonomicExpert"
                                                 color="tertiary"
                                             />
                                         </Col>

@@ -39,7 +39,7 @@ const MultimediaBlock = (props: Props) => {
                                     <div className={`${styles.imageBackground} h-100 w-100 d-flex justify-content-center`}>
                                         <img src={multimediaItem['schema:contentUrl']}
                                             alt={multimediaItem['schema:contentUrl']}
-                                            className={styles.multimediaItem}
+                                            className={`${styles.multimediaItem} object-fit-contain`}
                                         />
                                     </div>
                                 </Col>

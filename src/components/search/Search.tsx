@@ -1,6 +1,6 @@
 /* Import Dependencies */
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
@@ -10,12 +10,14 @@ import { usePaginator, useAppDispatch } from 'app/Hooks';
 /* Import Store */
 import { setIsApiOnline } from 'redux-store/AppStore';
 import { setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
+import { setTaxonomicExperts, concatToTaxonomicExperts } from 'redux-store/TaxonomicExpertSlice';
 
 /* Import Types */
-import { TaxonomicService } from 'app/Types';
+import { TaxonomicService, TaxonomicExpert } from 'app/Types';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
+import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from 'components/general/header/Header';
@@ -39,12 +41,20 @@ const Search = () => {
     /* Base variables */
     const paginator = usePaginator({
         Initiate: () => {
-            dispatch(setTaxonomicServices([]));
+            searchParams.get('serviceType') === 'taxonomicExpert' ? dispatch(setTaxonomicExperts([])) : dispatch(setTaxonomicServices([]));
             setNoMoreResults(false);
         },
-        Method: GetTaxonomicServices,
-        Handler: (taxonomicServices: TaxonomicService[]) => {
-            /* On receival of a new page with records, add them to the total */
+        Method: searchParams.get('serviceType') === 'taxonomicExpert' ? GetTaxonomicExperts : GetTaxonomicServices,
+        Handler: searchParams.get('serviceType') === 'taxonomicExpert' ? (taxonomicExperts: TaxonomicExpert[]) => {
+            /* On receival of a new page with records and add them to the total */
+            dispatch(concatToTaxonomicExperts(taxonomicExperts));
+            dispatch(setIsApiOnline(true))
+
+            if (!taxonomicExperts.length) {
+                setNoMoreResults(true);
+            }
+        } : (taxonomicServices: TaxonomicService[]) => {
+            /* On receival of a new page with records and add them to the total */
             dispatch(concatToTaxonomicServices(taxonomicServices));
             dispatch(setIsApiOnline(true))
 
@@ -56,14 +66,51 @@ const Search = () => {
             dispatch(setIsApiOnline(false));
         },
         pageSize: 12,
-        resultKey: 'taxonomicServices',
+        resultKey: searchParams.get('serviceType') === 'taxonomicExpert' ? 'taxonomicExperts' : 'taxonomicServices',
         allowSearchParams: true
     });
 
+    /* On search: check if there are any more records to be shown with the show more button */
+    useEffect(() => {
+        if (!noMoreResults) {
+            const searchFilters = [...searchParams.entries()].reduce((filtersObject, [key, value]) => {
+                return {
+                    ...filtersObject,
+                    [key]: value
+                }
+            }, {});
+
+            if (searchParams.get('serviceType') === 'taxonomicExpert') {
+                GetTaxonomicExperts({
+                    pageNumber: paginator.currentPage + 1,
+                    pageSize: 12,
+                    searchFilters
+                }).then(({ taxonomicExperts }) => {
+                    if (!taxonomicExperts.length) {
+                        setNoMoreResults(true);
+                    }
+                });
+            }
+            else {
+                GetTaxonomicServices({
+                    pageNumber: paginator.currentPage + 1,
+                    pageSize: 12,
+                    searchFilters
+                }).then(({ taxonomicServices }) => {
+                    if (!taxonomicServices.length) {
+                        setNoMoreResults(true);
+                    }
+                });
+            }
+        }
+    }, [paginator]);
+
+    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
     /* ClassNames */
     const mainBodyClass = classNames({
         'gradient-primary': true,
-        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'gradient-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
     });
 
     const searchResultsClassScrollBlock = classNames({
@@ -98,7 +145,7 @@ const Search = () => {
                             </Col>
                         </Row>
                         {/* Filters Bar */}
-                        <Row className="mt-3 d-none d-lg-flex">
+                        <Row className="mt-1 d-none d-lg-flex">
                             <Col>
                                 <FiltersBar />
                             </Col>
@@ -110,7 +157,7 @@ const Search = () => {
                             </Col>
                         </Row>
                         {/* Search Results body */}
-                        <Row className={`${searchResultsClassScrollBlock} flex-grow-1 mt-4`}>
+                        <Row className={`${searchResultsClassScrollBlock} flex-grow-1 mt-4 mb-4`}>
                             <Col className="h-100 d-flex flex-column">
                                 {/* Search Result blocks */}
                                 <Row className={searchResultsClass}>
@@ -130,7 +177,7 @@ const Search = () => {
                                     <Col className="d-flex justify-content-center">
                                         {(!paginator.loading && !noMoreResults && paginator.totalRecords > 0) &&
                                             <Button type="button"
-                                                variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                                variant={variant}
                                                 OnClick={() => paginator.Next?.()}
                                             >
                                                 Load more
@@ -158,6 +205,6 @@ const Search = () => {
             <Footer />
         </div >
     );
-}
+};
 
 export default Search;

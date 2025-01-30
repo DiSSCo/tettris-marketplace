@@ -20,7 +20,7 @@ const QueryBar = (props: Props) => {
     const { children, name, placeholder } = props;
 
     return (
-        <div className="h-100 w-100 position-relative d-flex flex-column justify-content-center">
+        <div className="position-relative d-flex flex-column justify-content-center">
             <Field name={name}
                 placeholder={placeholder}
                 className="w-100 py-1 px-2"

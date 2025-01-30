@@ -2,14 +2,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 /* Import Hooks */
 import { useFocus } from 'app/Hooks';
 
 /* Import Icons */
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 /* Import Styles */
 import styles from 'components/search/search.module.scss';
@@ -24,7 +24,8 @@ import { Button } from 'components/general/CustomComponents';
 */
 const TopBar = () => {
     /* Hooks */
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     /* Base variables */
     const [filtersToggle, setFiltersToggle] = useState<boolean>(false);
@@ -40,6 +41,18 @@ const TopBar = () => {
         'd-block': filtersToggle
     });
 
+    /* variable */
+    let textButton = "Suggest a new service"
+    let path = "/ts/suggestNewTaxonomicService"
+    if (searchParams.get('serviceType') === 'referenceCollection') {
+        textButton = "Suggest a new reference collection"
+    }
+    else if (searchParams.get('serviceType') === 'taxonomicExpert') {
+        textButton = "Register your expertise"
+        path = "/te/registerYourExpertise"
+    }
+    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
+
     return (
         <div className="position-relative">
             <Row>
@@ -53,7 +66,7 @@ const TopBar = () => {
                     className="d-block d-lg-none mt-3"
                 >
                     <Button type="button"
-                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={variant}
                         className="fs-5"
                         OnClick={() => setFiltersToggle(!filtersToggle)}
                     >
@@ -61,6 +74,13 @@ const TopBar = () => {
                             <span className="pe-2">Filters</span>
                             <FontAwesomeIcon icon={faFilter} />
                         </>
+                    </Button>
+                    <Button type="button"
+                        variant={variant}
+                        className="fs-5 ms-2"
+                        OnClick={() => setSearchParams()}
+                    >
+                        <FontAwesomeIcon icon={faFilterCircleXmark} />
                     </Button>
 
                     {/* Absolute position filters bar */}
@@ -74,14 +94,11 @@ const TopBar = () => {
                     className="mt-3 mt-lg-0"
                 >
                     <Button type="button"
-                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={variant}
                         className="fs-5 fs-lg-4"
-                        OnClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf6ug3jMZnZaZrP0WYv7GgFvnn06QIdi2GFekEqynwsoTCfUQ/viewform?usp=sf_link',
-                            '_blank',
-                            'noopener'
-                        )}
+                        OnClick={() => navigate(path)}
                     >
-                        Suggest a new service
+                        {textButton}
                     </Button>
                 </Col>
             </Row>

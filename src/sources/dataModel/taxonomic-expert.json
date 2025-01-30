@@ -1,0 +1,81 @@
+{
+    "$id": "https://schemas.dissco.tech/schemas/fdo-type/tettris-service/0.1.0/tettris-service.json",
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$comment": "Taxonomic Expert Version 0.1.0",
+    "title": "Taxonomic Expert",
+    "type": "object",
+    "description": "A Taxonomic Expert is a person who is an expert in the field of taxonomy, the science of defining and naming groups of biological organisms on the basis of shared characteristics.",
+    "properties": {
+        "@id": {
+            "type": "string",
+            "description": "The unique identifier of the Taxonomic Expert object",
+            "pattern": "20.500.14547\/(.){20}",
+            "examples": [
+                "20.500.14547/47bcc386b52ecbae623a"
+            ]
+        },
+        "@type": {
+            "type": "string",
+            "description": "The type of the object, in this case TaxonomicExpert",
+            "const": "TaxonomicExpert"
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the Taxonomic Expert",
+            "examples": [
+                "John Doe"
+            ]
+        },
+        "email": {
+            "type": "string",
+            "description": "The email of the Taxonomic Expert",
+            "format": "email",
+            "examples": [
+                "john.doe@mail.com"
+            ]
+        },
+        "topDescription": {
+          "type": "string",
+          "description": "A short description of the Taxonomic Expert",
+          "examples": [
+              "John Doe is a taxonomic expert with 10 years of experience in the field."
+          ]
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "English (EN)",
+              "French (FR)",
+              "Dutch (NL)",
+              "German (DE)",
+              "Spanish (ES)",
+              "Italian (IT)",
+              "Portuguese (PT)",
+              "Polish (PL)",
+              "Swedish (SV)",
+              "Czech (CS)",
+              "Hungarian (HU)",
+              "Romanian (RO)",
+              "Greek (EL)",
+              "Bulgarian (BG)",
+              "Slovak (SK)",
+              "Finnish (FI)",
+              "Danish (DA)",
+              "Lithuanian (LT)",
+              "Latvian (LV)",
+              "Estonian (ET)",
+              "Slovenian (SL)",
+              "Croatian (HR)",
+              "Maltese (MT)",
+              "Irish (GA)"
+            ]
+          },
+          "description": "Languages the user is proficient or fluent in."
+        }
+    },
+    "required": [
+        "@id"
+    ]
+}

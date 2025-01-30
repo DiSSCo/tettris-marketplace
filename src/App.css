@@ -97,7 +97,7 @@ p {
   .fs-lg-5 {
     font-size: 0.75rem !important;
   }
-  
+
   .fs-lg-4 {
     font-size: 0.875rem !important;
   }
@@ -105,15 +105,15 @@ p {
   .fs-lg-default {
     font-size: 1rem !important;
   }
-  
+
   .fs-lg-3 {
     font-size: 1.125rem !important;
   }
-  
+
   .fs-lg-2 {
     font-size: 1.5rem !important;
   }
-  
+
   .fs-lg-1 {
     font-size: 2.5rem !important;
   }
@@ -121,7 +121,7 @@ p {
   .fs-title {
     font-size: 3rem !important;
   }
-  
+
   .fs-subTitle {
     font-size: 2rem !important;
   }
@@ -129,6 +129,10 @@ p {
 
 /* Text color */
 .tc-primary {
+  color: var(--primary);
+}
+
+.tc-primary-hover:hover {
   color: var(--primary);
 }
 
@@ -205,8 +209,25 @@ p {
   background-color: var(--greyLight);
 }
 
+.bgc-error {
+  background-color: var(--error);
+}
+
 .bgc-none {
   background-color: transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .bgc-white-transparent {
+    background-color: white;
+    border-top: 2px solid var(--primary);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .bgc-lg-white-transparent {
+    background-color: rgb(255, 255, 255, 0.7);
+  }
 }
 
 /* Gradient */
@@ -220,9 +241,28 @@ p {
   background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(236, 248, 244, 1) 30%, rgba(198, 235, 222, 1) 60%, rgba(236, 248, 244, 1) 95%, rgba(249, 246, 244, 1) 100%);
 }
 
+.gradient-tertiary {
+  background: rgb(249, 250, 252);
+  background: linear-gradient(180deg, rgba(249, 250, 252, 1) 10%, rgba(200, 235, 245, 1) 30%, rgba(200, 235, 245, 1) 60%, rgba(200, 235, 245, 1) 95%, rgba(249, 246, 244, 1) 100%);
+}
+
 /* Border */
 .b-primary {
   border: 1px solid var(--primary);
+}
+.b-secondary {
+  border: 1px solid var(--secondary);
+}
+.b-tertiary {
+  border: 1px solid var(--tertiary);
+}
+
+.b-grey {
+  border: 1px solid var(--grey);
+}
+
+.b-error {
+  border: 1px solid var(--error);
 }
 
 .b-none {
@@ -329,6 +369,13 @@ p {
   transition: 0.3s;
 }
 
+/* Text overflow */
+.horizontalScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
 /* Buttons */
 .button-no-style {
   width: 100%;
@@ -359,4 +406,9 @@ p {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* MDX editor toolbar */
+.mdxeditor-toolbar {
+  z-index: 0 !important;
 }
