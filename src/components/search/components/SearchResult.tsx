@@ -114,15 +114,15 @@ const SearchResult = (props: Props) => {
                             className={`${imageColClass} h-100 flex-column`}
                         >
                             {/* Language */}
-                            <Row className="flex-grow-1">
+                            <Row>
                                 <Col className="d-flex justify-content-end">
                                     <p className="fw-bold fs-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
                                 </Col>
                             </Row>
                             {/* Logo, if present */}
                             {taxonomicService.taxonomicService['schema:service']['schema:logo'] &&
-                                <Row>
-                                    <Col>
+                                <Row className="flex-grow-1 overflow-hidden">
+                                    <Col className="h-100">
                                         <div className="h-100 w-100 overflow-hidden">
                                             <img src={logoImage}
                                                 alt={logoImage}
@@ -214,25 +214,6 @@ const SearchResult = (props: Props) => {
                     <Col lg={{ span: 4 }}
                         className={`h-100 flex-column`}
                     >
-                        {/* Language */}
-                        <Row>
-                            <Col className="d-flex justify-content-end">
-                                <p className="fw-bold fs-4">{taxonomicService.taxonomicService['schema:availableLanguage']?.join(' / ').toUpperCase()}</p>
-                            </Col>
-                        </Row>
-                        {/* Logo, if present */}
-                        {taxonomicService.taxonomicService['schema:service']['schema:logo'] &&
-                            <Row className="flex-grow-1 overflow-hidden">
-                                <Col className="h-100">
-                                    <div className="h-100 w-100 overflow-hidden">
-                                        <img src={logoImage}
-                                            alt={logoImage}
-                                            className="h-100 w-100 object-fit-contain"
-                                        />
-                                    </div>
-                                </Col>
-                            </Row>
-                        }
                         {/* Publishing Date */}
                         {/* <Row>
                             <Col className="d-flex justify-content-end">
