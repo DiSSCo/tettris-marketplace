@@ -128,7 +128,7 @@ const FiltersBar = (props: Props) => {
                         <Row className="align-items-end">
                             {/* Search Bar */}
                             <Col xs={{ span: 12 }}
-                                lg={{ span: filters.length > 4 ? 'auto' : 4 }}
+                                lg={{ span: 4 }}
                                 className="mb-4 mb-lg-0"
                             >
                                 <p className={`${serviceTypeClass} fs-5 fw-lightBold`}>Search query</p>
@@ -144,7 +144,7 @@ const FiltersBar = (props: Props) => {
                                     {filters.map((filter) => (
                                         <Col key={filter.name}
                                             xs={{ span: 12 }}
-                                            lg={{ span: filters.length > 4 ? 'auto' : 3 }}
+                                            lg={{ span: filters.length > 4 ? 2 : 3 }}
                                             className="mb-2 mb-lg-0"
                                         >
                                             <Filter filter={filter}

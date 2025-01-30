@@ -99,18 +99,20 @@ const TaxonomicExpert = () => {
                                         ORCID ID
                                     </Col>
                                     <Col>
-                                        BELGIUM
+                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['schema:location']}</p>
                                     </Col>
                                     <Col>
-                                        FRENCH (FR)
+                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['schema:language']?.join(' / ').toUpperCase()}</p>
                                     </Col>
-                                    <Col>
-                                        <Button variant="tertiary">EMAIL</Button>
+                                    <Col lg="auto" className="d-none d-lg-block">
+                                        <Button type="submit" variant='tertiary'>
+                                            <p>EMAIL</p>
+                                        </Button>
                                     </Col>
                                 </Row>
                                 <Row className="mb-3">
                                     <Col xs={{ span: 2 }}>
-                                        <img src="https://www.w3schools.com/images/picture.jpg" alt="John Doe" style={{ width: '200px', height: '200px' }} />
+                                        <img src="https://www.w3schools.com/images/picture.jpg" alt="John Doe" style={{ width: '100px', height: '100px' }} />
                                     </Col>
                                     <Col xs={{ span: 8 }}>
                                         <Row>
