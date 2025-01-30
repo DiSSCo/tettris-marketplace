@@ -4,35 +4,35 @@
         "type": "object",
         "fields": [
             {
-                "jsonPath": "$['name']",
+                "jsonPath": "$['schema:name']",
                 "title": "Full Name",
                 "type": "string",
                 "description": "The full name of the taxonomic expert.",
                 "required": true
             },
             {
-                "jsonPath": "$['schema:personal']['schema:email']",
+                "jsonPath": "$['schema:email']",
                 "title": "Email",
                 "type": "string",
                 "description": "The email address of the taxonomic expert.",
                 "required": false
             },
             {
-                "jsonPath": "$['schema:personal']['schema:identifier']",
+                "jsonPath": "$['schema:identifier']",
                 "title": "ORCID",
                 "description": "A unique identifier to identify the author; ORCID identifiers are valid",
                 "type": "string",
                 "required": false
             },
             {
-                "jsonPath": "$['schema:personal']['schema:description']",
+                "jsonPath": "$['schema:headline']",
                 "title": "Headline description",
                 "description": "A description of your job role or what you are an expert in. For example: Expert on Bee Taxonomy; Professor of Entomology, Citizen scientist on butterfly monitoring).",
                 "type": "text",
                 "required": false
             },
             {
-                "jsonPath": "$['nationality']",
+                "jsonPath": "$['schema:nationality']",
                 "title": "Nationality",
                 "description": "Select your nationality. Please use the country name and ISO code (Alpha-2 code).",
                 "type": "select",
@@ -238,7 +238,7 @@
                 "required": false
             },
             {
-                "jsonPath": "$['location']",
+                "jsonPath": "$['schema:location']",
                 "title": "Location",
                 "description": "Select your country of residence. Please use the country name and ISO code (Alpha-2 code).",
                 "type": "select",
@@ -444,7 +444,7 @@
                 "required": false
             },                               
             {
-                "jsonPath": "$['Languages']",
+                "jsonPath": "$['schema:language']",
                 "title": "Supporting language",
                 "description": "The languages that you are proficient or fluent in. Please use one of the language codes from the IETF BCP 47 standard",
                 "type": "multi-select",
@@ -577,10 +577,10 @@
         "type": "object",
         "fields": [
             {
-                "jsonPath": "$['schema:taxonomie']['schema:discipline']",
+                "jsonPath": "$['schema:taxonomicRange']",
                 "title": "Taxonomic discipline",
                 "type": "string",
-                "description": "The full name of the taxonomic expert.",
+                "description": "The taxonomic discipline that you are an expert in. For example: Entomology, Botany, Ichthyology, etc.",
                 "required": false
             }
         ]

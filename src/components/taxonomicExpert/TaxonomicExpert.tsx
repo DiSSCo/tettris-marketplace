@@ -93,7 +93,7 @@ const TaxonomicExpert = () => {
                                 {/* Top bar */}
                                 <Row className="mt-3 pt-lg-0">
                                     <Col>
-                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['name']}</p>
+                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['schema:name']}</p>
                                     </Col>
                                     <Col>
                                         ORCID ID

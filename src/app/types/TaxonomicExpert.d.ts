@@ -20,43 +20,50 @@ export interface TaxonomicExpert {
   /**
    * The name of the Taxonomic Expert
    */
-  name?: string;
+  "schema:name"?: string;
   /**
    * The email of the Taxonomic Expert
    */
-  email?: string;
+  "schema:email"?: string;
   /**
    * A short description of the Taxonomic Expert
    */
-  topDescription?: string;
+  "schema:headline"?: string;
   /**
    * Languages the user is proficient or fluent in.
    */
-  languages?: (
-    | "English (EN)"
-    | "French (FR)"
-    | "Dutch (NL)"
-    | "German (DE)"
-    | "Spanish (ES)"
-    | "Italian (IT)"
-    | "Portuguese (PT)"
-    | "Polish (PL)"
-    | "Swedish (SV)"
-    | "Czech (CS)"
-    | "Hungarian (HU)"
-    | "Romanian (RO)"
-    | "Greek (EL)"
-    | "Bulgarian (BG)"
-    | "Slovak (SK)"
-    | "Finnish (FI)"
-    | "Danish (DA)"
-    | "Lithuanian (LT)"
-    | "Latvian (LV)"
-    | "Estonian (ET)"
-    | "Slovenian (SL)"
-    | "Croatian (HR)"
-    | "Maltese (MT)"
-    | "Irish (GA)"
+  "schema:language"?: (
+    | "bg"
+    | "hr"
+    | "cs"
+    | "da"
+    | "lb"
+    | "nl"
+    | "en"
+    | "et"
+    | "fi"
+    | "fr"
+    | "de"
+    | "el"
+    | "hu"
+    | "ga"
+    | "it"
+    | "lv"
+    | "lt"
+    | "mt"
+    | "pl"
+    | "pt"
+    | "ro"
+    | "ru"
+    | "sk"
+    | "es"
+    | "sv"
+    | "tk"
+    | "uk"
   )[];
+  /**
+   * The location of the Taxonomic Expert
+   */
+  "schema:location"?: string;
   [k: string]: unknown;
 }

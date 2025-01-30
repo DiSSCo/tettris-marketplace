@@ -161,10 +161,7 @@ const SearchResult = (props: Props) => {
             navigate(`/te/${taxonomicExpert.taxonomicExpert['@id'].replace(import.meta.env.VITE_HANDLE_URL as string, '')}`);
         }
 
-        const imageColClass = classNames({
-            'd-none d-lg-none': !logoImage,
-            'd-none d-lg-flex': logoImage
-        });
+        const languages = taxonomicExpert.taxonomicExpert['schema:language']?.join(' / ').toUpperCase();
 
         return (
             <div className={`${styles.searchResult} w-100 bgc-white mt-lg-1 pt-3 pb-2 px-3`}>
@@ -172,61 +169,48 @@ const SearchResult = (props: Props) => {
                     className="button-no-style"
                     onClick={() => SelectTaxonomicExpert(taxonomicExpert)}
                 >
-                    <Row className="h-100">
-                        {/* Basic column with all the details */}
-                        <Col lg={{ ...(logoImage && { span: 8 }) }} className="h-100 d-flex flex-column">
-                            {/* Title and language if image is not present */}
-                            <Row>
-                                <Col xs lg={{ span: (!logoImage || window.innerWidth < 768) ? 9 : 12 }}>
-                                    <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicExpert.taxonomicExpert['name']}</p>
-                                </Col>
-                            </Row>
-                            {/* Headline description */}
-                            <Row>
-                                <Col>
-                                    <p className="fs-5 fs-lg-4 fst-italic textOverflow">Headline Description</p>
-                                </Col>
-                            </Row>
-                            {/* Taxonomic Range */}
-                            <Row className='flex-grow-1 my-2'>
-                                <Col>
-                                    <p>Bee/....</p>
-                                    <p>Bee/....</p>
-                                    <p>Bee/....</p>
-                                </Col>
-                            </Row>
-                            {/* Languages if preview image is not present */}
-                            <Row>
-                                <Col>
-                                    <p className="fs-5 fs-lg-4">{taxonomicExpert.taxonomicExpert['languages']}</p>
-                                </Col>
-                            </Row>
-                        </Col>
-                        {/* If preview image is present, render this additional column which takes over some details from the original one */}
-                        <Col lg={{ span: 4 }}
-                            className={`${imageColClass} h-100 flex-column`}
-                        >
-                            {/* Logo, if present */}
-                            {
-                                <Row className="flex-grow-1 overflow-hidden">
-                                    <Col className="h-100">
-                                        <div className="h-100 w-100 overflow-hidden">
-                                            <img src={logoImage}
-                                                alt={logoImage}
-                                                className="h-100 w-100 object-fit-contain"
-                                            />
-                                        </div>
+                    <Col className="h-100 d-flex flex-column">
+                        {/* Title */}
+                        <Row>
+                            <Col>
+                                <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicExpert.taxonomicExpert['schema:name']}</p>
+                            </Col>
+                        </Row>
+                        {/*Headline, Taxonomic Range and profile picture */}
+                        <Row className='mb-2 justify-content-between align-items-center'>
+                            <Col className=''>
+                                <Row className='mb-2'>
+                                    <Col>
+                                        <p className="fs-6 fs-lg-4  textOverflow">{taxonomicExpert.taxonomicExpert['schema:headline']}</p>
                                     </Col>
                                 </Row>
-                            }
-                            {/* Publishing Date */}
-                            <Row>
-                                <Col className="d-flex justify-content-end">
-                                    <p className="fw-bold fs-4">Belgium</p>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
+                                <Row>
+                                    <Col>
+                                        <p className='fst-italic'>Lepidoptera</p>
+                                        <p className='fst-italic'>Bees</p>
+                                        <p className='fst-italic'>Butterflies</p>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col className='d-flex justify-content-end'>
+                                <div className="h-100 w-100 overflow-hidden" style={{ maxWidth: window.innerWidth < 768 ? '80px' : '100px', maxHeight: window.innerWidth < 768 ? '80px' : '100px' }}>
+                                    <img src={logoImage}
+                                        alt={logoImage}
+                                        className="h-100 w-100 object-fit-contain"
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        {/* Languages and countries */}
+                        <Row >
+                            <Col className='d-flex justify-content-start'>
+                                <p className="fs-5 fs-lg-4">{languages}</p>
+                            </Col>
+                            <Col className="d-flex justify-content-end">
+                                <p className="fw-bold fs-4">{taxonomicExpert.taxonomicExpert['schema:location']}</p>
+                            </Col>
+                        </Row>
+                    </Col>
                 </button>
             </div >
             
