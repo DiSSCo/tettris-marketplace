@@ -74,17 +74,6 @@ const StringArrayField = (props: Props) => {
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col lg="auto">
-                                <Button type="button"
-                                    variant="blank"
-                                    className="px-0 py-0"
-                                    OnClick={() => push('')}
-                                >
-                                    <p className={color}>
-                                        Add field
-                                    </p>
-                                </Button>
-                            </Col>
                         </Row>
                         {fieldValues.map((_fieldValue, index) => {
                             const key = `${jsonPath}-${index}`;
@@ -117,6 +106,19 @@ const StringArrayField = (props: Props) => {
                                 </Row>
                             );
                         })}
+                        <Row className="mt-1">
+                            <Col>
+                                <Button type="button"
+                                    variant="blank"
+                                    className="px-0 py-0"
+                                    OnClick={() => push('')}
+                                >
+                                    <p className="tc-primary">
+                                        Add value
+                                    </p>
+                                </Button>
+                            </Col>
+                        </Row>
                     </div>
                 )}
             </FieldArray>

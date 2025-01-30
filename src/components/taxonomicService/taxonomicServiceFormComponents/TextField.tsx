@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import { 
     MDXEditor, UndoRedo, BlockTypeSelect, BoldItalicUnderlineToggles, CreateLink, 
-    linkDialogPlugin, ListsToggle, listsPlugin, headingsPlugin, toolbarPlugin 
+    linkDialogPlugin, ListsToggle, listsPlugin, headingsPlugin, toolbarPlugin , maxLengthPlugin
 } from '@mdxeditor/editor';
 import classNames from 'classnames';
 import jp from 'jsonpath'
@@ -44,10 +44,12 @@ const TextField = (props: Props) => {
             />
             <MDXEditor markdown=""
                 className={`${formFieldClass} b-grey br-corner mt-1 z-0`}
+                
                 plugins={[
                     headingsPlugin(),
                     linkDialogPlugin(),
                     listsPlugin(),
+                    maxLengthPlugin(2000),
                     toolbarPlugin({
                         toolbarContents: () => (
                             <>

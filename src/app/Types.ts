@@ -95,7 +95,8 @@ export type FormField = {
     mapping?: {
         [option: string]: string
     } | string,
-    required?: boolean
+    required?: boolean,
+    maxChars?: number
     maxSelections?: number
 };
 

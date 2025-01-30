@@ -48,22 +48,25 @@ const TopBar = (props: Props) => {
                     rel="noreferer"
                 >
                     <h1 className="fs-3 fs-lg-2 tc-primary-hover">{taxonomicService.taxonomicService['schema:service']['schema:name']}</h1>
+                    <p className="fs-4 tc-grey">{`Persistent ID: ${taxonomicService.taxonomicService['@id']}`}</p>
                 </a>
             </Col>
             {/* Apply for usage button */}
             <Col xs lg
                 className="mt-3 mt-lg-0 d-flex justify-content-end"
             >
-                <Button type="button"
-                    variant="primary"
-                    className="fs-5 fs-lg-4"
-                    disabled={!taxonomicService.taxonomicService['schema:url']}
-                    OnClick={() => window.open(`https://${taxonomicService.taxonomicService['schema:url']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
-                >
-                    <p>
-                        Go to E-Service
-                    </p>
-                </Button>
+                <div>
+                    <Button type="button"
+                        variant="primary"
+                        className="fs-5 fs-lg-4"
+                        disabled={!taxonomicService.taxonomicService['schema:url']}
+                        OnClick={() => window.open(`https://${taxonomicService.taxonomicService['schema:url']?.replace('http://', '').replace('https://', '')}`, '_blank', 'noopener')}
+                    >
+                        <p>
+                            Go to E-Service
+                        </p>
+                    </Button>
+                </div>
             </Col>
         </Row>
     );
