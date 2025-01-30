@@ -20,6 +20,7 @@ import GetTaxonomicExpert from 'api/taxonomicExpert/GetTaxonomicExpert';
 import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
 import { BreadCrumbs, Spinner } from 'components/general/CustomComponents';
+import DetailsBlock from './components/DetailsBlock';
 
 
 const TaxonomicExpert = () => {
@@ -92,7 +93,7 @@ const TaxonomicExpert = () => {
                                 {/* Top bar */}
                                 <Row className="mt-3 pt-lg-0">
                                     <Col>
-                                        {taxonomicExpert?.taxonomicExpert['name']}
+                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['name']}</p>
                                     </Col>
                                     <Col>
                                         ORCID ID
@@ -107,11 +108,11 @@ const TaxonomicExpert = () => {
                                         <Button variant="tertiary">EMAIL</Button>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col>
-                                        <img src="https://www.w3schools.com/images/picture.jpg" alt="John Doe" />
+                                <Row className="mb-3">
+                                    <Col xs={{ span: 2 }}>
+                                        <img src="https://www.w3schools.com/images/picture.jpg" alt="John Doe" style={{ width: '200px', height: '200px' }} />
                                     </Col>
-                                    <Col>
+                                    <Col xs={{ span: 8 }}>
                                         <Row>
                                             <Col>
                                                 <p>Headline Description</p>
@@ -130,26 +131,26 @@ const TaxonomicExpert = () => {
                                         </Row>
                                     </Col>
                                 </Row>
-                                <Row>
+                                <Row className="flex-grow-1">
                                     <Col>
-                                        <Row>
+                                        <Row className="mb-3">
                                             <Col>
-                                                <p>Expert Bio</p>
+                                                <DetailsBlock name="Expert Bio" />
                                             </Col>
                                         </Row>
-                                        <Row>
+                                        <Row className="mb-3">
                                             <Col>
-                                                <p>Experience and qualifications</p>
+                                                <DetailsBlock name="Experience and qualifications" />
                                             </Col>
                                         </Row>
-                                        <Row>
+                                        <Row className="mb-3">
                                             <Col>
-                                                <p>Training Provision</p>
+                                                <DetailsBlock name="Training Provision" />
                                             </Col>
                                         </Row>
                                     </Col>
                                     <Col>
-                                        <p>Taxonomic and research scope</p>
+                                        <DetailsBlock name="Taxonomic and research scope" />
                                     </Col>
                                 </Row>
                                 {/* Scrollable content */}
