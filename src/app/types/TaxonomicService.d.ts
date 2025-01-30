@@ -310,6 +310,10 @@ export interface TaxonomicService {
      * A unique identifier to identify the author; ORCID identifiers are valid
      */
     "schema:identifier": string;
+    /**
+     * Full name of the author
+     */
+    "schema:name": string;
     "schema:affiliation": {
       /**
        * The type of the affiliation
@@ -374,7 +378,7 @@ export interface TaxonomicService {
       /**
        * A unique identifier to identify the grant
        */
-      "schema:identifier": string;
+      "schema:identifier"?: string;
       /**
        * A description of the service's grant
        */

@@ -5,11 +5,13 @@ import type { PreloadedStateShapeFromReducersMapObject } from '@reduxjs/toolkit'
 /* Import Redux Slices */
 import AppServiceReducer from '../redux-store/AppStore';
 import TaxonomicServiceReducer from '../redux-store/TaxonomicServiceSlice';
+import TaxonomicExpertReducer from '../redux-store/TaxonomicExpertSlice';
 
 
 const rootReducer = combineReducers({
     app: AppServiceReducer,
-    taxonomicService: TaxonomicServiceReducer
+    taxonomicService: TaxonomicServiceReducer,
+    taxonomicExpert: TaxonomicExpertReducer
 });
 
 export const setupStore = (preloadedState?: PreloadedStateShapeFromReducersMapObject<RootState>) => {

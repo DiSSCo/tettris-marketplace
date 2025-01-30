@@ -16,6 +16,7 @@ import styles from './home.module.scss';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
+import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from "components/general/header/Header";
@@ -60,13 +61,21 @@ const Home = () => {
                         "schema:Service/schema:serviceType": 'referenceCollection'
                     }
                 }
+            },
+            {
+                alias: 'taxonomicExpertise',
+                Method: GetTaxonomicExperts,
+                params: {
+                    pageSize: 1,
+                    pageNumber: 0
+                }
             }
         ],
         Handler: (results: { [alias: string]: { metadata: Dict } }) => {
             setCounts({
                 taxonomicServices: results.taxonomicServices.metadata.totalRecords,
                 referenceCollections: results.referenceCollections.metadata.totalRecords,
-                taxonomicExpertise: 0
+                taxonomicExpertise: results.taxonomicExpertise.metadata.totalRecords
             });
             dispatch(setIsApiOnline(true))
         },
@@ -165,7 +174,7 @@ const Home = () => {
                                             <HomeCategory title="Expertise Taxonomists"
                                                 subTitle="Go engage"
                                                 count={counts.taxonomicExpertise}
-                                                link="/expertise"
+                                                link="/search?serviceType=taxonomicExpert"
                                                 color="tertiary"
                                             />
                                         </Col>

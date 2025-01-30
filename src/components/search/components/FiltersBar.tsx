@@ -12,7 +12,9 @@ import { useSearchParams } from 'react-router-dom';
 import { Dict, Filter as FilterType } from 'app/Types';
 
 /* Import Sources */
+import Filters from 'sources/searchFilters/Filters.json';
 import TaxonomicServiceFilters from 'sources/searchFilters/TaxonomicServiceFilters.json';
+import TaxonimicExpertFilters from 'sources/searchFilters/TaxonomicExpertFilters.json';
 
 /* Import Icons */
 import { faMagnifyingGlass, faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -42,13 +44,30 @@ const FiltersBar = (props: Props) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     /* Base variables */
-    const filters: FilterType[] = [...TaxonomicServiceFilters.taxonomicServiceFilters];
+    const FiltersType: FilterType[] = [...Filters.filters];
+    const taxonomicServicefilters: FilterType[] = [...TaxonomicServiceFilters.taxonomicServiceFilters];
+    const taxonomicExpertFilters: FilterType[] = [...TaxonimicExpertFilters.taxonomicExpertFilters];
     const [initialValues, setInitialValues] = useState<Dict>({});
 
+    /* Determine filters based on service type */
+    const filters: FilterType[] = [];
+    const serviceType = searchParams.get('serviceType');
+
+    if (!serviceType) {
+        filters.push(...taxonomicServicefilters);
+    } else if (serviceType === 'taxonomicExpert') {
+        filters.push(...taxonomicExpertFilters);
+    }
+
     /* Set initial values */
-    filters.forEach((filter) => {
+    filters.unshift(...FiltersType);
+    FiltersType.forEach((filter) => {
         initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
     });
+
+    // filters.forEach((filter) => {
+    //     initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
+    // });
 
     /**
      * Function that resets all search filters, except for taonomic service type
@@ -70,8 +89,11 @@ const FiltersBar = (props: Props) => {
     const serviceTypeClass = classNames({
         'tr-smooth': true,
         'tc-primary': !searchParams.get('serviceType'),
-        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'tc-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
     });
+    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
+
 
     return (
         <Formik initialValues={{
@@ -106,7 +128,7 @@ const FiltersBar = (props: Props) => {
                         <Row className="align-items-end">
                             {/* Search Bar */}
                             <Col xs={{ span: 12 }}
-                                lg={{ span: 4 }}
+                                lg={{ span: filters.length > 4 ? 'auto' : 4 }}
                                 className="mb-4 mb-lg-0"
                             >
                                 <p className={`${serviceTypeClass} fs-5 fw-lightBold`}>Search query</p>
@@ -122,7 +144,7 @@ const FiltersBar = (props: Props) => {
                                     {filters.map((filter) => (
                                         <Col key={filter.name}
                                             xs={{ span: 12 }}
-                                            lg={{ span: 3 }}
+                                            lg={{ span: filters.length > 4 ? 'auto' : 3 }}
                                             className="mb-2 mb-lg-0"
                                         >
                                             <Filter filter={filter}
@@ -140,7 +162,7 @@ const FiltersBar = (props: Props) => {
                                 className="d-none d-lg-block"
                             >
                                 <Button type="submit"
-                                    variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                    variant={variant}
                                 >
                                     <p>Search</p>
                                 </Button>
