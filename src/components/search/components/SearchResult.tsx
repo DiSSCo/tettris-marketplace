@@ -161,71 +161,76 @@ const SearchResult = (props: Props) => {
             navigate(`/te/${taxonomicExpert.taxonomicExpert['@id'].replace(import.meta.env.VITE_HANDLE_URL as string, '')}`);
         }
 
-        // const imageColClass = classNames({
-        //     'd-none d-lg-none': !logoImage,
-        //     'd-none d-lg-flex': logoImage
-        // });
+        const imageColClass = classNames({
+            'd-none d-lg-none': !logoImage,
+            'd-none d-lg-flex': logoImage
+        });
 
-        return (<div className={`${styles.searchResult} w-100 bgc-white mt-lg-1 pt-3 pb-2 px-3`}>
-            <button type="button"
-                className="button-no-style"
-                onClick={() => SelectTaxonomicExpert(taxonomicExpert)}
-            >
-                <Row className="h-100">
-                    {/* Basic column with all the details */}
+        return (
+            <div className={`${styles.searchResult} w-100 bgc-white mt-lg-1 pt-3 pb-2 px-3`}>
+                <button type="button"
+                    className="button-no-style"
+                    onClick={() => SelectTaxonomicExpert(taxonomicExpert)}
+                >
+                    <Row className="h-100">
+                        {/* Basic column with all the details */}
                         <Col lg={{ ...(logoImage && { span: 8 }) }} className="h-100 d-flex flex-column">
-                        {/* Title and language if image is not present */}
-                        <Row>
-                            <Col xs lg={{ span: (window.innerWidth < 768) ? 9 : 12 }}>
-                                <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicExpert.taxonomicExpert['name']}</p>
-                            </Col>      
-                            <Col xs="auto"
-                                className={'d-lg-block'}
-                            >
-                                <p className="fw-bold fs-5 fs-lg-5 text-end textOverflow">{taxonomicExpert.taxonomicExpert['topDescription']}</p>
-                            </Col>  
-                        </Row>
-                        {/* Taxomomic range */}
-                        <Row>
-                            <Col>
-                                <p className="fs-5 fs-lg-4 fst-italic textOverflow">hymenoptera/bee</p>
-                                <p className="fs-5 fs-lg-4 fst-italic textOverflow">hymenoptera/bee</p>
-                                <p className="fs-5 fs-lg-4 fst-italic textOverflow">hymenoptera/bee</p>
-                            </Col>
-                            <Col className="d-flex justify-content-end">
-                                <div className="h-70 w-70 overflow-hidden">
-                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/001/840/612/small_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
-                                        alt="profile"
-                                        className="h-100 w-100 object-fit-contain"
-                                    />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <p className="fs-5 fs-lg-4">{taxonomicExpert.taxonomicExpert['languages']?.join(' / ').toUpperCase()}</p>
-                            </Col>
-                            <Col className="d-flex justify-content-end">
-                                <p className="fs-5 fs-lg-4 fw-bold">Belgium</p>
-                            </Col>
-                        </Row>
-                    </Col>
-                    {/* If preview image is present, render this additional column which takes over some details from the original one */}
-                    <Col lg={{ span: 4 }}
-                        className={`h-100 flex-column`}
-                    >
-                        {/* Publishing Date */}
-                        {/* <Row>
-                            <Col className="d-flex justify-content-end">
-                                <p className="fw-bold fs-4">{taxonomicExpert.taxonomicService['schema:dateCreated'] &&
-                                    format(taxonomicService.taxonomicService['schema:dateCreated'], 'MMMM dd - yyyy')
-                                }</p>
-                            </Col>
-                        </Row> */}
-                    </Col>
-                </Row>
-            </button>
-        </div >);
+                            {/* Title and language if image is not present */}
+                            <Row>
+                                <Col xs lg={{ span: (!logoImage || window.innerWidth < 768) ? 9 : 12 }}>
+                                    <p className="fs-4 fs-lg-default fw-bold textOverflow">{taxonomicExpert.taxonomicExpert['name']}</p>
+                                </Col>
+                            </Row>
+                            {/* Headline description */}
+                            <Row>
+                                <Col>
+                                    <p className="fs-5 fs-lg-4 fst-italic textOverflow">Headline Description</p>
+                                </Col>
+                            </Row>
+                            {/* Taxonomic Range */}
+                            <Row className='flex-grow-1 my-2'>
+                                <Col>
+                                    <p>Bee/....</p>
+                                    <p>Bee/....</p>
+                                    <p>Bee/....</p>
+                                </Col>
+                            </Row>
+                            {/* Languages if preview image is not present */}
+                            <Row>
+                                <Col>
+                                    <p className="fs-5 fs-lg-4">{taxonomicExpert.taxonomicExpert['languages']}</p>
+                                </Col>
+                            </Row>
+                        </Col>
+                        {/* If preview image is present, render this additional column which takes over some details from the original one */}
+                        <Col lg={{ span: 4 }}
+                            className={`${imageColClass} h-100 flex-column`}
+                        >
+                            {/* Logo, if present */}
+                            {
+                                <Row className="flex-grow-1 overflow-hidden">
+                                    <Col className="h-100">
+                                        <div className="h-100 w-100 overflow-hidden">
+                                            <img src={logoImage}
+                                                alt={logoImage}
+                                                className="h-100 w-100 object-fit-contain"
+                                            />
+                                        </div>
+                                    </Col>
+                                </Row>
+                            }
+                            {/* Publishing Date */}
+                            <Row>
+                                <Col className="d-flex justify-content-end">
+                                    <p className="fw-bold fs-4">Belgium</p>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </button>
+            </div >
+            
+        );
     }
     else {
         return (<></>);
