@@ -21,6 +21,7 @@ import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
 import { BreadCrumbs, Spinner } from 'components/general/CustomComponents';
 import DetailsBlock from './components/DetailsBlock';
+import BioBlock from './components/BioBlock';
 
 
 const TaxonomicExpert = () => {
@@ -35,6 +36,8 @@ const TaxonomicExpert = () => {
     const [displaySpinner, setDisplaySpinner] = useState<boolean>(false);
     const taxonomicServiceID: string = `${params.prefix}/${params.suffix}`;
 
+
+    const text = "lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, vestibulum nunc sit amet, ultrices nunc sit";
     /* Fetch taxonomic service */
     fetch.Fetch({
         Method: GetTaxonomicExpert,
@@ -137,7 +140,7 @@ const TaxonomicExpert = () => {
                                     <Col>
                                         <Row className="mb-3">
                                             <Col>
-                                                <DetailsBlock name="Expert Bio" />
+                                                <BioBlock name="Expert Bio" text={text}/>
                                             </Col>
                                         </Row>
                                         <Row className="mb-3">
