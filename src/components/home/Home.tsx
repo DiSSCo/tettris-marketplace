@@ -75,7 +75,7 @@ const Home = () => {
             setCounts({
                 taxonomicServices: results.taxonomicServices.metadata.totalRecords,
                 referenceCollections: results.referenceCollections.metadata.totalRecords,
-                taxonomicExpertise: results.taxonomicExpertise.metadata.totalRecords
+                taxonomicExpertise:  0 //!\\ in dev \\ results.taxonomicExpertise.metadata.totalRecords
             });
             dispatch(setIsApiOnline(true))
         },
@@ -164,7 +164,7 @@ const Home = () => {
                                             <HomeCategory title="Reference Collections"
                                                 subTitle="Go explore"
                                                 count={counts.referenceCollections}
-                                                link="/search?serviceType=referenceCollection"
+                                                link="ReferenceCollection"//!\\ in dev \\"/search?serviceType=referenceCollection"
                                                 color="secondary"
                                             />
                                         </Col>
@@ -174,7 +174,7 @@ const Home = () => {
                                             <HomeCategory title="Expertise Taxonomists"
                                                 subTitle="Go engage"
                                                 count={counts.taxonomicExpertise}
-                                                link="/search?serviceType=taxonomicExpert"
+                                                link="/taxonomicExpert"//!\\ in dev \\ "/search?serviceType=taxonomicExpert"
                                                 color="tertiary"
                                             />
                                         </Col>

@@ -9,6 +9,14 @@
                 {
                     "label": "Taxonomic Service",
                     "value": "taxonomicService"
+                },
+                {
+                    "label": "Reference Collection",
+                    "value": "referenceCollection"
+                },
+                {
+                    "label": "Taxonomic Expert",
+                    "value": "taxonomicExpert"
                 }
             ]
         }
