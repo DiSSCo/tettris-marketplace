@@ -16,7 +16,7 @@ import styles from './home.module.scss';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
-import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
+//!\\ in dev \\ import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from "components/general/header/Header";
@@ -62,19 +62,20 @@ const Home = () => {
                     }
                 }
             },
-            {
-                alias: 'taxonomicExpertise',
-                Method: GetTaxonomicExperts,
-                params: {
-                    pageSize: 1,
-                    pageNumber: 0
-                }
-            }
+            //!\\ in dev \\
+            // {
+            //     alias: 'taxonomicExpertise',
+            //     Method: GetTaxonomicExperts,
+            //     params: {
+            //         pageSize: 1,
+            //         pageNumber: 0
+            //     }
+            // }
         ],
         Handler: (results: { [alias: string]: { metadata: Dict } }) => {
             setCounts({
                 taxonomicServices: results.taxonomicServices.metadata.totalRecords,
-                referenceCollections: results.referenceCollections.metadata.totalRecords,
+                referenceCollections: 0,//!\\ in dev \\ results.referenceCollections.metadata.totalRecords,
                 taxonomicExpertise:  0 //!\\ in dev \\ results.taxonomicExpertise.metadata.totalRecords
             });
             dispatch(setIsApiOnline(true))
