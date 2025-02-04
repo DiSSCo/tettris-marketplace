@@ -42,6 +42,9 @@ const RORField = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [dropdownOptions, setDropdownOptions] = useState<DropdownItem[] | undefined>();
 
+    /* Determine variant */
+    const variant = window.location.pathname.includes('/te') ? 'tertiary' :
+                    window.location.pathname.includes('/tc') ? 'secondary' : 'primary';
     /**
      * Function to search for RORs and fill the dropdown with options
      */
@@ -126,7 +129,7 @@ const RORField = (props: Props) => {
                 }
                 <Col xs="auto" lg="auto">
                     <Button type="button"
-                        variant="primary"
+                        variant={variant}
                         className="fs-5 fs-lg-4 mt-2 mt-lg-0"
                         OnClick={() => SearchForROR()}
                     >

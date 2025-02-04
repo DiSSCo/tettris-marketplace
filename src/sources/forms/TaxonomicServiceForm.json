@@ -357,7 +357,7 @@
                 "title": "Affiliated Organisation",
                 "description": "The affiliated organisation",
                 "type": "ror",
-                "required": true
+                "required": false
             }
         ],
         "applicableToServiceTypes": [
@@ -402,7 +402,7 @@
                 "title": "Affiliated Organisation",
                 "description": "The affiliated organisation",
                 "type": "ror",
-                "required": true
+                "required": false
             }
         ],
         "applicableToServiceTypes": [
@@ -438,7 +438,7 @@
                 "title": "Funding Organisation",
                 "description": "An organization that supports (sponsors) something through some kind of financial contribution",
                 "type": "ror",
-                "required": true
+                "required": false
             }
         ],
         "applicableToServiceTypes": [

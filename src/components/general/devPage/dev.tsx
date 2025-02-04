@@ -7,16 +7,16 @@ import Footer from 'components/general/footer/Footer';
 
 
 /**
- * Component that renders the Expertise page
+ * Component that renders the Dev page
  * @returns JSX Component
  */
-const Expertise = () => {
+const Dev = () => {
     return (
         <div className="h-100 d-flex flex-column">
             {/* Render Header */}
             <Header />
 
-            {/* Expertise page body */}
+            {/* Dev page body */}
             <Container fluid className="flex-grow-1 overflow-hidden">
                 <Row className="h-100">
                     <Col className="d-flex flex-column justify-content-center align-items-center">
@@ -31,4 +31,4 @@ const Expertise = () => {
     );
 }
 
-export default Expertise;
+export default Dev;

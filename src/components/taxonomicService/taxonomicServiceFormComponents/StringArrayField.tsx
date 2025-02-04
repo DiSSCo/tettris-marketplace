@@ -36,6 +36,9 @@ const StringArrayField = (props: Props) => {
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
+    /* Determine color */
+    const color = window.location.pathname.includes('/te') ? 'tc-tertiary' :
+    window.location.pathname.includes('/tc') ? 'tc-secondary' : 'tc-primary';
 
     /* Class Names */
     const formFieldClass = classNames({
