@@ -12,7 +12,7 @@ type Props = {
  * @param properties An object containing all the properties to be show in the details block
  * @returns JSX Component
  */
-const DetailsBlock = (props: Props) => {
+const TrainingBlock = (props: Props) => {
     const { name } = props;
 
     return (
@@ -36,4 +36,4 @@ const DetailsBlock = (props: Props) => {
     );
 };
 
-export default DetailsBlock;
+export default TrainingBlock;

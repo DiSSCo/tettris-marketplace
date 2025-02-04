@@ -1,7 +1,7 @@
 /* Import Dependencies */
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Col, Container, Row, } from 'react-bootstrap';
+import { Col, Container, Row, } from 'react-bootstrap';
 
 // /* Import Hooks */
 import { useAppSelector, useAppDispatch, useFetch } from 'app/Hooks';
@@ -20,8 +20,11 @@ import GetTaxonomicExpert from 'api/taxonomicExpert/GetTaxonomicExpert';
 import Header from 'components/general/header/Header';
 import Footer from 'components/general/footer/Footer';
 import { BreadCrumbs, Spinner } from 'components/general/CustomComponents';
-import DetailsBlock from './components/DetailsBlock';
 import BioBlock from './components/BioBlock';
+import TopBar from './components/TopBar';
+import ExperienceBlock from './components/ExperienceBlock';
+import TrainingBlock from './components/TrainingBlock';
+import TaxonomicBlock from './components/TaxonomicBlock';
 
 
 const TaxonomicExpert = () => {
@@ -78,7 +81,7 @@ const TaxonomicExpert = () => {
                             <Row className="flex-grow-1">
                                 <Col className="d-flex justify-content-center align-items-center">
                                     <div className="text-center">
-                                        <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Service</p>
+                                        <p className="fs-2 fw-lightBold pb-2">Loading Taxonomic Expert</p>
                                         <Spinner />
                                     </div>
                                 </Col>
@@ -94,48 +97,7 @@ const TaxonomicExpert = () => {
                                     </Col>
                                 </Row>
                                 {/* Top bar */}
-                                <Row className="mt-3 pt-lg-0">
-                                    <Col>
-                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['schema:name']}</p>
-                                    </Col>
-                                    <Col>
-                                        ORCID ID
-                                    </Col>
-                                    <Col>
-                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['schema:location']}</p>
-                                    </Col>
-                                    <Col>
-                                        <p className=' fs-lg-2 fw-bold'>{taxonomicExpert?.taxonomicExpert['schema:language']?.join(' / ').toUpperCase()}</p>
-                                    </Col>
-                                    <Col lg="auto" className="d-none d-lg-block">
-                                        <Button type="submit" variant='tertiary'>
-                                            <p>EMAIL</p>
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                <Row className="mb-3">
-                                    <Col xs={{ span: 2 }}>
-                                        <img src="https://www.w3schools.com/images/picture.jpg" alt="John Doe" style={{ width: '100px', height: '100px' }} />
-                                    </Col>
-                                    <Col xs={{ span: 8 }}>
-                                        <Row>
-                                            <Col>
-                                                <p>Headline Description</p>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
-                                                <p>Institution</p>
-                                            </Col>
-                                            <Col>
-                                                <p>URL</p>
-                                            </Col>
-                                            <Col>
-                                                <p>ROR ID</p>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
+                                <TopBar taxonomicExpert={taxonomicExpert} />
                                 <Row className="flex-grow-1">
                                     <Col>
                                         <Row className="mb-3">
@@ -145,30 +107,19 @@ const TaxonomicExpert = () => {
                                         </Row>
                                         <Row className="mb-3">
                                             <Col>
-                                                <DetailsBlock name="Experience and qualifications" />
+                                                <ExperienceBlock name="Experience and qualifications" />
                                             </Col>
                                         </Row>
                                         <Row className="mb-3">
                                             <Col>
-                                                <DetailsBlock name="Training Provision" />
+                                                <TrainingBlock name="Training Provision" />
                                             </Col>
                                         </Row>
                                     </Col>
-                                    <Col>
-                                        <DetailsBlock name="Taxonomic and research scope" />
+                                    <Col className='mb-3'>
+                                        <TaxonomicBlock name="Taxonomic and research scope" />
                                     </Col>
-                                </Row>
-                                {/* Scrollable content */}
-                                <Row className="flex-grow-1 overflow-scroll mt-3 mb-3">
-                                    <Col>
-                                        {/* Description block */}
-                                        <Row>
-                                            <Col>
-                                                {/* <DescriptionBlock taxonomicService={taxonomicService} /> */}
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
+                                </Row>                                
                             </>
                         }
                         {/* If an error occurred */}
