@@ -37,11 +37,6 @@ const GetTaxonomicExpert = async ({ handle }: { handle?: string }) => {
             /* Set Taxonomic Service */
             taxonomicExpert = data.attributes.content as TaxonomicExpert;
 
-            // /* Check if Taxonomic Service is published, otherwise throw error */
-            // if (taxonomicService.taxonomicService['schema:status'] !== 'accepted') {
-            //     throw (new Error('This Taxonomic Service has not been published yet', { cause: 200 }));
-            // };
-
             /* Set created and modified */
             taxonomicExpert.taxonomicExpert['schema:dateCreated'] = format(new Date(data.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
             taxonomicExpert.taxonomicExpert['schema:dateModified'] = format(new Date(data.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
