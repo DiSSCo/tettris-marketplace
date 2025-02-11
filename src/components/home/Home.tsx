@@ -16,7 +16,7 @@ import styles from './home.module.scss';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
-//!\\ in dev \\ import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
+import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from "components/general/header/Header";
@@ -62,21 +62,21 @@ const Home = () => {
                     }
                 }
             },
-            //!\\ in dev \\
-            // {
-            //     alias: 'taxonomicExpertise',
-            //     Method: GetTaxonomicExperts,
-            //     params: {
-            //         pageSize: 1,
-            //         pageNumber: 0
-            //     }
-            // }
+            ...(import.meta.env.VITE_DEV === 'true' ? 
+            [{
+                alias: 'taxonomicExpertise',
+                Method: GetTaxonomicExperts,
+                params: {
+                    pageSize: 1,
+                    pageNumber: 0
+                }
+            }] : [])
         ],
         Handler: (results: { [alias: string]: { metadata: Dict } }) => {
             setCounts({
                 taxonomicServices: results.taxonomicServices.metadata.totalRecords,
-                referenceCollections: 0,//!\\ in dev \\ results.referenceCollections.metadata.totalRecords,
-                taxonomicExpertise:  0 //!\\ in dev \\ results.taxonomicExpertise.metadata.totalRecords
+                referenceCollections: 0,
+                taxonomicExpertise:  import.meta.env.VITE_DEV === 'true' ? results.taxonomicExpertise.metadata.totalRecords : 0,
             });
             dispatch(setIsApiOnline(true))
         },
@@ -165,7 +165,7 @@ const Home = () => {
                                             <HomeCategory title="Reference Collections"
                                                 subTitle="Go explore"
                                                 count={counts.referenceCollections}
-                                                link="ReferenceCollection"//!\\ in dev \\"/search?serviceType=referenceCollection"
+                                                link= {import.meta.env.VITE_DEV === 'true' ? "/search?serviceType=referenceCollection" : "ReferenceCollection"}
                                                 color="secondary"
                                             />
                                         </Col>
@@ -175,7 +175,7 @@ const Home = () => {
                                             <HomeCategory title="Expertise Taxonomists"
                                                 subTitle="Go engage"
                                                 count={counts.taxonomicExpertise}
-                                                link="/taxonomicExpert"//!\\ in dev \\ "/search?serviceType=taxonomicExpert"
+                                                link={import.meta.env.VITE_DEV === 'true' ? "/search?serviceType=taxonomicExpert" : "/taxonomicExpert"}
                                                 color="tertiary"
                                             />
                                         </Col>

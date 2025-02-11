@@ -43,11 +43,7 @@ const Filter = (props: Props) => {
     });
 
     /* Base variables */
-    let color = '#FF8E3E'; 
-    if (searchParams.get('serviceType') === 'referenceCollection')
-        color = '#1e5741';
-    if (searchParams.get('serviceType') === 'taxonomicExpert')
-        color = '#7BC1DC';
+    const dropDowncolor = searchParams.get('serviceType') === 'referenceCollection' ? '#1e5741' : searchParams.get('serviceType') === 'taxonomicExpert' ? '#7BC1DC' : '#FF8E3E';
 
     switch (filter.type) {
         case 'select':
@@ -64,7 +60,7 @@ const Filter = (props: Props) => {
                         placeholder={MakeReadableString(filter.name)}
                         hasDefault={hasDefault}
                         styles={{
-                            color: color
+                            color: dropDowncolor
                         }}
                         OnChange={(item: DropdownItem) => {
                             SetFilterValue(item.value);

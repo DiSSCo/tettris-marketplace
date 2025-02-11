@@ -13,6 +13,7 @@ import { Dict, Filter as FilterType } from 'app/Types';
 
 /* Import Sources */
 import Filters from 'sources/searchFilters/Filters.json';
+import DevFilters from 'sources/searchFilters/DevFilters.json';
 import TaxonomicServiceFilters from 'sources/searchFilters/TaxonomicServiceFilters.json';
 import TaxonimicExpertFilters from 'sources/searchFilters/TaxonomicExpertFilters.json';
 
@@ -44,7 +45,7 @@ const FiltersBar = (props: Props) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     /* Base variables */
-    const FiltersType: FilterType[] = [...Filters.filters];
+    const FiltersType: FilterType[] = import.meta.env.VITE_DEV === 'true' ? [...DevFilters.filters] : [...Filters.filters];
     const taxonomicServicefilters: FilterType[] = [...TaxonomicServiceFilters.taxonomicServiceFilters];
     const taxonomicExpertFilters: FilterType[] = [...TaxonimicExpertFilters.taxonomicExpertFilters];
     const [initialValues, setInitialValues] = useState<Dict>({});
@@ -64,10 +65,6 @@ const FiltersBar = (props: Props) => {
     FiltersType.forEach((filter) => {
         initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
     });
-
-    // filters.forEach((filter) => {
-    //     initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
-    // });
 
     /**
      * Function that resets all search filters, except for taonomic service type

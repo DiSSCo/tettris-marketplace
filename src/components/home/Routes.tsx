@@ -10,8 +10,8 @@ import Dev from "components/general/devPage/dev";
 const routes = [
     <Route key="home" path="/" element={<Home />} />,
     // Redirection to dev page
-    <Route key="Expertise" path="/taxonomicExpert" element={<Dev />} />,
-    <Route key="Collection" path="/ReferenceCollection" element={<Dev />} />,
+    import.meta.env.VITE_DEV === 'true' ? '' : <Route key="Expertise" path="/taxonomicExpert" element={<Dev />} />,
+    import.meta.env.VITE_DEV === 'true' ? '' : <Route key="Collection" path="/ReferenceCollection" element={<Dev />} />,
 ];
 
 export default routes;

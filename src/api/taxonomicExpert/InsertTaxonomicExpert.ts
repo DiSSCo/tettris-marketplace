@@ -1,6 +1,5 @@
 /* Import Dependencies */
 import axios from 'axios';
-// import { format } from 'date-fns';
 
 /* Import Types */
 import { TaxonomicExpert, CordraResult, Dict } from 'app/Types';
@@ -52,9 +51,6 @@ const InsertTaxonomicExpert = async ({ taxonomicExpertRecord }: { taxonomicExper
             /* Set Taxonomic Expert */
             taxonomicExpert = data.attributes.content as TaxonomicExpert;
 
-            /* Set created and modified */
-            // taxonomicExpert.taxonomicService['schema:dateCreated'] = format(new Date(data.attributes.metadata.createdOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
-            // taxonomicExpert.taxonomicService['schema:dateModified'] = format(new Date(data.attributes.metadata.modifiedOn), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
         } catch (error) {
             console.error(error);
 
