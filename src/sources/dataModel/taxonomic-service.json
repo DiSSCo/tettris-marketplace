@@ -1,6 +1,6 @@
 {
     "$id": "https://schemas.dissco.tech/schemas/fdo-type/tettris-service/0.1.0/tettris-service.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$schema": "https://json-schema.org/draft-07/schema#",
     "$comment": "Taxonomic Service Version 0.1.0",
     "title": "Taxonomic Service",
     "type": "object",

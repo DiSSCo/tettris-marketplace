@@ -11,7 +11,6 @@ import { MakeReadableString } from 'app/Utilities';
 /* Import Components */
 import { Dropdown, DatePicker, QueryBar } from 'components/general/FormComponents';
 
-
 /* Props Type */
 type Props = {
     filter: FilterType,
@@ -38,8 +37,13 @@ const Filter = (props: Props) => {
     const serviceTypeClass = classNames({
         'tr-smooth': true,
         'tc-primary': !searchParams.get('serviceType'),
-        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'tc-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
+
     });
+
+    /* Base variables */
+    const dropDowncolor = searchParams.get('serviceType') === 'referenceCollection' ? '#1e5741' : searchParams.get('serviceType') === 'taxonomicExpert' ? '#7BC1DC' : '#FF8E3E';
 
     switch (filter.type) {
         case 'select':
@@ -56,7 +60,7 @@ const Filter = (props: Props) => {
                         placeholder={MakeReadableString(filter.name)}
                         hasDefault={hasDefault}
                         styles={{
-                            color: '#FF8E3E'
+                            color: dropDowncolor
                         }}
                         OnChange={(item: DropdownItem) => {
                             SetFilterValue(item.value);

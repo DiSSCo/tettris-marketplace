@@ -11,8 +11,16 @@ const initialState: AppState = {
     isApiOnline: true
 };
 
-export const TaxonomicServiceSlice = createSlice({
+export const TaxonomicSlice = createSlice({
     name: 'taxonomicService',
+    initialState,
+    reducers: {
+        setIsApiOnline: (state, action: PayloadAction<boolean>) => {
+            state.isApiOnline = action.payload;
+        }
+    }
+}) && createSlice({
+    name: 'taxonomicExpert',
     initialState,
     reducers: {
         setIsApiOnline: (state, action: PayloadAction<boolean>) => {
@@ -24,9 +32,9 @@ export const TaxonomicServiceSlice = createSlice({
 /* Action Creators */
 export const {
     setIsApiOnline
-} = TaxonomicServiceSlice.actions;
+} = TaxonomicSlice.actions;
 
 /* Connect with Root State */
 export const getIsApiOnline = (state: RootState) => state.app.isApiOnline;
 
-export default TaxonomicServiceSlice.reducer;
+export default TaxonomicSlice.reducer;

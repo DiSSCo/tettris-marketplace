@@ -51,6 +51,9 @@ type Props = {
  */
 const FormBuilderFieldArray = (props: Props) => {
     const { section, title, initialFormValues, values, formSections, FlattenJSONPath, SetFieldValue, ConstructFormField } = props;
+    /* Determine color */
+    const color = window.location.pathname.includes('/te') ? 'tc-tertiary' :
+    window.location.pathname.includes('/tc') ? 'tc-secondary' : 'tc-primary';
 
     return (
         <FieldArray name={section.jsonPath.replace('$', '')}>
@@ -68,7 +71,7 @@ const FormBuilderFieldArray = (props: Props) => {
                                     push(jp.value(initialFormValues, section.jsonPath)[0]);
                                 }}
                             >
-                                <p className="tc-primary">
+                                <p className={color}>
                                     {`Add ${title}`}
                                 </p>
                             </Button>

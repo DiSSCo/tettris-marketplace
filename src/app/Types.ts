@@ -1,6 +1,6 @@
 /* Import Types */
 import { TaxonomicService as TaxonomicServiceType } from "./types/TaxonomicService";
-
+import { TaxonomicExpert as TaxonomicExpertType } from "./types/TaxonomicExpert";
 
 /* General type for a dictionary */
 export type Dict = {
@@ -14,6 +14,7 @@ export type CordraResult = {
     attributes: {
         content: {
             taxonomicService?: TaxonomicServiceType,
+            taxonomicExpert?: TaxonomicExpertType,
             [property: string]: any
         },
         metadata: {
@@ -33,6 +34,11 @@ export type CordraResultArray = {
 /* Type for a Taxonomic Service */
 export type TaxonomicService = {
     taxonomicService: TaxonomicServiceType
+}
+
+/* Type for a Taxonomic Expert */
+export type TaxonomicExpert = {
+    taxonomicExpert: TaxonomicExpertType
 }
 
 /* Type for an Author */
@@ -91,6 +97,7 @@ export type FormField = {
     } | string,
     required?: boolean,
     maxChars?: number
+    maxSelections?: number
 };
 
 /* Type for a Dropdown item */
