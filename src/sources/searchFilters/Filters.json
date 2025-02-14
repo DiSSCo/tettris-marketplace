@@ -1,0 +1,16 @@
+{
+    "filters": [
+        {
+            "name": "serviceType",
+            "alias": "schema:Service/schema:serviceType",
+            "type": "select",
+            "default": "taxonomicService",
+            "options": [
+                {
+                    "label": "Taxonomic Service",
+                    "value": "taxonomicService"
+                }
+            ]
+        }
+    ]
+}

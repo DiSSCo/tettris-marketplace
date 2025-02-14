@@ -15,7 +15,7 @@ import GetRORsByName from 'api/ror/GetRORsByName';
 
 /* Import Components */
 import { Button, Spinner } from 'components/general/CustomComponents';
-
+import { getColor, Color } from 'components/general/ColorPage'
 
 /* Props Type */
 type Props = {
@@ -42,6 +42,8 @@ const RORField = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [dropdownOptions, setDropdownOptions] = useState<DropdownItem[] | undefined>();
 
+    /* Determine variant */
+    const variant: Color = getColor(window.location) as Color;
     /**
      * Function to search for RORs and fill the dropdown with options
      */
@@ -126,7 +128,7 @@ const RORField = (props: Props) => {
                 }
                 <Col xs="auto" lg="auto">
                     <Button type="button"
-                        variant="primary"
+                        variant={variant}
                         className="fs-5 fs-lg-4 mt-2 mt-lg-0"
                         OnClick={() => SearchForROR()}
                     >

@@ -14,6 +14,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 
 /* Import Components */
 import { Button } from "components/general/CustomComponents";
+import { Color, getColor } from "components/general/ColorPage";
 
 
 /* Props Type */
@@ -36,7 +37,8 @@ const StringArrayField = (props: Props) => {
 
     /* Base variables */
     const jsonPath = field.jsonPath.replace('$', '');
-
+    /* Determine color */
+    const color: Color = 'tc-' + getColor(window.location) as Color;
     /* Class Names */
     const formFieldClass = classNames({
         'b-error': (field.required && !jp.value(values, field.jsonPath)?.find((value: string) => !!value))
@@ -110,7 +112,7 @@ const StringArrayField = (props: Props) => {
                                     className="px-0 py-0"
                                     OnClick={() => push('')}
                                 >
-                                    <p className="tc-primary">
+                                    <p className={color}>
                                         Add value
                                     </p>
                                 </Button>

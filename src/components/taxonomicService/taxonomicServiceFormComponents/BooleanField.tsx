@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 /* Import Types */
 import { FormField } from "app/Types";
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /* Props Type */
@@ -22,8 +23,11 @@ const BooleanField = (props: Props) => {
     const { field } = props;
 
     /* Class Names */
+    /* Determine color */
+    const color: Color = getColor(window.location) as Color;
+
     const formFieldClass = classNames({
-        'b-primary': field.required
+        [color]: field.required
     });
 
     return (

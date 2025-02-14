@@ -12,7 +12,10 @@ import { useSearchParams } from 'react-router-dom';
 import { Dict, Filter as FilterType } from 'app/Types';
 
 /* Import Sources */
+import Filters from 'sources/searchFilters/Filters.json';
+import DevFilters from 'sources/searchFilters/DevFilters.json';
 import TaxonomicServiceFilters from 'sources/searchFilters/TaxonomicServiceFilters.json';
+import TaxonimicExpertFilters from 'sources/searchFilters/TaxonomicExpertFilters.json';
 
 /* Import Icons */
 import { faMagnifyingGlass, faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -21,6 +24,7 @@ import { faMagnifyingGlass, faFilterCircleXmark } from '@fortawesome/free-solid-
 import Filter from './Filter';
 import { QueryBar } from 'components/general/FormComponents';
 import { Button } from 'components/general/CustomComponents';
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /* Props Type */
@@ -42,11 +46,24 @@ const FiltersBar = (props: Props) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     /* Base variables */
-    const filters: FilterType[] = [...TaxonomicServiceFilters.taxonomicServiceFilters];
+    const FiltersType: FilterType[] = import.meta.env.VITE_DEV === 'true' ? [...DevFilters.filters] : [...Filters.filters];
+    const taxonomicServicefilters: FilterType[] = [...TaxonomicServiceFilters.taxonomicServiceFilters];
+    const taxonomicExpertFilters: FilterType[] = [...TaxonimicExpertFilters.taxonomicExpertFilters];
     const [initialValues, setInitialValues] = useState<Dict>({});
 
+    /* Determine filters based on service type */
+    const filters: FilterType[] = [];
+    const serviceType = searchParams.get('serviceType');
+
+    if (!serviceType) {
+        filters.push(...taxonomicServicefilters);
+    } else if (serviceType === 'taxonomicExpert') {
+        filters.push(...taxonomicExpertFilters);
+    }
+
     /* Set initial values */
-    filters.forEach((filter) => {
+    filters.unshift(...FiltersType);
+    FiltersType.forEach((filter) => {
         initialValues[filter.name] = searchParams.get(filter.name) ?? filter.default;
     });
 
@@ -70,8 +87,11 @@ const FiltersBar = (props: Props) => {
     const serviceTypeClass = classNames({
         'tr-smooth': true,
         'tc-primary': !searchParams.get('serviceType'),
-        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'tc-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
     });
+    const variant: Color = getColor(window.location) as Color;
+
 
     return (
         <Formik initialValues={{
@@ -122,7 +142,7 @@ const FiltersBar = (props: Props) => {
                                     {filters.map((filter) => (
                                         <Col key={filter.name}
                                             xs={{ span: 12 }}
-                                            lg={{ span: 3 }}
+                                            lg={{ span: filters.length > 4 ? 2 : 3 }}
                                             className="mb-2 mb-lg-0"
                                         >
                                             <Filter filter={filter}
@@ -140,7 +160,7 @@ const FiltersBar = (props: Props) => {
                                 className="d-none d-lg-block"
                             >
                                 <Button type="submit"
-                                    variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                    variant={variant}
                                 >
                                     <p>Search</p>
                                 </Button>

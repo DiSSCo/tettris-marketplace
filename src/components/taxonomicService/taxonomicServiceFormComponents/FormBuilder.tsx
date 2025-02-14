@@ -11,6 +11,7 @@ import { FormField, Dict } from "app/Types";
 
 /* Import API */
 import InsertTaxonomicService from "api/taxonomicService/InsertTaxonomicService";
+import InsertTaxonomicExpert from "api/taxonomicExpert/InsertTaxonomicExpert";
 
 /* Import Components */
 import BooleanField from "./BooleanField";
@@ -25,6 +26,7 @@ import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
 import TextField from "./TextField";
 import { Button, Spinner } from "components/general/CustomComponents";
+import { Color, getColor } from "components/general/ColorPage";
 
 
 /* Props Type */
@@ -60,6 +62,10 @@ const FormBuilder = (props: Props) => {
     });
 
     /* Base variables */
+    /* Determine color */
+    const color = getColor(window.location) as Color;
+    
+
     const [serviceTypes, setServiceTypes] = useState<string[] | undefined>();
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>();
@@ -316,22 +322,41 @@ const FormBuilder = (props: Props) => {
                             };
                         };
 
-                        let taxonomicServiceRecord = cloneDeep(values);
+                        if (window.location.pathname.includes('/ts')) {
+                            let taxonomicServiceRecord = cloneDeep(values);
 
-                        RemoveEmptyProperties(taxonomicServiceRecord);
-                        CheckForIrrelevantClasses(taxonomicServiceRecord);
+                            RemoveEmptyProperties(taxonomicServiceRecord);
+                            CheckForIrrelevantClasses(taxonomicServiceRecord);
 
-                        try {
-                            await InsertTaxonomicService({
-                                taxonomicServiceRecord
-                            });
+                            try {
+                                await InsertTaxonomicService({
+                                    taxonomicServiceRecord
+                                })
 
-                            SetCompleted();
-                        } catch {
-                            setErrorMessage('Something went wrong during the submission of the Taxonomic Service, please try again');
-                        } finally {
-                            setLoading(false);
-                        };
+                                SetCompleted();
+                            } catch {
+                                setErrorMessage('Something went wrong during the submission of the Taxonomic Service, please try again');
+                            } finally {
+                                setLoading(false);
+                            };
+                        } else if (window.location.pathname.includes('/te')) {  
+                            let taxonomicExpertRecord = cloneDeep(values);
+
+                            RemoveEmptyProperties(taxonomicExpertRecord);
+                            CheckForIrrelevantClasses(taxonomicExpertRecord);
+
+                            try {
+                                await InsertTaxonomicExpert({
+                                    taxonomicExpertRecord
+                                })
+
+                                SetCompleted();
+                            } catch {
+                                setErrorMessage('Something went wrong during the submission of the Taxonomic Expert, please try again');
+                            } finally {
+                                setLoading(false);
+                            };
+                        }
                     } else {
                         setErrorMessage('Please provide values for all required fields')
                     }
@@ -392,7 +417,7 @@ const FormBuilder = (props: Props) => {
                                 <Row>
                                     <Col lg="auto">
                                         <Button type="submit"
-                                            variant="primary"
+                                            variant={color}
                                             disabled={captchaHook.captchaStatus.solution === null}
                                         >
                                             <p>

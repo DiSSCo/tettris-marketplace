@@ -10,12 +10,14 @@ import { usePaginator, useAppDispatch } from 'app/Hooks';
 /* Import Store */
 import { setIsApiOnline } from 'redux-store/AppStore';
 import { setTaxonomicServices, concatToTaxonomicServices } from 'redux-store/TaxonomicServiceSlice';
+import { setTaxonomicExperts, concatToTaxonomicExperts } from 'redux-store/TaxonomicExpertSlice';
 
 /* Import Types */
-import { TaxonomicService } from 'app/Types';
+import { TaxonomicService, TaxonomicExpert } from 'app/Types';
 
 /* Import API */
 import GetTaxonomicServices from 'api/taxonomicService/GetTaxonomicServices';
+import GetTaxonomicExperts from 'api/taxonomicExpert/GetTaxonomicExperts';
 
 /* Import Components */
 import Header from 'components/general/header/Header';
@@ -24,6 +26,7 @@ import FiltersBar from './components/FiltersBar';
 import SearchResults from './components/SearchResults';
 import Footer from 'components/general/footer/Footer';
 import { Button, Spinner } from 'components/general/CustomComponents';
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /**
@@ -37,18 +40,24 @@ const Search = () => {
     const [noMoreResults, setNoMoreResults] = useState<boolean>(false);
 
     /* Base variables */
+    const serviceType = searchParams.get('serviceType');
+    const isTaxonomicExpert = serviceType === 'taxonomicExpert';
+
     const paginator = usePaginator({
         Initiate: () => {
-            dispatch(setTaxonomicServices([]));
+            dispatch(isTaxonomicExpert ? setTaxonomicExperts([]) : setTaxonomicServices([]));
             setNoMoreResults(false);
         },
-        Method: GetTaxonomicServices,
-        Handler: (taxonomicServices: TaxonomicService[]) => {
-            /* On receival of a new page with records and add them to the total */
-            dispatch(concatToTaxonomicServices(taxonomicServices));
-            dispatch(setIsApiOnline(true))
+        Method: isTaxonomicExpert ? GetTaxonomicExperts : GetTaxonomicServices,
+        Handler: (records: TaxonomicExpert[] | TaxonomicService[]) => {
+            if (isTaxonomicExpert) {
+                dispatch(concatToTaxonomicExperts(records as TaxonomicExpert[]));
+            } else {
+                dispatch(concatToTaxonomicServices(records as TaxonomicService[]));
+            }
+            dispatch(setIsApiOnline(true));
 
-            if (!taxonomicServices.length) {
+            if (!records.length) {
                 setNoMoreResults(true);
             }
         },
@@ -56,7 +65,7 @@ const Search = () => {
             dispatch(setIsApiOnline(false));
         },
         pageSize: 12,
-        resultKey: 'taxonomicServices',
+        resultKey: isTaxonomicExpert ? 'taxonomicExperts' : 'taxonomicServices',
         allowSearchParams: true
     });
 
@@ -70,24 +79,34 @@ const Search = () => {
                 }
             }, {});
 
-            GetTaxonomicServices({
-                pageNumber: paginator.currentPage + 1,
-                pageSize: 12,
-                searchFilters
-            }).then(({ taxonomicServices }) => {
-                if (!taxonomicServices.length) {
-                    setNoMoreResults(true);
-                }
-            });
+            if (searchParams.get('serviceType') === 'taxonomicExpert') {
+                GetTaxonomicExperts({
+                    pageNumber: paginator.currentPage + 1,
+                    pageSize: 12,
+                    searchFilters
+                }).then(({ taxonomicExperts }) => {
+                    if (!taxonomicExperts.length) {
+                        setNoMoreResults(true);
+                    }
+                });
+            }
+            else {
+                GetTaxonomicServices({
+                    pageNumber: paginator.currentPage + 1,
+                    pageSize: 12,
+                    searchFilters
+                }).then(({ taxonomicServices }) => {
+                    if (!taxonomicServices.length) {
+                        setNoMoreResults(true);
+                    }
+                });
+            }
         }
     }, [paginator]);
 
+    const variant: Color = getColor(window.location) as Color;
+    
     /* ClassNames */
-    const mainBodyClass = classNames({
-        'gradient-primary': true,
-        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection'
-    });
-
     const searchResultsClassScrollBlock = classNames({
         'overflow-x-hidden': paginator.totalRecords,
         'overflow-hidden': !paginator.totalRecords
@@ -108,7 +127,7 @@ const Search = () => {
             <Header />
 
             {/* Home page Body */}
-            <Container fluid className={`${mainBodyClass} flex-grow-1 overflow-hidden tr-smooth`}>
+            <Container fluid className={`gradient-${variant} flex-grow-1 overflow-hidden tr-smooth`}>
                 <Row className="h-100">
                     <Col lg={{ span: 10, offset: 1 }}
                         className="h-100 d-flex flex-column pt-5 px-4 px-lg-3"
@@ -152,7 +171,7 @@ const Search = () => {
                                     <Col className="d-flex justify-content-center">
                                         {(!paginator.loading && !noMoreResults && paginator.totalRecords > 0) &&
                                             <Button type="button"
-                                                variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                                                variant={variant}
                                                 OnClick={() => paginator.Next?.()}
                                             >
                                                 Load more

@@ -10,7 +10,7 @@ import { MakeReadableString } from 'app/Utilities';
 
 /* Import Components */
 import { Dropdown, DatePicker, QueryBar } from 'components/general/FormComponents';
-
+import { getColor } from 'components/general/ColorPage';
 
 /* Props Type */
 type Props = {
@@ -38,9 +38,13 @@ const Filter = (props: Props) => {
     const serviceTypeClass = classNames({
         'tr-smooth': true,
         'tc-primary': !searchParams.get('serviceType'),
-        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection'
+        'tc-secondary': searchParams.get('serviceType') === 'referenceCollection',
+        'tc-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
+
     });
 
+    /* Base variables */
+    const dropDowncolor = getColor(window.location, true)
     switch (filter.type) {
         case 'select':
             if (filter.options) {
@@ -56,7 +60,7 @@ const Filter = (props: Props) => {
                         placeholder={MakeReadableString(filter.name)}
                         hasDefault={hasDefault}
                         styles={{
-                            color: '#FF8E3E'
+                            color: dropDowncolor
                         }}
                         OnChange={(item: DropdownItem) => {
                             SetFilterValue(item.value);

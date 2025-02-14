@@ -16,7 +16,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 
 /* Import Components */
 import { Button } from "components/general/CustomComponents";
-
+import { getColor, Color } from 'components/general/ColorPage'
 
 /* Props Type */
 type Props = {
@@ -51,6 +51,8 @@ type Props = {
  */
 const FormBuilderFieldArray = (props: Props) => {
     const { section, title, initialFormValues, values, formSections, FlattenJSONPath, SetFieldValue, ConstructFormField } = props;
+    /* Determine color */
+    const color: Color = 'tc-' + getColor(window.location) as Color;
 
     return (
         <FieldArray name={section.jsonPath.replace('$', '')}>
@@ -68,7 +70,7 @@ const FormBuilderFieldArray = (props: Props) => {
                                     push(jp.value(initialFormValues, section.jsonPath)[0]);
                                 }}
                             >
-                                <p className="tc-primary">
+                                <p className={color}>
                                     {`Add ${title}`}
                                 </p>
                             </Button>

@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
 import Select from "react-select";
 
 /* Import Types */
-import { FormField, Dict } from "app/Types";
+import { FormField, Dict, DropdownItem } from "app/Types";
 
 /* Import Components */
 import FormFieldTitle from './FormFieldTitle';
@@ -73,6 +73,10 @@ const MultiSelectField = (props: Props) => {
                 isMulti={true}
                 className={`${formFieldClass} mt-2`}
                 onChange={(dropdownOptions) => {
+                    // Remove the first option if the max selections is reached
+                    if (field.maxSelections && dropdownOptions.length > field.maxSelections) {
+                        (dropdownOptions as Array<DropdownItem>).shift();
+                    }
                     /* Create array of all dropdown options values */
                     const valuesArray: string[] = [];
 

@@ -17,6 +17,7 @@ import styles from 'components/search/search.module.scss';
 /* Import Components */
 import FiltersBar from './FiltersBar';
 import { Button } from 'components/general/CustomComponents';
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /** Component that renders the Top Bar of the Search page,
@@ -41,6 +42,18 @@ const TopBar = () => {
         'd-block': filtersToggle
     });
 
+    /* variable */
+    let textButton = "Suggest a new service"
+    let path = "/ts/suggestNewTaxonomicService"
+    if (searchParams.get('serviceType') === 'referenceCollection') {
+        textButton = "Suggest a new reference collection"
+    }
+    else if (searchParams.get('serviceType') === 'taxonomicExpert') {
+        textButton = "Register your expertise"
+        path = "/te/registerYourExpertise"
+    }
+    const variant: Color = getColor(window.location) as Color;
+
     return (
         <div className="position-relative">
             <Row>
@@ -54,7 +67,7 @@ const TopBar = () => {
                     className="d-block d-lg-none mt-3"
                 >
                     <Button type="button"
-                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={variant}
                         className="fs-5"
                         OnClick={() => setFiltersToggle(!filtersToggle)}
                     >
@@ -64,7 +77,7 @@ const TopBar = () => {
                         </>
                     </Button>
                     <Button type="button"
-                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={variant}
                         className="fs-5 ms-2"
                         OnClick={() => setSearchParams()}
                     >
@@ -82,11 +95,11 @@ const TopBar = () => {
                     className="mt-3 mt-lg-0"
                 >
                     <Button type="button"
-                        variant={searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : 'primary'}
+                        variant={variant}
                         className="fs-5 fs-lg-4"
-                        OnClick={() => navigate('/ts/suggestNewTaxonomicService')}
+                        OnClick={() => navigate(path)}
                     >
-                        Suggest a new service
+                        {textButton}
                     </Button>
                 </Col>
             </Row>

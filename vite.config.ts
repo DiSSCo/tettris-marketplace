@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 export default defineConfig({
   plugins: [react()],
@@ -32,5 +34,14 @@ export default defineConfig({
       exclude: [],
       provider: "v8"
     }
-  }
-})
+  },
+  server:  (process.env.VITE_DEV ?? 'true') === 'true' ? {
+    proxy: {
+      '/cordra/doip': {
+        target: 'https://marketplace.cetaf.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/cordra\/doip/, '/cordra/doip'),
+      }
+    }
+  } : undefined
+});
