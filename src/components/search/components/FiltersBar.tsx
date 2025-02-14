@@ -24,6 +24,7 @@ import { faMagnifyingGlass, faFilterCircleXmark } from '@fortawesome/free-solid-
 import Filter from './Filter';
 import { QueryBar } from 'components/general/FormComponents';
 import { Button } from 'components/general/CustomComponents';
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /* Props Type */
@@ -89,7 +90,7 @@ const FiltersBar = (props: Props) => {
         'tc-secondary': searchParams.get('serviceType') === 'referenceCollection',
         'tc-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
     });
-    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
+    const variant: Color = getColor(window.location) as Color;
 
 
     return (

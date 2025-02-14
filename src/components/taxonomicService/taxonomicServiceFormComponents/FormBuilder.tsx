@@ -26,6 +26,7 @@ import StringField from "./StringField";
 import StringArrayField from "./StringArrayField";
 import TextField from "./TextField";
 import { Button, Spinner } from "components/general/CustomComponents";
+import { Color, getColor } from "components/general/ColorPage";
 
 
 /* Props Type */
@@ -62,8 +63,8 @@ const FormBuilder = (props: Props) => {
 
     /* Base variables */
     /* Determine color */
-    const color = window.location.pathname.includes('/te') ? 'tertiary' :
-    window.location.pathname.includes('/tc') ? 'secondary' : 'primary';
+    const color = getColor(window.location) as Color;
+    
 
     const [serviceTypes, setServiceTypes] = useState<string[] | undefined>();
     const [loading, setLoading] = useState<boolean>(false);

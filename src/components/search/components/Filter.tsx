@@ -10,6 +10,7 @@ import { MakeReadableString } from 'app/Utilities';
 
 /* Import Components */
 import { Dropdown, DatePicker, QueryBar } from 'components/general/FormComponents';
+import { getColor } from 'components/general/ColorPage';
 
 /* Props Type */
 type Props = {
@@ -43,8 +44,7 @@ const Filter = (props: Props) => {
     });
 
     /* Base variables */
-    const dropDowncolor = searchParams.get('serviceType') === 'referenceCollection' ? '#1e5741' : searchParams.get('serviceType') === 'taxonomicExpert' ? '#7BC1DC' : '#FF8E3E';
-
+    const dropDowncolor = getColor(window.location, true)
     switch (filter.type) {
         case 'select':
             if (filter.options) {

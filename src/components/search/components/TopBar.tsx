@@ -17,6 +17,7 @@ import styles from 'components/search/search.module.scss';
 /* Import Components */
 import FiltersBar from './FiltersBar';
 import { Button } from 'components/general/CustomComponents';
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /** Component that renders the Top Bar of the Search page,
@@ -51,7 +52,7 @@ const TopBar = () => {
         textButton = "Register your expertise"
         path = "/te/registerYourExpertise"
     }
-    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
+    const variant: Color = getColor(window.location) as Color;
 
     return (
         <div className="position-relative">
