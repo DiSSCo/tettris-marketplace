@@ -10,11 +10,12 @@ import TaxonomicExpertRoutes from 'components/taxonomicExpert/Routes';
 
 /* Routes for application */
 const AppRoutes: JSX.Element[] = [
-    ...HomeRoutes,
-    ...SearchRoutes,
-    ...TaxonomicServiceRoutes,
-    ...TaxonomicExpertRoutes,
+    ...(HomeRoutes as JSX.Element[]),
+    ...(SearchRoutes as JSX.Element[]),
+    ...(TaxonomicServiceRoutes as JSX.Element[]),
+    ...(TaxonomicExpertRoutes as JSX.Element[]),
     <Route key="404" path="*" element={<NotFound404 />} />
 ];
+
 
 export default AppRoutes;
