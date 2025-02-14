@@ -10,12 +10,12 @@ export function getColor(location: Location, returnHex: boolean = false): Color 
     const isReferenceCollection = serviceType === "referenceCollection" || location.pathname.includes("/tc");
 
     if (returnHex) {
-        return isReferenceCollection ? "#1e5741" :
-               isTaxonomicExpert ? "#7BC1DC" :
-               "#FF8E3E"; // Default primary color (hex)
+        if (isReferenceCollection) return "#1e5741";
+        if (isTaxonomicExpert) return "#7BC1DC";
+        return "#FF8E3E"; // Default primary color (hex)
     }
 
-    return isReferenceCollection ? "secondary" :
-           isTaxonomicExpert ? "tertiary" :
-           "primary"; // Default primary class
+    if (isReferenceCollection) return "secondary";
+    if (isTaxonomicExpert) return "tertiary";
+    return "primary"; // Default primary class
 }

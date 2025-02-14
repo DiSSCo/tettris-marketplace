@@ -26,6 +26,7 @@ import FiltersBar from './components/FiltersBar';
 import SearchResults from './components/SearchResults';
 import Footer from 'components/general/footer/Footer';
 import { Button, Spinner } from 'components/general/CustomComponents';
+import { Color, getColor } from 'components/general/ColorPage';
 
 
 /**
@@ -39,26 +40,24 @@ const Search = () => {
     const [noMoreResults, setNoMoreResults] = useState<boolean>(false);
 
     /* Base variables */
+    const serviceType = searchParams.get('serviceType');
+    const isTaxonomicExpert = serviceType === 'taxonomicExpert';
+
     const paginator = usePaginator({
         Initiate: () => {
-            searchParams.get('serviceType') === 'taxonomicExpert' ? dispatch(setTaxonomicExperts([])) : dispatch(setTaxonomicServices([]));
+            dispatch(isTaxonomicExpert ? setTaxonomicExperts([]) : setTaxonomicServices([]));
             setNoMoreResults(false);
         },
-        Method: searchParams.get('serviceType') === 'taxonomicExpert' ? GetTaxonomicExperts : GetTaxonomicServices,
-        Handler: searchParams.get('serviceType') === 'taxonomicExpert' ? (taxonomicExperts: TaxonomicExpert[]) => {
-            /* On receival of a new page with records and add them to the total */
-            dispatch(concatToTaxonomicExperts(taxonomicExperts));
-            dispatch(setIsApiOnline(true))
-
-            if (!taxonomicExperts.length) {
-                setNoMoreResults(true);
+        Method: isTaxonomicExpert ? GetTaxonomicExperts : GetTaxonomicServices,
+        Handler: (records: TaxonomicExpert[] | TaxonomicService[]) => {
+            if (isTaxonomicExpert) {
+                dispatch(concatToTaxonomicExperts(records as TaxonomicExpert[]));
+            } else {
+                dispatch(concatToTaxonomicServices(records as TaxonomicService[]));
             }
-        } : (taxonomicServices: TaxonomicService[]) => {
-            /* On receival of a new page with records and add them to the total */
-            dispatch(concatToTaxonomicServices(taxonomicServices));
-            dispatch(setIsApiOnline(true))
+            dispatch(setIsApiOnline(true));
 
-            if (!taxonomicServices.length) {
+            if (!records.length) {
                 setNoMoreResults(true);
             }
         },
@@ -66,7 +65,7 @@ const Search = () => {
             dispatch(setIsApiOnline(false));
         },
         pageSize: 12,
-        resultKey: searchParams.get('serviceType') === 'taxonomicExpert' ? 'taxonomicExperts' : 'taxonomicServices',
+        resultKey: isTaxonomicExpert ? 'taxonomicExperts' : 'taxonomicServices',
         allowSearchParams: true
     });
 
@@ -105,14 +104,9 @@ const Search = () => {
         }
     }, [paginator]);
 
-    const variant = searchParams.get('serviceType') === 'referenceCollection' ? 'secondary' : searchParams.get('serviceType') === 'taxonomicExpert' ? 'tertiary' : 'primary';
+    const variant: Color = getColor(window.location) as Color;
+    
     /* ClassNames */
-    const mainBodyClass = classNames({
-        'gradient-primary': true,
-        'gradient-secondary': searchParams.get('serviceType') === 'referenceCollection',
-        'gradient-tertiary': searchParams.get('serviceType') === 'taxonomicExpert'
-    });
-
     const searchResultsClassScrollBlock = classNames({
         'overflow-x-hidden': paginator.totalRecords,
         'overflow-hidden': !paginator.totalRecords
@@ -133,7 +127,7 @@ const Search = () => {
             <Header />
 
             {/* Home page Body */}
-            <Container fluid className={`${mainBodyClass} flex-grow-1 overflow-hidden tr-smooth`}>
+            <Container fluid className={`gradient-${variant} flex-grow-1 overflow-hidden tr-smooth`}>
                 <Row className="h-100">
                     <Col lg={{ span: 10, offset: 1 }}
                         className="h-100 d-flex flex-column pt-5 px-4 px-lg-3"
